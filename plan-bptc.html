@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kế hoạch AI lập bản vẽ biện pháp thi công</title>
+<style>
+:root{--bg:#fff;--fg:#1a1a1a;--mut:#666;--line:#ddd;--acc:#1f5fbf;--ok:#1e7f3e;--warn:#b35c00;--bad:#b32020;--soft:#f5f7fa}
+@media (prefers-color-scheme:dark){:root{--bg:#141618;--fg:#e8e8e8;--mut:#9a9a9a;--line:#333;--acc:#6ea0ff;--ok:#5fcf7f;--warn:#f0a040;--bad:#ff7070;--soft:#1d2024}}
+body{margin:0;padding:24px 16px;background:var(--bg);color:var(--fg);font:15px/1.55 system-ui,Segoe UI,Roboto,sans-serif;max-width:1100px;margin-inline:auto}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:20px;margin:36px 0 10px;border-bottom:1px solid var(--line);padding-bottom:6px}h3{font-size:16px;margin:20px 0 6px}
+.meta{color:var(--mut);font-size:13px;margin-bottom:20px}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:10px 0}th,td{border:1px solid var(--line);padding:7px 9px;vertical-align:top;text-align:left}th{background:var(--soft)}
+.box{background:var(--soft);border-left:4px solid var(--acc);padding:10px 14px;margin:12px 0}
+.ask{border-left-color:var(--warn)}
+.warn{color:var(--warn);font-weight:600}.bad{color:var(--bad);font-weight:600}.ok{color:var(--ok);font-weight:600}
+ul,ol{padding-left:22px}li{margin:3px 0}
+code{background:var(--soft);padding:1px 5px;border-radius:3px;font-size:13px}
+pre{background:var(--soft);padding:12px;overflow-x:auto;font-size:13px;line-height:1.4}
+.wrap{overflow-x:auto}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:12px 0}
+.flow div{background:var(--soft);border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:13px}
+.flow b{display:block;color:var(--acc);margin-bottom:3px}
+</style>
+</head>
+<body>
+<h1>AI tự thu thập dữ liệu và lập bản vẽ biện pháp thi công</h1>
+<div class="meta">Bản kế hoạch để duyệt · 21/10/2026 · Chưa code · Tiền đề: khảo sát thị trường ở <a href="doi-thu.html">doi-thu.html</a></div>
+
+<div class="box"><b>Một câu:</b> anh chỉ thư mục dự án và nói hạng mục cần biện pháp. Hệ thống tự gom tiêu chuẩn Việt Nam liên quan, tìm dự án tương đương trong kho của đơn vị, đọc tài liệu yêu cầu của dự án, lập bảng tham số có trích dẫn, rồi vẽ bản biện pháp vào AutoCAD kèm thuyết minh. Anh duyệt, sửa, cho kiểm tra lại.</div>
+
+<h2>1. Đầu vào và đầu ra</h2>
+<div class="wrap"><table>
+<tr><th>Đầu vào</th><th>Ai cung cấp</th><th>Dạng</th></tr>
+<tr><td>Thư mục dự án: bản vẽ kiến trúc, kết cấu, hiện trạng, địa chất, hợp đồng, yêu cầu của chủ đầu tư/TVGS, hồ sơ mời thầu</td><td>Anh chỉ đường dẫn</td><td>DWG, PDF, DOCX, XLSX</td></tr>
+<tr><td>Kho tiêu chuẩn Việt Nam</td><td>Hệ thống tự tra, đơn vị nạp file</td><td>PDF/DOC đã số hóa</td></tr>
+<tr><td>Kho dự án cũ đã duyệt</td><td>Hệ thống tự quét</td><td>DWG biện pháp + thuyết minh + hồ sơ duyệt</td></tr>
+<tr><td>Thông tin thực địa và quyết định quản lý</td><td>Anh trả lời khi hệ thống hỏi (một lần, gom câu hỏi)</td><td>Form</td></tr>
+</table></div>
+<div class="wrap"><table>
+<tr><th>Đầu ra</th><th>Nội dung</th></tr>
+<tr><td>Bản vẽ DWG</td><td>Mặt bằng tổ chức thi công; biện pháp theo hạng mục (đào đất, cọc, móng, thân, hoàn thiện); an toàn: giàn giáo, lan can, lưới, rào chắn; chi tiết điển hình; khung tên đúng mẫu đơn vị</td></tr>
+<tr><td>Thuyết minh DOCX</td><td>Sinh từ cùng bảng tham số nên khớp bản vẽ; mỗi số kèm điều khoản tiêu chuẩn</td></tr>
+<tr><td>Bảng tham số XLSX</td><td>Thông số công trình, quy tắc áp dụng, nguồn (file nào, trang nào, điều nào), trạng thái A/B/C</td></tr>
+<tr><td>Danh sách quyết định</td><td>"AI đã chọn" và "cần kỹ sư chọn", mỗi mục có lý do</td></tr>
+<tr><td>Báo cáo tự kiểm</td><td>Bản vẽ đã vẽ đối chiếu lại quy tắc: đạt / chưa đạt / cần xác nhận</td></tr>
+</table></div>
+
+<h2>2. Bốn kho dữ liệu hệ thống dựa vào</h2>
+<h3>2.1 Kho tiêu chuẩn Việt Nam</h3>
+<ul>
+<li>Lõi cho biện pháp thi công: <b>QCVN 18:2021/BXD</b> (an toàn thi công, bắt buộc), TCVN 4453 (bê tông, cốp pha), TCVN 4447 (đất, hố đào, mái dốc), TCVN 5308 (an toàn xây dựng), TCVN 9394 (cọc), TCVN 4055 (tổ chức thi công), QCVN 01 (quy hoạch), tiêu chuẩn giàn giáo, cẩu, điện công trường. Danh mục cuối cùng do kỹ sư chốt.</li>
+<li>Nguồn: QCVN công bố công khai (Bộ Xây dựng, luatvietnam có bản PDF/DOC cần tài khoản). TCVN có bản quyền, mua từ Viện Tiêu chuẩn. <span class="warn">Hệ thống không tự tải TCVN trên mạng</span>: bản trôi nổi hay sai phiên bản. Đơn vị nạp file đã mua vào kho, hệ thống chỉ tra trong kho.</li>
+<li>Xử lý: mỗi tiêu chuẩn được bóc thành <b>bảng quy tắc</b>: điều khoản, điều kiện áp dụng, giá trị, đơn vị, loại (bắt buộc / khuyến nghị / "theo thiết kế"). Bóc một lần bằng LLM, kỹ sư duyệt, lưu lại. Khi vẽ, hệ thống chỉ tra bảng, không đọc lại PDF.</li>
+<li>Theo dõi hiệu lực: mỗi tiêu chuẩn có ngày ban hành, văn bản thay thế. Hệ thống cảnh báo nếu dự án cũ dùng bản đã hết hiệu lực.</li>
+</ul>
+<h3>2.2 Kho dự án tương đương</h3>
+<ul>
+<li>Quét thư mục dự án cũ của đơn vị, mỗi dự án lập "hồ sơ": loại công trình, số tầng, diện tích, loại móng, hệ kết cấu, địa phương, năm, nhà thầu, kết quả duyệt.</li>
+<li>Tìm tương đương theo hồ sơ, không theo tên file. Ví dụ: chung cư 25 tầng, 2 hầm, cọc khoan nhồi, Hà Nội, 2023 trở lại.</li>
+<li>Từ dự án tương đương lấy: cách bố trí mặt bằng, chi tiết đã dùng, ghi chú, lỗi bị TVGS trả lại (nếu có hồ sơ). Đây là "cách làm riêng của đơn vị" mà tiêu chuẩn không có.</li>
+<li>Nếu đơn vị chưa có kho số: bắt đầu với 5 đến 10 dự án tiêu biểu, nạp tay.</li>
+</ul>
+<h3>2.3 Tài liệu yêu cầu của dự án</h3>
+<ul>
+<li>Hợp đồng, hồ sơ mời thầu, yêu cầu của chủ đầu tư, chỉ dẫn kỹ thuật (spec), biên bản họp. Hệ thống đọc và bóc các câu có tính ràng buộc: "phải", "không được", "tối thiểu", thời hạn, vật liệu chỉ định.</li>
+<li>Các ràng buộc này cộng vào bảng quy tắc với nguồn là "yêu cầu dự án", ưu tiên cao hơn tiêu chuẩn khi chặt hơn.</li>
+</ul>
+<h3>2.4 Thư viện chi tiết điển hình</h3>
+<ul>
+<li>Khoảng 20 đến 30 chi tiết viết dưới dạng LISP tham số: lan can mép sàn, giàn giáo bao che, lưới an toàn, rào hố thang, hố đào mái dốc, cừ larsen, cốp pha cột/dầm/sàn, sàn thao tác, cổng công trường, trạm điện, bãi vật liệu, lán trại, bể rửa xe.</li>
+<li>Mỗi chi tiết có: tham số đầu vào, quy tắc tiêu chuẩn nào quyết tham số nào, ghi chú tự sinh có điều khoản.</li>
+<li>Lấy từ bản vẽ cũ của đơn vị, chuẩn hóa lại. Đây là phần tốn công nhất và là tài sản của tool.</li>
+</ul>
+
+<h2>3. Quy trình agent</h2>
+<div class="flow">
+<div><b>1. Quét</b>Liệt kê file trong thư mục dự án, nhận dạng từng file là gì</div>
+<div><b>2. Bóc công trình</b>Số tầng, chiều cao, mặt bằng, lõi, móng, nhịp từ DWG/PDF</div>
+<div><b>3. Bóc yêu cầu</b>Ràng buộc từ hợp đồng, spec, yêu cầu CĐT</div>
+<div><b>4. Tra tiêu chuẩn</b>Chọn tiêu chuẩn áp dụng, lấy quy tắc từ bảng đã duyệt</div>
+<div><b>5. Tìm dự án tương đương</b>Lấy cách bố trí, chi tiết, bài học</div>
+<div><b>6. Lập bảng tham số</b>Gộp 2+3+4+5, mỗi dòng có nguồn, đánh dấu chỗ cần người</div>
+<div><b>7. Hỏi một lần</b>Gom mọi câu thiếu dữ liệu thành một form</div>
+<div><b>8. Bố trí và vẽ</b>Đề xuất mặt bằng, chọn chi tiết, điền tham số, vẽ bằng LISP qua MCP</div>
+<div><b>9. Tự kiểm</b>Đối chiếu bản vẽ với bảng quy tắc, khoanh chỗ chưa đạt</div>
+<div><b>10. Thuyết minh</b>Sinh DOCX từ bảng tham số</div>
+<div><b>11. Duyệt</b>Kỹ sư sửa trong AutoCAD, chạy lại bước 9</div>
+</div>
+<div class="box"><b>Nguyên tắc:</b> AI không phun tọa độ. AI chọn chi tiết và điền tham số, hình do code vẽ. Mọi số trên bản vẽ truy ngược được về một dòng trong bảng tham số, và dòng đó truy ngược được về file nguồn. Chỗ tiêu chuẩn ghi "theo điều kiện thực tế" thì AI không tự chọn.</div>
+
+<h2>4. Kiến trúc kỹ thuật</h2>
+<pre>
+[Thư mục dự án] [Kho tiêu chuẩn] [Kho dự án cũ]
+        \            |              /
+         v           v             v
+   Bộ đọc: ezdxf (DWG/DXF), OCR PDF, python-docx, openpyxl
+                     |
+                     v
+   Kho tri thức: SQLite + FTS5 (quy tắc, hồ sơ dự án, chi tiết)
+                     |
+                     v
+   Agent (Claude qua MCP): quét → bóc → tra → lập bảng → vẽ → tự kiểm
+                     |
+          +----------+-----------+
+          v                      v
+   AutoCAD MCP (nền U-C4N,   Sinh DOCX/XLSX
+   COM live + LISP tham số)
+</pre>
+<ul>
+<li>Tái dùng từ <code>research/hop-dong</code>: đọc văn bản, FTS5, registry luật có trạng thái hiệu lực, LLM đa provider, che PII.</li>
+<li>Tái dùng từ U-C4N/Autocad-MCP: COM + ezdxf, render ảnh, undo snapshot. Thêm lớp "vùng vẽ + preview + duyệt".</li>
+<li>Thư viện chi tiết: LISP tham số, test bằng ezdxf headless (vẽ ra DXF, kiểm tra kích thước bằng code), không cần AutoCAD để test.</li>
+<li>Chạy local trên máy có AutoCAD. Dữ liệu dự án không rời máy, trừ phần gửi LLM (có che tên dự án, chủ đầu tư nếu cần).</li>
+</ul>
+
+<h2>5. Giai đoạn và tiêu chí qua</h2>
+<div class="wrap"><table>
+<tr><th>GĐ</th><th>Việc</th><th>Tiêu chí qua</th><th>Ước lượng</th></tr>
+<tr><td>0</td><td>Chốt phạm vi với 1 hạng mục (đề xuất: biện pháp an toàn phần thân theo QCVN 18:2021/BXD) và 1 dự án thật đã duyệt làm mẫu</td><td>Anh duyệt bản kế hoạch này</td><td>1 tuần</td></tr>
+<tr><td>1</td><td>Bóc QCVN 18 thành bảng quy tắc; kỹ sư duyệt bảng</td><td>Kỹ sư xác nhận ≥90% dòng đúng</td><td>2 tuần</td></tr>
+<tr><td>2</td><td>Agent quét dự án mẫu, lập bảng tham số, so với bản biện pháp đã duyệt</td><td>Bắt được ≥80% thông số mà bản đã duyệt dùng; không bịa số</td><td>3 tuần</td></tr>
+<tr><td>3</td><td>Thư viện 10 chi tiết điển hình LISP tham số, test headless</td><td>Chi tiết sinh ra trùng kích thước với chi tiết đơn vị đang dùng</td><td>3 tuần</td></tr>
+<tr><td>4</td><td>Vẽ live qua MCP vào AutoCAD + tự kiểm + thuyết minh</td><td>Kỹ sư đánh giá bản nháp "sửa được thành bản nộp" dưới 50% thời gian làm tay</td><td>4 tuần</td></tr>
+<tr><td>5</td><td>Kho dự án tương đương + bố trí mặt bằng đề xuất</td><td>Trên 3 dự án mới, bố trí AI được giữ ≥60% sau khi kỹ sư sửa</td><td>4 tuần</td></tr>
+</table></div>
+<p>Mỗi giai đoạn có mốc đo được. Không qua mốc thì dừng và xem lại, không đi tiếp.</p>
+
+<h2>6. Rủi ro nói thật</h2>
+<ul>
+<li><span class="bad">Bố trí mặt bằng công trường</span> là bài toán không gian, AI làm ra phương án hợp lý trên giấy cho dự án quen, công trình lạ hoặc đất chật thì kỹ sư bố trí lại. Tool đề xuất và kiểm tra, không thay người.</li>
+<li><span class="warn">Chất lượng phụ thuộc kho của đơn vị</span>, không phụ thuộc LLM. Không có dự án cũ số hóa và chi tiết chuẩn thì AI chỉ vẽ được chi tiết chung chung.</li>
+<li><span class="warn">Tiêu chuẩn</span> có nhiều điều mở; bóc thành quy tắc có thể hiểu sai. Bắt buộc kỹ sư duyệt bảng quy tắc trước khi dùng.</li>
+<li><span class="warn">Pháp lý</span>: bản vẽ vẫn do kỹ sư ký. Tool phải làm người ký kiểm tra nhanh được, nên truy vết là bắt buộc, không phải tính năng thêm.</li>
+<li>Máy hiện tại chưa cài AutoCAD. GĐ 1 đến 3 làm được không cần AutoCAD, GĐ 4 trở đi cần.</li>
+</ul>
+
+<div class="box ask"><b>Cần từ anh để bắt đầu GĐ 0</b>
+<ol>
+<li>Một thư mục dự án thật đã có bản vẽ biện pháp thi công được duyệt (DWG + thuyết minh + bản vẽ kiến trúc/kết cấu).</li>
+<li>Chốt hạng mục đầu tiên: tôi đề xuất biện pháp an toàn phần thân (giàn giáo, lan can, lưới, rào) vì QCVN 18 công khai, quy tắc rõ, chi tiết lặp nhiều.</li>
+<li>File QCVN 18:2021/BXD và các TCVN đơn vị đang dùng (bản đơn vị có, không lấy trên mạng).</li>
+<li>Tên một kỹ sư sẽ duyệt bảng quy tắc và chấm kết quả từng giai đoạn.</li>
+</ol></div>
+
+<h2>Nguồn tham khảo</h2>
+<ul class="meta">
+<li><a href="https://luatvietnam.vn/xay-dung/quy-chuan-viet-nam-qcvn-18-2021-bxd-214877-d3.html">QCVN 18:2021/BXD toàn văn (luatvietnam)</a> · <a href="https://moc.gov.vn/pl/tin-tuc/441/tuyen-truyenpho-bien-tai-lieu-huong-dan-thuc-hien-qcvn-18-2021bxd-ve-an-toan-trong-thi-cong-xay-dungky-thuat-an-toan-khi-lam-viec-tren-cao-va-trong--.aspx">Tài liệu hướng dẫn QCVN 18 (Bộ Xây dựng)</a> · <a href="doi-thu.html">Khảo sát đối thủ</a></li>
+</ul>
+</body>
+</html>

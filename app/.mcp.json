@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "cadtroly": {
+      "command": "python",
+      "args": ["-m", "cadtroly.mcp"],
+      "env": {
+        "CADTROLY_KHO": "D:\\CAD-kho",
+        "AUTOCAD_MCP_BACKEND": "auto",
+        "TOOL_PROFILE": "lean",
+        "TOOL_PACKS": "core,arch",
+        "PYTHONIOENCODING": "utf-8"
+      }
+    }
+  }
+}

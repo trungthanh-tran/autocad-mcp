@@ -1,0 +1,34 @@
+AI TRỢ LÝ AUTOCAD — HƯỚNG DẪN NHANH
+=====================================
+
+1. Giải nén cả thư mục. Bấm đúp AI-Tro-ly-AutoCAD.exe (Linux: ./AI-Tro-ly-AutoCAD).
+   Không cần cài Python hay AutoCAD. Lần đầu mở có thể chậm vài giây.
+   Windows cần WebView2 Runtime (Win10/11 thường có sẵn). Không có thì tool tự mở trình duyệt.
+
+2. Màn hình chính:
+   - Chọn bản vẽ… (file .dxf; bản .dwg xuất ra DXF từ AutoCAD: lệnh SAVEAS → DXF)
+   - Σ Bóc khối lượng → bảng ánh xạ → chọn công tác trong danh sách → ✓ → Tính → Xuất Excel
+   - ✓ Kiểm tra theo chuẩn → chọn bộ quy tắc → Kiểm tra
+   - Hỏi trợ lý: gõ tiếng Việt (cần đăng nhập AI ở Cài đặt)
+
+3. Kho dữ liệu của đơn vị: thư mục CAD-kho trong thư mục người dùng
+   (Windows: C:\Users\<tên>\CAD-kho). Quy tắc anh chị xác nhận được lưu ở đây,
+   lần sau tự áp. Cập nhật chương trình không đụng vào kho. Sao lưu = chép thư mục này.
+   - Thêm chuẩn công ty: file .rules.json vào CAD-kho\quy-tac
+   - Thêm tiêu chuẩn: file .rules.json vào CAD-kho\tieu-chuan (kỹ sư duyệt từng dòng duyet=true)
+   - Kết quả Excel: CAD-kho\out
+
+4. Đăng nhập AI (tab Cài đặt): bấm "Đăng nhập Claude" → trình duyệt mở → đăng nhập → quay lại.
+   Tài khoản là tài khoản tổ chức API của Anthropic (tính theo lượng dùng), không phải gói Claude Pro.
+   Không có tài khoản thì dán API key. Không cần AI vẫn bóc khối lượng và kiểm tra được.
+
+5. Dữ liệu: bản vẽ ở lại máy. Khi dùng AI chỉ gửi tên layer/block, số lượng, ghi chú ngắn.
+
+6. Lỗi: hộp thông báo nói rõ lỗi gì và nên làm gì, kèm mã lỗi (E-FILE-xx file, E-AI-xx kết nối AI,
+   E-CAD-xx AutoCAD). Bấm "Gửi báo lỗi cho người phát triển": chương trình tự gom nhật ký + cấu hình
+   (đã che key, KHÔNG có bản vẽ) gửi thẳng cho bên phát triển và báo mã theo dõi. Nếu mất mạng, file
+   được lưu ở CAD-kho\out\bao-loi-<ngày>.zip để gửi tay. Chương trình bị tắt đột ngột thì lần mở sau
+   tự gửi. Xem lại danh sách lỗi ở Cài đặt → Nhật ký & báo lỗi.
+   Nhật ký lưu theo ngày: CAD-kho\log\app-<ngày>.log, giữ 30 ngày.
+
+Chạy nâng cao: AI-Tro-ly-AutoCAD.exe --browser (mở trình duyệt) --port 8765 --kho D:\CAD-kho

@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.egg-info/
+samples/out/
+samples/kho/out/
+samples/kho/log/
+samples/kho/quy-tac/anh-xa.json
+.pytest_cache/
+upstream_tests/__pycache__/
+*.egg-info/
+dist/
+build/_work/
+build/bin/

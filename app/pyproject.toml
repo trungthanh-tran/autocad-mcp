@@ -1,0 +1,46 @@
+[project]
+name = "cadtroly"
+version = "0.1.0"
+description = "AI Trợ lý cho AutoCAD (MCP): bóc khối lượng, kiểm tra chuẩn, sửa vẽ, biện pháp thi công. Fork của AutoCAD MCP Pro (U-C4N, MIT)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = [
+    "fastmcp>=3.4.5,<4",
+    "ezdxf>=1.4,<2",
+    "pydantic>=2.0,<3",
+    "openpyxl>=3.1",
+    "matplotlib>=3.8",
+    "Pillow>=10.0",
+    "pyyaml>=6",
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+    "python-multipart>=0.0.9",
+    'pywin32>=306; sys_platform == "win32"',
+]
+
+[project.optional-dependencies]
+llm = ["anthropic>=1.0", "httpx>=0.27"]
+web = ["fastapi>=0.110", "uvicorn>=0.29", "python-multipart>=0.0.9", "pywebview>=5", "keyring>=24"]
+dev = ["pytest>=8", "pytest-asyncio>=0.23"]
+
+[project.scripts]
+cadtroly = "cadtroly.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["server", "config", "security", "version"]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["cadtroly*", "backends*", "engineering*", "discovery*", "templates*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.dxf", "*.dwt", "*.json", "*.md", "*.lsp", "*.yaml", "*.html"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
