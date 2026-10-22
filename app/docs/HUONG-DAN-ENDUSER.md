@@ -133,279 +133,279 @@ Sau mỗi công việc, yêu cầu MCP/LLM trả về:
 
 ## Danh sách đầy đủ tất cả tool
 
-Bảng này gồm **272 tool** đang đăng ký, bao gồm cả **247 tool upstream** và tool mở rộng của cadtroly. Bạn có thể nói tên tool trong yêu cầu nếu muốn gọi trực tiếp.
+Bảng này gồm **272 tool** đang đăng ký, bao gồm cả **247 tool nền tảng** và tool mở rộng của cadtroly. Bạn có thể nói tên tool trong yêu cầu nếu muốn gọi trực tiếp.
 
-| Tool | Nhóm | Làm gì | Dùng khi nào |
+| Tên tool | Nhóm | Làm gì | Dùng khi nào |
 |---|---|---|---|
-| `analysis_bounding_box` | `analysis` | Get the overall extents of everything drawn. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
-| `analysis_entity_stats` | `analysis` | Count the drawing's objects, broken down by type and by layer. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
-| `analysis_find_in_region` | `analysis` | List everything that falls inside a rectangular window. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
-| `analysis_layer_stats` | `analysis` | Report how many entities, and which types, sit on each layer. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
-| `analysis_list_properties` | `analysis` | Dump every DXF property of one entity, like LIST. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
-| `analysis_measure_area` | `analysis` | Measure a polygon's area and perimeter from its vertices. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
-| `analysis_measure_distance` | `analysis` | Measure the gap between two points: distance, dx/dy and angle. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
-| `analysis_measure_entity` | `analysis` | Area and perimeter of an existing entity, by handle. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
-| `analysis_select_by_layer` | `analysis` | Grab the handles of everything sitting on one layer. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
-| `analysis_select_by_type` | `analysis` | Grab the handles of every entity of one type: all the circles, all the lines. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
-| `arch_catalogue_insert` | `architecture` | Insert a furniture or sanitary item - bed, sofa, WC, basin, bathtub - as a block. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
-| `arch_catalogue_list` | `architecture` | Search the furniture and sanitary catalogue in English or Turkish. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
-| `arch_dimension_chains` | `architecture` | Dimension the plan's facades: openings, walls and overall chains outside each side. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
-| `arch_grid` | `architecture` | Draw a structural grid: axis lines with numbered and lettered bubbles at both ends. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
-| `arch_opening` | `architecture` | Host a door or a window in a drawn wall by distance along it; the wall is cut. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
-| `arch_plan_from_spec` | `architecture` | Draw a whole floor plan - walls, doors, windows, stairs, rooms, chains, schedules - in one transaction. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
-| `arch_room` | `architecture` | Label a room with its name, number and measured area. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
-| `arch_rooms_detect` | `architecture` | Find the rooms of any plan and measure them; never modifies it. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
-| `arch_schedule` | `architecture` | Draw a door, window or room schedule from the plan records. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
-| `arch_stair` | `architecture` | Draw a straight, L or U stair in plan and report its Blondel step rule. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
-| `arch_symbol` | `architecture` | Draw a plan symbol: north arrow, section mark, level mark or elevation mark. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
-| `arch_wall` | `architecture` | Add walls to the plan: clean L/T/X junctions, cut openings, material poché. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
-| `balloon_add` | `sheet` | Add an ISO 6433 balloon linked to its item row. | Khi cần sheet, khung tên và phát hành. |
-| `batch_plot` | `page_setup` | Plot every sheet (or the named ones) to PDF; each sheet size is read back from its PDF. | Khi cần khổ giấy, tỷ lệ và in ấn. |
-| `block_create_from_entities` | `blocks` | Turn existing entities into a reusable block definition. | Khi cần block và block reference. |
-| `block_define` | `blocks` | Define a block from typed primitives and attribute definitions, on both engines. | Khi cần block và block reference. |
-| `block_explode` | `blocks` | Break a block reference apart into its component entities. | Khi cần block và block reference. |
-| `block_find_references` | `blocks` | Find every place a given block is inserted. | Khi cần block và block reference. |
-| `block_get_attributes` | `blocks` | Read the tag/value pairs off a block reference. | Khi cần block và block reference. |
-| `block_insert` | `blocks` | Place a block, filling in its attribute values as you go. | Khi cần block và block reference. |
-| `block_list` | `blocks` | List the block definitions the drawing already carries. | Khi cần block và block reference. |
-| `block_set_attributes` | `blocks` | Fill in a block reference's attributes, such as title-block fields. | Khi cần block và block reference. |
-| `bom_extract` | `sheet` | Read the bill of materials out of the drawing's block references. | Khi cần sheet, khung tên và phát hành. |
-| `bom_table` | `sheet` | Draw the parts list as a real TABLE above the title block. | Khi cần sheet, khung tên và phát hành. |
-| `boundary_from_entities` | `analysis` | Join named entities into one closed boundary polyline. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
-| `boundary_trace` | `analysis` | Trace the closed boundary around a point, like BOUNDARY. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
-| `cable_takeoff` | `plant` | Cable takeoff: one row per load, Manhattan length to its panel, rounded up to the metre. | Khi cần bố trí thiết bị plant. |
-| `cad_batch` | `batch` | Run an ordered list of tool calls in one round trip, binding results between steps. | Khi cần xử lý hàng loạt. |
-| `centre_marks` | `mechanical` | Draw ISO 128-23 centre marks or centre lines on circles, read from the drawing. | Khi cần bản vẽ cơ khí. |
-| `check_rulesets` | `cadtroly` | Liệt kê bộ quy tắc trong kho (tiêu chuẩn đã bóc + chuẩn công ty), kèm hiệu lực và số dòng chờ duyệt. | Khi cần chức năng mở rộng của cadtroly. |
-| `check_run` | `cadtroly` | Luồng D: rà bản vẽ theo bộ quy tắc. Trả về từng vấn đề kèm điều khoản, handle, vị trí, có tự sửa được không. | Khi cần chức năng mở rộng của cadtroly. |
-| `construction_clear` | `premium` | Wipe the construction scaffolding off the drawing before finalize. | Khi cần chức năng nâng cao. |
-| `construction_xline` | `premium` | Lay down an infinite guide line to build geometry against. | Khi cần chức năng nâng cao. |
-| `data_extract` | `sheet` | Write the bill of materials to a CSV file, or to XLSX when openpyxl is present. | Khi cần sheet, khung tên và phát hành. |
-| `datum_feature` | `engineering` | Mark a datum on a feature: filled triangle plus the boxed datum letter. | Khi cần kiểm tra kỹ thuật. |
-| `dimension_aligned` | `dimensions` | Dimension the true distance between two points, along a slope. | Khi cần kích thước và ghi chú dim. |
-| `dimension_angular` | `dimensions` | Dimension the included angle between two rays from a vertex. | Khi cần kích thước và ghi chú dim. |
-| `dimension_auto` | `premium` | Dimension a set of entities at once, as a chain, baseline or ordinate run. | Khi cần chức năng nâng cao. |
-| `dimension_diameter` | `dimensions` | Call out a hole or shaft diameter, optionally to a fit such as H7. | Khi cần kích thước và ghi chú dim. |
-| `dimension_linear` | `dimensions` | Dimension a horizontal or vertical size, with an ISO 129 tolerance or ISO 286 fit. | Khi cần kích thước và ghi chú dim. |
-| `dimension_radius` | `dimensions` | Call out the radius of a circle or arc, optionally toleranced. | Khi cần kích thước và ghi chú dim. |
-| `dimstyle_create` | `styles` | Create a dimension style from the ISO-25 or ANSI preset, with per-variable overrides. | Khi cần style và hiển thị. |
-| `dimstyle_list` | `styles` | List dimension styles with their ISO-25/ANSI variables and the current one. | Khi cần style và hiển thị. |
-| `dimstyle_modify` | `styles` | Change DIM* variables on an existing dimension style; reports only what moved. | Khi cần style và hiển thị. |
-| `dimstyle_set_current` | `styles` | Make a dimension style current so new dimensions use it. | Khi cần style và hiển thị. |
-| `document_activate` | `environment` | Switch which open document every later tool call targets. | Khi cần kiểm tra kết nối và cấu hình. |
-| `document_close` | `environment` | Close one open document by name; never drops unsaved work unless told to. | Khi cần kiểm tra kết nối và cấu hình. |
-| `document_list` | `environment` | List the open documents: which is active, which have unsaved changes. | Khi cần kiểm tra kết nối và cấu hình. |
-| `drawing_apply_discipline_standard` | `cadtroly` | Set up a drawing for a civil/architectural discipline in one call. | Khi cần chức năng mở rộng của cadtroly. |
-| `drawing_apply_iso_layers` | `premium` | Set up a standard ISO layer set with the right colours and lineweights. | Khi cần chức năng nâng cao. |
-| `drawing_apply_standard` | `styles` | Put the drawing on ISO or ANSI in one call: dimstyle, text style, units, mech layers. | Khi cần style và hiển thị. |
-| `drawing_audit` | `drawing` | Scan the drawing for structural errors and repair what it finds. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
-| `drawing_close` | `drawing` | Close the drawing, saving first unless you say otherwise. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
-| `drawing_critique` | `premium` | Review the drawing for drafting mistakes: must come back empty before finalize. | Khi cần chức năng nâng cao. |
-| `drawing_deliver` | `engineering` | Hand the drawing off: a hashed, validated bundle of files plus a manifest. | Khi cần kiểm tra kỹ thuật. |
-| `drawing_diff` | `understanding` | Compare two revisions of a drawing: what moved, changed, was added or removed. | Khi cần đọc hiểu cấu trúc bản vẽ. |
-| `drawing_entities` | `cadtroly` | Liệt kê đối tượng theo layer/block/loại kèm handle, toạ độ, chiều dài, diện tích, text. | Khi cần chức năng mở rộng của cadtroly. |
-| `drawing_export_dwg` | `sheet` | Write the drawing as a real DWG at a chosen AutoCAD version. | Khi cần sheet, khung tên và phát hành. |
-| `drawing_export_dxf` | `drawing` | Write a DXF interchange copy of the drawing. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
-| `drawing_export_pdf` | `drawing` | Plot the drawing, or one paper-space layout, to PDF. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
-| `drawing_finalize` | `engineering` | Finish the drawing: validate, critique, save, screenshot and score it. | Khi cần kiểm tra kỹ thuật. |
-| `drawing_info` | `entity_query` | Read the current drawing's name, path, extents and object counts. | Khi cần tìm và đọc thuộc tính đối tượng. |
-| `drawing_new` | `drawing` | Start a drawing: blank with the engineering layers, or from a bundled/own template. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
-| `drawing_open` | `drawing` | Load an existing DXF from disk (DWG only on the live AutoCAD backend). | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
-| `drawing_plan` | `premium` | Commit sheet size, scale, layer set and dimension style before any geometry. | Khi cần chức năng nâng cao. |
-| `drawing_preflight` | `premium` | Check the brief before you draw: units, part type, tolerances, missing inputs. | Khi cần chức năng nâng cao. |
-| `drawing_properties_get` | `environment` | Read the drawing's title, subject, author, keywords, comments and custom properties. | Khi cần kiểm tra kết nối và cấu hình. |
-| `drawing_properties_set` | `environment` | Set the drawing's summary fields and add, change or delete custom properties. | Khi cần kiểm tra kết nối và cấu hình. |
-| `drawing_purge` | `drawing` | Strip unused layers, blocks, linetypes and styles out of the file. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
-| `drawing_read` | `cadtroly` | Đọc bản vẽ thành số liệu: layer, block, số đối tượng, đơn vị. Không gửi gì đi. | Khi cần chức năng mở rộng của cadtroly. |
-| `drawing_redo` | `drawing` | Reapply the operation you just undid. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
-| `drawing_refine` | `premium` | Auto-repair what the critique found, then re-check, up to three rounds. | Khi cần chức năng nâng cao. |
-| `drawing_save` | `drawing` | Write the drawing back to its file, or to a path you give. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
-| `drawing_save_as` | `drawing` | Save a copy under a new name; the extension picks DXF, DWG or DWT. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
-| `drawing_scale_check` | `understanding` | Is this drawing to scale against a reference? Tag distances, ratios, a verdict. | Khi cần đọc hiểu cấu trúc bản vẽ. |
-| `drawing_settings` | `system` | Read or change drawing units, precision, linetype and dimension scale by name. | Khi cần trạng thái server. |
-| `drawing_template_list` | `page_setup` | List the five bundled drawing templates: standard, sheet, layers, styles, page setup. | Khi cần khổ giấy, tỷ lệ và in ấn. |
-| `drawing_template_save` | `page_setup` | Save the current drawing as a template: .dwt on live AutoCAD, .dxf headlessly. | Khi cần khổ giấy, tỷ lệ và in ấn. |
-| `drawing_topology_check` | `understanding` | Find dangling ends, near misses and unjoined crossings in a pipe or cable network. | Khi cần đọc hiểu cấu trúc bản vẽ. |
-| `drawing_understand` | `understanding` | Read a foreign drawing: units, extents, clusters, layers, tags, rooms, languages. | Khi cần đọc hiểu cấu trúc bản vẽ. |
-| `drawing_undo` | `drawing` | Step back one operation. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
-| `entity_array_polar` | `entity_modification` | Repeat an entity around a centre: a bolt circle or radial pattern. | Khi cần sửa hoặc biến đổi đối tượng. |
-| `entity_array_rectangular` | `entity_modification` | Repeat an entity in a grid of rows and columns. | Khi cần sửa hoặc biến đổi đối tượng. |
-| `entity_batch_create` | `batch` | Draw many entities in one call instead of one round trip each. | Khi cần xử lý hàng loạt. |
-| `entity_batch_modify` | `batch` | Move, rotate, scale, restyle or delete many entities in one call. | Khi cần xử lý hàng loạt. |
-| `entity_chamfer` | `corner_ops` | Bevel a corner between two lines by two setback distances. | Khi cần chức năng mở rộng của cadtroly. |
-| `entity_change_space` | `layouts` | Move entities between model space and a sheet through a viewport. | Khi cần layout và viewport. |
-| `entity_copy` | `entity_modification` | Duplicate an entity and offset the copy. | Khi cần sửa hoặc biến đổi đối tượng. |
-| `entity_create_arc` | `entity_creation` | Draw a circular arc from a centre, a radius and two angles. | Khi cần vẽ thêm đối tượng. |
-| `entity_create_block_ref` | `blocks` | Drop an instance of an existing block definition into the drawing. | Khi cần block và block reference. |
-| `entity_create_circle` | `entity_creation` | Draw a circle: a hole, a bore, a pitch circle. | Khi cần vẽ thêm đối tượng. |
-| `entity_create_ellipse` | `entity_creation` | Draw an ellipse from its centre, major axis vector and axis ratio. | Khi cần vẽ thêm đối tượng. |
-| `entity_create_hatch` | `entity_creation` | Fill a closed boundary with a section pattern such as ANSI31 or SOLID. | Khi cần vẽ thêm đối tượng. |
-| `entity_create_line` | `entity_creation` | Draw a straight line between two points. | Khi cần vẽ thêm đối tượng. |
-| `entity_create_mtext` | `entity_creation` | Place a wrapped paragraph note in a text box of a given width. | Khi cần vẽ thêm đối tượng. |
-| `entity_create_point` | `entity_creation` | Place a point marker (node) at a coordinate. | Khi cần vẽ thêm đối tượng. |
-| `entity_create_polyline` | `entity_creation` | Draw a connected outline or closed profile through a list of points. | Khi cần vẽ thêm đối tượng. |
-| `entity_create_rectangle` | `entity_creation` | Draw a closed rectangle from two opposite corners. | Khi cần vẽ thêm đối tượng. |
-| `entity_create_revcloud` | `entity_creation` | Draw a revision cloud around an area. | Khi cần vẽ thêm đối tượng. |
-| `entity_create_spline` | `entity_creation` | Draw a smooth NURBS curve through fit points. | Khi cần vẽ thêm đối tượng. |
-| `entity_create_table` | `entity_creation` | Place a parts list, BOM or schedule as a table with headers and rows. | Khi cần vẽ thêm đối tượng. |
-| `entity_create_text` | `entity_creation` | Place a single-line text label. | Khi cần vẽ thêm đối tượng. |
-| `entity_create_wipeout` | `entity_creation` | Mask whatever is behind a closed polygon on the sheet. | Khi cần vẽ thêm đối tượng. |
-| `entity_delete` | `entity_modification` | Erase one entity by handle. | Khi cần sửa hoặc biến đổi đối tượng. |
-| `entity_delete_many` | `entity_modification` | Erase a whole list of entities in one call. | Khi cần sửa hoặc biến đổi đối tượng. |
-| `entity_edit_geometry` | `entity_modification` | Change a circle's radius, a line's endpoints or an arc's angles in place. | Khi cần sửa hoặc biến đổi đối tượng. |
-| `entity_edit_text` | `entity_modification` | Reword a label, or change its height or rotation, keeping its handle. | Khi cần sửa hoặc biến đổi đối tượng. |
-| `entity_extend` | `corner_ops` | Lengthen a line until it meets a boundary line. | Khi cần chức năng mở rộng của cadtroly. |
-| `entity_fillet` | `corner_ops` | Round a corner between two lines with a tangent arc. | Khi cần chức năng mở rộng của cadtroly. |
-| `entity_get` | `entity_query` | Inspect one entity by handle: type, layer, colour and geometry. | Khi cần tìm và đọc thuộc tính đối tượng. |
-| `entity_get_xdata` | `entity_query` | Read an entity's extended data (XDATA) by application name. | Khi cần tìm và đọc thuộc tính đối tượng. |
-| `entity_list` | `entity_query` | Browse the drawing's entities and their handles, filtered by type or layer. | Khi cần tìm và đọc thuộc tính đối tượng. |
-| `entity_mirror` | `entity_modification` | Reflect an entity across a mirror line, keeping or dropping the original. | Khi cần sửa hoặc biến đổi đối tượng. |
-| `entity_move` | `entity_modification` | Shift an entity by a displacement vector. | Khi cần sửa hoặc biến đổi đối tượng. |
-| `entity_offset` | `entity_modification` | Make a parallel copy of a line, circle or polyline at a set distance. | Khi cần sửa hoặc biến đổi đối tượng. |
-| `entity_rotate` | `entity_modification` | Turn an entity about a base point by an angle in degrees. | Khi cần sửa hoặc biến đổi đối tượng. |
-| `entity_scale` | `entity_modification` | Resize an entity uniformly about a base point. | Khi cần sửa hoặc biến đổi đối tượng. |
-| `entity_select_smart` | `premium` | Pick every entity matching a description: type, layer, colour, length, location. | Khi cần chức năng nâng cao. |
-| `entity_set_properties` | `entity_modification` | Change an entity's layer, colour, linetype, lineweight or visibility. | Khi cần sửa hoặc biến đổi đối tượng. |
-| `entity_set_xdata` | `entity_modification` | Attach or replace extended data (XDATA) on an entity. | Khi cần sửa hoặc biến đổi đối tượng. |
-| `entity_trim` | `corner_ops` | Cut a line back to where another crosses it, keeping the side you point at. | Khi cần chức năng mở rộng của cadtroly. |
-| `gd_frame` | `engineering` | Draw an ISO 1101 feature control frame: symbol, tolerance zone and datums. | Khi cần kiểm tra kỹ thuật. |
-| `gear_draw_helical_front_view` | `engineering` | Draw a helical gear front view: true involute teeth, circles, bore and keyway. | Khi cần kiểm tra kỹ thuật. |
-| `gear_draw_section_aa` | `engineering` | Draw the hatched side cross-section A-A of a gear you already drew. | Khi cần kiểm tra kỹ thuật. |
-| `gear_draw_spur_front_view` | `engineering` | Draw a straight-tooth spur gear front view with true involute teeth. | Khi cần kiểm tra kỹ thuật. |
-| `hatch_add_boundary` | `entity_creation` | Add a boundary path to a hatch, arcs and ellipses included. | Khi cần vẽ thêm đối tượng. |
-| `hatch_edit` | `entity_creation` | Change a hatch's pattern, scale, angle, colour or island style. | Khi cần vẽ thêm đối tượng. |
-| `hatch_material` | `mechanical` | Hatch a region with the ISO 128-50 section pattern for a named material. | Khi cần bản vẽ cơ khí. |
-| `hatch_set_gradient` | `entity_creation` | Replace a hatch's fill with a two-colour gradient. | Khi cần vẽ thêm đối tượng. |
-| `image_attach` | `sheet` | Attach a raster image (PNG/JPG) as an underlay. | Khi cần sheet, khung tên và phát hành. |
-| `keyway_draw_keyed_bore` | `engineering` | Draw a bore with a DIN 6885 keyway, auto-sized from the bore diameter. | Khi cần kiểm tra kỹ thuật. |
-| `keyway_draw_section` | `engineering` | Draw the side cross-section of a keyed bore. | Khi cần kiểm tra kỹ thuật. |
-| `kho_industries` | `cadtroly` | Liệt kê danh mục ngành với mã máy và tên tiếng Việt để chọn tiêu chuẩn. | Khi cần chức năng mở rộng của cadtroly. |
-| `kho_rules_export` | `cadtroly` | Xuất quy tắc ánh xạ của đơn vị (chỉ quy tắc, không bản vẽ) để chia sẻ. | Khi cần chức năng mở rộng của cadtroly. |
-| `kho_rules_import` | `cadtroly` | Nhập quy tắc ánh xạ từ nơi khác (ghi đè theo pattern). | Khi cần chức năng mở rộng của cadtroly. |
-| `kho_skill_add` | `cadtroly` | Thêm skill do LLM soạn vào kho người dùng; chỉ ghi SKILL.md, không chạy mã. | Khi cần chức năng mở rộng của cadtroly. |
-| `kho_skill_toggle` | `cadtroly` | Bật/tắt một skill. | Khi cần chức năng mở rộng của cadtroly. |
-| `kho_skills` | `cadtroly` | Skill chuyên ngành trong kho/skill (mỗi thư mục một SKILL.md), bật/tắt. | Khi cần chức năng mở rộng của cadtroly. |
-| `kho_standard_add` | `cadtroly` | Thêm tiêu chuẩn/rule JSON vào kho người dùng; không ghi vào bộ mặc định. | Khi cần chức năng mở rộng của cadtroly. |
-| `kho_standard_delete` | `cadtroly` | Xóa tiêu chuẩn do người dùng thêm; tiêu chuẩn mặc định không thể xóa. | Khi cần chức năng mở rộng của cadtroly. |
-| `kho_standards` | `cadtroly` | Liệt kê tiêu chuẩn/rule theo ngành, phiên bản, nguồn và trạng thái duyệt. | Khi cần chức năng mở rộng của cadtroly. |
-| `kho_status` | `cadtroly` | Tình trạng kho tri thức, backend AutoCAD, nguồn AI. | Khi cần chức năng mở rộng của cadtroly. |
-| `layer_create` | `layers` | Add a layer with a colour, linetype and lineweight. | Khi cần tạo và quản lý layer. |
-| `layer_delete` | `layers` | Remove an empty layer from the drawing. | Khi cần tạo và quản lý layer. |
-| `layer_freeze` | `layers` | Freeze a layer so it stops drawing and regenerating. | Khi cần tạo và quản lý layer. |
-| `layer_hide` | `layers` | Turn a layer off so its entities stop showing. | Khi cần tạo và quản lý layer. |
-| `layer_isolate` | `layers` | Hide every layer except one, to work on it alone. | Khi cần tạo và quản lý layer. |
-| `layer_list` | `layers` | List every layer with its colour, linetype and visibility state. | Khi cần tạo và quản lý layer. |
-| `layer_lock` | `layers` | Lock a layer so its entities can be seen but not edited. | Khi cần tạo và quản lý layer. |
-| `layer_modify` | `layers` | Change an existing layer's colour, linetype or lineweight. | Khi cần tạo và quản lý layer. |
-| `layer_set_current` | `layers` | Choose the layer that new geometry lands on. | Khi cần tạo và quản lý layer. |
-| `layer_show` | `layers` | Turn a layer that was switched off back on. | Khi cần tạo và quản lý layer. |
-| `layer_state_delete` | `environment` | Delete one saved layer state from the drawing. | Khi cần kiểm tra kết nối và cấu hình. |
-| `layer_state_list` | `environment` | List the layer states saved in this drawing. | Khi cần kiểm tra kết nối và cấu hình. |
-| `layer_state_restore` | `environment` | Restore a saved layer state, all properties or a chosen subset. | Khi cần kiểm tra kết nối và cấu hình. |
-| `layer_state_save` | `environment` | Save the layer table (on/frozen/locked/colour/linetype/lineweight/plot + current) under a name, in the file. | Khi cần kiểm tra kết nối và cấu hình. |
-| `layer_thaw` | `layers` | Bring a frozen layer back into view. | Khi cần tạo và quản lý layer. |
-| `layer_unlock` | `layers` | Unlock a layer so its entities can be edited again. | Khi cần tạo và quản lý layer. |
-| `layout_copy` | `layouts` | Duplicate a sheet with its page setup and geometry. | Khi cần layout và viewport. |
-| `layout_create` | `layouts` | Add a new paper-space sheet tab to the drawing. | Khi cần layout và viewport. |
-| `layout_delete` | `layouts` | Delete a sheet tab and everything drawn on it. | Khi cần layout và viewport. |
-| `layout_list` | `layouts` | List the sheet tabs: Model plus every paper-space layout. | Khi cần layout và viewport. |
-| `layout_rename` | `layouts` | Rename a sheet tab, keeping its geometry and handles. | Khi cần layout và viewport. |
-| `layout_set_current` | `layouts` | Switch to a sheet tab, or back to model space. | Khi cần layout và viewport. |
-| `leader_create_mleader` | `entity_creation` | Add a callout: an arrow with a note on the end. | Khi cần vẽ thêm đối tượng. |
-| `linetype_list` | `layers` | List the dash patterns currently loaded in the drawing. | Khi cần tạo và quản lý layer. |
-| `linetype_load` | `layers` | Load a linetype such as CENTER or HIDDEN, without the FILEDIA dialog trap. | Khi cần tạo và quản lý layer. |
-| `mech_dimension_part` | `mechanical` | Dimension a drawn part: ISO 129 dimensions, ISO 286 fits, a hole table. | Khi cần bản vẽ cơ khí. |
-| `mech_hole_pattern` | `mechanical` | Draw a linear, grid or polar hole pattern with centre marks on any drawing. | Khi cần bản vẽ cơ khí. |
-| `mech_part_draw` | `mechanical` | Draw a machine part from a segment list or an outline plus typed features. | Khi cần bản vẽ cơ khí. |
-| `mech_part_from_spec` | `mechanical` | Draw a whole mechanical sheet - several parts and their views - in one transaction. | Khi cần bản vẽ cơ khí. |
-| `mech_part_inspect` | `mechanical` | Read the part model back off the drawing: segments, features, views, omissions. | Khi cần bản vẽ cơ khí. |
-| `mech_view_add` | `mechanical` | Add another view of a drawn part: side, top, section (full/half/offset) or detail. | Khi cần bản vẽ cơ khí. |
-| `mleaderstyle_create` | `styles` | Create a multileader style from the ISO or ANSI preset, on both engines. | Khi cần style và hiển thị. |
-| `mleaderstyle_list` | `styles` | List multileader styles: arrow size, landing gap, text style and height. | Khi cần style và hiển thị. |
-| `page_setup_apply` | `page_setup` | Set a sheet's paper, orientation, ctb, plot scale and device (PAGESETUP). | Khi cần khổ giấy, tỷ lệ và in ấn. |
-| `page_setup_list` | `page_setup` | Read each sheet's page setup: paper, orientation, ctb, scale, device. | Khi cần khổ giấy, tỷ lệ và in ấn. |
-| `pdf_to_dwg` | `cadtroly` | Create the final semantic DWG in one MCP call. The PDF is vectorized to a private temporary DXF, opened through the live AutoCAD backend, placed on an A-series layout and saved as DWG. The temporary DXF and its lock files are removed in ``finally`` after the DWG is saved, so callers do not have to manage intermediate artifacts. | Khi cần chức năng mở rộng của cadtroly. |
-| `pdf_vectorize` | `cadtroly` | Convert PDF vector artwork to editable DXF entities on semantic layers. Output is separated into technical layers such as ``PDF_COLUMNS``, ``PDF_WALLS``, ``PDF_DOORS``, ``PDF_WINDOWS``, ``PDF_FURNITURE``, ``PDF_SANITARY``, ``PDF_DIMENSIONS``, ``PDF_HATCH``, ``PDF_STRUCTURE``, ``PDF_TEXT``, ``PDF_NOTES``, ``PDF_TITLE`` and ``PDF_FRAME`` so an engineer can isolate, edit, delete or add each group. When available, the original DWG layer names embedded in the PDF are used as the classification source. Outlined PDF text remains geometry by design, so dimensions and symbols are not lost when the source font prevents text extraction. The returned counts are a quick audit before opening the DXF and saving it as DWG. | Khi cần chức năng mở rộng của cadtroly. |
-| `pid_equipment_list` | `pid` | Equipment list derived from the P&ID graph (tag, kind, ports, connections); optional CSV. | Khi cần sơ đồ P&ID. |
-| `pid_from_spec` | `pid` | Draw a whole P&ID from one declarative spec in one transaction; returns graph + critique. | Khi cần sơ đồ P&ID. |
-| `pid_graph` | `pid` | Read the P&ID back as a graph: symbols, lines, junctions, dangling ends, confidence. | Khi cần sơ đồ P&ID. |
-| `pid_instrument_index` | `pid` | Instrument index derived from the P&ID graph (tag, function, loop, connections); optional CSV. | Khi cần sơ đồ P&ID. |
-| `pid_line_draw` | `pid` | Draw a P&ID line port-to-port: orthogonal route, ISA-5.1 class, line number, markers, arrow. | Khi cần sơ đồ P&ID. |
-| `pid_line_list` | `pid` | Line list derived from the P&ID graph (number, class, size, spec, from/to); optional CSV. | Khi cần sơ đồ P&ID. |
-| `pid_symbol_insert` | `pid` | Place a P&ID symbol (valve, pump, vessel, instrument bubble, connector) as a tagged block with ports. | Khi cần sơ đồ P&ID. |
-| `pid_symbol_list` | `pid` | List the P&ID symbol catalogue: families, variants, ports, parameters. | Khi cần sơ đồ P&ID. |
-| `pid_tag_parse` | `pid` | Parse an ISA-5.1 instrument tag or an equipment tag; explains every letter. | Khi cần sơ đồ P&ID. |
-| `pipe_takeoff` | `plant` | Pipe takeoff from a P&ID and its layout: rows by room, service and diameter. | Khi cần bố trí thiết bị plant. |
-| `plot_style_list` | `page_setup` | List the plot style tables (ctb): the AutoCAD catalogue, plus what is installed. | Khi cần khổ giấy, tỷ lệ và in ấn. |
-| `point_from_snap` | `premium` | Get an exact endpoint, midpoint, centre, quadrant or perpendicular foot. | Khi cần chức năng nâng cao. |
-| `point_intersection` | `premium` | Find where two lines or circles cross, exactly. | Khi cần chức năng nâng cao. |
-| `point_tangent` | `premium` | Find where a line from an outside point touches a circle. | Khi cần chức năng nâng cao. |
-| `revision_add` | `sheet` | Append a revision row, with optional revision clouds and triangular tags. | Khi cần sheet, khung tên và phát hành. |
-| `section_line` | `mechanical` | Draw an ISO 128-40 cutting-plane line and return the plane the section view uses. | Khi cần bản vẽ cơ khí. |
-| `selection_filter` | `entity_query` | Select entities by layer, type, colour, linetype or minimum area. | Khi cần tìm và đọc thuộc tính đối tượng. |
-| `selection_get` | `entity_query` | Read what the user already picked in the AutoCAD viewport (COM backend). | Khi cần tìm và đọc thuộc tính đối tượng. |
-| `selection_polygon` | `entity_query` | Select entities inside or crossing an arbitrary polygon. | Khi cần tìm và đọc thuộc tính đối tượng. |
-| `selection_window` | `entity_query` | Select entities inside or crossing a rectangle. | Khi cần tìm và đọc thuộc tính đối tượng. |
-| `sheet_frame` | `sheet` | Draw an ISO 5457 sheet frame with the zone grid and centring marks. | Khi cần sheet, khung tên và phát hành. |
-| `solid_boolean` | `solids` | Union, subtract or intersect two 3D solids; the tool solid is consumed. | Khi cần hình học 3D/solid. |
-| `solid_box` | `solids` | Create a 3D solid box (live AutoCAD, opt-in via ENABLE_3D). | Khi cần hình học 3D/solid. |
-| `solid_cylinder` | `solids` | Create a 3D solid cylinder or shaft (live AutoCAD, opt-in via ENABLE_3D). | Khi cần hình học 3D/solid. |
-| `solid_extrude` | `solids` | Pull a closed profile up into a 3D solid (live AutoCAD, opt-in via ENABLE_3D). | Khi cần hình học 3D/solid. |
-| `solid_revolve` | `solids` | Spin a closed profile around an axis into a 3D solid (opt-in via ENABLE_3D). | Khi cần hình học 3D/solid. |
-| `standards_reference` | `cadtroly` | Read the built-in project reference catalogue. These entries guide layer naming and drafting setup; they do not certify regulatory compliance. Confirm the approved edition in the project standards register before issuing construction documents. | Khi cần chức năng mở rộng của cadtroly. |
-| `std_feature_draw` | `mechanical` | Draw a standard feature - thread, undercut, ring or O-ring groove, centre hole - onto existing geometry. | Khi cần bản vẽ cơ khí. |
-| `std_part_insert` | `mechanical` | Insert an ISO standard part - hex bolt, nut, washer, cap screw or ball bearing - as a tagged block. | Khi cần bản vẽ cơ khí. |
-| `std_part_list` | `mechanical` | Search the standard-parts catalogue: ISO bolts, nuts, washers, cap screws, bearings. | Khi cần bản vẽ cơ khí. |
-| `structural_qa` | `cadtroly` | Check structural CAD quality and return error/warning findings. This is a drawing/layer/geometry check, not a strength or safety certification. Loads, materials, restraints and approved calculations are required for engineering conclusions. | Khi cần chức năng mở rộng của cadtroly. |
-| `surface_texture` | `mechanical` | Draw an ISO 21920-1 surface-texture symbol: Ra/Rz, process, lay, allowance. | Khi cần bản vẽ cơ khí. |
-| `system_about` | `system` | See what this server can do: version, tool groups and active profile. | Khi cần trạng thái server. |
-| `system_capabilities` | `entity_query` | Ask the active backend which features it really supports. | Khi cần tìm và đọc thuộc tính đối tượng. |
-| `system_get_variable` | `system` | Read one AutoCAD system variable, such as DIMSCALE or LTSCALE. | Khi cần trạng thái server. |
-| `system_launch` | `environment` | Attach to the running AutoCAD or start it, optionally opening a file (live only). | Khi cần kiểm tra kết nối và cấu hình. |
-| `system_preferences_get` | `environment` | Read AutoCAD preferences from the whitelist (OPTIONS dialog values; live only). | Khi cần kiểm tra kết nối và cấu hình. |
-| `system_preferences_set` | `environment` | Change one whitelisted AutoCAD preference; reports old and new (live only). | Khi cần kiểm tra kết nối và cấu hình. |
-| `system_prompt_message` | `environment` | Print a message on AutoCAD's command line (live only). | Khi cần kiểm tra kết nối và cấu hình. |
-| `system_run_command` | `system` | Send a raw command string to the AutoCAD command line (COM only). | Khi cần trạng thái server. |
-| `system_run_lisp` | `system` | Evaluate an AutoLISP expression inside AutoCAD (COM only). | Khi cần trạng thái server. |
-| `system_set_variable` | `system` | Set one AutoCAD system variable by name. | Khi cần trạng thái server. |
-| `system_status` | `system` | Check the connection: which engine is live and what document is open. | Khi cần trạng thái server. |
-| `system_variable_describe` | `environment` | Explain a system variable: type, range, default, where it is saved, which engine honours it. | Khi cần kiểm tra kết nối và cấu hình. |
-| `takeoff_compute` | `cadtroly` | Bước 3 luồng A: tính khối lượng. Mỗi dòng có nguồn truy vết và tin cậy; thiếu dữ liệu thì để trống. | Khi cần chức năng mở rộng của cadtroly. |
-| `takeoff_decide` | `cadtroly` | Kỹ sư xác nhận ánh xạ một nhóm. Mặc định lưu thành quy tắc đơn vị (không train, chỉ ghi file). | Khi cần chức năng mở rộng của cadtroly. |
-| `takeoff_export` | `cadtroly` | Bước 4 luồng A: xuất Excel 4 sheet (Khối lượng, Chi tiết từng handle + lệnh zoom, Ánh xạ, Kiểm soát). | Khi cần chức năng mở rộng của cadtroly. |
-| `takeoff_propose` | `cadtroly` | Bước 2 luồng A: gom theo layer/block, đề xuất công tác với tin cậy A/B/C. B/C cần kỹ sư quyết. | Khi cần chức năng mở rộng của cadtroly. |
-| `takeoff_run` | `cadtroly` | Chạy trọn luồng A không hỏi (dùng quy tắc đã có). Thư mục → mỗi file một Excel. Nhóm B/C vẫn ghi rõ trong Excel. | Khi cần chức năng mở rộng của cadtroly. |
-| `template_apply_layers` | `templates` | Create a standard layer set: architectural, mechanical, electrical or piping. | Khi cần template bản vẽ. |
-| `template_list` | `templates` | Show the available layer templates and the layers in each. | Khi cần template bản vẽ. |
-| `text_find_replace` | `entity_modification` | Find and replace text across the drawing. | Khi cần sửa hoặc biến đổi đối tượng. |
-| `text_set_background` | `entity_modification` | Put an opaque background box behind an MTEXT. | Khi cần sửa hoặc biến đổi đối tượng. |
-| `textstyle_create` | `styles` | Create a text style from a bundled font (isocp, isocpeur, arial, romans) or any file. | Khi cần style và hiển thị. |
-| `textstyle_list` | `styles` | List text styles: font file, height, width factor, oblique angle. | Khi cần style và hiển thị. |
-| `textstyle_set_current` | `styles` | Make a text style current so new text uses it. | Khi cần style và hiển thị. |
-| `titleblock_apply` | `sheet` | Stamp an ISO 7200 title block (and frame) on any sheet from A4 to A0. | Khi cần sheet, khung tên và phát hành. |
-| `titleblock_apply_iso_a3` | `engineering` | Stamp an ISO 7200 title block and sheet frame onto an A3 drawing. | Khi cần kiểm tra kỹ thuật. |
-| `transaction_begin` | `transactions` | Open a rollback checkpoint before a risky edit. | Khi cần giao dịch thay đổi có kiểm soát. |
-| `transaction_commit` | `transactions` | Keep the changes and drop the checkpoint. | Khi cần giao dịch thay đổi có kiểm soát. |
-| `transaction_rollback` | `transactions` | Throw away every change made since transaction_begin. | Khi cần giao dịch thay đổi có kiểm soát. |
-| `ucs_list` | `environment` | List the user coordinate systems, with the implicit world one. | Khi cần kiểm tra kết nối và cấu hình. |
-| `ucs_restore` | `environment` | Make a saved UCS current, or `world` to reset to WCS. | Khi cần kiểm tra kết nối và cấu hình. |
-| `ucs_set` | `environment` | Define (or replace) a named UCS from an origin and two perpendicular axes, and make it current. | Khi cần kiểm tra kết nối và cấu hình. |
-| `user_pick_point` | `environment` | Ask the operator to pick a point on screen (live only; blocks until they do). | Khi cần kiểm tra kết nối và cấu hình. |
-| `user_select` | `environment` | Ask the operator to select one entity or a set on screen (live only). | Khi cần kiểm tra kết nối và cấu hình. |
-| `validation_check` | `validation` | Sanity-check the drawing for empty layers, zero-length lines and duplicates. | Khi cần kiểm tra hợp lệ. |
-| `view_named_list` | `environment` | List the named views saved in this drawing. | Khi cần kiểm tra kết nối và cấu hình. |
-| `view_named_restore` | `environment` | Restore a named view. | Khi cần kiểm tra kết nối và cấu hình. |
-| `view_named_save` | `environment` | Save a named view: a centre and height (and width) to come back to. | Khi cần kiểm tra kết nối và cấu hình. |
-| `view_render_report` | `cadtroly` | Return render coverage before relying on a preview for QA. The report is deliberately conservative: common 2D entities are marked as covered, while uncommon/proxy/3D types are surfaced for manual checking. It never claims that a PNG proves the full DWG was rendered. | Khi cần chức năng mở rộng của cadtroly. |
-| `view_screenshot` | `view` | Capture a PNG picture of the drawing as it currently looks. | Khi cần zoom, góc nhìn và ảnh chụp. |
-| `view_zoom_and_screenshot` | `view` | Fit the drawing on screen, then capture it: the quickest visual check. | Khi cần zoom, góc nhìn và ảnh chụp. |
-| `view_zoom_extents` | `view` | Zoom out until every entity fits on screen. | Khi cần zoom, góc nhìn và ảnh chụp. |
-| `view_zoom_window` | `view` | Zoom in on a rectangular region of the drawing. | Khi cần zoom, góc nhìn và ảnh chụp. |
-| `viewport_create` | `layouts` | Put a scaled window onto model space on a sheet, at 1:1, 1:2 and so on. | Khi cần layout và viewport. |
-| `viewport_delete` | `layouts` | Remove a viewport from a sheet. | Khi cần layout và viewport. |
-| `viewport_list` | `layouts` | List the viewports on a sheet with their scales and locks. | Khi cần layout và viewport. |
-| `viewport_lock` | `layouts` | Lock a viewport so its scale cannot be zoomed away. | Khi cần layout và viewport. |
-| `viewport_set_scale` | `layouts` | Set a viewport's scale, e.g. 1:2 or 1:50. | Khi cần layout và viewport. |
-| `weld_symbol` | `mechanical` | Draw an ISO 2553 weld symbol: reference line, identification line, size and pitch. | Khi cần bản vẽ cơ khí. |
-| `xref_attach` | `sheet` | Attach a DWG/DXF as an external reference (attachment or overlay). | Khi cần sheet, khung tên và phát hành. |
-| `xref_manage` | `sheet` | List, reload, bind, detach or repath an external reference. | Khi cần sheet, khung tên và phát hành. |
+| `analysis_bounding_box` | phân tích | Thực hiện thao tác phân tích giới hạn khung trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
+| `analysis_entity_stats` | phân tích | Thực hiện thao tác phân tích đối tượng thống kê trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
+| `analysis_find_in_region` | phân tích | Thực hiện thao tác phân tích tìm in vùng trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
+| `analysis_layer_stats` | phân tích | Thực hiện thao tác phân tích lớp thống kê trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
+| `analysis_list_properties` | phân tích | Thực hiện thao tác phân tích liệt kê thuộc tính trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
+| `analysis_measure_area` | phân tích | Thực hiện thao tác phân tích đo diện tích trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
+| `analysis_measure_distance` | phân tích | Thực hiện thao tác phân tích đo khoảng cách trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
+| `analysis_measure_entity` | phân tích | Thực hiện thao tác phân tích đo đối tượng trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
+| `analysis_select_by_layer` | phân tích | Thực hiện thao tác phân tích chọn by lớp trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
+| `analysis_select_by_type` | phân tích | Thực hiện thao tác phân tích chọn by type trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
+| `arch_catalogue_insert` | kiến trúc | Thực hiện thao tác arch catalogue chèn trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
+| `arch_catalogue_list` | kiến trúc | Thực hiện thao tác arch catalogue liệt kê trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
+| `arch_dimension_chains` | kiến trúc | Thực hiện thao tác arch kích thước chains trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
+| `arch_grid` | kiến trúc | Thực hiện thao tác arch grid trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
+| `arch_opening` | kiến trúc | Thực hiện thao tác arch opening trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
+| `arch_plan_from_spec` | kiến trúc | Thực hiện thao tác arch mặt bằng from spec trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
+| `arch_room` | kiến trúc | Thực hiện thao tác arch room trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
+| `arch_rooms_detect` | kiến trúc | Thực hiện thao tác arch rooms detect trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
+| `arch_schedule` | kiến trúc | Thực hiện thao tác arch schedule trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
+| `arch_stair` | kiến trúc | Thực hiện thao tác arch stair trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
+| `arch_symbol` | kiến trúc | Thực hiện thao tác arch ký hiệu trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
+| `arch_wall` | kiến trúc | Thực hiện thao tác arch wall trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. |
+| `balloon_add` | tờ bản vẽ | Thực hiện thao tác balloon add trong bản vẽ CAD. | Khi cần sheet, khung tên và phát hành. |
+| `batch_plot` | thiết lập trang | Thực hiện thao tác hàng loạt plot trong bản vẽ CAD. | Khi cần khổ giấy, tỷ lệ và in ấn. |
+| `block_create_from_entities` | khối | Thực hiện thao tác khối tạo from entities trong bản vẽ CAD. | Khi cần block và block reference. |
+| `block_define` | khối | Thực hiện thao tác khối define trong bản vẽ CAD. | Khi cần block và block reference. |
+| `block_explode` | khối | Thực hiện thao tác khối phá khối trong bản vẽ CAD. | Khi cần block và block reference. |
+| `block_find_references` | khối | Thực hiện thao tác khối tìm references trong bản vẽ CAD. | Khi cần block và block reference. |
+| `block_get_attributes` | khối | Thực hiện thao tác khối get attributes trong bản vẽ CAD. | Khi cần block và block reference. |
+| `block_insert` | khối | Thực hiện thao tác khối chèn trong bản vẽ CAD. | Khi cần block và block reference. |
+| `block_list` | khối | Thực hiện thao tác khối liệt kê trong bản vẽ CAD. | Khi cần block và block reference. |
+| `block_set_attributes` | khối | Thực hiện thao tác khối set attributes trong bản vẽ CAD. | Khi cần block và block reference. |
+| `bom_extract` | tờ bản vẽ | Thực hiện thao tác bom extract trong bản vẽ CAD. | Khi cần sheet, khung tên và phát hành. |
+| `bom_table` | tờ bản vẽ | Thực hiện thao tác bom bảng trong bản vẽ CAD. | Khi cần sheet, khung tên và phát hành. |
+| `boundary_from_entities` | phân tích | Thực hiện thao tác boundary from entities trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
+| `boundary_trace` | phân tích | Thực hiện thao tác boundary trace trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. |
+| `cable_takeoff` | nhà máy | Thực hiện thao tác cable takeoff trong bản vẽ CAD. | Khi cần bố trí thiết bị plant. |
+| `cad_batch` | xử lý hàng loạt | Thực hiện thao tác cad hàng loạt trong bản vẽ CAD. | Khi cần xử lý hàng loạt. |
+| `centre_marks` | cơ khí | Thực hiện thao tác centre marks trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. |
+| `check_rulesets` | mở rộng cadtroly | Thực hiện thao tác kiểm tra rulesets trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `check_run` | mở rộng cadtroly | Thực hiện thao tác kiểm tra run trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `construction_clear` | nâng cao | Thực hiện thao tác construction clear trong bản vẽ CAD. | Khi cần chức năng nâng cao. |
+| `construction_xline` | nâng cao | Thực hiện thao tác construction xline trong bản vẽ CAD. | Khi cần chức năng nâng cao. |
+| `data_extract` | tờ bản vẽ | Thực hiện thao tác dữ liệu extract trong bản vẽ CAD. | Khi cần sheet, khung tên và phát hành. |
+| `datum_feature` | kỹ thuật | Thực hiện thao tác datum feature trong bản vẽ CAD. | Khi cần kiểm tra kỹ thuật. |
+| `dimension_aligned` | kích thước | Thực hiện thao tác kích thước aligned trong bản vẽ CAD. | Khi cần kích thước và ghi chú dim. |
+| `dimension_angular` | kích thước | Thực hiện thao tác kích thước angular trong bản vẽ CAD. | Khi cần kích thước và ghi chú dim. |
+| `dimension_auto` | nâng cao | Thực hiện thao tác kích thước auto trong bản vẽ CAD. | Khi cần chức năng nâng cao. |
+| `dimension_diameter` | kích thước | Thực hiện thao tác kích thước diameter trong bản vẽ CAD. | Khi cần kích thước và ghi chú dim. |
+| `dimension_linear` | kích thước | Thực hiện thao tác kích thước linear trong bản vẽ CAD. | Khi cần kích thước và ghi chú dim. |
+| `dimension_radius` | kích thước | Thực hiện thao tác kích thước radius trong bản vẽ CAD. | Khi cần kích thước và ghi chú dim. |
+| `dimstyle_create` | kiểu hiển thị | Thực hiện thao tác dimstyle tạo trong bản vẽ CAD. | Khi cần style và hiển thị. |
+| `dimstyle_list` | kiểu hiển thị | Thực hiện thao tác dimstyle liệt kê trong bản vẽ CAD. | Khi cần style và hiển thị. |
+| `dimstyle_modify` | kiểu hiển thị | Thực hiện thao tác dimstyle sửa trong bản vẽ CAD. | Khi cần style và hiển thị. |
+| `dimstyle_set_current` | kiểu hiển thị | Thực hiện thao tác dimstyle set current trong bản vẽ CAD. | Khi cần style và hiển thị. |
+| `document_activate` | môi trường | Thực hiện thao tác document activate trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `document_close` | môi trường | Thực hiện thao tác document đóng trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `document_list` | môi trường | Thực hiện thao tác document liệt kê trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `drawing_apply_discipline_standard` | mở rộng cadtroly | Thực hiện thao tác bản vẽ apply discipline standard trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `drawing_apply_iso_layers` | nâng cao | Thực hiện thao tác bản vẽ apply iso layers trong bản vẽ CAD. | Khi cần chức năng nâng cao. |
+| `drawing_apply_standard` | kiểu hiển thị | Thực hiện thao tác bản vẽ apply standard trong bản vẽ CAD. | Khi cần style và hiển thị. |
+| `drawing_audit` | bản vẽ | Thực hiện thao tác bản vẽ audit trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
+| `drawing_close` | bản vẽ | Thực hiện thao tác bản vẽ đóng trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
+| `drawing_critique` | nâng cao | Thực hiện thao tác bản vẽ critique trong bản vẽ CAD. | Khi cần chức năng nâng cao. |
+| `drawing_deliver` | kỹ thuật | Thực hiện thao tác bản vẽ deliver trong bản vẽ CAD. | Khi cần kiểm tra kỹ thuật. |
+| `drawing_diff` | đọc hiểu | Thực hiện thao tác bản vẽ diff trong bản vẽ CAD. | Khi cần đọc hiểu cấu trúc bản vẽ. |
+| `drawing_entities` | mở rộng cadtroly | Thực hiện thao tác bản vẽ entities trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `drawing_export_dwg` | tờ bản vẽ | Thực hiện thao tác bản vẽ xuất dwg trong bản vẽ CAD. | Khi cần sheet, khung tên và phát hành. |
+| `drawing_export_dxf` | bản vẽ | Thực hiện thao tác bản vẽ xuất dxf trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
+| `drawing_export_pdf` | bản vẽ | Thực hiện thao tác bản vẽ xuất pdf trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
+| `drawing_finalize` | kỹ thuật | Thực hiện thao tác bản vẽ finalize trong bản vẽ CAD. | Khi cần kiểm tra kỹ thuật. |
+| `drawing_info` | tra cứu đối tượng | Thực hiện thao tác bản vẽ info trong bản vẽ CAD. | Khi cần tìm và đọc thuộc tính đối tượng. |
+| `drawing_new` | bản vẽ | Thực hiện thao tác bản vẽ new trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
+| `drawing_open` | bản vẽ | Thực hiện thao tác bản vẽ mở trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
+| `drawing_plan` | nâng cao | Thực hiện thao tác bản vẽ mặt bằng trong bản vẽ CAD. | Khi cần chức năng nâng cao. |
+| `drawing_preflight` | nâng cao | Thực hiện thao tác bản vẽ preflight trong bản vẽ CAD. | Khi cần chức năng nâng cao. |
+| `drawing_properties_get` | môi trường | Thực hiện thao tác bản vẽ thuộc tính get trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `drawing_properties_set` | môi trường | Thực hiện thao tác bản vẽ thuộc tính set trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `drawing_purge` | bản vẽ | Thực hiện thao tác bản vẽ dọn dẹp trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
+| `drawing_read` | mở rộng cadtroly | Thực hiện thao tác bản vẽ đọc trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `drawing_redo` | bản vẽ | Thực hiện thao tác bản vẽ redo trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
+| `drawing_refine` | nâng cao | Thực hiện thao tác bản vẽ refine trong bản vẽ CAD. | Khi cần chức năng nâng cao. |
+| `drawing_save` | bản vẽ | Thực hiện thao tác bản vẽ lưu trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
+| `drawing_save_as` | bản vẽ | Thực hiện thao tác bản vẽ lưu as trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
+| `drawing_scale_check` | đọc hiểu | Thực hiện thao tác bản vẽ tỷ lệ kiểm tra trong bản vẽ CAD. | Khi cần đọc hiểu cấu trúc bản vẽ. |
+| `drawing_settings` | hệ thống | Thực hiện thao tác bản vẽ thiết lập trong bản vẽ CAD. | Khi cần trạng thái server. |
+| `drawing_template_list` | thiết lập trang | Thực hiện thao tác bản vẽ mẫu liệt kê trong bản vẽ CAD. | Khi cần khổ giấy, tỷ lệ và in ấn. |
+| `drawing_template_save` | thiết lập trang | Thực hiện thao tác bản vẽ mẫu lưu trong bản vẽ CAD. | Khi cần khổ giấy, tỷ lệ và in ấn. |
+| `drawing_topology_check` | đọc hiểu | Thực hiện thao tác bản vẽ topology kiểm tra trong bản vẽ CAD. | Khi cần đọc hiểu cấu trúc bản vẽ. |
+| `drawing_understand` | đọc hiểu | Thực hiện thao tác bản vẽ understand trong bản vẽ CAD. | Khi cần đọc hiểu cấu trúc bản vẽ. |
+| `drawing_undo` | bản vẽ | Thực hiện thao tác bản vẽ undo trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. |
+| `entity_array_polar` | sửa đối tượng | Thực hiện thao tác đối tượng array polar trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. |
+| `entity_array_rectangular` | sửa đối tượng | Thực hiện thao tác đối tượng array rectangular trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. |
+| `entity_batch_create` | xử lý hàng loạt | Thực hiện thao tác đối tượng hàng loạt tạo trong bản vẽ CAD. | Khi cần xử lý hàng loạt. |
+| `entity_batch_modify` | xử lý hàng loạt | Thực hiện thao tác đối tượng hàng loạt sửa trong bản vẽ CAD. | Khi cần xử lý hàng loạt. |
+| `entity_chamfer` | corner_ops | Thực hiện thao tác đối tượng chamfer trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `entity_change_space` | bố cục | Thực hiện thao tác đối tượng change space trong bản vẽ CAD. | Khi cần layout và viewport. |
+| `entity_copy` | sửa đối tượng | Thực hiện thao tác đối tượng sao chép trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. |
+| `entity_create_arc` | tạo đối tượng | Thực hiện thao tác đối tượng tạo cung trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. |
+| `entity_create_block_ref` | khối | Thực hiện thao tác đối tượng tạo khối ref trong bản vẽ CAD. | Khi cần block và block reference. |
+| `entity_create_circle` | tạo đối tượng | Thực hiện thao tác đối tượng tạo đường tròn trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. |
+| `entity_create_ellipse` | tạo đối tượng | Thực hiện thao tác đối tượng tạo ellipse trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. |
+| `entity_create_hatch` | tạo đối tượng | Thực hiện thao tác đối tượng tạo tô mặt trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. |
+| `entity_create_line` | tạo đối tượng | Thực hiện thao tác đối tượng tạo đường trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. |
+| `entity_create_mtext` | tạo đối tượng | Thực hiện thao tác đối tượng tạo mtext trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. |
+| `entity_create_point` | tạo đối tượng | Thực hiện thao tác đối tượng tạo điểm trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. |
+| `entity_create_polyline` | tạo đối tượng | Thực hiện thao tác đối tượng tạo đa tuyến trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. |
+| `entity_create_rectangle` | tạo đối tượng | Thực hiện thao tác đối tượng tạo hình chữ nhật trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. |
+| `entity_create_revcloud` | tạo đối tượng | Thực hiện thao tác đối tượng tạo revcloud trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. |
+| `entity_create_spline` | tạo đối tượng | Thực hiện thao tác đối tượng tạo spline trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. |
+| `entity_create_table` | tạo đối tượng | Thực hiện thao tác đối tượng tạo bảng trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. |
+| `entity_create_text` | tạo đối tượng | Thực hiện thao tác đối tượng tạo chữ trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. |
+| `entity_create_wipeout` | tạo đối tượng | Thực hiện thao tác đối tượng tạo wipeout trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. |
+| `entity_delete` | sửa đối tượng | Thực hiện thao tác đối tượng xóa trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. |
+| `entity_delete_many` | sửa đối tượng | Thực hiện thao tác đối tượng xóa many trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. |
+| `entity_edit_geometry` | sửa đối tượng | Thực hiện thao tác đối tượng edit geometry trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. |
+| `entity_edit_text` | sửa đối tượng | Thực hiện thao tác đối tượng edit chữ trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. |
+| `entity_extend` | corner_ops | Thực hiện thao tác đối tượng kéo dài trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `entity_fillet` | corner_ops | Thực hiện thao tác đối tượng fillet trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `entity_get` | tra cứu đối tượng | Thực hiện thao tác đối tượng get trong bản vẽ CAD. | Khi cần tìm và đọc thuộc tính đối tượng. |
+| `entity_get_xdata` | tra cứu đối tượng | Thực hiện thao tác đối tượng get xdata trong bản vẽ CAD. | Khi cần tìm và đọc thuộc tính đối tượng. |
+| `entity_list` | tra cứu đối tượng | Thực hiện thao tác đối tượng liệt kê trong bản vẽ CAD. | Khi cần tìm và đọc thuộc tính đối tượng. |
+| `entity_mirror` | sửa đối tượng | Thực hiện thao tác đối tượng đối xứng trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. |
+| `entity_move` | sửa đối tượng | Thực hiện thao tác đối tượng di chuyển trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. |
+| `entity_offset` | sửa đối tượng | Thực hiện thao tác đối tượng song song trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. |
+| `entity_rotate` | sửa đối tượng | Thực hiện thao tác đối tượng xoay trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. |
+| `entity_scale` | sửa đối tượng | Thực hiện thao tác đối tượng tỷ lệ trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. |
+| `entity_select_smart` | nâng cao | Thực hiện thao tác đối tượng chọn smart trong bản vẽ CAD. | Khi cần chức năng nâng cao. |
+| `entity_set_properties` | sửa đối tượng | Thực hiện thao tác đối tượng set thuộc tính trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. |
+| `entity_set_xdata` | sửa đối tượng | Thực hiện thao tác đối tượng set xdata trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. |
+| `entity_trim` | corner_ops | Thực hiện thao tác đối tượng cắt trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `gd_frame` | kỹ thuật | Thực hiện thao tác gd frame trong bản vẽ CAD. | Khi cần kiểm tra kỹ thuật. |
+| `gear_draw_helical_front_view` | kỹ thuật | Thực hiện thao tác gear draw helical front góc nhìn trong bản vẽ CAD. | Khi cần kiểm tra kỹ thuật. |
+| `gear_draw_section_aa` | kỹ thuật | Thực hiện thao tác gear draw mặt cắt aa trong bản vẽ CAD. | Khi cần kiểm tra kỹ thuật. |
+| `gear_draw_spur_front_view` | kỹ thuật | Thực hiện thao tác gear draw spur front góc nhìn trong bản vẽ CAD. | Khi cần kiểm tra kỹ thuật. |
+| `hatch_add_boundary` | tạo đối tượng | Thực hiện thao tác tô mặt add boundary trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. |
+| `hatch_edit` | tạo đối tượng | Thực hiện thao tác tô mặt edit trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. |
+| `hatch_material` | cơ khí | Thực hiện thao tác tô mặt material trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. |
+| `hatch_set_gradient` | tạo đối tượng | Thực hiện thao tác tô mặt set gradient trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. |
+| `image_attach` | tờ bản vẽ | Thực hiện thao tác hình ảnh đính kèm trong bản vẽ CAD. | Khi cần sheet, khung tên và phát hành. |
+| `keyway_draw_keyed_bore` | kỹ thuật | Thực hiện thao tác keyway draw keyed bore trong bản vẽ CAD. | Khi cần kiểm tra kỹ thuật. |
+| `keyway_draw_section` | kỹ thuật | Thực hiện thao tác keyway draw mặt cắt trong bản vẽ CAD. | Khi cần kiểm tra kỹ thuật. |
+| `kho_industries` | mở rộng cadtroly | Thực hiện thao tác kho industries trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `kho_rules_export` | mở rộng cadtroly | Thực hiện thao tác kho rules xuất trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `kho_rules_import` | mở rộng cadtroly | Thực hiện thao tác kho rules nhập trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `kho_skill_add` | mở rộng cadtroly | Thực hiện thao tác kho skill add trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `kho_skill_toggle` | mở rộng cadtroly | Thực hiện thao tác kho skill toggle trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `kho_skills` | mở rộng cadtroly | Thực hiện thao tác kho skills trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `kho_standard_add` | mở rộng cadtroly | Thực hiện thao tác kho standard add trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `kho_standard_delete` | mở rộng cadtroly | Thực hiện thao tác kho standard xóa trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `kho_standards` | mở rộng cadtroly | Thực hiện thao tác kho standards trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `kho_status` | mở rộng cadtroly | Thực hiện thao tác kho trạng thái trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `layer_create` | lớp bản vẽ | Thực hiện thao tác lớp tạo trong bản vẽ CAD. | Khi cần tạo và quản lý layer. |
+| `layer_delete` | lớp bản vẽ | Thực hiện thao tác lớp xóa trong bản vẽ CAD. | Khi cần tạo và quản lý layer. |
+| `layer_freeze` | lớp bản vẽ | Thực hiện thao tác lớp freeze trong bản vẽ CAD. | Khi cần tạo và quản lý layer. |
+| `layer_hide` | lớp bản vẽ | Thực hiện thao tác lớp hide trong bản vẽ CAD. | Khi cần tạo và quản lý layer. |
+| `layer_isolate` | lớp bản vẽ | Thực hiện thao tác lớp isolate trong bản vẽ CAD. | Khi cần tạo và quản lý layer. |
+| `layer_list` | lớp bản vẽ | Thực hiện thao tác lớp liệt kê trong bản vẽ CAD. | Khi cần tạo và quản lý layer. |
+| `layer_lock` | lớp bản vẽ | Thực hiện thao tác lớp lock trong bản vẽ CAD. | Khi cần tạo và quản lý layer. |
+| `layer_modify` | lớp bản vẽ | Thực hiện thao tác lớp sửa trong bản vẽ CAD. | Khi cần tạo và quản lý layer. |
+| `layer_set_current` | lớp bản vẽ | Thực hiện thao tác lớp set current trong bản vẽ CAD. | Khi cần tạo và quản lý layer. |
+| `layer_show` | lớp bản vẽ | Thực hiện thao tác lớp show trong bản vẽ CAD. | Khi cần tạo và quản lý layer. |
+| `layer_state_delete` | môi trường | Thực hiện thao tác lớp state xóa trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `layer_state_list` | môi trường | Thực hiện thao tác lớp state liệt kê trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `layer_state_restore` | môi trường | Thực hiện thao tác lớp state restore trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `layer_state_save` | môi trường | Thực hiện thao tác lớp state lưu trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `layer_thaw` | lớp bản vẽ | Thực hiện thao tác lớp thaw trong bản vẽ CAD. | Khi cần tạo và quản lý layer. |
+| `layer_unlock` | lớp bản vẽ | Thực hiện thao tác lớp unlock trong bản vẽ CAD. | Khi cần tạo và quản lý layer. |
+| `layout_copy` | bố cục | Thực hiện thao tác bố cục sao chép trong bản vẽ CAD. | Khi cần layout và viewport. |
+| `layout_create` | bố cục | Thực hiện thao tác bố cục tạo trong bản vẽ CAD. | Khi cần layout và viewport. |
+| `layout_delete` | bố cục | Thực hiện thao tác bố cục xóa trong bản vẽ CAD. | Khi cần layout và viewport. |
+| `layout_list` | bố cục | Thực hiện thao tác bố cục liệt kê trong bản vẽ CAD. | Khi cần layout và viewport. |
+| `layout_rename` | bố cục | Thực hiện thao tác bố cục đổi tên trong bản vẽ CAD. | Khi cần layout và viewport. |
+| `layout_set_current` | bố cục | Thực hiện thao tác bố cục set current trong bản vẽ CAD. | Khi cần layout và viewport. |
+| `leader_create_mleader` | tạo đối tượng | Thực hiện thao tác đường dẫn tạo mleader trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. |
+| `linetype_list` | lớp bản vẽ | Thực hiện thao tác linetype liệt kê trong bản vẽ CAD. | Khi cần tạo và quản lý layer. |
+| `linetype_load` | lớp bản vẽ | Thực hiện thao tác linetype load trong bản vẽ CAD. | Khi cần tạo và quản lý layer. |
+| `mech_dimension_part` | cơ khí | Thực hiện thao tác mech kích thước part trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. |
+| `mech_hole_pattern` | cơ khí | Thực hiện thao tác mech hole pattern trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. |
+| `mech_part_draw` | cơ khí | Thực hiện thao tác mech part draw trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. |
+| `mech_part_from_spec` | cơ khí | Thực hiện thao tác mech part from spec trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. |
+| `mech_part_inspect` | cơ khí | Thực hiện thao tác mech part inspect trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. |
+| `mech_view_add` | cơ khí | Thực hiện thao tác mech góc nhìn add trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. |
+| `mleaderstyle_create` | kiểu hiển thị | Thực hiện thao tác mleaderstyle tạo trong bản vẽ CAD. | Khi cần style và hiển thị. |
+| `mleaderstyle_list` | kiểu hiển thị | Thực hiện thao tác mleaderstyle liệt kê trong bản vẽ CAD. | Khi cần style và hiển thị. |
+| `page_setup_apply` | thiết lập trang | Thực hiện thao tác trang cài đặt apply trong bản vẽ CAD. | Khi cần khổ giấy, tỷ lệ và in ấn. |
+| `page_setup_list` | thiết lập trang | Thực hiện thao tác trang cài đặt liệt kê trong bản vẽ CAD. | Khi cần khổ giấy, tỷ lệ và in ấn. |
+| `pdf_to_dwg` | mở rộng cadtroly | Thực hiện thao tác pdf to dwg trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `pdf_vectorize` | mở rộng cadtroly | Thực hiện thao tác pdf vectorize trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `pid_equipment_list` | P&ID | Thực hiện thao tác P&ID equipment liệt kê trong bản vẽ CAD. | Khi cần sơ đồ P&ID. |
+| `pid_from_spec` | P&ID | Thực hiện thao tác P&ID from spec trong bản vẽ CAD. | Khi cần sơ đồ P&ID. |
+| `pid_graph` | P&ID | Thực hiện thao tác P&ID graph trong bản vẽ CAD. | Khi cần sơ đồ P&ID. |
+| `pid_instrument_index` | P&ID | Thực hiện thao tác P&ID instrument index trong bản vẽ CAD. | Khi cần sơ đồ P&ID. |
+| `pid_line_draw` | P&ID | Thực hiện thao tác P&ID đường draw trong bản vẽ CAD. | Khi cần sơ đồ P&ID. |
+| `pid_line_list` | P&ID | Thực hiện thao tác P&ID đường liệt kê trong bản vẽ CAD. | Khi cần sơ đồ P&ID. |
+| `pid_symbol_insert` | P&ID | Thực hiện thao tác P&ID ký hiệu chèn trong bản vẽ CAD. | Khi cần sơ đồ P&ID. |
+| `pid_symbol_list` | P&ID | Thực hiện thao tác P&ID ký hiệu liệt kê trong bản vẽ CAD. | Khi cần sơ đồ P&ID. |
+| `pid_tag_parse` | P&ID | Thực hiện thao tác P&ID tag parse trong bản vẽ CAD. | Khi cần sơ đồ P&ID. |
+| `pipe_takeoff` | nhà máy | Thực hiện thao tác pipe takeoff trong bản vẽ CAD. | Khi cần bố trí thiết bị plant. |
+| `plot_style_list` | thiết lập trang | Thực hiện thao tác plot kiểu liệt kê trong bản vẽ CAD. | Khi cần khổ giấy, tỷ lệ và in ấn. |
+| `point_from_snap` | nâng cao | Thực hiện thao tác điểm from snap trong bản vẽ CAD. | Khi cần chức năng nâng cao. |
+| `point_intersection` | nâng cao | Thực hiện thao tác điểm intersection trong bản vẽ CAD. | Khi cần chức năng nâng cao. |
+| `point_tangent` | nâng cao | Thực hiện thao tác điểm tangent trong bản vẽ CAD. | Khi cần chức năng nâng cao. |
+| `revision_add` | tờ bản vẽ | Thực hiện thao tác revision add trong bản vẽ CAD. | Khi cần sheet, khung tên và phát hành. |
+| `section_line` | cơ khí | Thực hiện thao tác mặt cắt đường trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. |
+| `selection_filter` | tra cứu đối tượng | Thực hiện thao tác selection filter trong bản vẽ CAD. | Khi cần tìm và đọc thuộc tính đối tượng. |
+| `selection_get` | tra cứu đối tượng | Thực hiện thao tác selection get trong bản vẽ CAD. | Khi cần tìm và đọc thuộc tính đối tượng. |
+| `selection_polygon` | tra cứu đối tượng | Thực hiện thao tác selection đa giác trong bản vẽ CAD. | Khi cần tìm và đọc thuộc tính đối tượng. |
+| `selection_window` | tra cứu đối tượng | Thực hiện thao tác selection window trong bản vẽ CAD. | Khi cần tìm và đọc thuộc tính đối tượng. |
+| `sheet_frame` | tờ bản vẽ | Thực hiện thao tác tờ bản vẽ frame trong bản vẽ CAD. | Khi cần sheet, khung tên và phát hành. |
+| `solid_boolean` | khối đặc | Thực hiện thao tác khối đặc boolean trong bản vẽ CAD. | Khi cần hình học 3D/solid. |
+| `solid_box` | khối đặc | Thực hiện thao tác khối đặc khung trong bản vẽ CAD. | Khi cần hình học 3D/solid. |
+| `solid_cylinder` | khối đặc | Thực hiện thao tác khối đặc cylinder trong bản vẽ CAD. | Khi cần hình học 3D/solid. |
+| `solid_extrude` | khối đặc | Thực hiện thao tác khối đặc extrude trong bản vẽ CAD. | Khi cần hình học 3D/solid. |
+| `solid_revolve` | khối đặc | Thực hiện thao tác khối đặc revolve trong bản vẽ CAD. | Khi cần hình học 3D/solid. |
+| `standards_reference` | mở rộng cadtroly | Thực hiện thao tác standards reference trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `std_feature_draw` | cơ khí | Thực hiện thao tác std feature draw trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. |
+| `std_part_insert` | cơ khí | Thực hiện thao tác std part chèn trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. |
+| `std_part_list` | cơ khí | Thực hiện thao tác std part liệt kê trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. |
+| `structural_qa` | mở rộng cadtroly | Thực hiện thao tác structural qa trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `surface_texture` | cơ khí | Thực hiện thao tác surface texture trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. |
+| `system_about` | hệ thống | Thực hiện thao tác hệ thống thông tin trong bản vẽ CAD. | Khi cần trạng thái server. |
+| `system_capabilities` | tra cứu đối tượng | Thực hiện thao tác hệ thống capabilities trong bản vẽ CAD. | Khi cần tìm và đọc thuộc tính đối tượng. |
+| `system_get_variable` | hệ thống | Thực hiện thao tác hệ thống get variable trong bản vẽ CAD. | Khi cần trạng thái server. |
+| `system_launch` | môi trường | Thực hiện thao tác hệ thống launch trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `system_preferences_get` | môi trường | Thực hiện thao tác hệ thống preferences get trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `system_preferences_set` | môi trường | Thực hiện thao tác hệ thống preferences set trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `system_prompt_message` | môi trường | Thực hiện thao tác hệ thống prompt message trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `system_run_command` | hệ thống | Thực hiện thao tác hệ thống run command trong bản vẽ CAD. | Khi cần trạng thái server. |
+| `system_run_lisp` | hệ thống | Thực hiện thao tác hệ thống run lisp trong bản vẽ CAD. | Khi cần trạng thái server. |
+| `system_set_variable` | hệ thống | Thực hiện thao tác hệ thống set variable trong bản vẽ CAD. | Khi cần trạng thái server. |
+| `system_status` | hệ thống | Thực hiện thao tác hệ thống trạng thái trong bản vẽ CAD. | Khi cần trạng thái server. |
+| `system_variable_describe` | môi trường | Thực hiện thao tác hệ thống variable describe trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `takeoff_compute` | mở rộng cadtroly | Thực hiện thao tác takeoff compute trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `takeoff_decide` | mở rộng cadtroly | Thực hiện thao tác takeoff decide trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `takeoff_export` | mở rộng cadtroly | Thực hiện thao tác takeoff xuất trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `takeoff_propose` | mở rộng cadtroly | Thực hiện thao tác takeoff propose trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `takeoff_run` | mở rộng cadtroly | Thực hiện thao tác takeoff run trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `template_apply_layers` | mẫu bản vẽ | Thực hiện thao tác mẫu apply layers trong bản vẽ CAD. | Khi cần template bản vẽ. |
+| `template_list` | mẫu bản vẽ | Thực hiện thao tác mẫu liệt kê trong bản vẽ CAD. | Khi cần template bản vẽ. |
+| `text_find_replace` | sửa đối tượng | Thực hiện thao tác chữ tìm replace trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. |
+| `text_set_background` | sửa đối tượng | Thực hiện thao tác chữ set background trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. |
+| `textstyle_create` | kiểu hiển thị | Thực hiện thao tác textstyle tạo trong bản vẽ CAD. | Khi cần style và hiển thị. |
+| `textstyle_list` | kiểu hiển thị | Thực hiện thao tác textstyle liệt kê trong bản vẽ CAD. | Khi cần style và hiển thị. |
+| `textstyle_set_current` | kiểu hiển thị | Thực hiện thao tác textstyle set current trong bản vẽ CAD. | Khi cần style và hiển thị. |
+| `titleblock_apply` | tờ bản vẽ | Thực hiện thao tác titleblock apply trong bản vẽ CAD. | Khi cần sheet, khung tên và phát hành. |
+| `titleblock_apply_iso_a3` | kỹ thuật | Thực hiện thao tác titleblock apply iso a3 trong bản vẽ CAD. | Khi cần kiểm tra kỹ thuật. |
+| `transaction_begin` | giao dịch | Thực hiện thao tác giao dịch begin trong bản vẽ CAD. | Khi cần giao dịch thay đổi có kiểm soát. |
+| `transaction_commit` | giao dịch | Thực hiện thao tác giao dịch commit trong bản vẽ CAD. | Khi cần giao dịch thay đổi có kiểm soát. |
+| `transaction_rollback` | giao dịch | Thực hiện thao tác giao dịch rollback trong bản vẽ CAD. | Khi cần giao dịch thay đổi có kiểm soát. |
+| `ucs_list` | môi trường | Thực hiện thao tác ucs liệt kê trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `ucs_restore` | môi trường | Thực hiện thao tác ucs restore trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `ucs_set` | môi trường | Thực hiện thao tác ucs set trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `user_pick_point` | môi trường | Thực hiện thao tác user pick điểm trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `user_select` | môi trường | Thực hiện thao tác user chọn trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `validation_check` | xác nhận | Thực hiện thao tác validation kiểm tra trong bản vẽ CAD. | Khi cần kiểm tra hợp lệ. |
+| `view_named_list` | môi trường | Thực hiện thao tác góc nhìn named liệt kê trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `view_named_restore` | môi trường | Thực hiện thao tác góc nhìn named restore trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `view_named_save` | môi trường | Thực hiện thao tác góc nhìn named lưu trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. |
+| `view_render_report` | mở rộng cadtroly | Thực hiện thao tác góc nhìn kết xuất report trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. |
+| `view_screenshot` | góc nhìn | Thực hiện thao tác góc nhìn screenshot trong bản vẽ CAD. | Khi cần zoom, góc nhìn và ảnh chụp. |
+| `view_zoom_and_screenshot` | góc nhìn | Thực hiện thao tác góc nhìn thu phóng and screenshot trong bản vẽ CAD. | Khi cần zoom, góc nhìn và ảnh chụp. |
+| `view_zoom_extents` | góc nhìn | Thực hiện thao tác góc nhìn thu phóng extents trong bản vẽ CAD. | Khi cần zoom, góc nhìn và ảnh chụp. |
+| `view_zoom_window` | góc nhìn | Thực hiện thao tác góc nhìn thu phóng window trong bản vẽ CAD. | Khi cần zoom, góc nhìn và ảnh chụp. |
+| `viewport_create` | bố cục | Thực hiện thao tác khung nhìn tạo trong bản vẽ CAD. | Khi cần layout và viewport. |
+| `viewport_delete` | bố cục | Thực hiện thao tác khung nhìn xóa trong bản vẽ CAD. | Khi cần layout và viewport. |
+| `viewport_list` | bố cục | Thực hiện thao tác khung nhìn liệt kê trong bản vẽ CAD. | Khi cần layout và viewport. |
+| `viewport_lock` | bố cục | Thực hiện thao tác khung nhìn lock trong bản vẽ CAD. | Khi cần layout và viewport. |
+| `viewport_set_scale` | bố cục | Thực hiện thao tác khung nhìn set tỷ lệ trong bản vẽ CAD. | Khi cần layout và viewport. |
+| `weld_symbol` | cơ khí | Thực hiện thao tác mối hàn ký hiệu trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. |
+| `xref_attach` | tờ bản vẽ | Thực hiện thao tác tham chiếu ngoài đính kèm trong bản vẽ CAD. | Khi cần sheet, khung tên và phát hành. |
+| `xref_manage` | tờ bản vẽ | Thực hiện thao tác tham chiếu ngoài quản lý trong bản vẽ CAD. | Khi cần sheet, khung tên và phát hành. |
