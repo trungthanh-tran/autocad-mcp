@@ -151,7 +151,50 @@ khi hoàn tất PDF → DWG. File nguồn và file kết quả không tự xóa.
 
 > Chuyển PDF thành DWG, lưu kết quả, xóa DXF và file tạm nhưng giữ PDF nguồn.
 
-## G. Cập nhật phiên bản mới
+## G. Bảng chức năng MCP cho người dùng
+
+| Nhóm | Chức năng | Người dùng có thể nói | Kết quả |
+|---|---|---|---|
+| Bản vẽ | Đọc bản vẽ | “Đọc file này và cho biết có những layer nào.” | Danh sách layer, block, đối tượng, kích thước và đơn vị. |
+| Bản vẽ | PDF → DWG | “Dựng PDF này thành DWG A1.” | File DWG mới, các lớp đường nét và chữ được phân loại. |
+| Bản vẽ | Mở/lưu | “Mở file này”, “Lưu thành bản mới.” | Mở bản vẽ, lưu bản sao, không tự ghi đè file gốc nếu chưa yêu cầu. |
+| Bản vẽ | Vẽ thêm | “Vẽ tường dài 3 m trên layer tường.” | Đối tượng mới đúng vị trí và layer được yêu cầu. |
+| Bản vẽ | Sửa/xóa | “Đổi layer cửa”, “Xóa phần được chọn.” | Chỉnh sửa có thể kiểm tra lại hoặc undo. |
+| Layer | Tách layer | “Tách tường, cột, nội thất, dim thành layer riêng.” | Các nhóm layer rõ ràng để bật/tắt, sửa hoặc xóa. |
+| Layer | Áp dụng chuẩn | “Dùng chuẩn Việt Nam cho nhà” hoặc “Dùng NCS cho cầu.” | Tạo layer theo `KT/KC/HT/CAU` hoặc `A/C/S`. |
+| Layer | Tự nhận diện | “Tự nhận diện chuẩn layer.” | Chỉ tự áp dụng khi đủ bằng chứng; nếu không sẽ hỏi lại. |
+| Kiểm tra | Kiểm tra bản vẽ | “Kiểm tra theo chuẩn công ty.” | Danh sách lỗi/cảnh báo, vị trí và đề xuất xử lý. |
+| Khối lượng | Đề xuất bóc | “Bóc thử tường, cửa, sàn.” | Nhóm công tác và cách tính dự kiến. |
+| Khối lượng | Xác nhận cách tính | “Nhóm này tính theo m2.” | Ghi nhớ lựa chọn cho lần bóc sau. |
+| Khối lượng | Xuất Excel | “Xuất khối lượng ra Excel.” | File Excel có tổng hợp, chi tiết và nguồn truy vết. |
+| Kho dữ liệu | Tiêu chuẩn/quy tắc | “Liệt kê các bộ tiêu chuẩn đang có.” | Danh sách bộ mặc định trong MCP và bộ người dùng thêm. |
+| Kho dữ liệu | Skill | “Đọc skill biện pháp thi công.” | Hướng dẫn chuyên ngành đang được MCP sử dụng. |
+| Hệ thống | Trạng thái | “MCP đang chạy bằng AutoCAD hay DXF?” | Backend, version, kho dữ liệu và tình trạng kết nối. |
+| Hệ thống | Cập nhật | “Cập nhật MCP.” | Kéo bản mới và cài package theo file lock. |
+
+### Các cột trong bảng Excel khối lượng
+
+| Cột | Ý nghĩa |
+|---|---|
+| `Công tác` | Tên việc, ví dụ xây tường, cửa, sàn. |
+| `Đơn vị` | `m`, `m2`, `m3`, `bộ`, `cái`… |
+| `Khối lượng` | Giá trị MCP tính được từ bản vẽ. |
+| `Cách tính` | Đếm, chiều dài, diện tích, thể tích hoặc diện tích × chiều cao. |
+| `Nguồn` | Layer, block, text hoặc quy tắc đã dùng để tính. |
+| `Tin cậy` | `A` = đo/đếm trực tiếp; `B` = suy luận cần kiểm tra; `C` = chưa đủ dữ liệu. |
+| `Handle` | Mã đối tượng trong CAD để tìm lại đúng vị trí. |
+| `Ghi chú` | Điều kiện thiếu, giả định hoặc việc kỹ sư cần xác nhận. |
+
+### Các mức kết quả kiểm tra
+
+| Mức | Ý nghĩa |
+|---|---|
+| `Lỗi` | Cần sửa trước khi phát hành bản vẽ. |
+| `Cảnh báo` | Có dấu hiệu chưa phù hợp, người dùng kiểm tra lại. |
+| `Xác nhận` | MCP không đủ căn cứ kết luận; kỹ sư quyết định. |
+| `Đạt` | Không phát hiện vấn đề theo bộ quy tắc đã chọn. |
+
+## H. Cập nhật phiên bản mới
 
 Khi có ZIP phiên bản mới:
 
@@ -164,7 +207,7 @@ Khi có ZIP phiên bản mới:
 Không xóa thư mục `D:\CAD-kho`; đó là nơi lưu cấu hình, log, Excel và dữ liệu
 bổ sung của người dùng. Bộ mặc định nằm trong thư mục MCP.
 
-## H. Khi gặp lỗi
+## I. Khi gặp lỗi
 
 - MCP không hiện: đóng VSCode, mở lại và chọn **MCP: List Servers → Start**.
 - Không thấy AutoCAD: mở AutoCAD trước khi gọi MCP.
