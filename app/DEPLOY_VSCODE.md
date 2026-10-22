@@ -1,60 +1,51 @@
-# Triển khai cadtroly MCP trên máy khác bằng VSCode
+# Hướng dẫn cài cadtroly MCP cho người dùng cuối
 
-Phiên bản gói: **cadtroly 0.2.0**.
+Phiên bản: **cadtroly 0.2.0**.
 
-## 1. Cài phần mềm nền
+Tài liệu này dành cho người chỉ cần dùng AutoCAD + VSCode, không cần biết lập
+trình.
 
-Trên Windows, cài:
+## A. Chuẩn bị một lần
 
-- Python 3.11 trở lên, nhớ chọn **Add Python to PATH**.
-- Git.
-- VSCode và extension Python của Microsoft.
-- AutoCAD nếu muốn MCP sửa DWG trực tiếp qua COM.
-- ODA File Converter nếu cần đọc/ghi DWG khi không dùng AutoCAD.
+Trên máy mới, cài ba phần mềm:
 
-AutoCAD và ODA File Converter là phần mềm ngoài Python, không được cài tự động
-bởi MCP.
+1. Python 3.14: tải từ `python.org`, khi cài nhớ chọn **Add Python to PATH**.
+2. VSCode: tải từ `code.visualstudio.com`.
+3. Extension **Python** của Microsoft trong VSCode.
 
-## 2. Giải nén và mở bằng VSCode
+Nếu muốn MCP sửa bản vẽ trực tiếp trong AutoCAD, máy phải có AutoCAD đã cài.
+Nếu không có AutoCAD, MCP vẫn đọc/vẽ DXF; để chuyển DWG cần cài thêm ODA File
+Converter.
 
-Giải nén gói ZIP vào một thư mục không có dấu cách, ví dụ:
+## B. Cài cadtroly
 
-```powershell
-D:\cadtroly\app
-```
+1. Tải file `cadtroly-0.2.0-vscode.zip`.
+2. Nhấp chuột phải → **Extract All…**.
+3. Chọn nơi dễ nhớ, ví dụ `D:\cadtroly`.
+4. Mở thư mục đã giải nén, vào thư mục `app`.
+5. Nhấp đúp file `Cài đặt.bat`.
 
-Trong VSCode chọn **File → Open Folder…** và mở thư mục `app`.
+Chờ đến khi cửa sổ hiện dòng **CÀI ĐẶT HOÀN TẤT**. Nếu Windows hỏi quyền,
+chọn **Yes**.
 
-Mở Terminal trong VSCode và chạy:
+## C. Mở bằng VSCode
 
-```powershell
-py -3.14 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-python -m pip install -r requirements-mcp.lock
-python -m pip install -e .
-```
+1. Mở VSCode.
+2. Chọn **File → Open Folder…**.
+3. Chọn đúng thư mục `app`.
+4. Nếu VSCode hỏi chọn Python interpreter, chọn:
+   `.venv\Scripts\python.exe`.
 
-Nếu PowerShell chặn activate, có thể chạy trực tiếp bằng Python trong môi trường:
+## D. Kết nối MCP
 
-```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements-mcp.lock
-.\.venv\Scripts\python.exe -m pip install -e .
-```
+Trong VSCode:
 
-## 3. Kiểm tra cài đặt
-
-```powershell
-python -m pytest -q tests
-python -c "import version; print(version.__version__)"
-```
-
-Kết quả version phải là `0.2.0`.
-
-## 4. Kết nối MCP trong VSCode
-
-Trong VSCode mở Command Palette, chọn **MCP: Open User Configuration** và
-thêm server sau. Sửa `cwd` nếu giải nén ở nơi khác:
+1. Nhấn `Ctrl+Shift+P`.
+2. Gõ **MCP: Open User Configuration** rồi chọn mục đó.
+3. Dán cấu hình dưới đây.
+4. Sửa `D:\cadtroly\app` thành đúng nơi đã giải nén nếu khác.
+5. Lưu file.
+6. Nhấn `Ctrl+Shift+P` → **MCP: List Servers** → chọn `cadtroly` → **Start**.
 
 ```json
 {
@@ -76,42 +67,38 @@ thêm server sau. Sửa `cwd` nếu giải nén ở nơi khác:
 }
 ```
 
-Sau đó chạy **MCP: List Servers**, chọn `cadtroly` và **Start**. Có thể kiểm
-tra bằng tool `system_status` hoặc gọi `standards_reference`.
+## E. Dùng thử
 
-## 5. Cập nhật lần sau
+Mở một cuộc trò chuyện trong VSCode và nói:
 
-Nếu máy được clone từ GitHub:
+- “Đọc file PDF này và bóc tách thành DWG.”
+- “Mở file DWG này.”
+- “Tách layer tường, cột, nội thất và kích thước.”
+- “Áp dụng chuẩn layer Việt Nam cho bản vẽ nhà.”
+- “Bóc khối lượng bản vẽ này ra Excel.”
 
-```powershell
-python -m cadtroly.cli update
-```
+Khi cần chọn bộ layer, dùng `vn` cho quy ước Việt Nam hoặc `ncs` cho quy ước
+quốc tế. Nếu không xác định được, MCP sẽ hỏi lại, không tự chọn bừa.
 
-Lệnh này kéo code mới, cài lại dependency theo lock và báo version. Lệnh dừng
-nếu có file local chưa commit để tránh ghi đè.
+## F. Cập nhật phiên bản mới
 
-Nếu chỉ nhận ZIP mới, giải nén bản mới vào thư mục mới rồi cài lại bằng bước 2.
+Khi có ZIP phiên bản mới:
 
-## 6. Chạy MCP thủ công để xem log
+1. Đóng VSCode.
+2. Đổi tên thư mục cũ thành `app-cu` để dự phòng.
+3. Giải nén ZIP mới thành thư mục `app`.
+4. Nhấp đúp `Cài đặt.bat`.
+5. Mở lại VSCode và khởi động lại MCP.
 
-```powershell
-python -m cadtroly.mcp
-```
+Không xóa thư mục `D:\CAD-kho`; đó là nơi lưu cấu hình, tiêu chuẩn, log và file
+Excel của người dùng.
 
-MCP dùng stdio nên không gõ lệnh vào cửa sổ này; hãy để VSCode/MCP client quản
-lý tiến trình. Khi thiếu package, bootstrap sẽ tự cài từ `requirements-mcp.lock`.
-Có thể tắt tự cài bằng:
+## G. Khi gặp lỗi
 
-```powershell
-$env:CADTROLY_AUTO_INSTALL = "false"
-```
+- MCP không hiện: đóng VSCode, mở lại và chọn **MCP: List Servers → Start**.
+- Không thấy AutoCAD: mở AutoCAD trước khi gọi MCP.
+- Không đọc được DWG: kiểm tra ODA File Converter hoặc chuyển sang DXF.
+- Không cài được: gửi ảnh màn hình lỗi và phiên bản Python cho người quản trị.
 
-## 7. Các lỗi thường gặp
-
-- `No module named cadtroly`: kiểm tra `cwd` là thư mục `app` và dùng Python
-  trong `.venv`.
-- Không điều khiển được AutoCAD: mở AutoCAD trước và đặt
-  `AUTOCAD_MCP_BACKEND=auto` hoặc `com`.
-- Không ghi được DWG khi không có AutoCAD: cài ODA File Converter; backend
-  `ezdxf` chỉ đảm bảo DXF, không phải DWG native.
-- MCP không hiện tool: kiểm tra server đã **Start** và xem log trong VSCode.
+Không xóa `.venv`, `D:\CAD-kho` hoặc file DWG/PDF nguồn khi chưa hỏi người quản
+trị.
