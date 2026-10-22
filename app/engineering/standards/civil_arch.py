@@ -110,11 +110,69 @@ NCS_BRIDGE_LAYERS: list[LayerRow] = [
     ("S-ANNO-NPLT", 250, "Continuous", 0.05, "non-plot construction / coordination"),
 ]
 
+# Vietnamese project-office convention.  Names are deliberately ASCII and
+# uppercase: accents are avoided because they are unreliable in older CAD
+# templates and exchange scripts.  This is a practical convention, not a
+# single mandatory national layer table.
+VN_BUILDING_LAYERS: list[LayerRow] = [
+    ("0", 7, "Continuous", 0.25, "mac dinh"),
+    ("KT-TUONG", 7, "Continuous", 0.50, "tuong"),
+    ("KT-CUA", 2, "Continuous", 0.25, "cua"),
+    ("KT-CUA-SO", 4, "Continuous", 0.25, "cua so"),
+    ("KT-SAN", 7, "Continuous", 0.35, "san"),
+    ("KT-TRAN", 6, "Continuous", 0.18, "tran"),
+    ("KT-NOI-THAT", 6, "Continuous", 0.18, "noi that"),
+    ("KT-THIET-BI", 5, "Continuous", 0.18, "thiet bi"),
+    ("KT-TRUC", 1, "CENTER", 0.18, "luoi truc"),
+    ("KC-COT", 3, "Continuous", 0.50, "cot ket cau"),
+    ("KC-DAM", 3, "Continuous", 0.50, "dam ket cau"),
+    ("KC-SAN", 3, "Continuous", 0.35, "san ket cau"),
+    ("KC-MONG", 3, "Continuous", 0.50, "mong"),
+    ("KC-CTHEP", 2, "Continuous", 0.25, "cot thep"),
+    ("KT-DIM", 2, "Continuous", 0.18, "kich thuoc"),
+    ("KT-GHICHU", 7, "Continuous", 0.25, "ghi chu"),
+    ("KT-HATCH", 8, "Continuous", 0.13, "mat cat"),
+    ("KT-TAM", 250, "Continuous", 0.05, "khong in / tam"),
+]
+
+VN_ROAD_LAYERS: list[LayerRow] = [
+    ("0", 7, "Continuous", 0.25, "mac dinh"),
+    ("HT-HIENTRANG", 8, "Continuous", 0.18, "hien trang"),
+    ("HT-TIMDUONG", 1, "CENTER", 0.25, "tim tuyen"),
+    ("HT-MATDUONG", 7, "Continuous", 0.50, "mat duong"),
+    ("HT-LEDUONG", 7, "Continuous", 0.35, "le duong"),
+    ("HT-VIAHE", 5, "Continuous", 0.25, "via he"),
+    ("HT-THOATNUOC", 4, "Continuous", 0.25, "thoat nuoc"),
+    ("HT-CAPNUOC", 3, "DASHED", 0.18, "cap nuoc"),
+    ("HT-BIENBAO", 6, "Continuous", 0.18, "bien bao va son"),
+    ("HT-HATCH", 8, "Continuous", 0.13, "vat lieu"),
+    ("HT-DIM", 2, "Continuous", 0.18, "kich thuoc"),
+    ("HT-GHICHU", 7, "Continuous", 0.25, "ghi chu"),
+    ("HT-TAM", 250, "Continuous", 0.05, "khong in / tam"),
+]
+
+VN_BRIDGE_LAYERS: list[LayerRow] = [
+    ("0", 7, "Continuous", 0.25, "mac dinh"),
+    ("CAU-MATCAU", 7, "Continuous", 0.50, "mat cau va ban mat cau"),
+    ("CAU-DAM", 1, "Continuous", 0.50, "dam cau"),
+    ("CAU-TRU", 3, "Continuous", 0.50, "tru cau"),
+    ("CAU-MO", 4, "Continuous", 0.50, "mo cau va tuong canh"),
+    ("CAU-GOI", 5, "Continuous", 0.25, "goi cau va khe bien"),
+    ("CAU-CTHEP", 2, "Continuous", 0.25, "cot thep"),
+    ("CAU-AN", 3, "HIDDEN", 0.18, "phan an"),
+    ("CAU-TRUC", 1, "CENTER", 0.18, "tim truc"),
+    ("CAU-HATCH", 8, "Continuous", 0.13, "mat cat"),
+    ("CAU-DIM", 2, "Continuous", 0.18, "kich thuoc"),
+    ("CAU-GHICHU", 7, "Continuous", 0.25, "ghi chu"),
+    ("CAU-TAM", 250, "Continuous", 0.05, "khong in / tam"),
+]
+
 REFERENCE_SETS: dict[str, dict[str, Any]] = {
     "building": {
         "name": "Nhà / kiến trúc",
         "layer_set": "ncs_building",
         "layer_naming": "NCS/AIA + ISO 13567",
+        "vn_layer_set": "vn_building",
         "roles": {"dim": "A-DIMEN-T-N", "construction": "A-CONST-E-N"},
         "references": [
             {"code": "ISO 128", "purpose": "quy tắc trình bày nét vẽ"},
@@ -130,6 +188,7 @@ REFERENCE_SETS: dict[str, dict[str, Any]] = {
         "name": "Đường",
         "layer_set": "ncs_road",
         "layer_naming": "NCS/Civil + ISO 13567",
+        "vn_layer_set": "vn_road",
         "roles": {"dim": "C-ROAD-DIM", "construction": "C-ROAD-TEMP"},
         "references": [
             {"code": "TCVN 4054:2005", "purpose": "đường ô tô - yêu cầu thiết kế"},
@@ -144,6 +203,7 @@ REFERENCE_SETS: dict[str, dict[str, Any]] = {
         "name": "Cầu",
         "layer_set": "ncs_bridge",
         "layer_naming": "NCS/Structural + ISO 13567",
+        "vn_layer_set": "vn_bridge",
         "roles": {"dim": "S-BRIDGE-DIM", "construction": "S-BRIDGE-TEMP"},
         "references": [
             {"code": "TCVN 11823:2017", "purpose": "thiết kế cầu đường bộ"},
@@ -172,5 +232,6 @@ def resolve_reference_set(name: str) -> tuple[str, dict[str, Any]]:
 __all__ = [
     "BUILDING_LAYERS", "ROAD_LAYERS", "BRIDGE_LAYERS",
     "NCS_BUILDING_LAYERS", "NCS_ROAD_LAYERS", "NCS_BRIDGE_LAYERS",
+    "VN_BUILDING_LAYERS", "VN_ROAD_LAYERS", "VN_BRIDGE_LAYERS",
     "REFERENCE_SETS", "resolve_reference_set",
 ]

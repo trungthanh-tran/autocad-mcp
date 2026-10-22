@@ -7502,6 +7502,7 @@ async def drawing_apply_discipline_standard(
     discipline: Annotated[str, "building | road | bridge (aliases: nha | duong | cau)"],
     layers: Annotated[bool, "Create the discipline layer set"] = True,
     units: Annotated[bool, "Apply ISO-25/ISOCP and millimetre drafting units"] = True,
+    naming: Annotated[str, "ncs (international) | vn (Vietnamese project convention)"] = "ncs",
     ctx: Context = None,
 ) -> dict:
     """Set up a drawing for a civil/architectural discipline in one call."""
@@ -7513,13 +7514,18 @@ async def drawing_apply_discipline_standard(
         key, reference = resolve_reference_set(discipline)
     except ValueError as exc:
         raise ToolError(str(exc)) from exc
+    naming_key = str(naming).strip().lower()
+    if naming_key not in {"ncs", "vn"}:
+        raise ToolError("naming must be 'ncs' or 'vn'")
+    layer_set = reference["layer_set"] if naming_key == "ncs" else reference["vn_layer_set"]
     result = await apply_standard(_backend(ctx), "iso", layers=False, units=units)
     if layers:
         result["layers"] = {
-            "layer_set": reference["layer_set"],
-            "layers": await apply_layer_set(_backend(ctx), reference["layer_set"]),
+            "layer_set": layer_set,
+            "layers": await apply_layer_set(_backend(ctx), layer_set),
         }
     result["discipline"] = key
+    result["naming"] = naming_key
     result["references"] = reference["references"]
     return result
 

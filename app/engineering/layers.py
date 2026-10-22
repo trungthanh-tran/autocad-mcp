@@ -167,6 +167,9 @@ from engineering.standards.civil_arch import (  # noqa: E402
     NCS_BUILDING_LAYERS,
     NCS_ROAD_LAYERS,
     ROAD_LAYERS,
+    VN_BRIDGE_LAYERS,
+    VN_BUILDING_LAYERS,
+    VN_ROAD_LAYERS,
 )
 
 LAYER_SET_REGISTRY["arch"] = ARCH_LAYERS
@@ -177,6 +180,11 @@ LAYER_SET_REGISTRY.update({
     "ncs_road": NCS_ROAD_LAYERS,
     "ncs_bridge": NCS_BRIDGE_LAYERS,
 })
+LAYER_SET_REGISTRY.update({
+    "vn_building": VN_BUILDING_LAYERS,
+    "vn_road": VN_ROAD_LAYERS,
+    "vn_bridge": VN_BRIDGE_LAYERS,
+})
 LAYER_ROLES.update({
     "building": {"dim": "A-DIMEN-T-N", "construction": "A-CONST-E-N"},
     "road": {"dim": "C-ROAD-DIM", "construction": "C-ROAD-TEMP"},
@@ -184,4 +192,7 @@ LAYER_ROLES.update({
     "ncs_building": {"dim": "A-ANNO-DIMS", "construction": "A-ANNO-NPLT"},
     "ncs_road": {"dim": "C-ANNO-DIMS", "construction": "C-ANNO-NPLT"},
     "ncs_bridge": {"dim": "S-ANNO-DIMS", "construction": "S-ANNO-NPLT"},
+    "vn_building": {"dim": "KT-DIM", "construction": "KT-TAM"},
+    "vn_road": {"dim": "HT-DIM", "construction": "HT-TAM"},
+    "vn_bridge": {"dim": "CAU-DIM", "construction": "CAU-TAM"},
 })
