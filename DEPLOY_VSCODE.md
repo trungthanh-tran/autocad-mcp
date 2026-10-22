@@ -7,11 +7,13 @@ trình.
 
 ## A. Chuẩn bị một lần
 
-Trên máy mới, cài ba phần mềm:
+Trên máy mới, cài hai phần mềm:
 
-1. Python 3.14: tải từ `python.org`, khi cài nhớ chọn **Add Python to PATH**.
-2. VSCode: tải từ `code.visualstudio.com`.
-3. Extension **Python** của Microsoft trong VSCode.
+1. VSCode: tải từ `code.visualstudio.com`.
+2. Extension **Python** của Microsoft trong VSCode.
+
+Không cần cài Python thủ công. `CAI_DAT.bat` sẽ tự tải và cài Python 3.14.9
+64-bit từ `python.org` nếu máy chưa có Python 3.14.
 
 Nếu muốn MCP sửa bản vẽ trực tiếp trong AutoCAD, máy phải có AutoCAD đã cài.
 Nếu không có AutoCAD, MCP vẫn đọc/vẽ DXF; để chuyển DWG cần cài thêm ODA File
