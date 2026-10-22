@@ -1,0 +1,12 @@
+{
+  "id": "chuan-cong-ty",
+  "ten": "Chuẩn vẽ công ty (mẫu)",
+  "hieu_luc": "co",
+  "rules": [
+    {"id": "L-01", "loai": "no_entity_on_layer", "layer": "0", "muc": "loi", "mo_ta": "Không đặt đối tượng trên layer 0", "dieu": "Quy định vẽ §3.2", "duyet": true},
+    {"id": "L-02", "loai": "text_height_min", "gia_tri": 200, "muc": "loi", "mo_ta": "Chữ tối thiểu 2.0 mm", "dieu": "Quy định vẽ §4.1", "duyet": true},
+    {"id": "L-03", "loai": "dim_no_override", "muc": "canh_bao", "mo_ta": "Dimension không được ghi đè số", "dieu": "Quy định vẽ §4.3", "duyet": true},
+    {"id": "L-04", "loai": "required_layer", "layer": "DIM", "muc": "loi", "mo_ta": "Phải có layer DIM", "dieu": "Quy định vẽ §3.1", "duyet": true},
+    {"id": "S-01", "loai": "required_text", "pattern": "lưới an toàn|luoi an toan", "muc": "xac_nhan", "mo_ta": "Lưới an toàn theo điều kiện thực tế", "dieu": "QCVN 18:2021/BXD §2.2", "duyet": true}
+  ]
+}

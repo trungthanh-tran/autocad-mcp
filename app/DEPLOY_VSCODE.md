@@ -28,6 +28,11 @@ Converter.
 Chờ đến khi cửa sổ hiện dòng **CÀI ĐẶT HOÀN TẤT**. Nếu Windows hỏi quyền,
 chọn **Yes**.
 
+Lần cài đầu, bộ tiêu chuẩn/quy tắc/skill mẫu được tự động nạp vào
+`D:\CAD-kho`: chuẩn vẽ công ty mẫu, QCVN 18:2021/BXD mẫu và skill biện pháp thi
+công Việt Nam. Đây là dữ liệu nền đã đi kèm MCP; sau này người quản trị có thể
+bổ sung thêm, không làm mất dữ liệu cũ.
+
 ## C. Mở bằng VSCode
 
 1. Mở VSCode.

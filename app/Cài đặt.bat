@@ -18,7 +18,7 @@ if errorlevel 1 (
   pause
   exit /b 1
 )
-if not exist "%USERPROFILE%\CAD-kho" .venv\Scripts\python.exe -m cadtroly.cli init
+.venv\Scripts\python.exe -m cadtroly.cli init
 echo.
 echo CAI DAT HOAN TAT - cadtroly 0.2.0
 echo Bay gio mo VSCode va lam theo DEPLOY_VSCODE.md.

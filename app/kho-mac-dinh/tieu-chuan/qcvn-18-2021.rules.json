@@ -1,0 +1,12 @@
+{
+  "id": "qcvn-18-2021",
+  "ten": "QCVN 18:2021/BXD An toàn trong thi công xây dựng (MẪU)",
+  "hieu_luc": "co",
+  "thay_the": "QCVN 18:2014/BXD",
+  "rules": [
+    {"id": "S-01", "loai": "min_value_by_block_attr", "block": "LANCAN|LAN-CAN|HANDRAIL", "attr": "CAO", "gia_tri": 1000, "don_vi": "mm", "muc": "loi", "mo_ta": "Lan can bảo vệ mép sàn cao tối thiểu 1,0 m", "dieu": "§2.1", "duyet": false},
+    {"id": "S-02", "loai": "required_text", "pattern": "lưới an toàn|luoi an toan", "muc": "xac_nhan", "mo_ta": "Lưới an toàn bao che theo điều kiện thực tế", "dieu": "§2.2", "duyet": false},
+    {"id": "S-03", "loai": "required_text", "pattern": "neo giàn giáo|neo gian giao|neo vào kết cấu", "muc": "canh_bao", "mo_ta": "Giàn giáo phải có ghi chú neo vào kết cấu", "dieu": "§2.2", "duyet": false}
+  ],
+  "ghi_chu": "File mẫu; kỹ sư phải đối chiếu văn bản gốc và duyệt từng dòng trước khi phát hành."
+}
