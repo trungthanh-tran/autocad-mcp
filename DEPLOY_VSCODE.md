@@ -354,7 +354,8 @@ Xóa tiêu chuẩn fire-demo do người dùng thêm.
 Chỉ xóa sau khi tôi xác nhận.
 ```
 
-MCP dùng `kho_standards` để liệt kê/lọc theo `nganh`, `kho_standard_add` để
+Gọi `kho_industries` để xem mã ngành và tên tiếng Việt trước. MCP dùng
+`kho_standards` để liệt kê/lọc theo `nganh`, `kho_standard_add` để
 thêm JSON rule vào `CAD-kho\\tieu-chuan`, và `kho_standard_delete` với
 `confirm=true` để xóa. Tiêu chuẩn đóng gói mặc định trong MCP không thể xóa.
 

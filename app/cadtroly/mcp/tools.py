@@ -27,7 +27,7 @@ CADTROLY_TOOL_NAMES = frozenset({
     "drawing_read", "drawing_entities",
     "takeoff_propose", "takeoff_decide", "takeoff_compute", "takeoff_export", "takeoff_run",
     "check_rulesets", "check_run",
-    "kho_standards", "kho_standard_add", "kho_standard_delete",
+    "kho_industries", "kho_standards", "kho_standard_add", "kho_standard_delete",
     "kho_status", "kho_rules_export", "kho_rules_import", "kho_skills", "kho_skill_toggle", "kho_skill_add",
 })
 
@@ -176,6 +176,11 @@ def register(mcp: FastMCP) -> None:
         findings = check_drawing(d, rs, only_approved=not include_unapproved)
         kho.log("check", "run", path=path, ruleset=rs.id, **summarize(findings))
         return {"ruleset": rs.id, "summary": summarize(findings), "findings": [f.to_dict() for f in findings]}
+
+    @mcp.tool(tags={"kho", "check"}, annotations={"readOnlyHint": True})
+    async def kho_industries(ctx: Context = None) -> dict:
+        """Liệt kê danh mục ngành với mã máy và tên tiếng Việt để chọn tiêu chuẩn."""
+        return {"industries": _ctx(ctx)["kho"].industries()}
 
     @mcp.tool(tags={"kho", "check"}, annotations={"readOnlyHint": True})
     async def kho_standards(

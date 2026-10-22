@@ -33,6 +33,14 @@ def test_standard_add_list_by_industry_and_delete(tmp_path: Path):
     assert deleted == path and not path.exists()
 
 
+def test_industry_catalog_has_vietnamese_names(tmp_path: Path):
+    industries = _kho(tmp_path).industries()
+    by_id = {item["id"]: item for item in industries}
+    assert by_id["fire"]["ten"] == "Phòng cháy chữa cháy"
+    assert by_id["mechanical"]["ten"] == "Cơ khí"
+    assert by_id["pid"]["ten"].startswith("P&ID")
+
+
 def test_bundled_standard_cannot_be_deleted(tmp_path: Path):
     with pytest.raises(PermissionError):
         _kho(tmp_path).standard_delete("qcvn-18-2021")

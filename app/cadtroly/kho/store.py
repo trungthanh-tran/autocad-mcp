@@ -20,6 +20,28 @@ from ..config import Config
 from .rules import RuleStore
 
 
+INDUSTRIES = (
+    {"id": "building", "ten": "Xây dựng tổng hợp", "mo_ta": "Hồ sơ xây dựng và bản vẽ tổng hợp."},
+    {"id": "architecture", "ten": "Kiến trúc", "mo_ta": "Mặt bằng, mặt đứng, mặt cắt, phòng, cửa và nội thất."},
+    {"id": "structural", "ten": "Kết cấu", "mo_ta": "Cột, dầm, sàn, vách, móng và hồ sơ tính kết cấu."},
+    {"id": "fire", "ten": "Phòng cháy chữa cháy", "mo_ta": "Thoát nạn, báo cháy, chữa cháy, hút khói và khoang cháy."},
+    {"id": "mechanical", "ten": "Cơ khí", "mo_ta": "Chi tiết máy, GD&T, dung sai, mối hàn và bảng kê."},
+    {"id": "pid", "ten": "P&ID / Quy trình công nghệ", "mo_ta": "Thiết bị, đường ống, van, tag, port và topology."},
+    {"id": "electrical", "ten": "Điện", "mo_ta": "Sơ đồ điện, thiết bị, cáp, tủ và ký hiệu điện."},
+    {"id": "mep", "ten": "Cơ điện công trình (MEP)", "mo_ta": "HVAC, điện, cấp thoát nước và hệ thống kỹ thuật."},
+    {"id": "water-supply", "ten": "Cấp nước", "mo_ta": "Mạng cấp nước, thiết bị và tuyến ống."},
+    {"id": "drainage", "ten": "Thoát nước", "mo_ta": "Thoát nước mưa, nước thải và hạ tầng thoát nước."},
+    {"id": "civil", "ten": "Hạ tầng kỹ thuật", "mo_ta": "San nền, đường nội bộ, hạ tầng và công trình phụ trợ."},
+    {"id": "transportation", "ten": "Giao thông đường bộ", "mo_ta": "Đường, nút giao, mặt đường, biển báo và tổ chức giao thông."},
+    {"id": "bridge", "ten": "Cầu", "mo_ta": "Cầu, cống, mố, trụ, lan can và kết cấu phụ trợ."},
+    {"id": "landscape", "ten": "Cảnh quan", "mo_ta": "Cây xanh, sân vườn, lát nền và không gian ngoài nhà."},
+    {"id": "surveying", "ten": "Trắc địa", "mo_ta": "Mốc, tọa độ, cao độ, lưới khống chế và hiện trạng."},
+    {"id": "geotechnical", "ten": "Địa kỹ thuật", "mo_ta": "Địa chất, nền móng, taluy và xử lý nền."},
+    {"id": "construction", "ten": "Biện pháp thi công", "mo_ta": "Tổ chức thi công, an toàn thi công và bản vẽ biện pháp."},
+    {"id": "general-cad", "ten": "CAD tổng quát", "mo_ta": "Chuẩn layer, annotation, plot và quản trị hồ sơ CAD."},
+)
+
+
 class Kho:
     def __init__(self, cfg: Config):
         self.cfg = cfg
@@ -47,6 +69,9 @@ class Kho:
         return next((p for p in candidates if p.exists()), None)
 
     # ---- tiêu chuẩn ----
+    def industries(self) -> list[dict]:
+        return [dict(item) for item in INDUSTRIES]
+
     def standards(self) -> list[dict]:
         out = []
         for f in self._files("tieu-chuan", "*.rules.json"):

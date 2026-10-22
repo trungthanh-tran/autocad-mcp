@@ -1685,6 +1685,9 @@ TOOL_ALIASES: dict[str, ToolAliases] = {
     "kho_standards": ToolAliases(
         synonyms=("list safety standards", "list cad standards", "standards by industry", "liet ke tieu chuan", "tieu chuan an toan"),
     ),
+    "kho_industries": ToolAliases(
+        synonyms=("list industries", "cad disciplines", "danh sach nganh", "liet ke nganh", "nganh thiet ke"),
+    ),
     "kho_standard_add": ToolAliases(
         synonyms=("add safety standard", "add industry standard", "update cad standard", "them tieu chuan", "cap nhat tieu chuan"),
     ),
