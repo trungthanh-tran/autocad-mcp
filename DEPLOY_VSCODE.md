@@ -362,6 +362,12 @@ thêm JSON rule vào `CAD-kho\\tieu-chuan`, và `kho_standard_delete` với
 Danh mục chi tiết tiêu chuẩn an toàn theo 18 ngành nằm tại
 `app\\docs\\STANDARDS-SAFETY-BY-INDUSTRY.md`.
 
+Danh mục upstream gồm **247 tools · 8 resources · 5 prompt templates** được
+liệt kê tại `app\\docs\\MCP-TOOL-CATALOG.md`; tên, mô tả và tham số đầy đủ nằm
+trong `app\\docs\\tool-inventory.json`. Khi chạy cadtroly mở `full/all`, runtime
+có thêm tool riêng của cadtroly, vì vậy hãy dùng `system_about` hoặc `tools/list`
+để xem số lượng thực tế.
+
 Các câu lệnh chuyên môn có thể dùng trực tiếp:
 
 ```text
