@@ -1,6 +1,6 @@
 @echo off
 setlocal
-cd /d "%~dp0"
+cd /d "%~dp0code"
 title Cai dat cadtroly MCP
 echo Dang cai cadtroly MCP, vui long cho...
 where py >nul 2>nul

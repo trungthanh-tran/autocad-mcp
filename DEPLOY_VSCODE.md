@@ -22,21 +22,21 @@ Converter.
 1. Tải file `cadtroly-0.2.0-vscode.zip`.
 2. Nhấp chuột phải → **Extract All…**.
 3. Chọn nơi dễ nhớ, ví dụ `D:\cadtroly`.
-4. Mở thư mục đã giải nén, vào thư mục `app`.
+4. Mở thư mục đã giải nén; mã chương trình nằm trong thư mục `code`.
 5. Nhấp đúp file `CAI_DAT.bat`.
 
 Chờ đến khi cửa sổ hiện dòng **CÀI ĐẶT HOÀN TẤT**. Nếu Windows hỏi quyền,
 chọn **Yes**.
 
 Bộ tiêu chuẩn/quy tắc/skill nền đã nằm sẵn trong thư mục MCP tại
-`app\kho-mac-dinh`, không cần chép vào `D:\CAD-kho`. MCP đọc trực tiếp bộ này;
+`code\kho-mac-dinh`, không cần chép vào `D:\CAD-kho`. MCP đọc trực tiếp bộ này;
 `D:\CAD-kho` chỉ dành cho dữ liệu người dùng, log, Excel và phần bổ sung sau này.
 
 ## C. Mở bằng VSCode
 
 1. Mở VSCode.
 2. Chọn **File → Open Folder…**.
-3. Chọn đúng thư mục `app`.
+3. Chọn đúng thư mục `code`.
 4. Nếu VSCode hỏi chọn Python interpreter, chọn:
    `.venv\Scripts\python.exe`.
 
@@ -47,7 +47,7 @@ Trong VSCode:
 1. Nhấn `Ctrl+Shift+P`.
 2. Gõ **MCP: Open User Configuration** rồi chọn mục đó.
 3. Dán cấu hình dưới đây.
-4. Sửa `D:\cadtroly\app` thành đúng nơi đã giải nén nếu khác.
+4. Sửa `D:\cadtroly\code` thành đúng nơi đã giải nén nếu khác.
 5. Lưu file.
 6. Nhấn `Ctrl+Shift+P` → **MCP: List Servers** → chọn `cadtroly` → **Start**.
 
@@ -56,9 +56,9 @@ Trong VSCode:
   "servers": {
     "cadtroly": {
       "type": "stdio",
-      "command": "D:\\cadtroly\\app\\.venv\\Scripts\\python.exe",
+      "command": "D:\\cadtroly\\code\\.venv\\Scripts\\python.exe",
       "args": ["-m", "cadtroly.mcp"],
-      "cwd": "D:\\cadtroly\\app",
+      "cwd": "D:\\cadtroly\\code",
       "env": {
         "CADTROLY_KHO": "D:\\CAD-kho",
         "AUTOCAD_MCP_BACKEND": "auto",
@@ -80,7 +80,7 @@ Trong VSCode:
 | `type: "stdio"` | VSCode giao tiếp với MCP qua tiến trình chạy trên chính máy này. | Giữ nguyên. |
 | `command` | Đường dẫn Python trong môi trường `.venv` của cadtroly. | Chỉ sửa nếu giải nén ở ổ/thư mục khác. |
 | `args` | Lệnh Python yêu cầu chạy module `cadtroly.mcp`. | Giữ nguyên. |
-| `cwd` | Thư mục làm việc chính, phải trỏ tới thư mục `app`. | Chỉ sửa nếu đường dẫn khác. |
+| `cwd` | Thư mục làm việc chính, phải trỏ tới thư mục `code`. | Chỉ sửa nếu đường dẫn khác. |
 | `env` | Các thiết lập môi trường gửi cho MCP khi khởi động. | Có thể sửa theo nhu cầu. |
 | `CADTROLY_KHO` | Thư mục dữ liệu cá nhân: log, Excel, cấu hình và phần bổ sung. Bộ mặc định vẫn nằm trong MCP. | Có thể đổi, nhưng nên giữ `D:\CAD-kho`. |
 | `AUTOCAD_MCP_BACKEND` | Cách MCP kết nối bản vẽ: `auto` tự chọn, `com` dùng AutoCAD đang mở, `ezdxf` chạy không cần AutoCAD. | Nên giữ `auto`. |
@@ -90,11 +90,11 @@ Trong VSCode:
 
 ### Chỉ cần sửa hai chỗ khi đổi thư mục
 
-Nếu giải nén vào `E:\PhanMem\cadtroly\app`, sửa:
+Nếu giải nén vào `E:\PhanMem\cadtroly\code`, sửa:
 
 ```json
-"command": "E:\\PhanMem\\cadtroly\\app\\.venv\\Scripts\\python.exe",
-"cwd": "E:\\PhanMem\\cadtroly\\app"
+"command": "E:\\PhanMem\\cadtroly\\code\\.venv\\Scripts\\python.exe",
+"cwd": "E:\\PhanMem\\cadtroly\\code"
 ```
 
 Các dấu `\\` trong JSON là bắt buộc; không đổi thành một dấu `\`.
@@ -227,9 +227,9 @@ khi hoàn tất PDF → DWG. File nguồn và file kết quả không tự xóa.
 Khi có ZIP phiên bản mới:
 
 1. Đóng VSCode.
-2. Đổi tên thư mục cũ thành `app-cu` để dự phòng.
-3. Giải nén ZIP mới thành thư mục `app`.
-4. Nhấp đúp `CAI_DAT.bat`.
+2. Đổi tên thư mục cũ thành `code-cu` để dự phòng.
+3. Giải nén ZIP mới, giữ thư mục `code` và hai file hướng dẫn ở ngoài.
+4. Nhấp đúp `CAI_DAT.bat` ở thư mục ngoài, cạnh thư mục `code`.
 5. Mở lại VSCode và khởi động lại MCP.
 
 Không xóa thư mục `D:\CAD-kho`; đó là nơi lưu cấu hình, log, Excel và dữ liệu
