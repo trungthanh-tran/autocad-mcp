@@ -80,7 +80,74 @@ Mở một cuộc trò chuyện trong VSCode và nói:
 Khi cần chọn bộ layer, dùng `vn` cho quy ước Việt Nam hoặc `ncs` cho quy ước
 quốc tế. Nếu không xác định được, MCP sẽ hỏi lại, không tự chọn bừa.
 
-## F. Cập nhật phiên bản mới
+## F. Các chức năng chính
+
+### 1. Đọc PDF và dựng DWG
+
+MCP đọc được PDF bản vẽ có vector, giữ đường nét, chữ, ký hiệu, kích thước và
+phân loại thành layer để tiếp tục chỉnh sửa.
+
+Ví dụ:
+
+> Đọc `mat-bang.pdf`, dựng thành DWG A1, giữ kích thước và tách layer tường,
+> cột, cửa, nội thất, hatch, text và dimension.
+
+MCP sẽ hỏi lại nếu khổ giấy, tỷ lệ, hướng giấy hoặc hệ tên layer chưa rõ.
+
+### 2. Tách và tổ chức layer
+
+- Nhà: tường, cột, dầm, sàn, cửa, cửa sổ, nội thất, thiết bị, hatch, text,
+  kích thước.
+- Đường: tim tuyến, mặt đường, lề đường, thoát nước, cấp nước, biển báo,
+  hiện trạng, kích thước.
+- Cầu: mặt cầu, dầm, trụ, mố, gối cầu, cốt thép, mặt cắt, kích thước.
+
+MCP nhận diện `KT-`, `KC-`, `HT-`, `CAU-` là quy ước Việt Nam; `A-`, `C-`,
+`S-` là NCS quốc tế. Nếu không đủ bằng chứng, MCP hỏi lại `vn` hay `ncs`.
+
+### 3. Áp dụng chuẩn tên layer
+
+> Áp dụng chuẩn layer Việt Nam cho bản vẽ nhà.
+
+> Áp dụng chuẩn NCS quốc tế cho bản vẽ cầu.
+
+```text
+Việt Nam: KT-TUONG, KC-COT, HT-MATDUONG, CAU-TRU
+NCS:      A-WALL, S-DECK, C-ROAD, S-PIER
+```
+
+### 4. Vẽ và sửa bản vẽ
+
+MCP có thể vẽ đường, polyline, cung, hình tròn, hatch, text, block, ký hiệu,
+dim và khung bản vẽ; đồng thời di chuyển, copy, xoay, scale, trim, fillet,
+chamfer, xóa và đổi layer.
+
+> Vẽ thêm vách ngăn dài 3.2 m, đặt vào layer tường, ghi kích thước và lưu thành
+> bản mới.
+
+### 5. Bóc khối lượng ra Excel
+
+MCP đọc block, line, polyline, text và layer để đề xuất công tác rồi xuất Excel
+có nguồn truy vết. Các kết quả chưa chắc chắn được đánh dấu để người dùng xác
+nhận, không tự điền bừa.
+
+> Bóc khối lượng cửa, tường và sàn trong bản vẽ này ra Excel.
+
+### 6. Kiểm tra bản vẽ
+
+MCP có thể kiểm tra layer, kích thước, text, block, đơn vị, phạm vi bản vẽ và
+một số quy tắc công ty; kết quả kèm vị trí để dễ tìm và sửa.
+
+> Kiểm tra bản vẽ theo chuẩn công ty và liệt kê các lỗi cần sửa.
+
+### 7. Lưu, xuất và dọn file tạm
+
+MCP có thể lưu DWG/DXF, xuất PDF/ảnh xem trước và dọn thư mục trung gian sau
+khi hoàn tất PDF → DWG. File nguồn và file kết quả không tự xóa.
+
+> Chuyển PDF thành DWG, lưu kết quả, xóa DXF và file tạm nhưng giữ PDF nguồn.
+
+## G. Cập nhật phiên bản mới
 
 Khi có ZIP phiên bản mới:
 
@@ -93,7 +160,7 @@ Khi có ZIP phiên bản mới:
 Không xóa thư mục `D:\CAD-kho`; đó là nơi lưu cấu hình, tiêu chuẩn, log và file
 Excel của người dùng.
 
-## G. Khi gặp lỗi
+## H. Khi gặp lỗi
 
 - MCP không hiện: đóng VSCode, mở lại và chọn **MCP: List Servers → Start**.
 - Không thấy AutoCAD: mở AutoCAD trước khi gọi MCP.
