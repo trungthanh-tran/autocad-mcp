@@ -53,6 +53,34 @@ GROUP_VI = {
     "validation": "xác nhận", "view": "góc nhìn", "cadtroly": "mở rộng cadtroly",
 }
 
+INDUSTRY_ORDER = [
+    "Dùng chung",
+    "Kiến trúc",
+    "Cơ khí",
+    "P&ID",
+    "Nhà máy",
+    "Kỹ thuật và 3D",
+    "Nâng cao",
+    "Mở rộng cadtroly",
+]
+
+INDUSTRY_GROUPS = {
+    "Kiến trúc": {"architecture"},
+    "Cơ khí": {"mechanical"},
+    "P&ID": {"pid"},
+    "Nhà máy": {"plant"},
+    "Kỹ thuật và 3D": {"engineering", "solids"},
+    "Nâng cao": {"premium"},
+    "Mở rộng cadtroly": {"cadtroly"},
+}
+
+
+def industry_for(group: str) -> str:
+    for industry, groups in INDUSTRY_GROUPS.items():
+        if group in groups:
+            return industry
+    return "Dùng chung"
+
 
 WORD_VI = {
     "analysis": "phân tích", "bounding": "giới hạn", "box": "khung", "entity": "đối tượng",
@@ -152,8 +180,8 @@ def main() -> None:
 
     tools = asyncio.run(server._registered_tools())
     live = {tool.name: tool for tool in tools}
-    index_rows = []
-    detail_sections = []
+    index_by_industry = {industry: [] for industry in INDUSTRY_ORDER}
+    details_by_industry = {industry: [] for industry in INDUSTRY_ORDER}
     for name in sorted(live):
         tool = live[name]
         meta = upstream.get(name, {})
@@ -161,11 +189,12 @@ def main() -> None:
         text = f"Thực hiện thao tác {vietnamese_name(name)} trong bản vẽ CAD."
         when = GROUP_WHEN.get(group, "chức năng mở rộng của cadtroly")
         request = request_example(name, group)
-        index_rows.append(
+        industry = industry_for(group)
+        index_by_industry[industry].append(
             f"- [`{name}`](#{name}) — {GROUP_VI.get(group, group)}: "
             f"dùng để {vietnamese_name(name)} trong bản vẽ CAD."
         )
-        detail_sections.append(
+        details_by_industry[industry].append(
             f"### {name}\n\n"
             f"- **Nhóm:** {GROUP_VI.get(group, group)}\n"
             f"- **Làm gì:** {text}\n"
@@ -173,9 +202,16 @@ def main() -> None:
             f"- **Ví dụ gõ vào LLM:**\n\n"
             f"  > {request}\n"
         )
+    index_rows = []
+    detail_sections = []
+    for industry in INDUSTRY_ORDER:
+        index_rows.append(f"### {industry}")
+        index_rows.extend(index_by_industry[industry])
+        detail_sections.append(f"## {industry}")
+        detail_sections.extend(details_by_industry[industry])
     generated = (
         f"{MARKER}\n\n## Danh sách chức năng\n\n"
-        f"Có **{len(index_rows)} chức năng**, gồm **247 chức năng nền tảng** và chức năng mở rộng của cadtroly. Bấm vào tên để đi đến phần hướng dẫn tương ứng.\n\n"
+        f"Có **{len(live)} chức năng**, gồm **247 chức năng nền tảng** và chức năng mở rộng của cadtroly. Các chức năng được xếp theo ngành; chức năng dùng chung nằm ở nhóm đầu. Bấm vào tên để đi đến phần hướng dẫn tương ứng.\n\n"
         + "\n".join(index_rows)
         + "\n\n## Hướng dẫn từng chức năng\n\n"
         + "\n".join(detail_sections)
