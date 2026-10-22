@@ -54,6 +54,8 @@ def main(argv=None) -> int:
         serve(port=a.port, window=not a.browser)
         return 0
     if a.cmd == "mcp":
+        from .mcp.bootstrap import ensure_runtime_dependencies
+        ensure_runtime_dependencies()
         from .mcp.server import main as mcp_main
         mcp_main()
         return 0

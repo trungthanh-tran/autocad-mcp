@@ -60,6 +60,11 @@ Cần WebView2 Runtime (Win10/11 có sẵn); thiếu thì tự mở trình duy�
 
 ## Dùng với Claude Code / Claude Desktop
 
+Khi chạy MCP bằng `.mcp.json` hoặc `cadtroly mcp`, server tự kiểm tra các gói
+cần cho PDF/DXF, AutoCAD COM và các tool vẽ. Chỉ gói còn thiếu mới được cài
+qua `python -m pip install -e .`; không cài lại ở mỗi lần chạy. Tắt hành vi này
+bằng `CADTROLY_AUTO_INSTALL=false` nếu máy bị giới hạn mạng.
+
 `.mcp.json` (có sẵn trong thư mục này):
 
 ```json
