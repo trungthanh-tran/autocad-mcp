@@ -1679,6 +1679,9 @@ TOOL_ALIASES: dict[str, ToolAliases] = {
             "kiem tra ket cau",
         ),
     ),
+    "kho_skill_add": ToolAliases(
+        synonyms=("add skill", "create skill", "install skill to cad mcp", "them skill", "tao skill"),
+    ),
     # ── View & screenshot ───────────────────────────────────────────────────
     "view_screenshot": ToolAliases(
         synonyms=(

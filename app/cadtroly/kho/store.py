@@ -12,6 +12,7 @@ kho/
 from __future__ import annotations
 
 import json
+import re
 from datetime import datetime
 from pathlib import Path
 
@@ -135,6 +136,25 @@ class Kho:
         elif not enabled:
             flag.parent.mkdir(parents=True, exist_ok=True)
             flag.write_text("")
+
+    def add_skill(self, name: str, content: str, *, overwrite: bool = False) -> Path:
+        """Add a user-authored SKILL.md without allowing path traversal or code files."""
+        clean = str(name).strip().lower()
+        if not re.fullmatch(r"[a-z0-9][a-z0-9-]{1,63}", clean):
+            raise ValueError("skill name must be ASCII kebab-case, 2-64 characters")
+        if not isinstance(content, str) or not content.strip():
+            raise ValueError("skill content must not be empty")
+        if len(content.encode("utf-8")) > 128_000:
+            raise ValueError("skill content is limited to 128 KB")
+        if not content.lstrip().startswith("---"):
+            raise ValueError("skill content must start with YAML frontmatter (---)")
+        target = self.root / "skill" / clean / "SKILL.md"
+        existing = self.skill_path(clean)
+        if existing is not None and not (overwrite and target.exists()):
+            raise FileExistsError(f"skill already exists: {clean}")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(content, encoding="utf-8", newline="\n")
+        return target
 
     def skill_path(self, name: str) -> Path | None:
         for base in (self.root / "skill", self.bundled_root / "skill"):

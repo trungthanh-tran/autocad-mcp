@@ -27,7 +27,7 @@ CADTROLY_TOOL_NAMES = frozenset({
     "drawing_read", "drawing_entities",
     "takeoff_propose", "takeoff_decide", "takeoff_compute", "takeoff_export", "takeoff_run",
     "check_rulesets", "check_run",
-    "kho_status", "kho_rules_export", "kho_rules_import", "kho_skills", "kho_skill_toggle",
+    "kho_status", "kho_rules_export", "kho_rules_import", "kho_skills", "kho_skill_toggle", "kho_skill_add",
 })
 
 
@@ -206,6 +206,22 @@ def register(mcp: FastMCP) -> None:
         """Bật/tắt một skill."""
         _ctx(ctx)["kho"].set_skill(name, enabled)
         return {"ok": True, "skills": _ctx(ctx)["kho"].skills()}
+
+    @mcp.tool(tags={"kho"})
+    async def kho_skill_add(
+        name: Annotated[str, "Tên ASCII kebab-case, ví dụ qa-mep"],
+        content: Annotated[str, "Nội dung SKILL.md có YAML frontmatter"],
+        overwrite: Annotated[bool, "Cho phép cập nhật skill do người dùng đã tạo"] = False,
+        ctx: Context = None,
+    ) -> dict:
+        """Thêm skill do LLM soạn vào kho người dùng; chỉ ghi SKILL.md, không chạy mã."""
+        kho = _ctx(ctx)["kho"]
+        try:
+            path = kho.add_skill(name, content, overwrite=overwrite)
+        except (FileExistsError, ValueError) as exc:
+            raise ToolError(str(exc)) from exc
+        kho.log("skill", "add", name=name, path=str(path), overwrite=overwrite)
+        return {"ok": True, "name": name, "path": str(path), "skills": kho.skills()}
 
     @mcp.resource("cadtroly://skill/{name}")
     async def skill_text(name: str, ctx: Context = None) -> str:

@@ -272,6 +272,8 @@ Skill nằm trong `code\\kho-mac-dinh\\skill` và được MCP đọc trực ti�
   hồ sơ tính kết cấu được phê duyệt.
 - `an-toan-ket-cau`: rà soát liên tục cấu kiện và dấu hiệu mất an toàn.
 - `kiem-tra-pccc`: rà soát sơ bộ lối thoát, khoang cháy, tiếp cận và ký hiệu PCCC.
+- LLM có thể gọi `kho_skills` để xem skill, `kho_skill_toggle` để bật/tắt và
+  `kho_skill_add` để thêm skill mới vào `CAD-kho/skill`.
 - `bien-phap-thi-cong-vn`: biện pháp thi công Việt Nam.
 
 Tên thư mục kỹ thuật dùng ASCII; nội dung hướng dẫn và trao đổi với người dùng
@@ -312,6 +314,28 @@ vẫn bằng tiếng Việt.
 | Tự vẽ | “Vẽ mặt bằng theo kích thước và yêu cầu này.” | Hình học, layer, dim, text và layout; thiếu dữ liệu được đánh dấu review. |
 | Bóc khối lượng | “Đếm cửa, thiết bị và chiều dài tường, xuất Excel.” | Số lượng có layer, handle, nguồn đo và độ tin cậy. |
 | Tối ưu CAD | “Tìm đối tượng trùng, layer rỗng và lỗi ByLayer.” | Danh sách lỗi/cảnh báo và đề xuất dọn dẹp không phá hủy. |
+
+### Thêm skill bằng LLM
+
+Có thể yêu cầu LLM tạo skill mới cho một quy ước dự án hoặc bộ môn:
+
+```text
+Tạo skill qa-mep cho dự án này. Nội dung phải kiểm tra layer ống gió,
+ống nước, thiết bị, van, tag và khoảng bảo trì. Dùng error, warning, review,
+ghi rõ tiêu chuẩn dự án cần hỏi lại. Sau đó thêm vào MCP và bật skill.
+```
+
+LLM sẽ thực hiện theo luồng:
+
+1. Gọi `kho_skills` để tránh trùng tên.
+2. Soạn `SKILL.md` có frontmatter `name`, `description`, `version`.
+3. Gọi `kho_skill_add` để ghi vào `CAD-kho\skill\qa-mep\SKILL.md`.
+4. Gọi `kho_skill_toggle(name="qa-mep", enabled=true)` nếu skill đang tắt.
+5. Đọc resource `cadtroly://skill/qa-mep` trước khi áp dụng.
+
+`kho_skill_add` chỉ cho phép ghi một file Markdown vào kho người dùng; không
+chạy Python/LISP, không ghi vào thư mục skill mặc định và không tự ghi đè skill
+đã có. Nếu tên trùng hoặc nội dung không hợp lệ, MCP trả lỗi để LLM hỏi lại.
 
 Các câu lệnh chuyên môn có thể dùng trực tiếp:
 

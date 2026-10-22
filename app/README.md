@@ -120,7 +120,7 @@ phải kiểm tra lại trong AutoCAD trước khi phát hành.
 | đọc | `drawing_read`, `drawing_entities` | số liệu bản vẽ, handle, toạ độ, dài, diện tích, text |
 | bóc KL (luồng A) | `takeoff_propose` → `takeoff_decide` → `takeoff_compute` → `takeoff_export`; `takeoff_run` cả thư mục | ánh xạ A/B/C, tính, Excel 4 sheet có handle + lệnh zoom |
 | kiểm tra (luồng D) | `check_rulesets`, `check_run` | rà theo `.rules.json`, kết quả kèm điều khoản, handle, tự sửa được không |
-| kho | `kho_status`, `kho_rules_export/import`, `kho_skills`, `kho_skill_toggle`, resource `cadtroly://skill/{name}` | kho mặc định trong MCP + dữ liệu người dùng |
+| kho | `kho_status`, `kho_rules_export/import`, `kho_skills`, `kho_skill_toggle`, `kho_skill_add`, resource `cadtroly://skill/{name}` | LLM xem, bật/tắt và thêm `SKILL.md` vào kho người dùng |
 | phiên bản vẽ | `document_list`, `document_activate`, `document_close` | mở/đóng nhiều file; mỗi file có `document_id` |
 | render QA | `view_render_report` | báo cáo loại đối tượng có thể thiếu trong preview |
 | kết cấu | `structural_qa` | kiểm tra layer/hình học kết cấu, trả về `error`, `warning` và đề xuất tối ưu |

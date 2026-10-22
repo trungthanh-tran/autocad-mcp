@@ -266,7 +266,7 @@ cadtroly — AI Trợ lý AutoCAD (fork của AutoCAD MCP Pro, U-C4N, MIT).
 Tool riêng của cadtroly:
   Luồng A bóc khối lượng: drawing_read → takeoff_propose → takeoff_decide (nhóm B/C) → takeoff_compute → takeoff_export
   Luồng D kiểm tra chuẩn: check_rulesets → check_run
-  Kho tri thức: kho_status, kho_rules_export/import, kho_skills, kho_skill_toggle, resource cadtroly://skill/{name}
+  Kho tri thức: kho_status, kho_rules_export/import, kho_skills, kho_skill_toggle, kho_skill_add, resource cadtroly://skill/{name}
 Sửa vẽ live dùng các tool AutoCAD bên dưới: preview trước, mỗi cụm trong transaction_begin/commit, không tự lưu file.
 
 AutoCAD MCP Pro provides complete AutoCAD automation through a large tool surface.
