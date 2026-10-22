@@ -91,18 +91,13 @@ class Service:
 
     # ---- luồng D ----
     def rulesets(self) -> list[dict]:
-        extra = [{"id": f.stem.replace(".rules", ""), "ten": json.loads(f.read_text(encoding="utf-8")).get("ten", f.stem),
-                  "file": str(f), "hieu_luc": "co"} for f in (self.kho.root / "quy-tac").glob("*.rules.json")]
-        return self.kho.standards() + extra
+        return self.kho.rulesets()
 
     def check(self, path: str, ruleset: str, include_unapproved: bool = False) -> dict:
         rp = Path(ruleset)
         if not rp.exists():
-            for c in (self.kho.root / "tieu-chuan" / f"{ruleset}.rules.json", self.kho.root / "quy-tac" / f"{ruleset}.rules.json"):
-                if c.exists():
-                    rp = c
-                    break
-            else:
+            rp = self.kho.ruleset_path(ruleset)
+            if rp is None:
                 raise KeyError(f"Không thấy bộ quy tắc '{ruleset}'")
         rs = load_ruleset(rp)
         fs = check_drawing(self.state.drawing(path), rs, only_approved=not include_unapproved)

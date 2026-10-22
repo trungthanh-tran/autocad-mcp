@@ -46,9 +46,7 @@ def main(argv=None) -> int:
     cfg = Config.load(Path(a.kho) if a.kho else None)
     if a.cmd == "init":
         cfg.save()
-        from .launcher import seed_kho
-        copied = seed_kho(cfg.kho)
-        print(f"Kho: {cfg.kho}\nConfig: {cfg.path}\nĐã nạp {copied} file tiêu chuẩn/quy tắc/skill mẫu.")
+        print(f"Kho dữ liệu người dùng: {cfg.kho}\nConfig: {cfg.path}\nBộ tiêu chuẩn/quy tắc/skill mặc định nằm trong MCP.")
         return 0
     if a.cmd == "sample":
         from .samples import make_sample

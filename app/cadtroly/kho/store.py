@@ -23,13 +23,32 @@ class Kho:
     def __init__(self, cfg: Config):
         self.cfg = cfg
         self.root = cfg.kho
+        self.bundled_root = Path(__file__).resolve().parents[2] / "kho-mac-dinh"
         cfg.ensure_dirs()
-        self.rules = RuleStore(self.root / "quy-tac")
+        self.rules = RuleStore(self.root / "quy-tac", self.bundled_root / "quy-tac")
+
+    def _files(self, folder: str, pattern: str) -> list[Path]:
+        """User files override bundled files with the same filename."""
+        out: dict[str, Path] = {}
+        for base in (self.bundled_root / folder, self.root / folder):
+            if base.exists():
+                for f in base.glob(pattern):
+                    out[f.name] = f
+        return [out[name] for name in sorted(out)]
+
+    def ruleset_path(self, ruleset: str) -> Path | None:
+        name = Path(ruleset).name
+        suffix = name if name.endswith(".rules.json") else f"{name}.rules.json"
+        candidates = [
+            self.root / "tieu-chuan" / suffix, self.root / "quy-tac" / suffix,
+            self.bundled_root / "tieu-chuan" / suffix, self.bundled_root / "quy-tac" / suffix,
+        ]
+        return next((p for p in candidates if p.exists()), None)
 
     # ---- tiêu chuẩn ----
     def standards(self) -> list[dict]:
         out = []
-        for f in sorted((self.root / "tieu-chuan").glob("*.rules.json")):
+        for f in self._files("tieu-chuan", "*.rules.json"):
             d = json.loads(f.read_text(encoding="utf-8"))
             rules = d.get("rules", [])
             out.append({
@@ -43,8 +62,26 @@ class Kho:
             })
         return out
 
+    def rulesets(self) -> list[dict]:
+        """All bundled and user rule files, including company rules."""
+        out = []
+        for f in self._files("tieu-chuan", "*.rules.json") + self._files("quy-tac", "*.rules.json"):
+            data = json.loads(f.read_text(encoding="utf-8"))
+            rules = data.get("rules", [])
+            out.append({
+                "id": data.get("id", f.stem.replace(".rules", "")),
+                "ten": data.get("ten", f.stem),
+                "hieu_luc": data.get("hieu_luc", "unknown"),
+                "so_quy_tac": len(rules),
+                "cho_duyet": sum(1 for r in rules if not r.get("duyet")),
+                "file": str(f),
+            })
+        return out
+
     def load_standard(self, std_id: str) -> dict:
-        f = self.root / "tieu-chuan" / f"{std_id}.rules.json"
+        f = self.ruleset_path(std_id)
+        if f is None:
+            raise FileNotFoundError(std_id)
         return json.loads(f.read_text(encoding="utf-8"))
 
     def save_standard(self, data: dict) -> Path:
@@ -75,7 +112,13 @@ class Kho:
     # ---- skill ----
     def skills(self) -> list[dict]:
         out = []
-        for d in sorted((self.root / "skill").iterdir()):
+        dirs: dict[str, Path] = {}
+        for base in (self.bundled_root / "skill", self.root / "skill"):
+            if base.exists():
+                for d in base.iterdir():
+                    if d.is_dir():
+                        dirs[d.name] = d
+        for d in (dirs[name] for name in sorted(dirs)):
             md = d / "SKILL.md"
             if d.is_dir() and md.exists():
                 meta = _frontmatter(md.read_text(encoding="utf-8"))
@@ -92,6 +135,13 @@ class Kho:
         elif not enabled:
             flag.parent.mkdir(parents=True, exist_ok=True)
             flag.write_text("")
+
+    def skill_path(self, name: str) -> Path | None:
+        for base in (self.root / "skill", self.bundled_root / "skill"):
+            path = base / name / "SKILL.md"
+            if path.exists():
+                return path
+        return None
 
     # ---- nhật ký ----
     def log(self, _kind: str, _msg: str, **data) -> None:

@@ -157,9 +157,7 @@ def register(mcp: FastMCP) -> None:
     async def check_rulesets(ctx: Context = None) -> dict:
         """Liệt kê bộ quy tắc trong kho (tiêu chuẩn đã bóc + chuẩn công ty), kèm hiệu lực và số dòng chờ duyệt."""
         kho = _ctx(ctx)["kho"]
-        extra = [{"id": f.stem.replace(".rules", ""), "file": str(f), "ten": f.stem}
-                 for f in (kho.root / "quy-tac").glob("*.rules.json")]
-        return {"rulesets": kho.standards() + extra}
+        return {"rulesets": kho.rulesets()}
 
     @mcp.tool(tags={"check"}, annotations={"readOnlyHint": True})
     async def check_run(path: str, ruleset: Annotated[str, "id bộ quy tắc hoặc đường dẫn .rules.json"],
@@ -169,8 +167,7 @@ def register(mcp: FastMCP) -> None:
         st, kho = lc["state"], lc["kho"]
         rp = Path(ruleset)
         if not rp.exists():
-            cands = [kho.root / "tieu-chuan" / f"{ruleset}.rules.json", kho.root / "quy-tac" / f"{ruleset}.rules.json"]
-            rp = next((c for c in cands if c.exists()), None)
+            rp = kho.ruleset_path(ruleset)
             if rp is None:
                 raise ToolError(f"Không thấy bộ quy tắc '{ruleset}'. Gọi check_rulesets để xem danh sách.")
         rs = load_ruleset(rp)
@@ -213,6 +210,6 @@ def register(mcp: FastMCP) -> None:
     @mcp.resource("cadtroly://skill/{name}")
     async def skill_text(name: str, ctx: Context = None) -> str:
         """Nội dung SKILL.md của một skill (hướng dẫn cho AI theo ngành)."""
-        p = _ctx(ctx)["kho"].root / "skill" / name / "SKILL.md"
-        return p.read_text(encoding="utf-8") if p.exists() else f"Không có skill {name}"
+        p = _ctx(ctx)["kho"].skill_path(name)
+        return p.read_text(encoding="utf-8") if p else f"Không có skill {name}"
 

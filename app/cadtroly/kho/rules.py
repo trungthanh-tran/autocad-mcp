@@ -45,8 +45,9 @@ class MappingRule:
 class RuleStore:
     FILE = "anh-xa.json"
 
-    def __init__(self, dir_: Path):
+    def __init__(self, dir_: Path, fallback_dir: Path | None = None):
         self.dir = Path(dir_)
+        self.fallback_dir = Path(fallback_dir) if fallback_dir else None
         self.dir.mkdir(parents=True, exist_ok=True)
         self.rules: list[MappingRule] = []
         self.load()
@@ -57,9 +58,13 @@ class RuleStore:
 
     def load(self) -> None:
         self.rules = []
-        if self.path.exists():
-            for d in json.loads(self.path.read_text(encoding="utf-8")):
-                self.rules.append(MappingRule(**d))
+        paths = [self.path]
+        if self.fallback_dir:
+            paths.append(self.fallback_dir / self.FILE)
+        for path in paths:
+            if path.exists():
+                for d in json.loads(path.read_text(encoding="utf-8")):
+                    self.rules.append(MappingRule(**d))
 
     def save(self) -> None:
         self.path.write_text(json.dumps([asdict(r) for r in self.rules], ensure_ascii=False, indent=2),

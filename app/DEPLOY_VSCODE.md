@@ -28,10 +28,9 @@ Converter.
 Chờ đến khi cửa sổ hiện dòng **CÀI ĐẶT HOÀN TẤT**. Nếu Windows hỏi quyền,
 chọn **Yes**.
 
-Lần cài đầu, bộ tiêu chuẩn/quy tắc/skill mẫu được tự động nạp vào
-`D:\CAD-kho`: chuẩn vẽ công ty mẫu, QCVN 18:2021/BXD mẫu và skill biện pháp thi
-công Việt Nam. Đây là dữ liệu nền đã đi kèm MCP; sau này người quản trị có thể
-bổ sung thêm, không làm mất dữ liệu cũ.
+Bộ tiêu chuẩn/quy tắc/skill nền đã nằm sẵn trong thư mục MCP tại
+`app\kho-mac-dinh`, không cần chép vào `D:\CAD-kho`. MCP đọc trực tiếp bộ này;
+`D:\CAD-kho` chỉ dành cho dữ liệu người dùng, log, Excel và phần bổ sung sau này.
 
 ## C. Mở bằng VSCode
 
@@ -162,8 +161,8 @@ Khi có ZIP phiên bản mới:
 4. Nhấp đúp `Cài đặt.bat`.
 5. Mở lại VSCode và khởi động lại MCP.
 
-Không xóa thư mục `D:\CAD-kho`; đó là nơi lưu cấu hình, tiêu chuẩn, log và file
-Excel của người dùng.
+Không xóa thư mục `D:\CAD-kho`; đó là nơi lưu cấu hình, log, Excel và dữ liệu
+bổ sung của người dùng. Bộ mặc định nằm trong thư mục MCP.
 
 ## H. Khi gặp lỗi
 
