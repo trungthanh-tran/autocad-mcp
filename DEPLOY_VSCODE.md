@@ -13,7 +13,8 @@ Trên máy mới, cài hai phần mềm:
 2. Extension **Python** của Microsoft trong VSCode.
 
 Không cần cài Python thủ công. `CAI_DAT.bat` sẽ tự tải và cài Python 3.14.9
-64-bit từ `python.org` nếu máy chưa có Python 3.14.
+64-bit từ `python.org` nếu máy chưa có Python 3.14, sau đó kiểm tra SHA-256
+trước khi chạy bộ cài.
 
 Nếu muốn MCP sửa bản vẽ trực tiếp trong AutoCAD, máy phải có AutoCAD đã cài.
 Nếu không có AutoCAD, MCP vẫn đọc/vẽ DXF; để chuyển DWG cần cài thêm ODA File
@@ -21,7 +22,7 @@ Converter.
 
 ## B. Cài cadtroly
 
-1. Tải file `cadtroly-0.2.0-vscode-core.zip`.
+1. Tải file `cadtroly-0.2.0-vscode-dwg.zip`.
 2. Nhấp chuột phải → **Extract All…**.
 3. Chọn nơi dễ nhớ, ví dụ `D:\cadtroly`.
 4. Mở thư mục đã giải nén; mã chương trình nằm trong thư mục `code`.
@@ -63,6 +64,7 @@ Trong VSCode:
       "cwd": "D:\\cadtroly\\code",
       "env": {
         "CADTROLY_KHO": "D:\\CAD-kho",
+          "DWG_MCP_ALLOWED_ROOTS": "D:\\CAD-kho",
         "AUTOCAD_MCP_BACKEND": "auto",
         "TOOL_PROFILE": "lean",
         "TOOL_PACKS": "core,arch",
@@ -85,6 +87,7 @@ Trong VSCode:
 | `cwd` | Thư mục làm việc chính, phải trỏ tới thư mục `code`. | Chỉ sửa nếu đường dẫn khác. |
 | `env` | Các thiết lập môi trường gửi cho MCP khi khởi động. | Có thể sửa theo nhu cầu. |
 | `CADTROLY_KHO` | Thư mục dữ liệu cá nhân: log, Excel, cấu hình và phần bổ sung. Bộ mặc định vẫn nằm trong MCP. | Có thể đổi, nhưng nên giữ `D:\CAD-kho`. |
+| `DWG_MCP_ALLOWED_ROOTS` | Giới hạn thư mục DWG/PDF được MCP phép đọc/ghi; nhiều thư mục ngăn cách bằng dấu `;`. | Nên đặt thư mục dự án. |
 | `AUTOCAD_MCP_BACKEND` | Cách MCP kết nối bản vẽ: `auto` tự chọn, `com` dùng AutoCAD đang mở, `ezdxf` chạy không cần AutoCAD. | Nên giữ `auto`. |
 | `TOOL_PROFILE` | Số lượng chức năng được hiện ra. `lean` gọn hơn; `full` hiện đầy đủ. | Người mới nên giữ `lean`. |
 | `TOOL_PACKS` | Nhóm chức năng được bật. `core,arch` gồm chức năng cơ bản và kiến trúc. | Giữ nguyên; đổi thành `all` khi cần toàn bộ. |
@@ -215,6 +218,7 @@ vẫn bằng tiếng Việt.
 | Kho dữ liệu | Skill | “Đọc skill biện pháp thi công.” | Hướng dẫn chuyên ngành đang được MCP sử dụng. |
 | Hệ thống | Trạng thái | “MCP đang chạy bằng AutoCAD hay DXF?” | Backend, version, kho dữ liệu và tình trạng kết nối. |
 | Hệ thống | Cập nhật | “Cập nhật MCP.” | Kéo bản mới và cài package theo file lock. |
+| Hệ thống | Báo cáo render | “Kiểm tra preview có thiếu đối tượng không.” | Thống kê type đã render và type cần kiểm tra thủ công. |
 
 ### Các cột trong bảng Excel khối lượng
 

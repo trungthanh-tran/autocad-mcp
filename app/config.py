@@ -52,10 +52,14 @@ class Settings:
     def __init__(self):
         self.log_level: str = os.environ.get("LOG_LEVEL", "INFO").upper().strip()
 
+        # Accept the project's original name and the DWG-MCP-compatible alias.
+        # Both use a comma or semicolon separated list of absolute roots.
         raw_paths = os.environ.get("ALLOWED_PATHS", "").strip()
+        if not raw_paths:
+            raw_paths = os.environ.get("DWG_MCP_ALLOWED_ROOTS", "").strip()
         self.allowed_paths: list[Path] = []
         if raw_paths:
-            for p in raw_paths.split(","):
+            for p in raw_paths.replace(";", ",").split(","):
                 p = p.strip()
                 if p:
                     self.allowed_paths.append(Path(p).resolve())

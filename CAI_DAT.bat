@@ -16,10 +16,18 @@ if not errorlevel 1 goto :python_ok
 
 echo Chua co Python 3.14. Dang tai bo cai chinh thuc tu python.org...
 set "PY_URL=https://www.python.org/ftp/python/3.14.9/python-3.14.9-amd64.exe"
+set "PY_SHA256=A247A0B612244A803F507B39FB7121E3602E4160D59C3B99D98E735289C53394"
 set "PY_INSTALLER=%TEMP%\python-3.14.9-amd64.exe"
 powershell -NoProfile -ExecutionPolicy Bypass -Command "$ProgressPreference='SilentlyContinue'; Invoke-WebRequest -UseBasicParsing -Uri '%PY_URL%' -OutFile '%PY_INSTALLER%'"
 if errorlevel 1 (
   echo Khong tai duoc Python. Kiem tra ket noi Internet va chay lai.
+  pause
+  exit /b 1
+)
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$actual=(Get-FileHash -Algorithm SHA256 -LiteralPath '%PY_INSTALLER%').Hash; if ($actual -ne '%PY_SHA256%') { Write-Error ('Python checksum mismatch: ' + $actual); exit 1 }"
+if errorlevel 1 (
+  echo Kiem tra SHA-256 Python that bai. Bo cai da tai se bi xoa.
+  del /q "%PY_INSTALLER%" >nul 2>nul
   pause
   exit /b 1
 )

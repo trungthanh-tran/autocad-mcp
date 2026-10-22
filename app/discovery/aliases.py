@@ -1680,6 +1680,14 @@ TOOL_ALIASES: dict[str, ToolAliases] = {
             "what does it look like",
         ),
     ),
+    "view_render_report": ToolAliases(
+        synonyms=(
+            "render coverage",
+            "check missing objects in preview",
+            "render diagnostics",
+            "preview coverage report",
+        ),
+    ),
     "view_zoom_and_screenshot": ToolAliases(
         acad=("ZOOM",),
         synonyms=(

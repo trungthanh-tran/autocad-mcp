@@ -84,7 +84,7 @@ Lệnh chỉ update khi code local sạch; nếu có sửa local chưa commit, l
 
 ```json
 {"mcpServers": {"cadtroly": {"command": "python", "args": ["-m", "cadtroly.mcp"],
-  "env": {"CADTROLY_KHO": "D:\\CAD-kho", "AUTOCAD_MCP_BACKEND": "auto", "TOOL_PROFILE": "lean"}}}}
+  "env": {"CADTROLY_KHO": "D:\\CAD-kho", "DWG_MCP_ALLOWED_ROOTS": "D:\\CAD-kho", "AUTOCAD_MCP_BACKEND": "auto", "TOOL_PROFILE": "lean"}}}}
 ```
 
 Rồi hỏi tự nhiên: *"bóc khối lượng file samples/mat-bang-tang-3.dxf"*, *"kiểm tra bản vẽ theo chuan-cong-ty"*,
@@ -98,6 +98,8 @@ hoặc *"tìm các đối tượng hình học trùng nhau"*.
 | bóc KL (luồng A) | `takeoff_propose` → `takeoff_decide` → `takeoff_compute` → `takeoff_export`; `takeoff_run` cả thư mục | ánh xạ A/B/C, tính, Excel 4 sheet có handle + lệnh zoom |
 | kiểm tra (luồng D) | `check_rulesets`, `check_run` | rà theo `.rules.json`, kết quả kèm điều khoản, handle, tự sửa được không |
 | kho | `kho_status`, `kho_rules_export/import`, `kho_skills`, `kho_skill_toggle`, resource `cadtroly://skill/{name}` | kho mặc định trong MCP + dữ liệu người dùng |
+| phiên bản vẽ | `document_list`, `document_activate`, `document_close` | mở/đóng nhiều file; mỗi file có `document_id` |
+| render QA | `view_render_report` | báo cáo loại đối tượng có thể thiếu trong preview |
 | AutoCAD (upstream) | `drawing_open`, `entity_*`, `layer_*`, `block_*`, `dimension_*`, `system_run_lisp`, `view_screenshot`, `transaction_*`, `arch_*`, `drawing_understand`, `drawing_diff`… (59 ở `TOOL_PROFILE=lean`, 247 ở `full`) | mở/lưu, tạo/sửa entity, layer, block, dimension, LISP, screenshot, transaction/undo, arch_*, understand, diff |
 
 ## Kho (thư mục trên máy người dùng)

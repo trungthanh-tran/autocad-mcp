@@ -2498,7 +2498,9 @@ class ComBackend(AutoCADBackend):
     @staticmethod
     def _com_document_row(doc, active) -> dict:
         full_name = str(doc.FullName)
+        document_id = f"com:{full_name or doc.Name}"
         return {
+            "document_id": document_id,
             "name": str(doc.Name),
             "path": full_name or None,
             "active": active is not None

@@ -5163,6 +5163,52 @@ async def view_screenshot(
 
 
 @cad_tool(
+    summary="Report drawing objects that may be missing or approximated in a render.",
+    cost="read",
+)
+@mcp.tool(
+    annotations={"title": "Render Coverage Report", "readOnlyHint": True},
+    tags={"view", "render", "qa"},
+)
+async def view_render_report(ctx: Context = None) -> dict:
+    """Return render coverage before relying on a preview for QA.
+
+    The report is deliberately conservative: common 2D entities are marked as
+    covered, while uncommon/proxy/3D types are surfaced for manual checking.
+    It never claims that a PNG proves the full DWG was rendered.
+    """
+    backend = _backend(ctx)
+    rows = await backend.entity_list(limit=50000)
+    covered_types = {
+        "LINE", "LWPOLYLINE", "POLYLINE", "ARC", "CIRCLE", "ELLIPSE",
+        "POINT", "TEXT", "MTEXT", "HATCH", "INSERT", "DIMENSION",
+        "LEADER", "MLEADER", "SOLID", "TRACE", "3DFACE",
+    }
+    by_type: dict[str, int] = {}
+    for row in rows:
+        kind = str(row.type or "UNKNOWN").upper()
+        by_type[kind] = by_type.get(kind, 0) + 1
+    unsupported = {
+        kind: count for kind, count in sorted(by_type.items())
+        if kind not in covered_types
+    }
+    covered_count = sum(count for kind, count in by_type.items() if kind in covered_types)
+    return {
+        "ok": not unsupported,
+        "backend": getattr(backend, "name", "unknown"),
+        "entity_count": len(rows),
+        "covered_count": covered_count,
+        "unsupported_count": sum(unsupported.values()),
+        "types": dict(sorted(by_type.items())),
+        "unsupported_types": unsupported,
+        "action": (
+            "Review unsupported types or inspect the source DWG before issuing."
+            if unsupported else "All detected entity types are in the common 2D render set."
+        ),
+    }
+
+
+@cad_tool(
     summary="Fit the drawing on screen, then capture it: the quickest visual check.",
     cost="read",
 )
@@ -7840,7 +7886,7 @@ async def drawing_template_save(
     tags={"environment", "drawing"},
 )
 async def document_list(ctx: Context = None) -> dict:
-    """Every open document with `name`, `path`, `active`, `saved` and
+    """Every open document with `document_id`, `name`, `path`, `active`, `saved` and
     `entity_count`.
 
     Headless, the server keeps its own registry: `drawing_new` / `drawing_open`

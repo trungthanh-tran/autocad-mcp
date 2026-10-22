@@ -13,4 +13,4 @@ bản vẽ, kho tiêu chuẩn và skill chuyên ngành.
 
 Chạy nhanh: `cd app && pip install -e .`. Test và MCP dùng cùng một bộ phụ thuộc;
 không cần chọn thêm `dev`, `web` hay `llm`.
-Gói mới nhất cho người dùng: `dist\cadtroly-0.2.0-vscode-core.zip`.
+Gói mới nhất cho người dùng: `dist\cadtroly-0.2.0-vscode-dwg.zip`.

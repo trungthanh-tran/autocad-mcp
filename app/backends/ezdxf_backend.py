@@ -1887,6 +1887,7 @@ class EzdxfBackend(AutoCADBackend):
 
     def _document_row(self, key: str, state: _DocState) -> dict:
         return {
+            "document_id": key,
             "name": state.label,
             "path": state.path,
             "key": key,
