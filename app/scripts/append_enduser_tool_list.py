@@ -235,7 +235,9 @@ def main() -> None:
     import server  # type: ignore
 
     tools = asyncio.run(server._registered_tools())
-    live = {tool.name: tool for tool in tools}
+    # Legacy kho_* names remain callable in runtime, but end users should see
+    # only the canonical English knowledge_* names in the guide.
+    live = {tool.name: tool for tool in tools if not tool.name.startswith("kho_")}
     index_by_industry = {industry: {} for industry in INDUSTRY_ORDER}
     details_by_industry = {industry: {} for industry in INDUSTRY_ORDER}
     for name in sorted(live):
@@ -274,7 +276,7 @@ def main() -> None:
             detail_sections.extend(details_by_industry[industry][group_name])
     generated = (
         f"{MARKER}\n\n## 11. Mục lục chức năng theo ngành\n\n"
-        f"Có **{len(live)} tên gọi chức năng**, gồm **247 chức năng nền tảng**, chức năng mở rộng và alias tương thích tên cũ. Tên chuẩn mới dùng tiếng Anh; các tên `kho_*` cũ vẫn được hỗ trợ. Các chức năng được xếp theo ngành; chức năng dùng chung nằm ở nhóm đầu. Bấm vào tên để đi đến phần hướng dẫn tương ứng.\n\n"
+        f"Có **{len(live)} chức năng chính**, gồm **247 chức năng nền tảng** và chức năng mở rộng. Tên chuẩn mới dùng tiếng Anh; các tên cũ vẫn được MCP hỗ trợ tương thích nhưng không liệt kê trong tài liệu enduser. Các chức năng được xếp theo ngành; chức năng dùng chung nằm ở nhóm đầu. Bấm vào tên để đi đến phần hướng dẫn tương ứng.\n\n"
         + "\n".join(index_rows)
         + "\n\n## 12. Hướng dẫn chi tiết từng chức năng\n\n"
         + "\n".join(detail_sections)

@@ -146,7 +146,7 @@ Sau mỗi công việc, yêu cầu MCP/LLM trả về:
 
 ## 11. Mục lục chức năng theo ngành
 
-Có **282 tên gọi chức năng**, gồm **247 chức năng nền tảng**, chức năng mở rộng và alias tương thích tên cũ. Tên chuẩn mới dùng tiếng Anh; các tên `kho_*` cũ vẫn được hỗ trợ. Các chức năng được xếp theo ngành; chức năng dùng chung nằm ở nhóm đầu. Bấm vào tên để đi đến phần hướng dẫn tương ứng.
+Có **272 chức năng chính**, gồm **247 chức năng nền tảng** và chức năng mở rộng. Tên chuẩn mới dùng tiếng Anh; các tên cũ vẫn được MCP hỗ trợ tương thích nhưng không liệt kê trong tài liệu enduser. Các chức năng được xếp theo ngành; chức năng dùng chung nằm ở nhóm đầu. Bấm vào tên để đi đến phần hướng dẫn tương ứng.
 
 ### Dùng chung
 _Các chức năng có thể dùng cho hầu hết bản vẽ và ngành kỹ thuật._
@@ -445,16 +445,6 @@ _Các chức năng riêng của project cadtroly như tiêu chuẩn, QA và kh�
 - [`drawing_apply_discipline_standard`](#drawing_apply_discipline_standard) — mở rộng cadtroly: dùng để áp dụng tiêu chuẩn bộ môn cho bản vẽ trong bản vẽ CAD.
 - [`drawing_entities`](#drawing_entities) — mở rộng cadtroly: dùng để đọc các đối tượng trong bản vẽ trong bản vẽ CAD.
 - [`drawing_read`](#drawing_read) — mở rộng cadtroly: dùng để đọc bản vẽ trong bản vẽ CAD.
-- [`kho_industries`](#kho_industries) — mở rộng cadtroly: dùng để liệt kê các ngành trong kho trong bản vẽ CAD.
-- [`kho_rules_export`](#kho_rules_export) — mở rộng cadtroly: dùng để xuất bộ quy tắc trong kho trong bản vẽ CAD.
-- [`kho_rules_import`](#kho_rules_import) — mở rộng cadtroly: dùng để nhập bộ quy tắc vào kho trong bản vẽ CAD.
-- [`kho_skill_add`](#kho_skill_add) — mở rộng cadtroly: dùng để thêm kỹ năng vào kho trong bản vẽ CAD.
-- [`kho_skill_toggle`](#kho_skill_toggle) — mở rộng cadtroly: dùng để bật hoặc tắt kỹ năng trong kho trong bản vẽ CAD.
-- [`kho_skills`](#kho_skills) — mở rộng cadtroly: dùng để liệt kê kỹ năng trong kho trong bản vẽ CAD.
-- [`kho_standard_add`](#kho_standard_add) — mở rộng cadtroly: dùng để thêm tiêu chuẩn vào kho trong bản vẽ CAD.
-- [`kho_standard_delete`](#kho_standard_delete) — mở rộng cadtroly: dùng để xóa tiêu chuẩn khỏi kho trong bản vẽ CAD.
-- [`kho_standards`](#kho_standards) — mở rộng cadtroly: dùng để liệt kê tiêu chuẩn trong kho trong bản vẽ CAD.
-- [`kho_status`](#kho_status) — mở rộng cadtroly: dùng để kiểm tra trạng thái kho trong bản vẽ CAD.
 - [`knowledge_industries`](#knowledge_industries) — mở rộng cadtroly: dùng để liệt kê các ngành trong kho trong bản vẽ CAD.
 - [`knowledge_rules_export`](#knowledge_rules_export) — mở rộng cadtroly: dùng để xuất bộ quy tắc trong kho trong bản vẽ CAD.
 - [`knowledge_rules_import`](#knowledge_rules_import) — mở rộng cadtroly: dùng để nhập bộ quy tắc vào kho trong bản vẽ CAD.
@@ -2790,96 +2780,6 @@ Các chức năng riêng của project cadtroly như tiêu chuẩn, QA và khố
 - **Ví dụ gõ vào LLM:**
 
   > Thực hiện đọc bản vẽ trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
-
-#### kho_industries
-
-- **Nhóm:** mở rộng cadtroly
-- **Làm gì:** Thực hiện thao tác liệt kê các ngành trong kho trong bản vẽ CAD.
-- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
-- **Ví dụ gõ vào LLM:**
-
-  > Thực hiện liệt kê các ngành trong kho trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
-
-#### kho_rules_export
-
-- **Nhóm:** mở rộng cadtroly
-- **Làm gì:** Thực hiện thao tác xuất bộ quy tắc trong kho trong bản vẽ CAD.
-- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
-- **Ví dụ gõ vào LLM:**
-
-  > Thực hiện xuất bộ quy tắc trong kho trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
-
-#### kho_rules_import
-
-- **Nhóm:** mở rộng cadtroly
-- **Làm gì:** Thực hiện thao tác nhập bộ quy tắc vào kho trong bản vẽ CAD.
-- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
-- **Ví dụ gõ vào LLM:**
-
-  > Thực hiện nhập bộ quy tắc vào kho trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
-
-#### kho_skill_add
-
-- **Nhóm:** mở rộng cadtroly
-- **Làm gì:** Thực hiện thao tác thêm kỹ năng vào kho trong bản vẽ CAD.
-- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
-- **Ví dụ gõ vào LLM:**
-
-  > Thực hiện thêm kỹ năng vào kho trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
-
-#### kho_skill_toggle
-
-- **Nhóm:** mở rộng cadtroly
-- **Làm gì:** Thực hiện thao tác bật hoặc tắt kỹ năng trong kho trong bản vẽ CAD.
-- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
-- **Ví dụ gõ vào LLM:**
-
-  > Thực hiện bật hoặc tắt kỹ năng trong kho trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
-
-#### kho_skills
-
-- **Nhóm:** mở rộng cadtroly
-- **Làm gì:** Thực hiện thao tác liệt kê kỹ năng trong kho trong bản vẽ CAD.
-- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
-- **Ví dụ gõ vào LLM:**
-
-  > Thực hiện liệt kê kỹ năng trong kho trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
-
-#### kho_standard_add
-
-- **Nhóm:** mở rộng cadtroly
-- **Làm gì:** Thực hiện thao tác thêm tiêu chuẩn vào kho trong bản vẽ CAD.
-- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
-- **Ví dụ gõ vào LLM:**
-
-  > Thực hiện thêm tiêu chuẩn vào kho trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
-
-#### kho_standard_delete
-
-- **Nhóm:** mở rộng cadtroly
-- **Làm gì:** Thực hiện thao tác xóa tiêu chuẩn khỏi kho trong bản vẽ CAD.
-- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
-- **Ví dụ gõ vào LLM:**
-
-  > Thực hiện xóa tiêu chuẩn khỏi kho trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
-
-#### kho_standards
-
-- **Nhóm:** mở rộng cadtroly
-- **Làm gì:** Thực hiện thao tác liệt kê tiêu chuẩn trong kho trong bản vẽ CAD.
-- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
-- **Ví dụ gõ vào LLM:**
-
-  > Thực hiện liệt kê tiêu chuẩn trong kho trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
-
-#### kho_status
-
-- **Nhóm:** mở rộng cadtroly
-- **Làm gì:** Thực hiện thao tác kiểm tra trạng thái kho trong bản vẽ CAD.
-- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
-- **Ví dụ gõ vào LLM:**
-
-  > Thực hiện kiểm tra trạng thái kho trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
 
 #### knowledge_industries
 
