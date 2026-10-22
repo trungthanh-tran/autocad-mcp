@@ -50,6 +50,43 @@ _DIM_RE = re.compile(r"(?:\d+[.,]?\d*|±\s*\d|\+\s*\d).*?(?:mm|m|°)?$", re.I)
 _TITLE_WORDS = ("ground floor", "rest room", "elevation", "section", "plan", "drawing no", "scale")
 _NOTE_WORDS = ("note", "all dimensions", "hvac", "downspout", "see ", "typ.", "level", "finish")
 
+# The PDF exporter preserved the original DWG layer names in each vector
+# drawing.  Use those names first; geometric heuristics are only the fallback
+# for the many unnamed/ambiguous paths in a plotted sheet.
+_SOURCE_LAYER_GROUPS = {
+    "PDF_COLUMNS": {"COL", "CTL"},
+    "PDF_WALLS": {"WALL-C", "TUONG XAY", "TUONG XAY"},
+    "PDF_DOORS": {"DO", "DOOR", "A_DOOR", "4DOOR"},
+    "PDF_WINDOWS": {"WINDOW", "WID", "A_WID", "PANEL W"},
+    "PDF_FURNITURE": {"FUR", "NHA", "BLOCK-H"},
+    "PDF_SANITARY": {"AA-FFXM-SANI", "BM_화장실 세면기", "TOI"},
+    "PDF_DIMENSIONS": {"DIM", "KICHTHUOC", "DMCAI", "4DP"},
+    "PDF_HATCH": {"HATCH", "HAT", "5HAT", "CON HATCH", "INSUL"},
+    "PDF_STRUCTURE": {"CONC", "2CONC"},
+    "PDF_FINISHES": {"FIN", "FINISH", "6FIN"},
+    "PDF_CEILING": {"CEILING"},
+    "PDF_LIGHTING": {"LED"},
+    "PDF_SECTIONS_ELEVATIONS": {"2SEC", "3SEC", "4ELE", "3ELE", "ELE3", "BM_ELEV", "7ELE"},
+    "PDF_SITE": {
+        "_ROAD", "_WALKWAY", "TALUY", "TALUYN", "TALUYD", "DUONG NHUA",
+        "DUONG DAT", "THUY HE", "V_CONTOUR_00-04", "V_CONTOUR_05-09",
+        "V_CONTOUR_10-14", "V_DONGMUC", "FA_SD", "CAOTHE", "DIA VAT",
+        "DIAVAT", "HO GA", "BO KENH", "CAU CONG",
+    },
+    "PDF_REFERENCE": {"KE", "CEN", "CENTER", "AXIS BOX", "KATA_GRID", "TIM"},
+    "PDF_DETAIL_LINES": {"3BLOCK", "4CAGE", "5CAGE", "LEAN", "DTL", "HATHE"},
+    "PDF_SYMBOLS": {"SYM", "SYMBOL", "BUBBLE", "CMARK", "E_SYM-EMR", "E_SYM-NOR", "ORIENTATE", "MARK"},
+    "PDF_NOTES": {"NOTE TEXT-M(T)", "KEY TEXT(T)", "TK"},
+    "PDF_TITLE": {"TITLE", "TAN-TIT", "REV.1", "REV.B", "REV.C", "REV.D"},
+    "PDF_TEXT": {"TEXT", "M TEXT", "M TEXT(T)", "TEXT_3", "TXT", "BUBB-TEXT", "VNTIME", "TVL"},
+}
+
+_SOURCE_TO_GROUP = {
+    source: group
+    for group, sources in _SOURCE_LAYER_GROUPS.items()
+    for source in sources
+}
+
 
 def _text_layer(text, bbox, size, page_width, page_height, rotation):
     x0, y0, x1, y1 = _screen_rect(pymupdf.Rect(*bbox), page_width, page_height, rotation)
@@ -67,6 +104,9 @@ def _text_layer(text, bbox, size, page_width, page_height, rotation):
 
 
 def _drawing_layer(drawing, page_width, page_height, rotation):
+    source_layer = (drawing.get("layer") or "").strip().upper()
+    if source_layer in _SOURCE_TO_GROUP:
+        return _SOURCE_TO_GROUP[source_layer]
     x0, y0, x1, y1 = _screen_rect(drawing["rect"], page_width, page_height, rotation)
     width, height = x1 - x0, y1 - y0
     area = width * height
@@ -98,6 +138,20 @@ def convert(source: Path, target: Path) -> dict:
         "PDF_FRAME": 8,
         "PDF_GEOMETRY": 7,
         "PDF_HATCH": 9,
+        "PDF_COLUMNS": 30,
+        "PDF_WALLS": 31,
+        "PDF_DOORS": 32,
+        "PDF_WINDOWS": 33,
+        "PDF_FURNITURE": 34,
+        "PDF_SANITARY": 35,
+        "PDF_STRUCTURE": 36,
+        "PDF_FINISHES": 37,
+        "PDF_CEILING": 38,
+        "PDF_LIGHTING": 39,
+        "PDF_SECTIONS_ELEVATIONS": 40,
+        "PDF_SITE": 41,
+        "PDF_REFERENCE": 42,
+        "PDF_DETAIL_LINES": 43,
         "PDF_SYMBOLS": 4,
         "PDF_DIMENSIONS": 3,
         "PDF_TEXT": 2,
@@ -112,8 +166,12 @@ def convert(source: Path, target: Path) -> dict:
     lines = 0
     curves = 0
     by_layer = Counter()
+    source_layer_map = {}
     for drawing in page.get_drawings():
         layer = _drawing_layer(drawing, pw, ph, rotation)
+        source_name = (drawing.get("layer") or "").strip()
+        if source_name:
+            source_layer_map[source_name] = layer
         for item in drawing["items"]:
             kind = item[0]
             if kind == "l":
@@ -168,4 +226,5 @@ def convert(source: Path, target: Path) -> dict:
         "text": text_count,
         "entities": len(msp),
         "layers": dict(sorted(by_layer.items())),
+        "source_layer_map": dict(sorted(source_layer_map.items())),
     }

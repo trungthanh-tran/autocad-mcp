@@ -9893,9 +9893,12 @@ async def pdf_vectorize(
 ) -> dict:
     """Convert PDF vector artwork to editable DXF entities on semantic layers.
 
-    Output is separated into ``PDF_GEOMETRY``, ``PDF_HATCH``, ``PDF_SYMBOLS``,
-    ``PDF_DIMENSIONS``, ``PDF_TEXT``, ``PDF_NOTES``, ``PDF_TITLE`` and
-    ``PDF_FRAME`` so an engineer can isolate, edit, delete or add each group.
+    Output is separated into technical layers such as ``PDF_COLUMNS``,
+    ``PDF_WALLS``, ``PDF_DOORS``, ``PDF_WINDOWS``, ``PDF_FURNITURE``,
+    ``PDF_SANITARY``, ``PDF_DIMENSIONS``, ``PDF_HATCH``, ``PDF_STRUCTURE``,
+    ``PDF_TEXT``, ``PDF_NOTES``, ``PDF_TITLE`` and ``PDF_FRAME`` so an engineer
+    can isolate, edit, delete or add each group. When available, the original
+    DWG layer names embedded in the PDF are used as the classification source.
     Outlined PDF text remains geometry by design, so dimensions and symbols
     are not lost when the source font prevents text extraction. The returned
     counts are a quick audit before opening the DXF and saving it as DWG.
