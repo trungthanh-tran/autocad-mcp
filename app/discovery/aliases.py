@@ -1131,6 +1131,21 @@ TOOL_ALIASES: dict[str, ToolAliases] = {
             "resim ekle",
         ),
     ),
+    "pdf_vectorize": ToolAliases(
+        acad=("PDFIMPORT",),
+        synonyms=(
+            "vectorize a pdf",
+            "pdf to editable cad",
+            "pdf to dwg",
+            "convert pdf into drawing geometry",
+            "extract pdf lines and text",
+            "import a vector pdf",
+            "pdf線轉cad",
+            "tach pdf thanh dwg",
+            "tach pdf thanh cad",
+            "boc tach pdf",
+        ),
+    ),
     "data_extract": ToolAliases(
         acad=("DATAEXTRACTION", "EATTEXT"),
         synonyms=(

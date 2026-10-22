@@ -11,6 +11,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import asyncio
 import json
 import logging
 import math
@@ -9777,18 +9778,139 @@ async def image_attach(
         ),
     ] = 1.0,
     rotation: Annotated[float, Field(default=0.0, description="Rotation in degrees.")] = 0.0,
+    auto_layout: Annotated[
+        bool,
+        Field(
+            default=False,
+            description=(
+                "Also create an A1/A0/etc paper-space layout, page setup, and a "
+                "fit viewport centred on the attached image."
+            ),
+        ),
+    ] = False,
+    layout: Annotated[
+        str,
+        Field(
+            default="",
+            description="Layout name when auto_layout is true (default: paper name, e.g. A1).",
+        ),
+    ] = "",
+    paper: Annotated[
+        str,
+        Field(
+            default="A1",
+            description="ISO/ANSI paper when auto_layout is true (default: A1).",
+        ),
+    ] = "A1",
+    orientation: Annotated[
+        str,
+        Field(
+            default="landscape",
+            description="Paper orientation when auto_layout is true.",
+        ),
+    ] = "landscape",
     ctx: Context = None,
 ) -> dict:
     """Attach a raster underlay at the file's own aspect ratio. Both engines.
 
     `scale` is drawing units per pixel, so the placed size is the image's pixel
-    size times `scale` and the payload reports both. Refusals, all before
-    anything is written: a file that does not exist, a file no image reader can
-    open (named), a non-positive or non-finite scale.
+    size times `scale` and the payload reports both. With `auto_layout=True`,
+    the server also creates (or reuses) a paper-space layout, applies the
+    requested paper setup, and creates a viewport that fits the image. This is
+    important for sheet underlays: attaching an image in Model space alone does
+    not make it visible on an A1/A0 tab.
+
+    Refusals, all before anything is written: a file that does not exist, a file
+    no image reader can open (named), a non-positive or non-finite scale.
     """
     validated = validate_path(path)
     await ctx.info(f"Image underlay: {validated}")
-    return await _backend(ctx).image_attach(str(validated), (x, y), scale, rotation)
+    backend = _backend(ctx)
+    result = await backend.image_attach(str(validated), (x, y), scale, rotation)
+    if not auto_layout:
+        return result
+
+    from engineering.standards.papers import resolve_page_setup
+
+    layout_name = layout.strip() or paper.strip().upper()
+    warnings: list[str] = []
+    created = await backend.layout_create(layout_name)
+    if not created.get("ok") and "already exists" not in str(created.get("error", "")):
+        warnings.append(f"layout_create: {created.get('error', created)}")
+
+    setup = resolve_page_setup(
+        paper=paper,
+        orientation=orientation,
+        plot_style="monochrome.ctb",
+        scale="fit",
+        plot_area="layout",
+        device="DWG To PDF.pc3",
+        center=True,
+    )
+    applied = await backend.page_setup_apply(layout_name, setup)
+    if not applied.get("ok"):
+        warnings.append(f"page_setup_apply: {applied.get('error', applied)}")
+
+    image_width, image_height = (float(v) for v in result["size_mm"])
+    sheet_width, sheet_height = (float(v) for v in setup["size_mm"])
+    margin = 10.0
+    viewport_width = max(1.0, sheet_width - 2 * margin)
+    viewport_height = max(1.0, sheet_height - 2 * margin)
+    fit_scale = min(viewport_width / image_width, viewport_height / image_height)
+    viewport = await backend.viewport_create(
+        layout_name,
+        sheet_width / 2,
+        sheet_height / 2,
+        viewport_width,
+        viewport_height,
+        x + image_width / 2,
+        y + image_height / 2,
+        fit_scale,
+    )
+    if not viewport.get("ok"):
+        warnings.append(f"viewport_create: {viewport.get('error', viewport)}")
+    result["paper_layout"] = {
+        "layout": layout_name,
+        "paper": setup["paper"],
+        "orientation": orientation,
+        "size_mm": setup["size_mm"],
+        "viewport": viewport,
+    }
+    if warnings:
+        result["warnings"] = warnings
+    return result
+
+
+@cad_tool(summary="Vectorize a PDF sheet into editable DXF geometry.", cost="mutate")
+@mcp.tool(
+    annotations={"title": "PDF to Editable DXF", "destructiveHint": False},
+    tags={"drawing", "sheet", "create"},
+)
+async def pdf_vectorize(
+    source: Annotated[str, Field(description="Full path to a single-page PDF sheet.")],
+    target: Annotated[str, Field(description="Full output path ending in .dxf.")],
+    ctx: Context = None,
+) -> dict:
+    """Convert PDF vector artwork to editable DXF entities on semantic layers.
+
+    Output is separated into ``PDF_GEOMETRY``, ``PDF_HATCH``, ``PDF_SYMBOLS``,
+    ``PDF_DIMENSIONS``, ``PDF_TEXT``, ``PDF_NOTES``, ``PDF_TITLE`` and
+    ``PDF_FRAME`` so an engineer can isolate, edit, delete or add each group.
+    Outlined PDF text remains geometry by design, so dimensions and symbols
+    are not lost when the source font prevents text extraction. The returned
+    counts are a quick audit before opening the DXF and saving it as DWG.
+    """
+    source_path = validate_path(source)
+    target_path = validate_path(target)
+    if source_path.suffix.lower() != ".pdf":
+        raise ValueError("pdf_vectorize: source must end in .pdf")
+    if target_path.suffix.lower() != ".dxf":
+        raise ValueError("pdf_vectorize: target must end in .dxf")
+    await ctx.info(f"Vectorizing PDF: {source_path}")
+    from cadtroly.pdf_vectorize import convert
+
+    stats = await asyncio.to_thread(convert, source_path, target_path)
+    return {"ok": True, "source": str(source_path), "target": str(target_path), **stats}
 
 
 @cad_tool(
