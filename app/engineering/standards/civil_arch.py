@@ -225,8 +225,8 @@ REFERENCE_ALIASES = {
 def detect_naming_scheme(layer_names: list[str] | set[str]) -> dict[str, Any]:
     """Infer the layer convention from existing layer prefixes.
 
-    A blank/new drawing has no evidence, so the safe default is NCS.  The
-    result includes evidence and a confidence label for auditability.
+    A blank/new drawing has no evidence and must be confirmed by the caller.
+    The result includes evidence and a confidence label for auditability.
     """
     names = {str(name).strip().upper() for name in layer_names}
     vn_prefixes = ("KT-", "KC-", "HT-", "CAU-")
@@ -237,13 +237,15 @@ def detect_naming_scheme(layer_names: list[str] | set[str]) -> dict[str, Any]:
         scheme, confidence = "vn", "high" if len(vn_hits) >= 2 else "medium"
     elif len(ncs_hits) > len(vn_hits) and ncs_hits:
         scheme, confidence = "ncs", "high" if len(ncs_hits) >= 2 else "medium"
+    elif ncs_hits or vn_hits:
+        scheme, confidence = "ambiguous", "low"
     else:
-        scheme, confidence = "ncs", "low"
+        scheme, confidence = None, "none"
     return {
         "scheme": scheme,
         "confidence": confidence,
         "evidence": {"vn": vn_hits[:20], "ncs": ncs_hits[:20]},
-        "reason": "existing layer prefixes" if (vn_hits or ncs_hits) else "no recognizable prefixes; defaulted to ncs",
+        "reason": "existing layer prefixes" if (vn_hits or ncs_hits) else "no recognizable prefixes; user confirmation required",
     }
 
 

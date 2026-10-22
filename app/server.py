@@ -7527,6 +7527,12 @@ async def drawing_apply_discipline_standard(
         except Exception:
             layer_names = []
         detection = detect_naming_scheme(layer_names)
+        if detection["scheme"] not in {"ncs", "vn"}:
+            raise ToolError(
+                "Không thể tự nhận diện hệ tên layer. "
+                "Vui lòng gọi lại với naming='vn' hoặc naming='ncs'. "
+                f"Bằng chứng: {detection['evidence']}"
+            )
         naming_key = detection["scheme"]
     elif naming_key not in {"ncs", "vn"}:
         raise ToolError("naming must be 'auto', 'ncs' or 'vn'")
