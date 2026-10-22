@@ -5084,6 +5084,37 @@ async def validation_check(
     }
 
 
+@cad_tool(
+    summary="Check structural drawing organization and suggest non-destructive optimizations.",
+    cost="read",
+)
+@mcp.tool(
+    annotations={"title": "Structural QA", "readOnlyHint": True},
+    tags={"analysis", "validation", "structural"},
+)
+async def structural_qa(
+    discipline: Annotated[str, "building, road or bridge"] = "building",
+    ctx: Context = None,
+) -> dict:
+    """Check structural CAD quality and return error/warning findings.
+
+    This is a drawing/layer/geometry check, not a strength or safety
+    certification. Loads, materials, restraints and approved calculations are
+    required for engineering conclusions.
+    """
+    from engineering.structural_qa import check_structural_drawing
+
+    backend = _backend(ctx)
+    layers = await backend.layer_list()
+    entities = await backend.entity_list(limit=50000)
+    result = check_structural_drawing(layers, entities, discipline=discipline)
+    if result["summary"]["errors"]:
+        await ctx.warning(f"Structural QA found {result['summary']['errors']} error(s)")
+    elif result["summary"]["warnings"]:
+        await ctx.warning(f"Structural QA found {result['summary']['warnings']} warning(s)")
+    return result
+
+
 # ---------------------------------------------------------------------------
 # ── SECTION 9: View & Screenshot (4 tools) ──────────────────────────────────
 # ---------------------------------------------------------------------------

@@ -265,6 +265,7 @@ Skill nằm trong `code\\kho-mac-dinh\\skill` và được MCP đọc trực ti�
 - `annotation-dim-qa`: kiểm tra text, dim, hatch và tỷ lệ.
 - `bo-tri-ho-so-thiet-ke`: quản lý tên file, sheet và revision.
 - `kiem-tra-ban-ve-civil-bridge`: kiểm tra bản vẽ đường và cầu.
+- `kiem-tra-ket-cau`: kiểm tra layer/hình học kết cấu và đề xuất tối ưu.
 - `bien-phap-thi-cong-vn`: biện pháp thi công Việt Nam.
 
 Tên thư mục kỹ thuật dùng ASCII; nội dung hướng dẫn và trao đổi với người dùng
@@ -283,6 +284,7 @@ vẫn bằng tiếng Việt.
 | Layer | Áp dụng chuẩn | “Dùng chuẩn Việt Nam cho nhà” hoặc “Dùng NCS cho cầu.” | Tạo layer theo `KT/KC/HT/CAU` hoặc `A/C/S`. |
 | Layer | Tự nhận diện | “Tự nhận diện chuẩn layer.” | Chỉ tự áp dụng khi đủ bằng chứng; nếu không sẽ hỏi lại. |
 | Kiểm tra | Kiểm tra bản vẽ | “Kiểm tra theo chuẩn công ty.” | Danh sách lỗi/cảnh báo, vị trí và đề xuất xử lý. |
+| Kết cấu | Structural QA | “Kiểm tra kết cấu và tối ưu layer.” | `error`, `warning`, đề xuất tối ưu và giới hạn kiểm tra. |
 | Khối lượng | Đề xuất bóc | “Bóc thử tường, cửa, sàn.” | Nhóm công tác và cách tính dự kiến. |
 | Khối lượng | Xác nhận cách tính | “Nhóm này tính theo m2.” | Ghi nhớ lựa chọn cho lần bóc sau. |
 | Khối lượng | Xuất Excel | “Xuất khối lượng ra Excel.” | File Excel có tổng hợp, chi tiết và nguồn truy vết. |

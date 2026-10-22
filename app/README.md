@@ -123,6 +123,7 @@ phải kiểm tra lại trong AutoCAD trước khi phát hành.
 | kho | `kho_status`, `kho_rules_export/import`, `kho_skills`, `kho_skill_toggle`, resource `cadtroly://skill/{name}` | kho mặc định trong MCP + dữ liệu người dùng |
 | phiên bản vẽ | `document_list`, `document_activate`, `document_close` | mở/đóng nhiều file; mỗi file có `document_id` |
 | render QA | `view_render_report` | báo cáo loại đối tượng có thể thiếu trong preview |
+| kết cấu | `structural_qa` | kiểm tra layer/hình học kết cấu, trả về `error`, `warning` và đề xuất tối ưu |
 | AutoCAD (upstream) | `drawing_open`, `entity_*`, `layer_*`, `block_*`, `dimension_*`, `system_run_lisp`, `view_screenshot`, `transaction_*`, `arch_*`, `drawing_understand`, `drawing_diff`… (59 ở `TOOL_PROFILE=lean`, 247 ở `full`) | mở/lưu, tạo/sửa entity, layer, block, dimension, LISP, screenshot, transaction/undo, arch_*, understand, diff |
 
 ## Kho (thư mục trên máy người dùng)

@@ -1670,6 +1670,15 @@ TOOL_ALIASES: dict[str, ToolAliases] = {
             "sanity check the drawing",
         ),
     ),
+    "structural_qa": ToolAliases(
+        synonyms=(
+            "check structural drawing",
+            "structural quality check",
+            "check columns beams foundations",
+            "optimize structural layers",
+            "kiem tra ket cau",
+        ),
+    ),
     # ── View & screenshot ───────────────────────────────────────────────────
     "view_screenshot": ToolAliases(
         synonyms=(
