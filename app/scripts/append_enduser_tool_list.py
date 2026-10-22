@@ -43,8 +43,8 @@ GROUP_WHEN = {
     "view": "thu phóng, góc nhìn và ảnh chụp",
 }
 GROUP_VI = {
-    "analysis": "phân tích", "architecture": "kiến trúc", "batch": "xử lý hàng loạt",
-    "blocks": "khối", "dimensions": "kích thước", "drawing": "bản vẽ", "engineering": "kỹ thuật",
+    "analysis": "phân tích", "architecture": "thành phần kiến trúc", "batch": "xử lý hàng loạt",
+    "blocks": "khối", "corner_ops": "bo góc và cắt nối", "dimensions": "kích thước", "drawing": "bản vẽ", "engineering": "kỹ thuật",
     "entity_creation": "tạo đối tượng", "entity_modification": "sửa đối tượng", "entity_query": "tra cứu đối tượng",
     "environment": "môi trường", "layers": "lớp bản vẽ", "layouts": "bố cục", "mechanical": "cơ khí",
     "page_setup": "thiết lập trang", "pid": "P&ID", "plant": "nhà máy", "premium": "nâng cao",
@@ -72,6 +72,17 @@ INDUSTRY_GROUPS = {
     "Kỹ thuật và 3D": {"engineering", "solids"},
     "Nâng cao": {"premium"},
     "Mở rộng cadtroly": {"cadtroly"},
+}
+
+INDUSTRY_DESCRIPTION = {
+    "Dùng chung": "Các chức năng có thể dùng cho hầu hết bản vẽ và ngành kỹ thuật.",
+    "Kiến trúc": "Mặt bằng, mặt đứng, mặt cắt, phòng, cửa, tường và hồ sơ kiến trúc.",
+    "Cơ khí": "Chi tiết cơ khí, ký hiệu mối hàn và các thao tác phục vụ bản vẽ cơ khí.",
+    "P&ID": "Sơ đồ đường ống và thiết bị đo lường điều khiển.",
+    "Nhà máy": "Bố trí thiết bị và bản vẽ nhà máy công nghiệp.",
+    "Kỹ thuật và 3D": "Kiểm tra kỹ thuật và hình học khối ba chiều.",
+    "Nâng cao": "Các chức năng nâng cao cần kiểm tra khả năng backend trước khi dùng.",
+    "Mở rộng cadtroly": "Các chức năng riêng của project cadtroly như tiêu chuẩn, QA và khối lượng.",
 }
 
 
@@ -180,8 +191,8 @@ def main() -> None:
 
     tools = asyncio.run(server._registered_tools())
     live = {tool.name: tool for tool in tools}
-    index_by_industry = {industry: [] for industry in INDUSTRY_ORDER}
-    details_by_industry = {industry: [] for industry in INDUSTRY_ORDER}
+    index_by_industry = {industry: {} for industry in INDUSTRY_ORDER}
+    details_by_industry = {industry: {} for industry in INDUSTRY_ORDER}
     for name in sorted(live):
         tool = live[name]
         meta = upstream.get(name, {})
@@ -190,12 +201,13 @@ def main() -> None:
         when = GROUP_WHEN.get(group, "chức năng mở rộng của cadtroly")
         request = request_example(name, group)
         industry = industry_for(group)
-        index_by_industry[industry].append(
+        group_name = GROUP_VI.get(group, group)
+        index_by_industry[industry].setdefault(group_name, []).append(
             f"- [`{name}`](#{name}) — {GROUP_VI.get(group, group)}: "
             f"dùng để {vietnamese_name(name)} trong bản vẽ CAD."
         )
-        details_by_industry[industry].append(
-            f"### {name}\n\n"
+        details_by_industry[industry].setdefault(group_name, []).append(
+            f"#### {name}\n\n"
             f"- **Nhóm:** {GROUP_VI.get(group, group)}\n"
             f"- **Làm gì:** {text}\n"
             f"- **Dùng khi nào:** Khi cần {when}.\n"
@@ -206,21 +218,27 @@ def main() -> None:
     detail_sections = []
     for industry in INDUSTRY_ORDER:
         index_rows.append(f"### {industry}")
-        index_rows.extend(index_by_industry[industry])
+        index_rows.append(f"_{INDUSTRY_DESCRIPTION[industry]}_")
+        for group_name in sorted(index_by_industry[industry]):
+            index_rows.append(f"#### {group_name}")
+            index_rows.extend(index_by_industry[industry][group_name])
         detail_sections.append(f"## {industry}")
-        detail_sections.extend(details_by_industry[industry])
+        detail_sections.append(INDUSTRY_DESCRIPTION[industry])
+        for group_name in sorted(details_by_industry[industry]):
+            detail_sections.append(f"### {group_name}")
+            detail_sections.extend(details_by_industry[industry][group_name])
     generated = (
-        f"{MARKER}\n\n## Danh sách chức năng\n\n"
+        f"{MARKER}\n\n## 11. Mục lục chức năng theo ngành\n\n"
         f"Có **{len(live)} chức năng**, gồm **247 chức năng nền tảng** và chức năng mở rộng của cadtroly. Các chức năng được xếp theo ngành; chức năng dùng chung nằm ở nhóm đầu. Bấm vào tên để đi đến phần hướng dẫn tương ứng.\n\n"
         + "\n".join(index_rows)
-        + "\n\n## Hướng dẫn từng chức năng\n\n"
+        + "\n\n## 12. Hướng dẫn chi tiết từng chức năng\n\n"
         + "\n".join(detail_sections)
         + "\n"
     )
     text = DOC.read_text(encoding="utf-8")
     text = text.split(MARKER, 1)[0].rstrip() + "\n\n" + generated
     DOC.write_text(text, encoding="utf-8")
-    print(f"Updated {DOC} with {len(index_rows)} tools")
+    print(f"Updated {DOC} with {len(live)} tools")
 
 
 if __name__ == "__main__":
