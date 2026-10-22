@@ -1,5 +1,5 @@
 ---
-name: kiem-tra-ban-ve-civil-bridge
+name: civil-bridge-drawing-qa
 description: Đọc, phân lớp và kiểm tra bản vẽ đường, cầu, thoát nước và hạ tầng theo vai trò kỹ thuật.
 version: 0.1
 ---

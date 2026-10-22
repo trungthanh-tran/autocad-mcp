@@ -1,5 +1,5 @@
 ---
-name: bo-tri-ho-so-thiet-ke
+name: cad-document-control
 description: Chuẩn hóa cấu trúc hồ sơ, tên file, sheet, revision và trạng thái phát hành cho dự án CAD.
 version: 0.1
 ---
