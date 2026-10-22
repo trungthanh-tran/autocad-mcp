@@ -271,6 +271,13 @@ Sửa vẽ live dùng các tool AutoCAD bên dưới: preview trước, mỗi c�
 
 AutoCAD MCP Pro provides complete AutoCAD automation through a large tool surface.
 
+LANGUAGE:
+  Tool names and schema keys remain English for stable MCP calls. Understand
+  Vietnamese user requests and choose the matching English tool automatically;
+  do not ask end users to write JSON or tool names unless they explicitly want
+  technical control. Reply in the user's language and confirm the selected
+  action before destructive changes.
+
 DUAL ENGINE:
   - COM backend: Live AutoCAD control (requires AutoCAD running on Windows)
   - ezdxf backend: Headless DXF file operations (no AutoCAD needed)

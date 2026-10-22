@@ -16,6 +16,19 @@ Ví dụ:
 
 LLM sẽ tự chọn tool phù hợp. Không cần tự gõ tên tool, trừ khi bạn muốn kiểm soát chính xác.
 
+## Tên tool và ngôn ngữ sử dụng
+
+Tên tool MCP được giữ bằng tiếng Anh để kết nối ổn định, ví dụ `pdf_to_dwg`,
+`view_screenshot` hoặc `kho_standard_add`. Người dùng không cần nhớ các tên này.
+
+Bạn chỉ cần gõ tiếng Việt trong ô chat. LLM sẽ hiểu yêu cầu, tự chọn đúng tool
+tiếng Anh, tự điền tham số và gọi MCP. Ví dụ:
+
+> Chụp riêng vùng mặt bằng tầng 1, vùng khung tên và vùng kích thước bên phải.
+
+LLM sẽ tự chọn chức năng chụp ảnh tương ứng. Không cần gõ JSON, không cần viết
+`view_screenshot` và không cần biết cấu trúc MCP.
+
 ## 2. Cách viết yêu cầu tốt
 
 Trong yêu cầu nên nêu:
