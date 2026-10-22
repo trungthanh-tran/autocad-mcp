@@ -5029,6 +5029,53 @@ async def validation_check(
                         }
                     )
 
+    if "duplicate_entities" in checks:
+        # Compare a stable, rounded geometry signature.  The layer is part of
+        # the key: identical construction/reference geometry on separate layers
+        # is often intentional.  Only geometry-bearing primitives are checked;
+        # text, dimensions and blocks may legitimately share insertion points.
+        entities = await b.entity_list(limit=50000)
+
+        def _round_value(value):
+            if isinstance(value, (int, float)):
+                return round(float(value), 3)
+            if isinstance(value, (list, tuple)):
+                return tuple(_round_value(item) for item in value)
+            if isinstance(value, dict):
+                return tuple(sorted((str(k), _round_value(v)) for k, v in value.items()))
+            return value
+
+        def _geometry_signature(entity):
+            props = entity.properties or {}
+            kind = str(entity.type or "").upper()
+            if kind == "LINE" and props.get("start") and props.get("end"):
+                ends = sorted((_round_value(props["start"]), _round_value(props["end"])))
+                return kind, tuple(ends)
+            if kind in {"CIRCLE", "ARC"} and props.get("center"):
+                return kind, _round_value(props.get("center")), _round_value(props.get("radius"))
+            if kind in {"LWPOLYLINE", "POLYLINE"} and props.get("points"):
+                return kind, _round_value(props.get("points")), _round_value(props.get("closed"))
+            return None
+
+        seen = {}
+        for entity in entities:
+            signature = _geometry_signature(entity)
+            if signature is None:
+                continue
+            key = (entity.layer, signature)
+            previous = seen.setdefault(key, [])
+            if previous:
+                issues.append(
+                    {
+                        "check": "duplicate_entities",
+                        "severity": "warning",
+                        "message": f"Duplicate {entity.type} geometry on layer '{entity.layer}'",
+                        "handles": [*previous, entity.handle],
+                        "layer": entity.layer,
+                    }
+                )
+            previous.append(entity.handle)
+
     return {
         "ok": len(issues) == 0,
         "total_issues": len(issues),
