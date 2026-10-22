@@ -359,6 +359,9 @@ Gọi `kho_industries` để xem mã ngành và tên tiếng Việt trước. MC
 thêm JSON rule vào `CAD-kho\\tieu-chuan`, và `kho_standard_delete` với
 `confirm=true` để xóa. Tiêu chuẩn đóng gói mặc định trong MCP không thể xóa.
 
+Danh mục chi tiết tiêu chuẩn an toàn theo 18 ngành nằm tại
+`app\\docs\\STANDARDS-SAFETY-BY-INDUSTRY.md`.
+
 Các câu lệnh chuyên môn có thể dùng trực tiếp:
 
 ```text
