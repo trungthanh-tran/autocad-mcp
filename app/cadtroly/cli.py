@@ -6,12 +6,14 @@
   cadtroly check <dxf> <ruleset>            kiểm tra theo bộ quy tắc
   cadtroly sample [<out.dxf>]               sinh bản vẽ mẫu
   cadtroly mcp                              chạy MCP server (stdio)
+  cadtroly update                           cập nhật code và package từ GitHub
   cadtroly ui [--port 8765] [--browser]      giao diện người dùng (cửa sổ, hoặc trình duyệt)
 """
 from __future__ import annotations
 
 import argparse
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -37,6 +39,7 @@ def main(argv=None) -> int:
     p = sub.add_parser("check"); p.add_argument("path"); p.add_argument("ruleset")
     p = sub.add_parser("sample"); p.add_argument("out", nargs="?", default="samples/mat-bang-tang-3.dxf")
     sub.add_parser("mcp")
+    sub.add_parser("update")
     p = sub.add_parser("ui"); p.add_argument("--port", type=int, default=8765); p.add_argument("--browser", action="store_true")
     a = ap.parse_args(argv)
 
@@ -58,6 +61,25 @@ def main(argv=None) -> int:
         ensure_runtime_dependencies()
         from .mcp.server import main as mcp_main
         mcp_main()
+        return 0
+    if a.cmd == "update":
+        root = Path(__file__).resolve().parents[1]
+        status = subprocess.run(
+            ["git", "status", "--porcelain"], cwd=root, capture_output=True, text=True, check=True
+        ).stdout.strip()
+        if status:
+            print("Không thể update: thư mục code đang có thay đổi local chưa commit.", file=sys.stderr)
+            print(status, file=sys.stderr)
+            return 2
+        subprocess.run(["git", "pull", "--ff-only", "origin", "main"], cwd=root, check=True)
+        lock = root / "requirements-mcp.lock"
+        command = [sys.executable, "-m", "pip", "install"]
+        if lock.is_file():
+            command += ["-r", str(lock)]
+        command += ["-e", str(root)]
+        subprocess.run(command, check=True)
+        from version import __version__
+        print(f"Đã update cadtroly {__version__}")
         return 0
 
     from .reader import read_dxf

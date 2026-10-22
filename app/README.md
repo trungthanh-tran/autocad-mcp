@@ -69,6 +69,16 @@ Phiên bản hiện tại: **cadtroly 0.2.0**. Các phiên bản package đã ki
 ghi trong `requirements-mcp.lock`; gửi cả thư mục `app` và file lock sang máy
 khác để cài lại nhanh, đồng nhất.
 
+Update máy đã cài từ GitHub:
+
+```bash
+cd app
+python -m cadtroly.cli update
+```
+
+Lệnh chỉ update khi code local sạch; nếu có sửa local chưa commit, lệnh dừng
+để không ghi đè.
+
 `.mcp.json` (có sẵn trong thư mục này):
 
 ```json
