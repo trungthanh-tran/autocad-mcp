@@ -127,6 +127,50 @@ def vietnamese_name(name: str) -> str:
     return " ".join(words)
 
 
+def request_example(name: str, group: str) -> str:
+    """Return a natural Vietnamese instruction, not merely a tool-name echo."""
+    if name == "view_screenshot":
+        return "Chụp riêng vùng mặt bằng tầng 1, vùng khung tên và vùng kích thước bên phải."
+    if name == "view_zoom_and_screenshot":
+        return "Thu toàn bộ bản vẽ vào màn hình rồi chụp ảnh để tôi kiểm tra nhanh."
+    if name == "view_zoom_window":
+        return "Phóng to riêng vùng mặt bằng tầng 1 để nhìn rõ cửa, thiết bị và kích thước."
+    if name == "view_zoom_extents":
+        return "Thu phóng để toàn bộ đối tượng của bản vẽ nằm vừa trên màn hình."
+    action = vietnamese_name(name)
+    templates = {
+        "analysis": f"Đọc bản vẽ và báo cáo {action}; không sửa file gốc.",
+        "architecture": f"Trên mặt bằng kiến trúc, hãy {action} và giữ đúng tỷ lệ bản vẽ.",
+        "batch": f"Thực hiện {action} cho tất cả bản vẽ trong thư mục dự án và báo cáo từng file.",
+        "blocks": f"Trong bản vẽ hiện tại, hãy {action} cho các khối cửa và thiết bị.",
+        "dimensions": f"Kiểm tra và thực hiện {action} cho các kích thước của mặt bằng tầng 1.",
+        "drawing": f"Mở bản vẽ, thực hiện {action}, sau đó lưu ra file mới và không ghi đè file gốc.",
+        "engineering": f"Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo {action} thành lỗi hoặc cảnh báo.",
+        "entity_creation": f"Vẽ thêm đối tượng cần thiết để {action}, đặt đúng lớp bản vẽ và ghi chú rõ ràng.",
+        "entity_modification": f"Chụp ảnh trước, thực hiện {action}, chụp ảnh sau và liệt kê các đối tượng đã đổi.",
+        "entity_query": f"Tìm các đối tượng liên quan rồi báo cáo {action}, không thay đổi hình học.",
+        "environment": f"Kiểm tra kết nối AutoCAD và báo cáo {action} trước khi thao tác bản vẽ.",
+        "layers": f"Tổ chức các đối tượng theo lớp bản vẽ bằng cách {action}, không tự đổi tiêu chuẩn nếu chưa hỏi.",
+        "layouts": f"Thiết lập bố cục A1 và thực hiện {action} cho khung tên và khung nhìn.",
+        "mechanical": f"Trên bản vẽ cơ khí, hãy {action} theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn.",
+        "page_setup": f"Thiết lập khổ A1, tỷ lệ 1:100 rồi thực hiện {action} để chuẩn bị phát hành.",
+        "pid": f"Trên sơ đồ P&ID, hãy {action} và kiểm tra ký hiệu, đường ống cùng nhãn thiết bị.",
+        "plant": f"Trong bản vẽ nhà máy, hãy {action} và kiểm tra khoảng cách an toàn thiết bị.",
+        "premium": f"Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện {action} nếu backend cho phép.",
+        "sheet": f"Chuẩn bị tờ bản vẽ phát hành và thực hiện {action} trong khung tên.",
+        "solids": f"Kiểm tra hình học ba chiều rồi thực hiện {action}; không làm hỏng đối tượng gốc.",
+        "styles": f"Kiểm tra kiểu hiển thị hiện tại và thực hiện {action} cho toàn bộ bản vẽ.",
+        "system": f"Báo cáo trạng thái MCP, AutoCAD và backend bằng cách {action}.",
+        "templates": f"Tạo bản vẽ mới từ mẫu dự án rồi thực hiện {action} theo tiêu chuẩn đã chọn.",
+        "transactions": f"Bắt đầu giao dịch, thực hiện {action}, cho tôi xem thay đổi rồi mới xác nhận.",
+        "understanding": f"Đọc hiểu bản vẽ và giải thích {action} bằng ngôn ngữ dễ hiểu cho người dùng.",
+        "validation": f"Kiểm tra bản vẽ và báo cáo {action} theo mức Error, Warning và Info.",
+        "view": f"Hiển thị bản vẽ để tôi kiểm tra trực quan việc {action}.",
+        "cadtroly": f"Thực hiện {action} trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.",
+    }
+    return templates.get(group, f"Hãy thực hiện {action} trên bản vẽ và báo cáo kết quả.")
+
+
 def main() -> None:
     inventory = json.loads(INVENTORY.read_text(encoding="utf-8"))
     upstream = {x["name"]: x for x in inventory["tools"]}
@@ -145,7 +189,7 @@ def main() -> None:
         text = f"Thực hiện thao tác {vietnamese_name(name)} trong bản vẽ CAD."
         when = GROUP_WHEN.get(group, "chức năng mở rộng của cadtroly")
         example = tool_example(name, tool)
-        request = f"Dùng `{name}` để {vietnamese_name(name)} trong bản vẽ hiện tại."
+        request = request_example(name, group)
         rows.append(f"| `{name}` | {GROUP_VI.get(group, group)} | {text} | Khi cần {when}. | {request} | `{example}` |")
     generated = (
         f"{MARKER}\n\n## Danh sách đầy đủ tất cả tool\n\n"
