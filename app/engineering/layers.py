@@ -160,13 +160,28 @@ async def apply_layer_set(
 # - and those import from this module. A partially initialised
 # engineering.layers must already hold every name they ask for.
 from engineering.arch.layers import ARCH_LAYER_ROLES, ARCH_LAYERS  # noqa: E402
-from engineering.standards.civil_arch import BRIDGE_LAYERS, BUILDING_LAYERS, ROAD_LAYERS  # noqa: E402
+from engineering.standards.civil_arch import (  # noqa: E402
+    BRIDGE_LAYERS,
+    BUILDING_LAYERS,
+    NCS_BRIDGE_LAYERS,
+    NCS_BUILDING_LAYERS,
+    NCS_ROAD_LAYERS,
+    ROAD_LAYERS,
+)
 
 LAYER_SET_REGISTRY["arch"] = ARCH_LAYERS
 LAYER_ROLES["arch"] = dict(ARCH_LAYER_ROLES)
 LAYER_SET_REGISTRY.update({"building": BUILDING_LAYERS, "road": ROAD_LAYERS, "bridge": BRIDGE_LAYERS})
+LAYER_SET_REGISTRY.update({
+    "ncs_building": NCS_BUILDING_LAYERS,
+    "ncs_road": NCS_ROAD_LAYERS,
+    "ncs_bridge": NCS_BRIDGE_LAYERS,
+})
 LAYER_ROLES.update({
     "building": {"dim": "A-DIMEN-T-N", "construction": "A-CONST-E-N"},
     "road": {"dim": "C-ROAD-DIM", "construction": "C-ROAD-TEMP"},
     "bridge": {"dim": "S-BRIDGE-DIM", "construction": "S-BRIDGE-TEMP"},
+    "ncs_building": {"dim": "A-ANNO-DIMS", "construction": "A-ANNO-NPLT"},
+    "ncs_road": {"dim": "C-ANNO-DIMS", "construction": "C-ANNO-NPLT"},
+    "ncs_bridge": {"dim": "S-ANNO-DIMS", "construction": "S-ANNO-NPLT"},
 })
