@@ -150,7 +150,8 @@ def main() -> None:
 
     tools = asyncio.run(server._registered_tools())
     live = {tool.name: tool for tool in tools}
-    rows = []
+    index_rows = []
+    detail_sections = []
     for name in sorted(live):
         tool = live[name]
         meta = upstream.get(name, {})
@@ -158,18 +159,27 @@ def main() -> None:
         text = f"Thực hiện thao tác {vietnamese_name(name)} trong bản vẽ CAD."
         when = GROUP_WHEN.get(group, "chức năng mở rộng của cadtroly")
         request = request_example(name, group)
-        rows.append(f"| `{name}` | {GROUP_VI.get(group, group)} | {text} | Khi cần {when}. | {request} |")
+        index_rows.append(f"- [`{name}`](#{name}) — {GROUP_VI.get(group, group)}")
+        detail_sections.append(
+            f"### {name}\n\n"
+            f"- **Nhóm:** {GROUP_VI.get(group, group)}\n"
+            f"- **Làm gì:** {text}\n"
+            f"- **Dùng khi nào:** Khi cần {when}.\n"
+            f"- **Ví dụ gõ vào LLM:**\n\n"
+            f"  > {request}\n"
+        )
     generated = (
-        f"{MARKER}\n\n## Danh sách đầy đủ tất cả tool\n\n"
-        f"Bảng này gồm **{len(rows)} tool** đang đăng ký, bao gồm cả **247 tool nền tảng** và tool mở rộng của cadtroly. Bạn có thể nói tên tool trong yêu cầu nếu muốn gọi trực tiếp.\n\n"
-        "| Tên chức năng | Nhóm | Làm gì | Dùng khi nào | Ví dụ câu gõ vào LLM |\n|---|---|---|---|---|\n"
-        + "\n".join(rows)
+        f"{MARKER}\n\n## Danh sách chức năng\n\n"
+        f"Có **{len(index_rows)} chức năng**, gồm **247 chức năng nền tảng** và chức năng mở rộng của cadtroly. Bấm vào tên để đi đến phần hướng dẫn tương ứng.\n\n"
+        + "\n".join(index_rows)
+        + "\n\n## Hướng dẫn từng chức năng\n\n"
+        + "\n".join(detail_sections)
         + "\n"
     )
     text = DOC.read_text(encoding="utf-8")
     text = text.split(MARKER, 1)[0].rstrip() + "\n\n" + generated
     DOC.write_text(text, encoding="utf-8")
-    print(f"Updated {DOC} with {len(rows)} tools")
+    print(f"Updated {DOC} with {len(index_rows)} tools")
 
 
 if __name__ == "__main__":

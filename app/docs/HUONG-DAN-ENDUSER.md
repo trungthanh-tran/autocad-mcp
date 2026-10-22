@@ -131,281 +131,2730 @@ Sau mỗi công việc, yêu cầu MCP/LLM trả về:
 
 <!-- GENERATED-ALL-TOOLS -->
 
-## Danh sách đầy đủ tất cả tool
+## Danh sách chức năng
 
-Bảng này gồm **272 tool** đang đăng ký, bao gồm cả **247 tool nền tảng** và tool mở rộng của cadtroly. Bạn có thể nói tên tool trong yêu cầu nếu muốn gọi trực tiếp.
+Có **272 chức năng**, gồm **247 chức năng nền tảng** và chức năng mở rộng của cadtroly. Bấm vào tên để đi đến phần hướng dẫn tương ứng.
 
-| Tên chức năng | Nhóm | Làm gì | Dùng khi nào | Ví dụ câu gõ vào LLM |
-|---|---|---|---|---|
-| `analysis_bounding_box` | phân tích | Thực hiện thao tác phân tích giới hạn khung trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. | Đọc bản vẽ và báo cáo phân tích giới hạn khung; không sửa file gốc. |
-| `analysis_entity_stats` | phân tích | Thực hiện thao tác phân tích đối tượng thống kê trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. | Đọc bản vẽ và báo cáo phân tích đối tượng thống kê; không sửa file gốc. |
-| `analysis_find_in_region` | phân tích | Thực hiện thao tác phân tích tìm trong vùng trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. | Đọc bản vẽ và báo cáo phân tích tìm trong vùng; không sửa file gốc. |
-| `analysis_layer_stats` | phân tích | Thực hiện thao tác phân tích lớp thống kê trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. | Đọc bản vẽ và báo cáo phân tích lớp thống kê; không sửa file gốc. |
-| `analysis_list_properties` | phân tích | Thực hiện thao tác phân tích liệt kê thuộc tính trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. | Đọc bản vẽ và báo cáo phân tích liệt kê thuộc tính; không sửa file gốc. |
-| `analysis_measure_area` | phân tích | Thực hiện thao tác phân tích đo diện tích trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. | Đọc bản vẽ và báo cáo phân tích đo diện tích; không sửa file gốc. |
-| `analysis_measure_distance` | phân tích | Thực hiện thao tác phân tích đo khoảng cách trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. | Đọc bản vẽ và báo cáo phân tích đo khoảng cách; không sửa file gốc. |
-| `analysis_measure_entity` | phân tích | Thực hiện thao tác phân tích đo đối tượng trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. | Đọc bản vẽ và báo cáo phân tích đo đối tượng; không sửa file gốc. |
-| `analysis_select_by_layer` | phân tích | Thực hiện thao tác phân tích chọn theo lớp trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. | Đọc bản vẽ và báo cáo phân tích chọn theo lớp; không sửa file gốc. |
-| `analysis_select_by_type` | phân tích | Thực hiện thao tác phân tích chọn theo type trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. | Đọc bản vẽ và báo cáo phân tích chọn theo type; không sửa file gốc. |
-| `arch_catalogue_insert` | kiến trúc | Thực hiện thao tác arch catalogue chèn trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. | Trên mặt bằng kiến trúc, hãy arch catalogue chèn và giữ đúng tỷ lệ bản vẽ. |
-| `arch_catalogue_list` | kiến trúc | Thực hiện thao tác arch catalogue liệt kê trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. | Trên mặt bằng kiến trúc, hãy arch catalogue liệt kê và giữ đúng tỷ lệ bản vẽ. |
-| `arch_dimension_chains` | kiến trúc | Thực hiện thao tác arch kích thước chains trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. | Trên mặt bằng kiến trúc, hãy arch kích thước chains và giữ đúng tỷ lệ bản vẽ. |
-| `arch_grid` | kiến trúc | Thực hiện thao tác arch grid trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. | Trên mặt bằng kiến trúc, hãy arch grid và giữ đúng tỷ lệ bản vẽ. |
-| `arch_opening` | kiến trúc | Thực hiện thao tác arch opening trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. | Trên mặt bằng kiến trúc, hãy arch opening và giữ đúng tỷ lệ bản vẽ. |
-| `arch_plan_from_spec` | kiến trúc | Thực hiện thao tác arch mặt bằng từ spec trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. | Trên mặt bằng kiến trúc, hãy arch mặt bằng từ spec và giữ đúng tỷ lệ bản vẽ. |
-| `arch_room` | kiến trúc | Thực hiện thao tác arch room trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. | Trên mặt bằng kiến trúc, hãy arch room và giữ đúng tỷ lệ bản vẽ. |
-| `arch_rooms_detect` | kiến trúc | Thực hiện thao tác arch rooms detect trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. | Trên mặt bằng kiến trúc, hãy arch rooms detect và giữ đúng tỷ lệ bản vẽ. |
-| `arch_schedule` | kiến trúc | Thực hiện thao tác arch schedule trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. | Trên mặt bằng kiến trúc, hãy arch schedule và giữ đúng tỷ lệ bản vẽ. |
-| `arch_stair` | kiến trúc | Thực hiện thao tác arch stair trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. | Trên mặt bằng kiến trúc, hãy arch stair và giữ đúng tỷ lệ bản vẽ. |
-| `arch_symbol` | kiến trúc | Thực hiện thao tác arch ký hiệu trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. | Trên mặt bằng kiến trúc, hãy arch ký hiệu và giữ đúng tỷ lệ bản vẽ. |
-| `arch_wall` | kiến trúc | Thực hiện thao tác arch wall trong bản vẽ CAD. | Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc. | Trên mặt bằng kiến trúc, hãy arch wall và giữ đúng tỷ lệ bản vẽ. |
-| `balloon_add` | tờ bản vẽ | Thực hiện thao tác balloon add trong bản vẽ CAD. | Khi cần tờ bản vẽ, khung tên và phát hành. | Chuẩn bị tờ bản vẽ phát hành và thực hiện balloon add trong khung tên. |
-| `batch_plot` | thiết lập trang | Thực hiện thao tác hàng loạt plot trong bản vẽ CAD. | Khi cần khổ giấy, tỷ lệ và in ấn. | Thiết lập khổ A1, tỷ lệ 1:100 rồi thực hiện hàng loạt plot để chuẩn bị phát hành. |
-| `block_create_from_entities` | khối | Thực hiện thao tác khối tạo từ đối tượng trong bản vẽ CAD. | Khi cần khối và tham chiếu khối. | Trong bản vẽ hiện tại, hãy khối tạo từ đối tượng cho các khối cửa và thiết bị. |
-| `block_define` | khối | Thực hiện thao tác khối định nghĩa trong bản vẽ CAD. | Khi cần khối và tham chiếu khối. | Trong bản vẽ hiện tại, hãy khối định nghĩa cho các khối cửa và thiết bị. |
-| `block_explode` | khối | Thực hiện thao tác khối phá khối trong bản vẽ CAD. | Khi cần khối và tham chiếu khối. | Trong bản vẽ hiện tại, hãy khối phá khối cho các khối cửa và thiết bị. |
-| `block_find_references` | khối | Thực hiện thao tác khối tìm tham chiếu trong bản vẽ CAD. | Khi cần khối và tham chiếu khối. | Trong bản vẽ hiện tại, hãy khối tìm tham chiếu cho các khối cửa và thiết bị. |
-| `block_get_attributes` | khối | Thực hiện thao tác khối get attributes trong bản vẽ CAD. | Khi cần khối và tham chiếu khối. | Trong bản vẽ hiện tại, hãy khối get attributes cho các khối cửa và thiết bị. |
-| `block_insert` | khối | Thực hiện thao tác khối chèn trong bản vẽ CAD. | Khi cần khối và tham chiếu khối. | Trong bản vẽ hiện tại, hãy khối chèn cho các khối cửa và thiết bị. |
-| `block_list` | khối | Thực hiện thao tác khối liệt kê trong bản vẽ CAD. | Khi cần khối và tham chiếu khối. | Trong bản vẽ hiện tại, hãy khối liệt kê cho các khối cửa và thiết bị. |
-| `block_set_attributes` | khối | Thực hiện thao tác khối đặt attributes trong bản vẽ CAD. | Khi cần khối và tham chiếu khối. | Trong bản vẽ hiện tại, hãy khối đặt attributes cho các khối cửa và thiết bị. |
-| `bom_extract` | tờ bản vẽ | Thực hiện thao tác bom extract trong bản vẽ CAD. | Khi cần tờ bản vẽ, khung tên và phát hành. | Chuẩn bị tờ bản vẽ phát hành và thực hiện bom extract trong khung tên. |
-| `bom_table` | tờ bản vẽ | Thực hiện thao tác bom bảng trong bản vẽ CAD. | Khi cần tờ bản vẽ, khung tên và phát hành. | Chuẩn bị tờ bản vẽ phát hành và thực hiện bom bảng trong khung tên. |
-| `boundary_from_entities` | phân tích | Thực hiện thao tác boundary từ đối tượng trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. | Đọc bản vẽ và báo cáo boundary từ đối tượng; không sửa file gốc. |
-| `boundary_trace` | phân tích | Thực hiện thao tác boundary trace trong bản vẽ CAD. | Khi cần đọc/đo/phân tích, không sửa bản vẽ. | Đọc bản vẽ và báo cáo boundary trace; không sửa file gốc. |
-| `cable_takeoff` | nhà máy | Thực hiện thao tác cable takeoff trong bản vẽ CAD. | Khi cần bố trí thiết bị nhà máy. | Trong bản vẽ nhà máy, hãy cable takeoff và kiểm tra khoảng cách an toàn thiết bị. |
-| `cad_batch` | xử lý hàng loạt | Thực hiện thao tác cad hàng loạt trong bản vẽ CAD. | Khi cần xử lý hàng loạt. | Thực hiện cad hàng loạt cho tất cả bản vẽ trong thư mục dự án và báo cáo từng file. |
-| `centre_marks` | cơ khí | Thực hiện thao tác centre marks trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. | Trên bản vẽ cơ khí, hãy centre marks theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn. |
-| `check_rulesets` | mở rộng cadtroly | Thực hiện thao tác kiểm tra rulesets trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện kiểm tra rulesets trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `check_run` | mở rộng cadtroly | Thực hiện thao tác kiểm tra run trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện kiểm tra run trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `construction_clear` | nâng cao | Thực hiện thao tác construction clear trong bản vẽ CAD. | Khi cần chức năng nâng cao. | Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện construction clear nếu backend cho phép. |
-| `construction_xline` | nâng cao | Thực hiện thao tác construction xline trong bản vẽ CAD. | Khi cần chức năng nâng cao. | Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện construction xline nếu backend cho phép. |
-| `data_extract` | tờ bản vẽ | Thực hiện thao tác dữ liệu extract trong bản vẽ CAD. | Khi cần tờ bản vẽ, khung tên và phát hành. | Chuẩn bị tờ bản vẽ phát hành và thực hiện dữ liệu extract trong khung tên. |
-| `datum_feature` | kỹ thuật | Thực hiện thao tác datum feature trong bản vẽ CAD. | Khi cần kiểm tra kỹ thuật. | Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo datum feature thành lỗi hoặc cảnh báo. |
-| `dimension_aligned` | kích thước | Thực hiện thao tác kích thước aligned trong bản vẽ CAD. | Khi cần kích thước và ghi chú đo. | Kiểm tra và thực hiện kích thước aligned cho các kích thước của mặt bằng tầng 1. |
-| `dimension_angular` | kích thước | Thực hiện thao tác kích thước angular trong bản vẽ CAD. | Khi cần kích thước và ghi chú đo. | Kiểm tra và thực hiện kích thước angular cho các kích thước của mặt bằng tầng 1. |
-| `dimension_auto` | nâng cao | Thực hiện thao tác kích thước auto trong bản vẽ CAD. | Khi cần chức năng nâng cao. | Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện kích thước auto nếu backend cho phép. |
-| `dimension_diameter` | kích thước | Thực hiện thao tác kích thước diameter trong bản vẽ CAD. | Khi cần kích thước và ghi chú đo. | Kiểm tra và thực hiện kích thước diameter cho các kích thước của mặt bằng tầng 1. |
-| `dimension_linear` | kích thước | Thực hiện thao tác kích thước linear trong bản vẽ CAD. | Khi cần kích thước và ghi chú đo. | Kiểm tra và thực hiện kích thước linear cho các kích thước của mặt bằng tầng 1. |
-| `dimension_radius` | kích thước | Thực hiện thao tác kích thước radius trong bản vẽ CAD. | Khi cần kích thước và ghi chú đo. | Kiểm tra và thực hiện kích thước radius cho các kích thước của mặt bằng tầng 1. |
-| `dimstyle_create` | kiểu hiển thị | Thực hiện thao tác dimstyle tạo trong bản vẽ CAD. | Khi cần kiểu và hiển thị. | Kiểm tra kiểu hiển thị hiện tại và thực hiện dimstyle tạo cho toàn bộ bản vẽ. |
-| `dimstyle_list` | kiểu hiển thị | Thực hiện thao tác dimstyle liệt kê trong bản vẽ CAD. | Khi cần kiểu và hiển thị. | Kiểm tra kiểu hiển thị hiện tại và thực hiện dimstyle liệt kê cho toàn bộ bản vẽ. |
-| `dimstyle_modify` | kiểu hiển thị | Thực hiện thao tác dimstyle sửa trong bản vẽ CAD. | Khi cần kiểu và hiển thị. | Kiểm tra kiểu hiển thị hiện tại và thực hiện dimstyle sửa cho toàn bộ bản vẽ. |
-| `dimstyle_set_current` | kiểu hiển thị | Thực hiện thao tác dimstyle đặt hiện tại trong bản vẽ CAD. | Khi cần kiểu và hiển thị. | Kiểm tra kiểu hiển thị hiện tại và thực hiện dimstyle đặt hiện tại cho toàn bộ bản vẽ. |
-| `document_activate` | môi trường | Thực hiện thao tác document activate trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo document activate trước khi thao tác bản vẽ. |
-| `document_close` | môi trường | Thực hiện thao tác document đóng trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo document đóng trước khi thao tác bản vẽ. |
-| `document_list` | môi trường | Thực hiện thao tác document liệt kê trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo document liệt kê trước khi thao tác bản vẽ. |
-| `drawing_apply_discipline_standard` | mở rộng cadtroly | Thực hiện thao tác bản vẽ apply discipline standard trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện bản vẽ apply discipline standard trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `drawing_apply_iso_layers` | nâng cao | Thực hiện thao tác bản vẽ apply iso layers trong bản vẽ CAD. | Khi cần chức năng nâng cao. | Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện bản vẽ apply iso layers nếu backend cho phép. |
-| `drawing_apply_standard` | kiểu hiển thị | Thực hiện thao tác bản vẽ apply standard trong bản vẽ CAD. | Khi cần kiểu và hiển thị. | Kiểm tra kiểu hiển thị hiện tại và thực hiện bản vẽ apply standard cho toàn bộ bản vẽ. |
-| `drawing_audit` | bản vẽ | Thực hiện thao tác bản vẽ audit trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. | Mở bản vẽ, thực hiện bản vẽ audit, sau đó lưu ra file mới và không ghi đè file gốc. |
-| `drawing_close` | bản vẽ | Thực hiện thao tác bản vẽ đóng trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. | Mở bản vẽ, thực hiện bản vẽ đóng, sau đó lưu ra file mới và không ghi đè file gốc. |
-| `drawing_critique` | nâng cao | Thực hiện thao tác bản vẽ critique trong bản vẽ CAD. | Khi cần chức năng nâng cao. | Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện bản vẽ critique nếu backend cho phép. |
-| `drawing_deliver` | kỹ thuật | Thực hiện thao tác bản vẽ deliver trong bản vẽ CAD. | Khi cần kiểm tra kỹ thuật. | Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo bản vẽ deliver thành lỗi hoặc cảnh báo. |
-| `drawing_diff` | đọc hiểu | Thực hiện thao tác bản vẽ diff trong bản vẽ CAD. | Khi cần đọc hiểu cấu trúc bản vẽ. | Đọc hiểu bản vẽ và giải thích bản vẽ diff bằng ngôn ngữ dễ hiểu cho người dùng. |
-| `drawing_entities` | mở rộng cadtroly | Thực hiện thao tác bản vẽ đối tượng trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện bản vẽ đối tượng trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `drawing_export_dwg` | tờ bản vẽ | Thực hiện thao tác bản vẽ xuất dwg trong bản vẽ CAD. | Khi cần tờ bản vẽ, khung tên và phát hành. | Chuẩn bị tờ bản vẽ phát hành và thực hiện bản vẽ xuất dwg trong khung tên. |
-| `drawing_export_dxf` | bản vẽ | Thực hiện thao tác bản vẽ xuất dxf trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. | Mở bản vẽ, thực hiện bản vẽ xuất dxf, sau đó lưu ra file mới và không ghi đè file gốc. |
-| `drawing_export_pdf` | bản vẽ | Thực hiện thao tác bản vẽ xuất pdf trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. | Mở bản vẽ, thực hiện bản vẽ xuất pdf, sau đó lưu ra file mới và không ghi đè file gốc. |
-| `drawing_finalize` | kỹ thuật | Thực hiện thao tác bản vẽ finalize trong bản vẽ CAD. | Khi cần kiểm tra kỹ thuật. | Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo bản vẽ finalize thành lỗi hoặc cảnh báo. |
-| `drawing_info` | tra cứu đối tượng | Thực hiện thao tác bản vẽ info trong bản vẽ CAD. | Khi cần tìm và đọc thuộc tính đối tượng. | Tìm các đối tượng liên quan rồi báo cáo bản vẽ info, không thay đổi hình học. |
-| `drawing_new` | bản vẽ | Thực hiện thao tác bản vẽ new trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. | Mở bản vẽ, thực hiện bản vẽ new, sau đó lưu ra file mới và không ghi đè file gốc. |
-| `drawing_open` | bản vẽ | Thực hiện thao tác bản vẽ mở trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. | Mở bản vẽ, thực hiện bản vẽ mở, sau đó lưu ra file mới và không ghi đè file gốc. |
-| `drawing_plan` | nâng cao | Thực hiện thao tác bản vẽ mặt bằng trong bản vẽ CAD. | Khi cần chức năng nâng cao. | Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện bản vẽ mặt bằng nếu backend cho phép. |
-| `drawing_preflight` | nâng cao | Thực hiện thao tác bản vẽ preflight trong bản vẽ CAD. | Khi cần chức năng nâng cao. | Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện bản vẽ preflight nếu backend cho phép. |
-| `drawing_properties_get` | môi trường | Thực hiện thao tác bản vẽ thuộc tính get trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo bản vẽ thuộc tính get trước khi thao tác bản vẽ. |
-| `drawing_properties_set` | môi trường | Thực hiện thao tác bản vẽ thuộc tính đặt trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo bản vẽ thuộc tính đặt trước khi thao tác bản vẽ. |
-| `drawing_purge` | bản vẽ | Thực hiện thao tác bản vẽ dọn dẹp trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. | Mở bản vẽ, thực hiện bản vẽ dọn dẹp, sau đó lưu ra file mới và không ghi đè file gốc. |
-| `drawing_read` | mở rộng cadtroly | Thực hiện thao tác bản vẽ đọc trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện bản vẽ đọc trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `drawing_redo` | bản vẽ | Thực hiện thao tác bản vẽ redo trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. | Mở bản vẽ, thực hiện bản vẽ redo, sau đó lưu ra file mới và không ghi đè file gốc. |
-| `drawing_refine` | nâng cao | Thực hiện thao tác bản vẽ refine trong bản vẽ CAD. | Khi cần chức năng nâng cao. | Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện bản vẽ refine nếu backend cho phép. |
-| `drawing_save` | bản vẽ | Thực hiện thao tác bản vẽ lưu trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. | Mở bản vẽ, thực hiện bản vẽ lưu, sau đó lưu ra file mới và không ghi đè file gốc. |
-| `drawing_save_as` | bản vẽ | Thực hiện thao tác bản vẽ lưu as trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. | Mở bản vẽ, thực hiện bản vẽ lưu as, sau đó lưu ra file mới và không ghi đè file gốc. |
-| `drawing_scale_check` | đọc hiểu | Thực hiện thao tác bản vẽ tỷ lệ kiểm tra trong bản vẽ CAD. | Khi cần đọc hiểu cấu trúc bản vẽ. | Đọc hiểu bản vẽ và giải thích bản vẽ tỷ lệ kiểm tra bằng ngôn ngữ dễ hiểu cho người dùng. |
-| `drawing_settings` | hệ thống | Thực hiện thao tác bản vẽ thiết lập trong bản vẽ CAD. | Khi cần trạng thái máy chủ. | Báo cáo trạng thái MCP, AutoCAD và backend bằng cách bản vẽ thiết lập. |
-| `drawing_template_list` | thiết lập trang | Thực hiện thao tác bản vẽ mẫu liệt kê trong bản vẽ CAD. | Khi cần khổ giấy, tỷ lệ và in ấn. | Thiết lập khổ A1, tỷ lệ 1:100 rồi thực hiện bản vẽ mẫu liệt kê để chuẩn bị phát hành. |
-| `drawing_template_save` | thiết lập trang | Thực hiện thao tác bản vẽ mẫu lưu trong bản vẽ CAD. | Khi cần khổ giấy, tỷ lệ và in ấn. | Thiết lập khổ A1, tỷ lệ 1:100 rồi thực hiện bản vẽ mẫu lưu để chuẩn bị phát hành. |
-| `drawing_topology_check` | đọc hiểu | Thực hiện thao tác bản vẽ topology kiểm tra trong bản vẽ CAD. | Khi cần đọc hiểu cấu trúc bản vẽ. | Đọc hiểu bản vẽ và giải thích bản vẽ topology kiểm tra bằng ngôn ngữ dễ hiểu cho người dùng. |
-| `drawing_understand` | đọc hiểu | Thực hiện thao tác bản vẽ understand trong bản vẽ CAD. | Khi cần đọc hiểu cấu trúc bản vẽ. | Đọc hiểu bản vẽ và giải thích bản vẽ understand bằng ngôn ngữ dễ hiểu cho người dùng. |
-| `drawing_undo` | bản vẽ | Thực hiện thao tác bản vẽ undo trong bản vẽ CAD. | Khi cần mở, lưu, đóng hoặc xuất bản vẽ. | Mở bản vẽ, thực hiện bản vẽ undo, sau đó lưu ra file mới và không ghi đè file gốc. |
-| `entity_array_polar` | sửa đối tượng | Thực hiện thao tác đối tượng array polar trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. | Chụp ảnh trước, thực hiện đối tượng array polar, chụp ảnh sau và liệt kê các đối tượng đã đổi. |
-| `entity_array_rectangular` | sửa đối tượng | Thực hiện thao tác đối tượng array rectangular trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. | Chụp ảnh trước, thực hiện đối tượng array rectangular, chụp ảnh sau và liệt kê các đối tượng đã đổi. |
-| `entity_batch_create` | xử lý hàng loạt | Thực hiện thao tác đối tượng hàng loạt tạo trong bản vẽ CAD. | Khi cần xử lý hàng loạt. | Thực hiện đối tượng hàng loạt tạo cho tất cả bản vẽ trong thư mục dự án và báo cáo từng file. |
-| `entity_batch_modify` | xử lý hàng loạt | Thực hiện thao tác đối tượng hàng loạt sửa trong bản vẽ CAD. | Khi cần xử lý hàng loạt. | Thực hiện đối tượng hàng loạt sửa cho tất cả bản vẽ trong thư mục dự án và báo cáo từng file. |
-| `entity_chamfer` | corner_ops | Thực hiện thao tác đối tượng chamfer trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Hãy thực hiện đối tượng chamfer trên bản vẽ và báo cáo kết quả. |
-| `entity_change_space` | bố cục | Thực hiện thao tác đối tượng change space trong bản vẽ CAD. | Khi cần bố cục và khung nhìn. | Thiết lập bố cục A1 và thực hiện đối tượng change space cho khung tên và khung nhìn. |
-| `entity_copy` | sửa đối tượng | Thực hiện thao tác đối tượng sao chép trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. | Chụp ảnh trước, thực hiện đối tượng sao chép, chụp ảnh sau và liệt kê các đối tượng đã đổi. |
-| `entity_create_arc` | tạo đối tượng | Thực hiện thao tác đối tượng tạo cung trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. | Vẽ thêm đối tượng cần thiết để đối tượng tạo cung, đặt đúng lớp bản vẽ và ghi chú rõ ràng. |
-| `entity_create_block_ref` | khối | Thực hiện thao tác đối tượng tạo khối ref trong bản vẽ CAD. | Khi cần khối và tham chiếu khối. | Trong bản vẽ hiện tại, hãy đối tượng tạo khối ref cho các khối cửa và thiết bị. |
-| `entity_create_circle` | tạo đối tượng | Thực hiện thao tác đối tượng tạo đường tròn trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. | Vẽ thêm đối tượng cần thiết để đối tượng tạo đường tròn, đặt đúng lớp bản vẽ và ghi chú rõ ràng. |
-| `entity_create_ellipse` | tạo đối tượng | Thực hiện thao tác đối tượng tạo ellipse trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. | Vẽ thêm đối tượng cần thiết để đối tượng tạo ellipse, đặt đúng lớp bản vẽ và ghi chú rõ ràng. |
-| `entity_create_hatch` | tạo đối tượng | Thực hiện thao tác đối tượng tạo tô mặt trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. | Vẽ thêm đối tượng cần thiết để đối tượng tạo tô mặt, đặt đúng lớp bản vẽ và ghi chú rõ ràng. |
-| `entity_create_line` | tạo đối tượng | Thực hiện thao tác đối tượng tạo đường trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. | Vẽ thêm đối tượng cần thiết để đối tượng tạo đường, đặt đúng lớp bản vẽ và ghi chú rõ ràng. |
-| `entity_create_mtext` | tạo đối tượng | Thực hiện thao tác đối tượng tạo mtext trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. | Vẽ thêm đối tượng cần thiết để đối tượng tạo mtext, đặt đúng lớp bản vẽ và ghi chú rõ ràng. |
-| `entity_create_point` | tạo đối tượng | Thực hiện thao tác đối tượng tạo điểm trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. | Vẽ thêm đối tượng cần thiết để đối tượng tạo điểm, đặt đúng lớp bản vẽ và ghi chú rõ ràng. |
-| `entity_create_polyline` | tạo đối tượng | Thực hiện thao tác đối tượng tạo đa tuyến trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. | Vẽ thêm đối tượng cần thiết để đối tượng tạo đa tuyến, đặt đúng lớp bản vẽ và ghi chú rõ ràng. |
-| `entity_create_rectangle` | tạo đối tượng | Thực hiện thao tác đối tượng tạo hình chữ nhật trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. | Vẽ thêm đối tượng cần thiết để đối tượng tạo hình chữ nhật, đặt đúng lớp bản vẽ và ghi chú rõ ràng. |
-| `entity_create_revcloud` | tạo đối tượng | Thực hiện thao tác đối tượng tạo revcloud trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. | Vẽ thêm đối tượng cần thiết để đối tượng tạo revcloud, đặt đúng lớp bản vẽ và ghi chú rõ ràng. |
-| `entity_create_spline` | tạo đối tượng | Thực hiện thao tác đối tượng tạo spline trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. | Vẽ thêm đối tượng cần thiết để đối tượng tạo spline, đặt đúng lớp bản vẽ và ghi chú rõ ràng. |
-| `entity_create_table` | tạo đối tượng | Thực hiện thao tác đối tượng tạo bảng trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. | Vẽ thêm đối tượng cần thiết để đối tượng tạo bảng, đặt đúng lớp bản vẽ và ghi chú rõ ràng. |
-| `entity_create_text` | tạo đối tượng | Thực hiện thao tác đối tượng tạo chữ trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. | Vẽ thêm đối tượng cần thiết để đối tượng tạo chữ, đặt đúng lớp bản vẽ và ghi chú rõ ràng. |
-| `entity_create_wipeout` | tạo đối tượng | Thực hiện thao tác đối tượng tạo wipeout trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. | Vẽ thêm đối tượng cần thiết để đối tượng tạo wipeout, đặt đúng lớp bản vẽ và ghi chú rõ ràng. |
-| `entity_delete` | sửa đối tượng | Thực hiện thao tác đối tượng xóa trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. | Chụp ảnh trước, thực hiện đối tượng xóa, chụp ảnh sau và liệt kê các đối tượng đã đổi. |
-| `entity_delete_many` | sửa đối tượng | Thực hiện thao tác đối tượng xóa many trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. | Chụp ảnh trước, thực hiện đối tượng xóa many, chụp ảnh sau và liệt kê các đối tượng đã đổi. |
-| `entity_edit_geometry` | sửa đối tượng | Thực hiện thao tác đối tượng edit geometry trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. | Chụp ảnh trước, thực hiện đối tượng edit geometry, chụp ảnh sau và liệt kê các đối tượng đã đổi. |
-| `entity_edit_text` | sửa đối tượng | Thực hiện thao tác đối tượng edit chữ trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. | Chụp ảnh trước, thực hiện đối tượng edit chữ, chụp ảnh sau và liệt kê các đối tượng đã đổi. |
-| `entity_extend` | corner_ops | Thực hiện thao tác đối tượng kéo dài trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Hãy thực hiện đối tượng kéo dài trên bản vẽ và báo cáo kết quả. |
-| `entity_fillet` | corner_ops | Thực hiện thao tác đối tượng fillet trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Hãy thực hiện đối tượng fillet trên bản vẽ và báo cáo kết quả. |
-| `entity_get` | tra cứu đối tượng | Thực hiện thao tác đối tượng get trong bản vẽ CAD. | Khi cần tìm và đọc thuộc tính đối tượng. | Tìm các đối tượng liên quan rồi báo cáo đối tượng get, không thay đổi hình học. |
-| `entity_get_xdata` | tra cứu đối tượng | Thực hiện thao tác đối tượng get xdata trong bản vẽ CAD. | Khi cần tìm và đọc thuộc tính đối tượng. | Tìm các đối tượng liên quan rồi báo cáo đối tượng get xdata, không thay đổi hình học. |
-| `entity_list` | tra cứu đối tượng | Thực hiện thao tác đối tượng liệt kê trong bản vẽ CAD. | Khi cần tìm và đọc thuộc tính đối tượng. | Tìm các đối tượng liên quan rồi báo cáo đối tượng liệt kê, không thay đổi hình học. |
-| `entity_mirror` | sửa đối tượng | Thực hiện thao tác đối tượng đối xứng trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. | Chụp ảnh trước, thực hiện đối tượng đối xứng, chụp ảnh sau và liệt kê các đối tượng đã đổi. |
-| `entity_move` | sửa đối tượng | Thực hiện thao tác đối tượng di chuyển trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. | Chụp ảnh trước, thực hiện đối tượng di chuyển, chụp ảnh sau và liệt kê các đối tượng đã đổi. |
-| `entity_offset` | sửa đối tượng | Thực hiện thao tác đối tượng song song trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. | Chụp ảnh trước, thực hiện đối tượng song song, chụp ảnh sau và liệt kê các đối tượng đã đổi. |
-| `entity_rotate` | sửa đối tượng | Thực hiện thao tác đối tượng xoay trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. | Chụp ảnh trước, thực hiện đối tượng xoay, chụp ảnh sau và liệt kê các đối tượng đã đổi. |
-| `entity_scale` | sửa đối tượng | Thực hiện thao tác đối tượng tỷ lệ trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. | Chụp ảnh trước, thực hiện đối tượng tỷ lệ, chụp ảnh sau và liệt kê các đối tượng đã đổi. |
-| `entity_select_smart` | nâng cao | Thực hiện thao tác đối tượng chọn smart trong bản vẽ CAD. | Khi cần chức năng nâng cao. | Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện đối tượng chọn smart nếu backend cho phép. |
-| `entity_set_properties` | sửa đối tượng | Thực hiện thao tác đối tượng đặt thuộc tính trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. | Chụp ảnh trước, thực hiện đối tượng đặt thuộc tính, chụp ảnh sau và liệt kê các đối tượng đã đổi. |
-| `entity_set_xdata` | sửa đối tượng | Thực hiện thao tác đối tượng đặt xdata trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. | Chụp ảnh trước, thực hiện đối tượng đặt xdata, chụp ảnh sau và liệt kê các đối tượng đã đổi. |
-| `entity_trim` | corner_ops | Thực hiện thao tác đối tượng cắt trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Hãy thực hiện đối tượng cắt trên bản vẽ và báo cáo kết quả. |
-| `gd_frame` | kỹ thuật | Thực hiện thao tác gd frame trong bản vẽ CAD. | Khi cần kiểm tra kỹ thuật. | Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo gd frame thành lỗi hoặc cảnh báo. |
-| `gear_draw_helical_front_view` | kỹ thuật | Thực hiện thao tác gear draw helical front góc nhìn trong bản vẽ CAD. | Khi cần kiểm tra kỹ thuật. | Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo gear draw helical front góc nhìn thành lỗi hoặc cảnh báo. |
-| `gear_draw_section_aa` | kỹ thuật | Thực hiện thao tác gear draw mặt cắt aa trong bản vẽ CAD. | Khi cần kiểm tra kỹ thuật. | Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo gear draw mặt cắt aa thành lỗi hoặc cảnh báo. |
-| `gear_draw_spur_front_view` | kỹ thuật | Thực hiện thao tác gear draw spur front góc nhìn trong bản vẽ CAD. | Khi cần kiểm tra kỹ thuật. | Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo gear draw spur front góc nhìn thành lỗi hoặc cảnh báo. |
-| `hatch_add_boundary` | tạo đối tượng | Thực hiện thao tác tô mặt add boundary trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. | Vẽ thêm đối tượng cần thiết để tô mặt add boundary, đặt đúng lớp bản vẽ và ghi chú rõ ràng. |
-| `hatch_edit` | tạo đối tượng | Thực hiện thao tác tô mặt edit trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. | Vẽ thêm đối tượng cần thiết để tô mặt edit, đặt đúng lớp bản vẽ và ghi chú rõ ràng. |
-| `hatch_material` | cơ khí | Thực hiện thao tác tô mặt material trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. | Trên bản vẽ cơ khí, hãy tô mặt material theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn. |
-| `hatch_set_gradient` | tạo đối tượng | Thực hiện thao tác tô mặt đặt gradient trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. | Vẽ thêm đối tượng cần thiết để tô mặt đặt gradient, đặt đúng lớp bản vẽ và ghi chú rõ ràng. |
-| `image_attach` | tờ bản vẽ | Thực hiện thao tác hình ảnh đính kèm trong bản vẽ CAD. | Khi cần tờ bản vẽ, khung tên và phát hành. | Chuẩn bị tờ bản vẽ phát hành và thực hiện hình ảnh đính kèm trong khung tên. |
-| `keyway_draw_keyed_bore` | kỹ thuật | Thực hiện thao tác keyway draw keyed bore trong bản vẽ CAD. | Khi cần kiểm tra kỹ thuật. | Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo keyway draw keyed bore thành lỗi hoặc cảnh báo. |
-| `keyway_draw_section` | kỹ thuật | Thực hiện thao tác keyway draw mặt cắt trong bản vẽ CAD. | Khi cần kiểm tra kỹ thuật. | Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo keyway draw mặt cắt thành lỗi hoặc cảnh báo. |
-| `kho_industries` | mở rộng cadtroly | Thực hiện thao tác kho industries trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện kho industries trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `kho_rules_export` | mở rộng cadtroly | Thực hiện thao tác kho rules xuất trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện kho rules xuất trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `kho_rules_import` | mở rộng cadtroly | Thực hiện thao tác kho rules nhập trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện kho rules nhập trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `kho_skill_add` | mở rộng cadtroly | Thực hiện thao tác kho skill add trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện kho skill add trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `kho_skill_toggle` | mở rộng cadtroly | Thực hiện thao tác kho skill toggle trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện kho skill toggle trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `kho_skills` | mở rộng cadtroly | Thực hiện thao tác kho skills trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện kho skills trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `kho_standard_add` | mở rộng cadtroly | Thực hiện thao tác kho standard add trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện kho standard add trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `kho_standard_delete` | mở rộng cadtroly | Thực hiện thao tác kho standard xóa trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện kho standard xóa trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `kho_standards` | mở rộng cadtroly | Thực hiện thao tác kho standards trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện kho standards trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `kho_status` | mở rộng cadtroly | Thực hiện thao tác kho trạng thái trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện kho trạng thái trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `layer_create` | lớp bản vẽ | Thực hiện thao tác lớp tạo trong bản vẽ CAD. | Khi cần tạo và quản lý lớp bản vẽ. | Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp tạo, không tự đổi tiêu chuẩn nếu chưa hỏi. |
-| `layer_delete` | lớp bản vẽ | Thực hiện thao tác lớp xóa trong bản vẽ CAD. | Khi cần tạo và quản lý lớp bản vẽ. | Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp xóa, không tự đổi tiêu chuẩn nếu chưa hỏi. |
-| `layer_freeze` | lớp bản vẽ | Thực hiện thao tác lớp freeze trong bản vẽ CAD. | Khi cần tạo và quản lý lớp bản vẽ. | Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp freeze, không tự đổi tiêu chuẩn nếu chưa hỏi. |
-| `layer_hide` | lớp bản vẽ | Thực hiện thao tác lớp hide trong bản vẽ CAD. | Khi cần tạo và quản lý lớp bản vẽ. | Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp hide, không tự đổi tiêu chuẩn nếu chưa hỏi. |
-| `layer_isolate` | lớp bản vẽ | Thực hiện thao tác lớp isolate trong bản vẽ CAD. | Khi cần tạo và quản lý lớp bản vẽ. | Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp isolate, không tự đổi tiêu chuẩn nếu chưa hỏi. |
-| `layer_list` | lớp bản vẽ | Thực hiện thao tác lớp liệt kê trong bản vẽ CAD. | Khi cần tạo và quản lý lớp bản vẽ. | Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp liệt kê, không tự đổi tiêu chuẩn nếu chưa hỏi. |
-| `layer_lock` | lớp bản vẽ | Thực hiện thao tác lớp khóa trong bản vẽ CAD. | Khi cần tạo và quản lý lớp bản vẽ. | Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp khóa, không tự đổi tiêu chuẩn nếu chưa hỏi. |
-| `layer_modify` | lớp bản vẽ | Thực hiện thao tác lớp sửa trong bản vẽ CAD. | Khi cần tạo và quản lý lớp bản vẽ. | Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp sửa, không tự đổi tiêu chuẩn nếu chưa hỏi. |
-| `layer_set_current` | lớp bản vẽ | Thực hiện thao tác lớp đặt hiện tại trong bản vẽ CAD. | Khi cần tạo và quản lý lớp bản vẽ. | Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp đặt hiện tại, không tự đổi tiêu chuẩn nếu chưa hỏi. |
-| `layer_show` | lớp bản vẽ | Thực hiện thao tác lớp show trong bản vẽ CAD. | Khi cần tạo và quản lý lớp bản vẽ. | Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp show, không tự đổi tiêu chuẩn nếu chưa hỏi. |
-| `layer_state_delete` | môi trường | Thực hiện thao tác lớp state xóa trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo lớp state xóa trước khi thao tác bản vẽ. |
-| `layer_state_list` | môi trường | Thực hiện thao tác lớp state liệt kê trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo lớp state liệt kê trước khi thao tác bản vẽ. |
-| `layer_state_restore` | môi trường | Thực hiện thao tác lớp state restore trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo lớp state restore trước khi thao tác bản vẽ. |
-| `layer_state_save` | môi trường | Thực hiện thao tác lớp state lưu trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo lớp state lưu trước khi thao tác bản vẽ. |
-| `layer_thaw` | lớp bản vẽ | Thực hiện thao tác lớp thaw trong bản vẽ CAD. | Khi cần tạo và quản lý lớp bản vẽ. | Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp thaw, không tự đổi tiêu chuẩn nếu chưa hỏi. |
-| `layer_unlock` | lớp bản vẽ | Thực hiện thao tác lớp unlock trong bản vẽ CAD. | Khi cần tạo và quản lý lớp bản vẽ. | Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp unlock, không tự đổi tiêu chuẩn nếu chưa hỏi. |
-| `layout_copy` | bố cục | Thực hiện thao tác bố cục sao chép trong bản vẽ CAD. | Khi cần bố cục và khung nhìn. | Thiết lập bố cục A1 và thực hiện bố cục sao chép cho khung tên và khung nhìn. |
-| `layout_create` | bố cục | Thực hiện thao tác bố cục tạo trong bản vẽ CAD. | Khi cần bố cục và khung nhìn. | Thiết lập bố cục A1 và thực hiện bố cục tạo cho khung tên và khung nhìn. |
-| `layout_delete` | bố cục | Thực hiện thao tác bố cục xóa trong bản vẽ CAD. | Khi cần bố cục và khung nhìn. | Thiết lập bố cục A1 và thực hiện bố cục xóa cho khung tên và khung nhìn. |
-| `layout_list` | bố cục | Thực hiện thao tác bố cục liệt kê trong bản vẽ CAD. | Khi cần bố cục và khung nhìn. | Thiết lập bố cục A1 và thực hiện bố cục liệt kê cho khung tên và khung nhìn. |
-| `layout_rename` | bố cục | Thực hiện thao tác bố cục đổi tên trong bản vẽ CAD. | Khi cần bố cục và khung nhìn. | Thiết lập bố cục A1 và thực hiện bố cục đổi tên cho khung tên và khung nhìn. |
-| `layout_set_current` | bố cục | Thực hiện thao tác bố cục đặt hiện tại trong bản vẽ CAD. | Khi cần bố cục và khung nhìn. | Thiết lập bố cục A1 và thực hiện bố cục đặt hiện tại cho khung tên và khung nhìn. |
-| `leader_create_mleader` | tạo đối tượng | Thực hiện thao tác đường dẫn tạo mleader trong bản vẽ CAD. | Khi cần vẽ thêm đối tượng. | Vẽ thêm đối tượng cần thiết để đường dẫn tạo mleader, đặt đúng lớp bản vẽ và ghi chú rõ ràng. |
-| `linetype_list` | lớp bản vẽ | Thực hiện thao tác linetype liệt kê trong bản vẽ CAD. | Khi cần tạo và quản lý lớp bản vẽ. | Tổ chức các đối tượng theo lớp bản vẽ bằng cách linetype liệt kê, không tự đổi tiêu chuẩn nếu chưa hỏi. |
-| `linetype_load` | lớp bản vẽ | Thực hiện thao tác linetype nạp trong bản vẽ CAD. | Khi cần tạo và quản lý lớp bản vẽ. | Tổ chức các đối tượng theo lớp bản vẽ bằng cách linetype nạp, không tự đổi tiêu chuẩn nếu chưa hỏi. |
-| `mech_dimension_part` | cơ khí | Thực hiện thao tác mech kích thước part trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. | Trên bản vẽ cơ khí, hãy mech kích thước part theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn. |
-| `mech_hole_pattern` | cơ khí | Thực hiện thao tác mech hole pattern trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. | Trên bản vẽ cơ khí, hãy mech hole pattern theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn. |
-| `mech_part_draw` | cơ khí | Thực hiện thao tác mech part draw trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. | Trên bản vẽ cơ khí, hãy mech part draw theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn. |
-| `mech_part_from_spec` | cơ khí | Thực hiện thao tác mech part từ spec trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. | Trên bản vẽ cơ khí, hãy mech part từ spec theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn. |
-| `mech_part_inspect` | cơ khí | Thực hiện thao tác mech part inspect trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. | Trên bản vẽ cơ khí, hãy mech part inspect theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn. |
-| `mech_view_add` | cơ khí | Thực hiện thao tác mech góc nhìn add trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. | Trên bản vẽ cơ khí, hãy mech góc nhìn add theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn. |
-| `mleaderstyle_create` | kiểu hiển thị | Thực hiện thao tác mleaderstyle tạo trong bản vẽ CAD. | Khi cần kiểu và hiển thị. | Kiểm tra kiểu hiển thị hiện tại và thực hiện mleaderstyle tạo cho toàn bộ bản vẽ. |
-| `mleaderstyle_list` | kiểu hiển thị | Thực hiện thao tác mleaderstyle liệt kê trong bản vẽ CAD. | Khi cần kiểu và hiển thị. | Kiểm tra kiểu hiển thị hiện tại và thực hiện mleaderstyle liệt kê cho toàn bộ bản vẽ. |
-| `page_setup_apply` | thiết lập trang | Thực hiện thao tác trang cài đặt apply trong bản vẽ CAD. | Khi cần khổ giấy, tỷ lệ và in ấn. | Thiết lập khổ A1, tỷ lệ 1:100 rồi thực hiện trang cài đặt apply để chuẩn bị phát hành. |
-| `page_setup_list` | thiết lập trang | Thực hiện thao tác trang cài đặt liệt kê trong bản vẽ CAD. | Khi cần khổ giấy, tỷ lệ và in ấn. | Thiết lập khổ A1, tỷ lệ 1:100 rồi thực hiện trang cài đặt liệt kê để chuẩn bị phát hành. |
-| `pdf_to_dwg` | mở rộng cadtroly | Thực hiện thao tác pdf đến dwg trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện pdf đến dwg trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `pdf_vectorize` | mở rộng cadtroly | Thực hiện thao tác pdf vectorize trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện pdf vectorize trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `pid_equipment_list` | P&ID | Thực hiện thao tác P&ID equipment liệt kê trong bản vẽ CAD. | Khi cần sơ đồ P&ID. | Trên sơ đồ P&ID, hãy P&ID equipment liệt kê và kiểm tra ký hiệu, đường ống cùng nhãn thiết bị. |
-| `pid_from_spec` | P&ID | Thực hiện thao tác P&ID từ spec trong bản vẽ CAD. | Khi cần sơ đồ P&ID. | Trên sơ đồ P&ID, hãy P&ID từ spec và kiểm tra ký hiệu, đường ống cùng nhãn thiết bị. |
-| `pid_graph` | P&ID | Thực hiện thao tác P&ID graph trong bản vẽ CAD. | Khi cần sơ đồ P&ID. | Trên sơ đồ P&ID, hãy P&ID graph và kiểm tra ký hiệu, đường ống cùng nhãn thiết bị. |
-| `pid_instrument_index` | P&ID | Thực hiện thao tác P&ID instrument index trong bản vẽ CAD. | Khi cần sơ đồ P&ID. | Trên sơ đồ P&ID, hãy P&ID instrument index và kiểm tra ký hiệu, đường ống cùng nhãn thiết bị. |
-| `pid_line_draw` | P&ID | Thực hiện thao tác P&ID đường draw trong bản vẽ CAD. | Khi cần sơ đồ P&ID. | Trên sơ đồ P&ID, hãy P&ID đường draw và kiểm tra ký hiệu, đường ống cùng nhãn thiết bị. |
-| `pid_line_list` | P&ID | Thực hiện thao tác P&ID đường liệt kê trong bản vẽ CAD. | Khi cần sơ đồ P&ID. | Trên sơ đồ P&ID, hãy P&ID đường liệt kê và kiểm tra ký hiệu, đường ống cùng nhãn thiết bị. |
-| `pid_symbol_insert` | P&ID | Thực hiện thao tác P&ID ký hiệu chèn trong bản vẽ CAD. | Khi cần sơ đồ P&ID. | Trên sơ đồ P&ID, hãy P&ID ký hiệu chèn và kiểm tra ký hiệu, đường ống cùng nhãn thiết bị. |
-| `pid_symbol_list` | P&ID | Thực hiện thao tác P&ID ký hiệu liệt kê trong bản vẽ CAD. | Khi cần sơ đồ P&ID. | Trên sơ đồ P&ID, hãy P&ID ký hiệu liệt kê và kiểm tra ký hiệu, đường ống cùng nhãn thiết bị. |
-| `pid_tag_parse` | P&ID | Thực hiện thao tác P&ID tag parse trong bản vẽ CAD. | Khi cần sơ đồ P&ID. | Trên sơ đồ P&ID, hãy P&ID tag parse và kiểm tra ký hiệu, đường ống cùng nhãn thiết bị. |
-| `pipe_takeoff` | nhà máy | Thực hiện thao tác pipe takeoff trong bản vẽ CAD. | Khi cần bố trí thiết bị nhà máy. | Trong bản vẽ nhà máy, hãy pipe takeoff và kiểm tra khoảng cách an toàn thiết bị. |
-| `plot_style_list` | thiết lập trang | Thực hiện thao tác plot kiểu liệt kê trong bản vẽ CAD. | Khi cần khổ giấy, tỷ lệ và in ấn. | Thiết lập khổ A1, tỷ lệ 1:100 rồi thực hiện plot kiểu liệt kê để chuẩn bị phát hành. |
-| `point_from_snap` | nâng cao | Thực hiện thao tác điểm từ snap trong bản vẽ CAD. | Khi cần chức năng nâng cao. | Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện điểm từ snap nếu backend cho phép. |
-| `point_intersection` | nâng cao | Thực hiện thao tác điểm intersection trong bản vẽ CAD. | Khi cần chức năng nâng cao. | Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện điểm intersection nếu backend cho phép. |
-| `point_tangent` | nâng cao | Thực hiện thao tác điểm tangent trong bản vẽ CAD. | Khi cần chức năng nâng cao. | Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện điểm tangent nếu backend cho phép. |
-| `revision_add` | tờ bản vẽ | Thực hiện thao tác revision add trong bản vẽ CAD. | Khi cần tờ bản vẽ, khung tên và phát hành. | Chuẩn bị tờ bản vẽ phát hành và thực hiện revision add trong khung tên. |
-| `section_line` | cơ khí | Thực hiện thao tác mặt cắt đường trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. | Trên bản vẽ cơ khí, hãy mặt cắt đường theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn. |
-| `selection_filter` | tra cứu đối tượng | Thực hiện thao tác selection filter trong bản vẽ CAD. | Khi cần tìm và đọc thuộc tính đối tượng. | Tìm các đối tượng liên quan rồi báo cáo selection filter, không thay đổi hình học. |
-| `selection_get` | tra cứu đối tượng | Thực hiện thao tác selection get trong bản vẽ CAD. | Khi cần tìm và đọc thuộc tính đối tượng. | Tìm các đối tượng liên quan rồi báo cáo selection get, không thay đổi hình học. |
-| `selection_polygon` | tra cứu đối tượng | Thực hiện thao tác selection đa giác trong bản vẽ CAD. | Khi cần tìm và đọc thuộc tính đối tượng. | Tìm các đối tượng liên quan rồi báo cáo selection đa giác, không thay đổi hình học. |
-| `selection_window` | tra cứu đối tượng | Thực hiện thao tác selection window trong bản vẽ CAD. | Khi cần tìm và đọc thuộc tính đối tượng. | Tìm các đối tượng liên quan rồi báo cáo selection window, không thay đổi hình học. |
-| `sheet_frame` | tờ bản vẽ | Thực hiện thao tác tờ bản vẽ frame trong bản vẽ CAD. | Khi cần tờ bản vẽ, khung tên và phát hành. | Chuẩn bị tờ bản vẽ phát hành và thực hiện tờ bản vẽ frame trong khung tên. |
-| `solid_boolean` | khối đặc | Thực hiện thao tác khối đặc boolean trong bản vẽ CAD. | Khi cần hình học ba chiều và khối đặc. | Kiểm tra hình học ba chiều rồi thực hiện khối đặc boolean; không làm hỏng đối tượng gốc. |
-| `solid_box` | khối đặc | Thực hiện thao tác khối đặc khung trong bản vẽ CAD. | Khi cần hình học ba chiều và khối đặc. | Kiểm tra hình học ba chiều rồi thực hiện khối đặc khung; không làm hỏng đối tượng gốc. |
-| `solid_cylinder` | khối đặc | Thực hiện thao tác khối đặc cylinder trong bản vẽ CAD. | Khi cần hình học ba chiều và khối đặc. | Kiểm tra hình học ba chiều rồi thực hiện khối đặc cylinder; không làm hỏng đối tượng gốc. |
-| `solid_extrude` | khối đặc | Thực hiện thao tác khối đặc extrude trong bản vẽ CAD. | Khi cần hình học ba chiều và khối đặc. | Kiểm tra hình học ba chiều rồi thực hiện khối đặc extrude; không làm hỏng đối tượng gốc. |
-| `solid_revolve` | khối đặc | Thực hiện thao tác khối đặc revolve trong bản vẽ CAD. | Khi cần hình học ba chiều và khối đặc. | Kiểm tra hình học ba chiều rồi thực hiện khối đặc revolve; không làm hỏng đối tượng gốc. |
-| `standards_reference` | mở rộng cadtroly | Thực hiện thao tác standards tham chiếu trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện standards tham chiếu trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `std_feature_draw` | cơ khí | Thực hiện thao tác std feature draw trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. | Trên bản vẽ cơ khí, hãy std feature draw theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn. |
-| `std_part_insert` | cơ khí | Thực hiện thao tác std part chèn trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. | Trên bản vẽ cơ khí, hãy std part chèn theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn. |
-| `std_part_list` | cơ khí | Thực hiện thao tác std part liệt kê trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. | Trên bản vẽ cơ khí, hãy std part liệt kê theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn. |
-| `structural_qa` | mở rộng cadtroly | Thực hiện thao tác structural qa trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện structural qa trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `surface_texture` | cơ khí | Thực hiện thao tác surface texture trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. | Trên bản vẽ cơ khí, hãy surface texture theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn. |
-| `system_about` | hệ thống | Thực hiện thao tác hệ thống thông tin trong bản vẽ CAD. | Khi cần trạng thái máy chủ. | Báo cáo trạng thái MCP, AutoCAD và backend bằng cách hệ thống thông tin. |
-| `system_capabilities` | tra cứu đối tượng | Thực hiện thao tác hệ thống capabilities trong bản vẽ CAD. | Khi cần tìm và đọc thuộc tính đối tượng. | Tìm các đối tượng liên quan rồi báo cáo hệ thống capabilities, không thay đổi hình học. |
-| `system_get_variable` | hệ thống | Thực hiện thao tác hệ thống get variable trong bản vẽ CAD. | Khi cần trạng thái máy chủ. | Báo cáo trạng thái MCP, AutoCAD và backend bằng cách hệ thống get variable. |
-| `system_launch` | môi trường | Thực hiện thao tác hệ thống launch trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo hệ thống launch trước khi thao tác bản vẽ. |
-| `system_preferences_get` | môi trường | Thực hiện thao tác hệ thống preferences get trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo hệ thống preferences get trước khi thao tác bản vẽ. |
-| `system_preferences_set` | môi trường | Thực hiện thao tác hệ thống preferences đặt trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo hệ thống preferences đặt trước khi thao tác bản vẽ. |
-| `system_prompt_message` | môi trường | Thực hiện thao tác hệ thống prompt message trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo hệ thống prompt message trước khi thao tác bản vẽ. |
-| `system_run_command` | hệ thống | Thực hiện thao tác hệ thống run command trong bản vẽ CAD. | Khi cần trạng thái máy chủ. | Báo cáo trạng thái MCP, AutoCAD và backend bằng cách hệ thống run command. |
-| `system_run_lisp` | hệ thống | Thực hiện thao tác hệ thống run lisp trong bản vẽ CAD. | Khi cần trạng thái máy chủ. | Báo cáo trạng thái MCP, AutoCAD và backend bằng cách hệ thống run lisp. |
-| `system_set_variable` | hệ thống | Thực hiện thao tác hệ thống đặt variable trong bản vẽ CAD. | Khi cần trạng thái máy chủ. | Báo cáo trạng thái MCP, AutoCAD và backend bằng cách hệ thống đặt variable. |
-| `system_status` | hệ thống | Thực hiện thao tác hệ thống trạng thái trong bản vẽ CAD. | Khi cần trạng thái máy chủ. | Báo cáo trạng thái MCP, AutoCAD và backend bằng cách hệ thống trạng thái. |
-| `system_variable_describe` | môi trường | Thực hiện thao tác hệ thống variable describe trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo hệ thống variable describe trước khi thao tác bản vẽ. |
-| `takeoff_compute` | mở rộng cadtroly | Thực hiện thao tác takeoff compute trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện takeoff compute trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `takeoff_decide` | mở rộng cadtroly | Thực hiện thao tác takeoff decide trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện takeoff decide trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `takeoff_export` | mở rộng cadtroly | Thực hiện thao tác takeoff xuất trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện takeoff xuất trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `takeoff_propose` | mở rộng cadtroly | Thực hiện thao tác takeoff propose trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện takeoff propose trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `takeoff_run` | mở rộng cadtroly | Thực hiện thao tác takeoff run trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện takeoff run trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `template_apply_layers` | mẫu bản vẽ | Thực hiện thao tác mẫu apply layers trong bản vẽ CAD. | Khi cần mẫu bản vẽ. | Tạo bản vẽ mới từ mẫu dự án rồi thực hiện mẫu apply layers theo tiêu chuẩn đã chọn. |
-| `template_list` | mẫu bản vẽ | Thực hiện thao tác mẫu liệt kê trong bản vẽ CAD. | Khi cần mẫu bản vẽ. | Tạo bản vẽ mới từ mẫu dự án rồi thực hiện mẫu liệt kê theo tiêu chuẩn đã chọn. |
-| `text_find_replace` | sửa đối tượng | Thực hiện thao tác chữ tìm replace trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. | Chụp ảnh trước, thực hiện chữ tìm replace, chụp ảnh sau và liệt kê các đối tượng đã đổi. |
-| `text_set_background` | sửa đối tượng | Thực hiện thao tác chữ đặt background trong bản vẽ CAD. | Khi cần sửa hoặc biến đổi đối tượng. | Chụp ảnh trước, thực hiện chữ đặt background, chụp ảnh sau và liệt kê các đối tượng đã đổi. |
-| `textstyle_create` | kiểu hiển thị | Thực hiện thao tác textstyle tạo trong bản vẽ CAD. | Khi cần kiểu và hiển thị. | Kiểm tra kiểu hiển thị hiện tại và thực hiện textstyle tạo cho toàn bộ bản vẽ. |
-| `textstyle_list` | kiểu hiển thị | Thực hiện thao tác textstyle liệt kê trong bản vẽ CAD. | Khi cần kiểu và hiển thị. | Kiểm tra kiểu hiển thị hiện tại và thực hiện textstyle liệt kê cho toàn bộ bản vẽ. |
-| `textstyle_set_current` | kiểu hiển thị | Thực hiện thao tác textstyle đặt hiện tại trong bản vẽ CAD. | Khi cần kiểu và hiển thị. | Kiểm tra kiểu hiển thị hiện tại và thực hiện textstyle đặt hiện tại cho toàn bộ bản vẽ. |
-| `titleblock_apply` | tờ bản vẽ | Thực hiện thao tác titleblock apply trong bản vẽ CAD. | Khi cần tờ bản vẽ, khung tên và phát hành. | Chuẩn bị tờ bản vẽ phát hành và thực hiện titleblock apply trong khung tên. |
-| `titleblock_apply_iso_a3` | kỹ thuật | Thực hiện thao tác titleblock apply iso a3 trong bản vẽ CAD. | Khi cần kiểm tra kỹ thuật. | Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo titleblock apply iso a3 thành lỗi hoặc cảnh báo. |
-| `transaction_begin` | giao dịch | Thực hiện thao tác giao dịch begin trong bản vẽ CAD. | Khi cần giao dịch thay đổi có kiểm soát. | Bắt đầu giao dịch, thực hiện giao dịch begin, cho tôi xem thay đổi rồi mới xác nhận. |
-| `transaction_commit` | giao dịch | Thực hiện thao tác giao dịch commit trong bản vẽ CAD. | Khi cần giao dịch thay đổi có kiểm soát. | Bắt đầu giao dịch, thực hiện giao dịch commit, cho tôi xem thay đổi rồi mới xác nhận. |
-| `transaction_rollback` | giao dịch | Thực hiện thao tác giao dịch rollback trong bản vẽ CAD. | Khi cần giao dịch thay đổi có kiểm soát. | Bắt đầu giao dịch, thực hiện giao dịch rollback, cho tôi xem thay đổi rồi mới xác nhận. |
-| `ucs_list` | môi trường | Thực hiện thao tác ucs liệt kê trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo ucs liệt kê trước khi thao tác bản vẽ. |
-| `ucs_restore` | môi trường | Thực hiện thao tác ucs restore trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo ucs restore trước khi thao tác bản vẽ. |
-| `ucs_set` | môi trường | Thực hiện thao tác ucs đặt trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo ucs đặt trước khi thao tác bản vẽ. |
-| `user_pick_point` | môi trường | Thực hiện thao tác user pick điểm trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo user pick điểm trước khi thao tác bản vẽ. |
-| `user_select` | môi trường | Thực hiện thao tác user chọn trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo user chọn trước khi thao tác bản vẽ. |
-| `validation_check` | xác nhận | Thực hiện thao tác validation kiểm tra trong bản vẽ CAD. | Khi cần kiểm tra hợp lệ. | Kiểm tra bản vẽ và báo cáo validation kiểm tra theo mức Error, Warning và Info. |
-| `view_named_list` | môi trường | Thực hiện thao tác góc nhìn named liệt kê trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo góc nhìn named liệt kê trước khi thao tác bản vẽ. |
-| `view_named_restore` | môi trường | Thực hiện thao tác góc nhìn named restore trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo góc nhìn named restore trước khi thao tác bản vẽ. |
-| `view_named_save` | môi trường | Thực hiện thao tác góc nhìn named lưu trong bản vẽ CAD. | Khi cần kiểm tra kết nối và cấu hình. | Kiểm tra kết nối AutoCAD và báo cáo góc nhìn named lưu trước khi thao tác bản vẽ. |
-| `view_render_report` | mở rộng cadtroly | Thực hiện thao tác góc nhìn kết xuất report trong bản vẽ CAD. | Khi cần chức năng mở rộng của cadtroly. | Thực hiện góc nhìn kết xuất report trên bản vẽ, báo cáo kết quả và không ghi đè file gốc. |
-| `view_screenshot` | góc nhìn | Thực hiện thao tác góc nhìn screenshot trong bản vẽ CAD. | Khi cần thu phóng, góc nhìn và ảnh chụp. | Chụp riêng vùng mặt bằng tầng 1, vùng khung tên và vùng kích thước bên phải. |
-| `view_zoom_and_screenshot` | góc nhìn | Thực hiện thao tác góc nhìn thu phóng và screenshot trong bản vẽ CAD. | Khi cần thu phóng, góc nhìn và ảnh chụp. | Thu toàn bộ bản vẽ vào màn hình rồi chụp ảnh để tôi kiểm tra nhanh. |
-| `view_zoom_extents` | góc nhìn | Thực hiện thao tác góc nhìn thu phóng extents trong bản vẽ CAD. | Khi cần thu phóng, góc nhìn và ảnh chụp. | Thu phóng để toàn bộ đối tượng của bản vẽ nằm vừa trên màn hình. |
-| `view_zoom_window` | góc nhìn | Thực hiện thao tác góc nhìn thu phóng window trong bản vẽ CAD. | Khi cần thu phóng, góc nhìn và ảnh chụp. | Phóng to riêng vùng mặt bằng tầng 1 để nhìn rõ cửa, thiết bị và kích thước. |
-| `viewport_create` | bố cục | Thực hiện thao tác khung nhìn tạo trong bản vẽ CAD. | Khi cần bố cục và khung nhìn. | Thiết lập bố cục A1 và thực hiện khung nhìn tạo cho khung tên và khung nhìn. |
-| `viewport_delete` | bố cục | Thực hiện thao tác khung nhìn xóa trong bản vẽ CAD. | Khi cần bố cục và khung nhìn. | Thiết lập bố cục A1 và thực hiện khung nhìn xóa cho khung tên và khung nhìn. |
-| `viewport_list` | bố cục | Thực hiện thao tác khung nhìn liệt kê trong bản vẽ CAD. | Khi cần bố cục và khung nhìn. | Thiết lập bố cục A1 và thực hiện khung nhìn liệt kê cho khung tên và khung nhìn. |
-| `viewport_lock` | bố cục | Thực hiện thao tác khung nhìn khóa trong bản vẽ CAD. | Khi cần bố cục và khung nhìn. | Thiết lập bố cục A1 và thực hiện khung nhìn khóa cho khung tên và khung nhìn. |
-| `viewport_set_scale` | bố cục | Thực hiện thao tác khung nhìn đặt tỷ lệ trong bản vẽ CAD. | Khi cần bố cục và khung nhìn. | Thiết lập bố cục A1 và thực hiện khung nhìn đặt tỷ lệ cho khung tên và khung nhìn. |
-| `weld_symbol` | cơ khí | Thực hiện thao tác mối hàn ký hiệu trong bản vẽ CAD. | Khi cần bản vẽ cơ khí. | Trên bản vẽ cơ khí, hãy mối hàn ký hiệu theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn. |
-| `xref_attach` | tờ bản vẽ | Thực hiện thao tác tham chiếu ngoài đính kèm trong bản vẽ CAD. | Khi cần tờ bản vẽ, khung tên và phát hành. | Chuẩn bị tờ bản vẽ phát hành và thực hiện tham chiếu ngoài đính kèm trong khung tên. |
-| `xref_manage` | tờ bản vẽ | Thực hiện thao tác tham chiếu ngoài quản lý trong bản vẽ CAD. | Khi cần tờ bản vẽ, khung tên và phát hành. | Chuẩn bị tờ bản vẽ phát hành và thực hiện tham chiếu ngoài quản lý trong khung tên. |
+- [`analysis_bounding_box`](#analysis_bounding_box) — phân tích
+- [`analysis_entity_stats`](#analysis_entity_stats) — phân tích
+- [`analysis_find_in_region`](#analysis_find_in_region) — phân tích
+- [`analysis_layer_stats`](#analysis_layer_stats) — phân tích
+- [`analysis_list_properties`](#analysis_list_properties) — phân tích
+- [`analysis_measure_area`](#analysis_measure_area) — phân tích
+- [`analysis_measure_distance`](#analysis_measure_distance) — phân tích
+- [`analysis_measure_entity`](#analysis_measure_entity) — phân tích
+- [`analysis_select_by_layer`](#analysis_select_by_layer) — phân tích
+- [`analysis_select_by_type`](#analysis_select_by_type) — phân tích
+- [`arch_catalogue_insert`](#arch_catalogue_insert) — kiến trúc
+- [`arch_catalogue_list`](#arch_catalogue_list) — kiến trúc
+- [`arch_dimension_chains`](#arch_dimension_chains) — kiến trúc
+- [`arch_grid`](#arch_grid) — kiến trúc
+- [`arch_opening`](#arch_opening) — kiến trúc
+- [`arch_plan_from_spec`](#arch_plan_from_spec) — kiến trúc
+- [`arch_room`](#arch_room) — kiến trúc
+- [`arch_rooms_detect`](#arch_rooms_detect) — kiến trúc
+- [`arch_schedule`](#arch_schedule) — kiến trúc
+- [`arch_stair`](#arch_stair) — kiến trúc
+- [`arch_symbol`](#arch_symbol) — kiến trúc
+- [`arch_wall`](#arch_wall) — kiến trúc
+- [`balloon_add`](#balloon_add) — tờ bản vẽ
+- [`batch_plot`](#batch_plot) — thiết lập trang
+- [`block_create_from_entities`](#block_create_from_entities) — khối
+- [`block_define`](#block_define) — khối
+- [`block_explode`](#block_explode) — khối
+- [`block_find_references`](#block_find_references) — khối
+- [`block_get_attributes`](#block_get_attributes) — khối
+- [`block_insert`](#block_insert) — khối
+- [`block_list`](#block_list) — khối
+- [`block_set_attributes`](#block_set_attributes) — khối
+- [`bom_extract`](#bom_extract) — tờ bản vẽ
+- [`bom_table`](#bom_table) — tờ bản vẽ
+- [`boundary_from_entities`](#boundary_from_entities) — phân tích
+- [`boundary_trace`](#boundary_trace) — phân tích
+- [`cable_takeoff`](#cable_takeoff) — nhà máy
+- [`cad_batch`](#cad_batch) — xử lý hàng loạt
+- [`centre_marks`](#centre_marks) — cơ khí
+- [`check_rulesets`](#check_rulesets) — mở rộng cadtroly
+- [`check_run`](#check_run) — mở rộng cadtroly
+- [`construction_clear`](#construction_clear) — nâng cao
+- [`construction_xline`](#construction_xline) — nâng cao
+- [`data_extract`](#data_extract) — tờ bản vẽ
+- [`datum_feature`](#datum_feature) — kỹ thuật
+- [`dimension_aligned`](#dimension_aligned) — kích thước
+- [`dimension_angular`](#dimension_angular) — kích thước
+- [`dimension_auto`](#dimension_auto) — nâng cao
+- [`dimension_diameter`](#dimension_diameter) — kích thước
+- [`dimension_linear`](#dimension_linear) — kích thước
+- [`dimension_radius`](#dimension_radius) — kích thước
+- [`dimstyle_create`](#dimstyle_create) — kiểu hiển thị
+- [`dimstyle_list`](#dimstyle_list) — kiểu hiển thị
+- [`dimstyle_modify`](#dimstyle_modify) — kiểu hiển thị
+- [`dimstyle_set_current`](#dimstyle_set_current) — kiểu hiển thị
+- [`document_activate`](#document_activate) — môi trường
+- [`document_close`](#document_close) — môi trường
+- [`document_list`](#document_list) — môi trường
+- [`drawing_apply_discipline_standard`](#drawing_apply_discipline_standard) — mở rộng cadtroly
+- [`drawing_apply_iso_layers`](#drawing_apply_iso_layers) — nâng cao
+- [`drawing_apply_standard`](#drawing_apply_standard) — kiểu hiển thị
+- [`drawing_audit`](#drawing_audit) — bản vẽ
+- [`drawing_close`](#drawing_close) — bản vẽ
+- [`drawing_critique`](#drawing_critique) — nâng cao
+- [`drawing_deliver`](#drawing_deliver) — kỹ thuật
+- [`drawing_diff`](#drawing_diff) — đọc hiểu
+- [`drawing_entities`](#drawing_entities) — mở rộng cadtroly
+- [`drawing_export_dwg`](#drawing_export_dwg) — tờ bản vẽ
+- [`drawing_export_dxf`](#drawing_export_dxf) — bản vẽ
+- [`drawing_export_pdf`](#drawing_export_pdf) — bản vẽ
+- [`drawing_finalize`](#drawing_finalize) — kỹ thuật
+- [`drawing_info`](#drawing_info) — tra cứu đối tượng
+- [`drawing_new`](#drawing_new) — bản vẽ
+- [`drawing_open`](#drawing_open) — bản vẽ
+- [`drawing_plan`](#drawing_plan) — nâng cao
+- [`drawing_preflight`](#drawing_preflight) — nâng cao
+- [`drawing_properties_get`](#drawing_properties_get) — môi trường
+- [`drawing_properties_set`](#drawing_properties_set) — môi trường
+- [`drawing_purge`](#drawing_purge) — bản vẽ
+- [`drawing_read`](#drawing_read) — mở rộng cadtroly
+- [`drawing_redo`](#drawing_redo) — bản vẽ
+- [`drawing_refine`](#drawing_refine) — nâng cao
+- [`drawing_save`](#drawing_save) — bản vẽ
+- [`drawing_save_as`](#drawing_save_as) — bản vẽ
+- [`drawing_scale_check`](#drawing_scale_check) — đọc hiểu
+- [`drawing_settings`](#drawing_settings) — hệ thống
+- [`drawing_template_list`](#drawing_template_list) — thiết lập trang
+- [`drawing_template_save`](#drawing_template_save) — thiết lập trang
+- [`drawing_topology_check`](#drawing_topology_check) — đọc hiểu
+- [`drawing_understand`](#drawing_understand) — đọc hiểu
+- [`drawing_undo`](#drawing_undo) — bản vẽ
+- [`entity_array_polar`](#entity_array_polar) — sửa đối tượng
+- [`entity_array_rectangular`](#entity_array_rectangular) — sửa đối tượng
+- [`entity_batch_create`](#entity_batch_create) — xử lý hàng loạt
+- [`entity_batch_modify`](#entity_batch_modify) — xử lý hàng loạt
+- [`entity_chamfer`](#entity_chamfer) — corner_ops
+- [`entity_change_space`](#entity_change_space) — bố cục
+- [`entity_copy`](#entity_copy) — sửa đối tượng
+- [`entity_create_arc`](#entity_create_arc) — tạo đối tượng
+- [`entity_create_block_ref`](#entity_create_block_ref) — khối
+- [`entity_create_circle`](#entity_create_circle) — tạo đối tượng
+- [`entity_create_ellipse`](#entity_create_ellipse) — tạo đối tượng
+- [`entity_create_hatch`](#entity_create_hatch) — tạo đối tượng
+- [`entity_create_line`](#entity_create_line) — tạo đối tượng
+- [`entity_create_mtext`](#entity_create_mtext) — tạo đối tượng
+- [`entity_create_point`](#entity_create_point) — tạo đối tượng
+- [`entity_create_polyline`](#entity_create_polyline) — tạo đối tượng
+- [`entity_create_rectangle`](#entity_create_rectangle) — tạo đối tượng
+- [`entity_create_revcloud`](#entity_create_revcloud) — tạo đối tượng
+- [`entity_create_spline`](#entity_create_spline) — tạo đối tượng
+- [`entity_create_table`](#entity_create_table) — tạo đối tượng
+- [`entity_create_text`](#entity_create_text) — tạo đối tượng
+- [`entity_create_wipeout`](#entity_create_wipeout) — tạo đối tượng
+- [`entity_delete`](#entity_delete) — sửa đối tượng
+- [`entity_delete_many`](#entity_delete_many) — sửa đối tượng
+- [`entity_edit_geometry`](#entity_edit_geometry) — sửa đối tượng
+- [`entity_edit_text`](#entity_edit_text) — sửa đối tượng
+- [`entity_extend`](#entity_extend) — corner_ops
+- [`entity_fillet`](#entity_fillet) — corner_ops
+- [`entity_get`](#entity_get) — tra cứu đối tượng
+- [`entity_get_xdata`](#entity_get_xdata) — tra cứu đối tượng
+- [`entity_list`](#entity_list) — tra cứu đối tượng
+- [`entity_mirror`](#entity_mirror) — sửa đối tượng
+- [`entity_move`](#entity_move) — sửa đối tượng
+- [`entity_offset`](#entity_offset) — sửa đối tượng
+- [`entity_rotate`](#entity_rotate) — sửa đối tượng
+- [`entity_scale`](#entity_scale) — sửa đối tượng
+- [`entity_select_smart`](#entity_select_smart) — nâng cao
+- [`entity_set_properties`](#entity_set_properties) — sửa đối tượng
+- [`entity_set_xdata`](#entity_set_xdata) — sửa đối tượng
+- [`entity_trim`](#entity_trim) — corner_ops
+- [`gd_frame`](#gd_frame) — kỹ thuật
+- [`gear_draw_helical_front_view`](#gear_draw_helical_front_view) — kỹ thuật
+- [`gear_draw_section_aa`](#gear_draw_section_aa) — kỹ thuật
+- [`gear_draw_spur_front_view`](#gear_draw_spur_front_view) — kỹ thuật
+- [`hatch_add_boundary`](#hatch_add_boundary) — tạo đối tượng
+- [`hatch_edit`](#hatch_edit) — tạo đối tượng
+- [`hatch_material`](#hatch_material) — cơ khí
+- [`hatch_set_gradient`](#hatch_set_gradient) — tạo đối tượng
+- [`image_attach`](#image_attach) — tờ bản vẽ
+- [`keyway_draw_keyed_bore`](#keyway_draw_keyed_bore) — kỹ thuật
+- [`keyway_draw_section`](#keyway_draw_section) — kỹ thuật
+- [`kho_industries`](#kho_industries) — mở rộng cadtroly
+- [`kho_rules_export`](#kho_rules_export) — mở rộng cadtroly
+- [`kho_rules_import`](#kho_rules_import) — mở rộng cadtroly
+- [`kho_skill_add`](#kho_skill_add) — mở rộng cadtroly
+- [`kho_skill_toggle`](#kho_skill_toggle) — mở rộng cadtroly
+- [`kho_skills`](#kho_skills) — mở rộng cadtroly
+- [`kho_standard_add`](#kho_standard_add) — mở rộng cadtroly
+- [`kho_standard_delete`](#kho_standard_delete) — mở rộng cadtroly
+- [`kho_standards`](#kho_standards) — mở rộng cadtroly
+- [`kho_status`](#kho_status) — mở rộng cadtroly
+- [`layer_create`](#layer_create) — lớp bản vẽ
+- [`layer_delete`](#layer_delete) — lớp bản vẽ
+- [`layer_freeze`](#layer_freeze) — lớp bản vẽ
+- [`layer_hide`](#layer_hide) — lớp bản vẽ
+- [`layer_isolate`](#layer_isolate) — lớp bản vẽ
+- [`layer_list`](#layer_list) — lớp bản vẽ
+- [`layer_lock`](#layer_lock) — lớp bản vẽ
+- [`layer_modify`](#layer_modify) — lớp bản vẽ
+- [`layer_set_current`](#layer_set_current) — lớp bản vẽ
+- [`layer_show`](#layer_show) — lớp bản vẽ
+- [`layer_state_delete`](#layer_state_delete) — môi trường
+- [`layer_state_list`](#layer_state_list) — môi trường
+- [`layer_state_restore`](#layer_state_restore) — môi trường
+- [`layer_state_save`](#layer_state_save) — môi trường
+- [`layer_thaw`](#layer_thaw) — lớp bản vẽ
+- [`layer_unlock`](#layer_unlock) — lớp bản vẽ
+- [`layout_copy`](#layout_copy) — bố cục
+- [`layout_create`](#layout_create) — bố cục
+- [`layout_delete`](#layout_delete) — bố cục
+- [`layout_list`](#layout_list) — bố cục
+- [`layout_rename`](#layout_rename) — bố cục
+- [`layout_set_current`](#layout_set_current) — bố cục
+- [`leader_create_mleader`](#leader_create_mleader) — tạo đối tượng
+- [`linetype_list`](#linetype_list) — lớp bản vẽ
+- [`linetype_load`](#linetype_load) — lớp bản vẽ
+- [`mech_dimension_part`](#mech_dimension_part) — cơ khí
+- [`mech_hole_pattern`](#mech_hole_pattern) — cơ khí
+- [`mech_part_draw`](#mech_part_draw) — cơ khí
+- [`mech_part_from_spec`](#mech_part_from_spec) — cơ khí
+- [`mech_part_inspect`](#mech_part_inspect) — cơ khí
+- [`mech_view_add`](#mech_view_add) — cơ khí
+- [`mleaderstyle_create`](#mleaderstyle_create) — kiểu hiển thị
+- [`mleaderstyle_list`](#mleaderstyle_list) — kiểu hiển thị
+- [`page_setup_apply`](#page_setup_apply) — thiết lập trang
+- [`page_setup_list`](#page_setup_list) — thiết lập trang
+- [`pdf_to_dwg`](#pdf_to_dwg) — mở rộng cadtroly
+- [`pdf_vectorize`](#pdf_vectorize) — mở rộng cadtroly
+- [`pid_equipment_list`](#pid_equipment_list) — P&ID
+- [`pid_from_spec`](#pid_from_spec) — P&ID
+- [`pid_graph`](#pid_graph) — P&ID
+- [`pid_instrument_index`](#pid_instrument_index) — P&ID
+- [`pid_line_draw`](#pid_line_draw) — P&ID
+- [`pid_line_list`](#pid_line_list) — P&ID
+- [`pid_symbol_insert`](#pid_symbol_insert) — P&ID
+- [`pid_symbol_list`](#pid_symbol_list) — P&ID
+- [`pid_tag_parse`](#pid_tag_parse) — P&ID
+- [`pipe_takeoff`](#pipe_takeoff) — nhà máy
+- [`plot_style_list`](#plot_style_list) — thiết lập trang
+- [`point_from_snap`](#point_from_snap) — nâng cao
+- [`point_intersection`](#point_intersection) — nâng cao
+- [`point_tangent`](#point_tangent) — nâng cao
+- [`revision_add`](#revision_add) — tờ bản vẽ
+- [`section_line`](#section_line) — cơ khí
+- [`selection_filter`](#selection_filter) — tra cứu đối tượng
+- [`selection_get`](#selection_get) — tra cứu đối tượng
+- [`selection_polygon`](#selection_polygon) — tra cứu đối tượng
+- [`selection_window`](#selection_window) — tra cứu đối tượng
+- [`sheet_frame`](#sheet_frame) — tờ bản vẽ
+- [`solid_boolean`](#solid_boolean) — khối đặc
+- [`solid_box`](#solid_box) — khối đặc
+- [`solid_cylinder`](#solid_cylinder) — khối đặc
+- [`solid_extrude`](#solid_extrude) — khối đặc
+- [`solid_revolve`](#solid_revolve) — khối đặc
+- [`standards_reference`](#standards_reference) — mở rộng cadtroly
+- [`std_feature_draw`](#std_feature_draw) — cơ khí
+- [`std_part_insert`](#std_part_insert) — cơ khí
+- [`std_part_list`](#std_part_list) — cơ khí
+- [`structural_qa`](#structural_qa) — mở rộng cadtroly
+- [`surface_texture`](#surface_texture) — cơ khí
+- [`system_about`](#system_about) — hệ thống
+- [`system_capabilities`](#system_capabilities) — tra cứu đối tượng
+- [`system_get_variable`](#system_get_variable) — hệ thống
+- [`system_launch`](#system_launch) — môi trường
+- [`system_preferences_get`](#system_preferences_get) — môi trường
+- [`system_preferences_set`](#system_preferences_set) — môi trường
+- [`system_prompt_message`](#system_prompt_message) — môi trường
+- [`system_run_command`](#system_run_command) — hệ thống
+- [`system_run_lisp`](#system_run_lisp) — hệ thống
+- [`system_set_variable`](#system_set_variable) — hệ thống
+- [`system_status`](#system_status) — hệ thống
+- [`system_variable_describe`](#system_variable_describe) — môi trường
+- [`takeoff_compute`](#takeoff_compute) — mở rộng cadtroly
+- [`takeoff_decide`](#takeoff_decide) — mở rộng cadtroly
+- [`takeoff_export`](#takeoff_export) — mở rộng cadtroly
+- [`takeoff_propose`](#takeoff_propose) — mở rộng cadtroly
+- [`takeoff_run`](#takeoff_run) — mở rộng cadtroly
+- [`template_apply_layers`](#template_apply_layers) — mẫu bản vẽ
+- [`template_list`](#template_list) — mẫu bản vẽ
+- [`text_find_replace`](#text_find_replace) — sửa đối tượng
+- [`text_set_background`](#text_set_background) — sửa đối tượng
+- [`textstyle_create`](#textstyle_create) — kiểu hiển thị
+- [`textstyle_list`](#textstyle_list) — kiểu hiển thị
+- [`textstyle_set_current`](#textstyle_set_current) — kiểu hiển thị
+- [`titleblock_apply`](#titleblock_apply) — tờ bản vẽ
+- [`titleblock_apply_iso_a3`](#titleblock_apply_iso_a3) — kỹ thuật
+- [`transaction_begin`](#transaction_begin) — giao dịch
+- [`transaction_commit`](#transaction_commit) — giao dịch
+- [`transaction_rollback`](#transaction_rollback) — giao dịch
+- [`ucs_list`](#ucs_list) — môi trường
+- [`ucs_restore`](#ucs_restore) — môi trường
+- [`ucs_set`](#ucs_set) — môi trường
+- [`user_pick_point`](#user_pick_point) — môi trường
+- [`user_select`](#user_select) — môi trường
+- [`validation_check`](#validation_check) — xác nhận
+- [`view_named_list`](#view_named_list) — môi trường
+- [`view_named_restore`](#view_named_restore) — môi trường
+- [`view_named_save`](#view_named_save) — môi trường
+- [`view_render_report`](#view_render_report) — mở rộng cadtroly
+- [`view_screenshot`](#view_screenshot) — góc nhìn
+- [`view_zoom_and_screenshot`](#view_zoom_and_screenshot) — góc nhìn
+- [`view_zoom_extents`](#view_zoom_extents) — góc nhìn
+- [`view_zoom_window`](#view_zoom_window) — góc nhìn
+- [`viewport_create`](#viewport_create) — bố cục
+- [`viewport_delete`](#viewport_delete) — bố cục
+- [`viewport_list`](#viewport_list) — bố cục
+- [`viewport_lock`](#viewport_lock) — bố cục
+- [`viewport_set_scale`](#viewport_set_scale) — bố cục
+- [`weld_symbol`](#weld_symbol) — cơ khí
+- [`xref_attach`](#xref_attach) — tờ bản vẽ
+- [`xref_manage`](#xref_manage) — tờ bản vẽ
+
+## Hướng dẫn từng chức năng
+
+### analysis_bounding_box
+
+- **Nhóm:** phân tích
+- **Làm gì:** Thực hiện thao tác phân tích giới hạn khung trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần đọc/đo/phân tích, không sửa bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Đọc bản vẽ và báo cáo phân tích giới hạn khung; không sửa file gốc.
+
+### analysis_entity_stats
+
+- **Nhóm:** phân tích
+- **Làm gì:** Thực hiện thao tác phân tích đối tượng thống kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần đọc/đo/phân tích, không sửa bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Đọc bản vẽ và báo cáo phân tích đối tượng thống kê; không sửa file gốc.
+
+### analysis_find_in_region
+
+- **Nhóm:** phân tích
+- **Làm gì:** Thực hiện thao tác phân tích tìm trong vùng trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần đọc/đo/phân tích, không sửa bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Đọc bản vẽ và báo cáo phân tích tìm trong vùng; không sửa file gốc.
+
+### analysis_layer_stats
+
+- **Nhóm:** phân tích
+- **Làm gì:** Thực hiện thao tác phân tích lớp thống kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần đọc/đo/phân tích, không sửa bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Đọc bản vẽ và báo cáo phân tích lớp thống kê; không sửa file gốc.
+
+### analysis_list_properties
+
+- **Nhóm:** phân tích
+- **Làm gì:** Thực hiện thao tác phân tích liệt kê thuộc tính trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần đọc/đo/phân tích, không sửa bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Đọc bản vẽ và báo cáo phân tích liệt kê thuộc tính; không sửa file gốc.
+
+### analysis_measure_area
+
+- **Nhóm:** phân tích
+- **Làm gì:** Thực hiện thao tác phân tích đo diện tích trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần đọc/đo/phân tích, không sửa bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Đọc bản vẽ và báo cáo phân tích đo diện tích; không sửa file gốc.
+
+### analysis_measure_distance
+
+- **Nhóm:** phân tích
+- **Làm gì:** Thực hiện thao tác phân tích đo khoảng cách trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần đọc/đo/phân tích, không sửa bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Đọc bản vẽ và báo cáo phân tích đo khoảng cách; không sửa file gốc.
+
+### analysis_measure_entity
+
+- **Nhóm:** phân tích
+- **Làm gì:** Thực hiện thao tác phân tích đo đối tượng trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần đọc/đo/phân tích, không sửa bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Đọc bản vẽ và báo cáo phân tích đo đối tượng; không sửa file gốc.
+
+### analysis_select_by_layer
+
+- **Nhóm:** phân tích
+- **Làm gì:** Thực hiện thao tác phân tích chọn theo lớp trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần đọc/đo/phân tích, không sửa bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Đọc bản vẽ và báo cáo phân tích chọn theo lớp; không sửa file gốc.
+
+### analysis_select_by_type
+
+- **Nhóm:** phân tích
+- **Làm gì:** Thực hiện thao tác phân tích chọn theo type trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần đọc/đo/phân tích, không sửa bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Đọc bản vẽ và báo cáo phân tích chọn theo type; không sửa file gốc.
+
+### arch_catalogue_insert
+
+- **Nhóm:** kiến trúc
+- **Làm gì:** Thực hiện thao tác arch catalogue chèn trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên mặt bằng kiến trúc, hãy arch catalogue chèn và giữ đúng tỷ lệ bản vẽ.
+
+### arch_catalogue_list
+
+- **Nhóm:** kiến trúc
+- **Làm gì:** Thực hiện thao tác arch catalogue liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên mặt bằng kiến trúc, hãy arch catalogue liệt kê và giữ đúng tỷ lệ bản vẽ.
+
+### arch_dimension_chains
+
+- **Nhóm:** kiến trúc
+- **Làm gì:** Thực hiện thao tác arch kích thước chains trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên mặt bằng kiến trúc, hãy arch kích thước chains và giữ đúng tỷ lệ bản vẽ.
+
+### arch_grid
+
+- **Nhóm:** kiến trúc
+- **Làm gì:** Thực hiện thao tác arch grid trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên mặt bằng kiến trúc, hãy arch grid và giữ đúng tỷ lệ bản vẽ.
+
+### arch_opening
+
+- **Nhóm:** kiến trúc
+- **Làm gì:** Thực hiện thao tác arch opening trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên mặt bằng kiến trúc, hãy arch opening và giữ đúng tỷ lệ bản vẽ.
+
+### arch_plan_from_spec
+
+- **Nhóm:** kiến trúc
+- **Làm gì:** Thực hiện thao tác arch mặt bằng từ spec trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên mặt bằng kiến trúc, hãy arch mặt bằng từ spec và giữ đúng tỷ lệ bản vẽ.
+
+### arch_room
+
+- **Nhóm:** kiến trúc
+- **Làm gì:** Thực hiện thao tác arch room trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên mặt bằng kiến trúc, hãy arch room và giữ đúng tỷ lệ bản vẽ.
+
+### arch_rooms_detect
+
+- **Nhóm:** kiến trúc
+- **Làm gì:** Thực hiện thao tác arch rooms detect trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên mặt bằng kiến trúc, hãy arch rooms detect và giữ đúng tỷ lệ bản vẽ.
+
+### arch_schedule
+
+- **Nhóm:** kiến trúc
+- **Làm gì:** Thực hiện thao tác arch schedule trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên mặt bằng kiến trúc, hãy arch schedule và giữ đúng tỷ lệ bản vẽ.
+
+### arch_stair
+
+- **Nhóm:** kiến trúc
+- **Làm gì:** Thực hiện thao tác arch stair trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên mặt bằng kiến trúc, hãy arch stair và giữ đúng tỷ lệ bản vẽ.
+
+### arch_symbol
+
+- **Nhóm:** kiến trúc
+- **Làm gì:** Thực hiện thao tác arch ký hiệu trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên mặt bằng kiến trúc, hãy arch ký hiệu và giữ đúng tỷ lệ bản vẽ.
+
+### arch_wall
+
+- **Nhóm:** kiến trúc
+- **Làm gì:** Thực hiện thao tác arch wall trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên mặt bằng kiến trúc, hãy arch wall và giữ đúng tỷ lệ bản vẽ.
+
+### balloon_add
+
+- **Nhóm:** tờ bản vẽ
+- **Làm gì:** Thực hiện thao tác balloon add trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tờ bản vẽ, khung tên và phát hành.
+- **Ví dụ gõ vào LLM:**
+
+  > Chuẩn bị tờ bản vẽ phát hành và thực hiện balloon add trong khung tên.
+
+### batch_plot
+
+- **Nhóm:** thiết lập trang
+- **Làm gì:** Thực hiện thao tác hàng loạt plot trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần khổ giấy, tỷ lệ và in ấn.
+- **Ví dụ gõ vào LLM:**
+
+  > Thiết lập khổ A1, tỷ lệ 1:100 rồi thực hiện hàng loạt plot để chuẩn bị phát hành.
+
+### block_create_from_entities
+
+- **Nhóm:** khối
+- **Làm gì:** Thực hiện thao tác khối tạo từ đối tượng trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần khối và tham chiếu khối.
+- **Ví dụ gõ vào LLM:**
+
+  > Trong bản vẽ hiện tại, hãy khối tạo từ đối tượng cho các khối cửa và thiết bị.
+
+### block_define
+
+- **Nhóm:** khối
+- **Làm gì:** Thực hiện thao tác khối định nghĩa trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần khối và tham chiếu khối.
+- **Ví dụ gõ vào LLM:**
+
+  > Trong bản vẽ hiện tại, hãy khối định nghĩa cho các khối cửa và thiết bị.
+
+### block_explode
+
+- **Nhóm:** khối
+- **Làm gì:** Thực hiện thao tác khối phá khối trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần khối và tham chiếu khối.
+- **Ví dụ gõ vào LLM:**
+
+  > Trong bản vẽ hiện tại, hãy khối phá khối cho các khối cửa và thiết bị.
+
+### block_find_references
+
+- **Nhóm:** khối
+- **Làm gì:** Thực hiện thao tác khối tìm tham chiếu trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần khối và tham chiếu khối.
+- **Ví dụ gõ vào LLM:**
+
+  > Trong bản vẽ hiện tại, hãy khối tìm tham chiếu cho các khối cửa và thiết bị.
+
+### block_get_attributes
+
+- **Nhóm:** khối
+- **Làm gì:** Thực hiện thao tác khối get attributes trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần khối và tham chiếu khối.
+- **Ví dụ gõ vào LLM:**
+
+  > Trong bản vẽ hiện tại, hãy khối get attributes cho các khối cửa và thiết bị.
+
+### block_insert
+
+- **Nhóm:** khối
+- **Làm gì:** Thực hiện thao tác khối chèn trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần khối và tham chiếu khối.
+- **Ví dụ gõ vào LLM:**
+
+  > Trong bản vẽ hiện tại, hãy khối chèn cho các khối cửa và thiết bị.
+
+### block_list
+
+- **Nhóm:** khối
+- **Làm gì:** Thực hiện thao tác khối liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần khối và tham chiếu khối.
+- **Ví dụ gõ vào LLM:**
+
+  > Trong bản vẽ hiện tại, hãy khối liệt kê cho các khối cửa và thiết bị.
+
+### block_set_attributes
+
+- **Nhóm:** khối
+- **Làm gì:** Thực hiện thao tác khối đặt attributes trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần khối và tham chiếu khối.
+- **Ví dụ gõ vào LLM:**
+
+  > Trong bản vẽ hiện tại, hãy khối đặt attributes cho các khối cửa và thiết bị.
+
+### bom_extract
+
+- **Nhóm:** tờ bản vẽ
+- **Làm gì:** Thực hiện thao tác bom extract trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tờ bản vẽ, khung tên và phát hành.
+- **Ví dụ gõ vào LLM:**
+
+  > Chuẩn bị tờ bản vẽ phát hành và thực hiện bom extract trong khung tên.
+
+### bom_table
+
+- **Nhóm:** tờ bản vẽ
+- **Làm gì:** Thực hiện thao tác bom bảng trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tờ bản vẽ, khung tên và phát hành.
+- **Ví dụ gõ vào LLM:**
+
+  > Chuẩn bị tờ bản vẽ phát hành và thực hiện bom bảng trong khung tên.
+
+### boundary_from_entities
+
+- **Nhóm:** phân tích
+- **Làm gì:** Thực hiện thao tác boundary từ đối tượng trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần đọc/đo/phân tích, không sửa bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Đọc bản vẽ và báo cáo boundary từ đối tượng; không sửa file gốc.
+
+### boundary_trace
+
+- **Nhóm:** phân tích
+- **Làm gì:** Thực hiện thao tác boundary trace trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần đọc/đo/phân tích, không sửa bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Đọc bản vẽ và báo cáo boundary trace; không sửa file gốc.
+
+### cable_takeoff
+
+- **Nhóm:** nhà máy
+- **Làm gì:** Thực hiện thao tác cable takeoff trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bố trí thiết bị nhà máy.
+- **Ví dụ gõ vào LLM:**
+
+  > Trong bản vẽ nhà máy, hãy cable takeoff và kiểm tra khoảng cách an toàn thiết bị.
+
+### cad_batch
+
+- **Nhóm:** xử lý hàng loạt
+- **Làm gì:** Thực hiện thao tác cad hàng loạt trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần xử lý hàng loạt.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện cad hàng loạt cho tất cả bản vẽ trong thư mục dự án và báo cáo từng file.
+
+### centre_marks
+
+- **Nhóm:** cơ khí
+- **Làm gì:** Thực hiện thao tác centre marks trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bản vẽ cơ khí.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên bản vẽ cơ khí, hãy centre marks theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn.
+
+### check_rulesets
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác kiểm tra rulesets trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện kiểm tra rulesets trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### check_run
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác kiểm tra run trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện kiểm tra run trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### construction_clear
+
+- **Nhóm:** nâng cao
+- **Làm gì:** Thực hiện thao tác construction clear trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng nâng cao.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện construction clear nếu backend cho phép.
+
+### construction_xline
+
+- **Nhóm:** nâng cao
+- **Làm gì:** Thực hiện thao tác construction xline trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng nâng cao.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện construction xline nếu backend cho phép.
+
+### data_extract
+
+- **Nhóm:** tờ bản vẽ
+- **Làm gì:** Thực hiện thao tác dữ liệu extract trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tờ bản vẽ, khung tên và phát hành.
+- **Ví dụ gõ vào LLM:**
+
+  > Chuẩn bị tờ bản vẽ phát hành và thực hiện dữ liệu extract trong khung tên.
+
+### datum_feature
+
+- **Nhóm:** kỹ thuật
+- **Làm gì:** Thực hiện thao tác datum feature trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kỹ thuật.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo datum feature thành lỗi hoặc cảnh báo.
+
+### dimension_aligned
+
+- **Nhóm:** kích thước
+- **Làm gì:** Thực hiện thao tác kích thước aligned trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kích thước và ghi chú đo.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra và thực hiện kích thước aligned cho các kích thước của mặt bằng tầng 1.
+
+### dimension_angular
+
+- **Nhóm:** kích thước
+- **Làm gì:** Thực hiện thao tác kích thước angular trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kích thước và ghi chú đo.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra và thực hiện kích thước angular cho các kích thước của mặt bằng tầng 1.
+
+### dimension_auto
+
+- **Nhóm:** nâng cao
+- **Làm gì:** Thực hiện thao tác kích thước auto trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng nâng cao.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện kích thước auto nếu backend cho phép.
+
+### dimension_diameter
+
+- **Nhóm:** kích thước
+- **Làm gì:** Thực hiện thao tác kích thước diameter trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kích thước và ghi chú đo.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra và thực hiện kích thước diameter cho các kích thước của mặt bằng tầng 1.
+
+### dimension_linear
+
+- **Nhóm:** kích thước
+- **Làm gì:** Thực hiện thao tác kích thước linear trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kích thước và ghi chú đo.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra và thực hiện kích thước linear cho các kích thước của mặt bằng tầng 1.
+
+### dimension_radius
+
+- **Nhóm:** kích thước
+- **Làm gì:** Thực hiện thao tác kích thước radius trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kích thước và ghi chú đo.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra và thực hiện kích thước radius cho các kích thước của mặt bằng tầng 1.
+
+### dimstyle_create
+
+- **Nhóm:** kiểu hiển thị
+- **Làm gì:** Thực hiện thao tác dimstyle tạo trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểu và hiển thị.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kiểu hiển thị hiện tại và thực hiện dimstyle tạo cho toàn bộ bản vẽ.
+
+### dimstyle_list
+
+- **Nhóm:** kiểu hiển thị
+- **Làm gì:** Thực hiện thao tác dimstyle liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểu và hiển thị.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kiểu hiển thị hiện tại và thực hiện dimstyle liệt kê cho toàn bộ bản vẽ.
+
+### dimstyle_modify
+
+- **Nhóm:** kiểu hiển thị
+- **Làm gì:** Thực hiện thao tác dimstyle sửa trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểu và hiển thị.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kiểu hiển thị hiện tại và thực hiện dimstyle sửa cho toàn bộ bản vẽ.
+
+### dimstyle_set_current
+
+- **Nhóm:** kiểu hiển thị
+- **Làm gì:** Thực hiện thao tác dimstyle đặt hiện tại trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểu và hiển thị.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kiểu hiển thị hiện tại và thực hiện dimstyle đặt hiện tại cho toàn bộ bản vẽ.
+
+### document_activate
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác document activate trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo document activate trước khi thao tác bản vẽ.
+
+### document_close
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác document đóng trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo document đóng trước khi thao tác bản vẽ.
+
+### document_list
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác document liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo document liệt kê trước khi thao tác bản vẽ.
+
+### drawing_apply_discipline_standard
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác bản vẽ apply discipline standard trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện bản vẽ apply discipline standard trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### drawing_apply_iso_layers
+
+- **Nhóm:** nâng cao
+- **Làm gì:** Thực hiện thao tác bản vẽ apply iso layers trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng nâng cao.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện bản vẽ apply iso layers nếu backend cho phép.
+
+### drawing_apply_standard
+
+- **Nhóm:** kiểu hiển thị
+- **Làm gì:** Thực hiện thao tác bản vẽ apply standard trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểu và hiển thị.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kiểu hiển thị hiện tại và thực hiện bản vẽ apply standard cho toàn bộ bản vẽ.
+
+### drawing_audit
+
+- **Nhóm:** bản vẽ
+- **Làm gì:** Thực hiện thao tác bản vẽ audit trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mở, lưu, đóng hoặc xuất bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Mở bản vẽ, thực hiện bản vẽ audit, sau đó lưu ra file mới và không ghi đè file gốc.
+
+### drawing_close
+
+- **Nhóm:** bản vẽ
+- **Làm gì:** Thực hiện thao tác bản vẽ đóng trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mở, lưu, đóng hoặc xuất bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Mở bản vẽ, thực hiện bản vẽ đóng, sau đó lưu ra file mới và không ghi đè file gốc.
+
+### drawing_critique
+
+- **Nhóm:** nâng cao
+- **Làm gì:** Thực hiện thao tác bản vẽ critique trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng nâng cao.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện bản vẽ critique nếu backend cho phép.
+
+### drawing_deliver
+
+- **Nhóm:** kỹ thuật
+- **Làm gì:** Thực hiện thao tác bản vẽ deliver trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kỹ thuật.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo bản vẽ deliver thành lỗi hoặc cảnh báo.
+
+### drawing_diff
+
+- **Nhóm:** đọc hiểu
+- **Làm gì:** Thực hiện thao tác bản vẽ diff trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần đọc hiểu cấu trúc bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Đọc hiểu bản vẽ và giải thích bản vẽ diff bằng ngôn ngữ dễ hiểu cho người dùng.
+
+### drawing_entities
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác bản vẽ đối tượng trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện bản vẽ đối tượng trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### drawing_export_dwg
+
+- **Nhóm:** tờ bản vẽ
+- **Làm gì:** Thực hiện thao tác bản vẽ xuất dwg trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tờ bản vẽ, khung tên và phát hành.
+- **Ví dụ gõ vào LLM:**
+
+  > Chuẩn bị tờ bản vẽ phát hành và thực hiện bản vẽ xuất dwg trong khung tên.
+
+### drawing_export_dxf
+
+- **Nhóm:** bản vẽ
+- **Làm gì:** Thực hiện thao tác bản vẽ xuất dxf trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mở, lưu, đóng hoặc xuất bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Mở bản vẽ, thực hiện bản vẽ xuất dxf, sau đó lưu ra file mới và không ghi đè file gốc.
+
+### drawing_export_pdf
+
+- **Nhóm:** bản vẽ
+- **Làm gì:** Thực hiện thao tác bản vẽ xuất pdf trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mở, lưu, đóng hoặc xuất bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Mở bản vẽ, thực hiện bản vẽ xuất pdf, sau đó lưu ra file mới và không ghi đè file gốc.
+
+### drawing_finalize
+
+- **Nhóm:** kỹ thuật
+- **Làm gì:** Thực hiện thao tác bản vẽ finalize trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kỹ thuật.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo bản vẽ finalize thành lỗi hoặc cảnh báo.
+
+### drawing_info
+
+- **Nhóm:** tra cứu đối tượng
+- **Làm gì:** Thực hiện thao tác bản vẽ info trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tìm và đọc thuộc tính đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Tìm các đối tượng liên quan rồi báo cáo bản vẽ info, không thay đổi hình học.
+
+### drawing_new
+
+- **Nhóm:** bản vẽ
+- **Làm gì:** Thực hiện thao tác bản vẽ new trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mở, lưu, đóng hoặc xuất bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Mở bản vẽ, thực hiện bản vẽ new, sau đó lưu ra file mới và không ghi đè file gốc.
+
+### drawing_open
+
+- **Nhóm:** bản vẽ
+- **Làm gì:** Thực hiện thao tác bản vẽ mở trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mở, lưu, đóng hoặc xuất bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Mở bản vẽ, thực hiện bản vẽ mở, sau đó lưu ra file mới và không ghi đè file gốc.
+
+### drawing_plan
+
+- **Nhóm:** nâng cao
+- **Làm gì:** Thực hiện thao tác bản vẽ mặt bằng trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng nâng cao.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện bản vẽ mặt bằng nếu backend cho phép.
+
+### drawing_preflight
+
+- **Nhóm:** nâng cao
+- **Làm gì:** Thực hiện thao tác bản vẽ preflight trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng nâng cao.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện bản vẽ preflight nếu backend cho phép.
+
+### drawing_properties_get
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác bản vẽ thuộc tính get trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo bản vẽ thuộc tính get trước khi thao tác bản vẽ.
+
+### drawing_properties_set
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác bản vẽ thuộc tính đặt trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo bản vẽ thuộc tính đặt trước khi thao tác bản vẽ.
+
+### drawing_purge
+
+- **Nhóm:** bản vẽ
+- **Làm gì:** Thực hiện thao tác bản vẽ dọn dẹp trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mở, lưu, đóng hoặc xuất bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Mở bản vẽ, thực hiện bản vẽ dọn dẹp, sau đó lưu ra file mới và không ghi đè file gốc.
+
+### drawing_read
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác bản vẽ đọc trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện bản vẽ đọc trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### drawing_redo
+
+- **Nhóm:** bản vẽ
+- **Làm gì:** Thực hiện thao tác bản vẽ redo trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mở, lưu, đóng hoặc xuất bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Mở bản vẽ, thực hiện bản vẽ redo, sau đó lưu ra file mới và không ghi đè file gốc.
+
+### drawing_refine
+
+- **Nhóm:** nâng cao
+- **Làm gì:** Thực hiện thao tác bản vẽ refine trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng nâng cao.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện bản vẽ refine nếu backend cho phép.
+
+### drawing_save
+
+- **Nhóm:** bản vẽ
+- **Làm gì:** Thực hiện thao tác bản vẽ lưu trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mở, lưu, đóng hoặc xuất bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Mở bản vẽ, thực hiện bản vẽ lưu, sau đó lưu ra file mới và không ghi đè file gốc.
+
+### drawing_save_as
+
+- **Nhóm:** bản vẽ
+- **Làm gì:** Thực hiện thao tác bản vẽ lưu as trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mở, lưu, đóng hoặc xuất bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Mở bản vẽ, thực hiện bản vẽ lưu as, sau đó lưu ra file mới và không ghi đè file gốc.
+
+### drawing_scale_check
+
+- **Nhóm:** đọc hiểu
+- **Làm gì:** Thực hiện thao tác bản vẽ tỷ lệ kiểm tra trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần đọc hiểu cấu trúc bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Đọc hiểu bản vẽ và giải thích bản vẽ tỷ lệ kiểm tra bằng ngôn ngữ dễ hiểu cho người dùng.
+
+### drawing_settings
+
+- **Nhóm:** hệ thống
+- **Làm gì:** Thực hiện thao tác bản vẽ thiết lập trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần trạng thái máy chủ.
+- **Ví dụ gõ vào LLM:**
+
+  > Báo cáo trạng thái MCP, AutoCAD và backend bằng cách bản vẽ thiết lập.
+
+### drawing_template_list
+
+- **Nhóm:** thiết lập trang
+- **Làm gì:** Thực hiện thao tác bản vẽ mẫu liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần khổ giấy, tỷ lệ và in ấn.
+- **Ví dụ gõ vào LLM:**
+
+  > Thiết lập khổ A1, tỷ lệ 1:100 rồi thực hiện bản vẽ mẫu liệt kê để chuẩn bị phát hành.
+
+### drawing_template_save
+
+- **Nhóm:** thiết lập trang
+- **Làm gì:** Thực hiện thao tác bản vẽ mẫu lưu trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần khổ giấy, tỷ lệ và in ấn.
+- **Ví dụ gõ vào LLM:**
+
+  > Thiết lập khổ A1, tỷ lệ 1:100 rồi thực hiện bản vẽ mẫu lưu để chuẩn bị phát hành.
+
+### drawing_topology_check
+
+- **Nhóm:** đọc hiểu
+- **Làm gì:** Thực hiện thao tác bản vẽ topology kiểm tra trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần đọc hiểu cấu trúc bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Đọc hiểu bản vẽ và giải thích bản vẽ topology kiểm tra bằng ngôn ngữ dễ hiểu cho người dùng.
+
+### drawing_understand
+
+- **Nhóm:** đọc hiểu
+- **Làm gì:** Thực hiện thao tác bản vẽ understand trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần đọc hiểu cấu trúc bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Đọc hiểu bản vẽ và giải thích bản vẽ understand bằng ngôn ngữ dễ hiểu cho người dùng.
+
+### drawing_undo
+
+- **Nhóm:** bản vẽ
+- **Làm gì:** Thực hiện thao tác bản vẽ undo trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mở, lưu, đóng hoặc xuất bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Mở bản vẽ, thực hiện bản vẽ undo, sau đó lưu ra file mới và không ghi đè file gốc.
+
+### entity_array_polar
+
+- **Nhóm:** sửa đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng array polar trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sửa hoặc biến đổi đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Chụp ảnh trước, thực hiện đối tượng array polar, chụp ảnh sau và liệt kê các đối tượng đã đổi.
+
+### entity_array_rectangular
+
+- **Nhóm:** sửa đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng array rectangular trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sửa hoặc biến đổi đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Chụp ảnh trước, thực hiện đối tượng array rectangular, chụp ảnh sau và liệt kê các đối tượng đã đổi.
+
+### entity_batch_create
+
+- **Nhóm:** xử lý hàng loạt
+- **Làm gì:** Thực hiện thao tác đối tượng hàng loạt tạo trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần xử lý hàng loạt.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện đối tượng hàng loạt tạo cho tất cả bản vẽ trong thư mục dự án và báo cáo từng file.
+
+### entity_batch_modify
+
+- **Nhóm:** xử lý hàng loạt
+- **Làm gì:** Thực hiện thao tác đối tượng hàng loạt sửa trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần xử lý hàng loạt.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện đối tượng hàng loạt sửa cho tất cả bản vẽ trong thư mục dự án và báo cáo từng file.
+
+### entity_chamfer
+
+- **Nhóm:** corner_ops
+- **Làm gì:** Thực hiện thao tác đối tượng chamfer trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Hãy thực hiện đối tượng chamfer trên bản vẽ và báo cáo kết quả.
+
+### entity_change_space
+
+- **Nhóm:** bố cục
+- **Làm gì:** Thực hiện thao tác đối tượng change space trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bố cục và khung nhìn.
+- **Ví dụ gõ vào LLM:**
+
+  > Thiết lập bố cục A1 và thực hiện đối tượng change space cho khung tên và khung nhìn.
+
+### entity_copy
+
+- **Nhóm:** sửa đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng sao chép trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sửa hoặc biến đổi đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Chụp ảnh trước, thực hiện đối tượng sao chép, chụp ảnh sau và liệt kê các đối tượng đã đổi.
+
+### entity_create_arc
+
+- **Nhóm:** tạo đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng tạo cung trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần vẽ thêm đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Vẽ thêm đối tượng cần thiết để đối tượng tạo cung, đặt đúng lớp bản vẽ và ghi chú rõ ràng.
+
+### entity_create_block_ref
+
+- **Nhóm:** khối
+- **Làm gì:** Thực hiện thao tác đối tượng tạo khối ref trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần khối và tham chiếu khối.
+- **Ví dụ gõ vào LLM:**
+
+  > Trong bản vẽ hiện tại, hãy đối tượng tạo khối ref cho các khối cửa và thiết bị.
+
+### entity_create_circle
+
+- **Nhóm:** tạo đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng tạo đường tròn trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần vẽ thêm đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Vẽ thêm đối tượng cần thiết để đối tượng tạo đường tròn, đặt đúng lớp bản vẽ và ghi chú rõ ràng.
+
+### entity_create_ellipse
+
+- **Nhóm:** tạo đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng tạo ellipse trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần vẽ thêm đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Vẽ thêm đối tượng cần thiết để đối tượng tạo ellipse, đặt đúng lớp bản vẽ và ghi chú rõ ràng.
+
+### entity_create_hatch
+
+- **Nhóm:** tạo đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng tạo tô mặt trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần vẽ thêm đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Vẽ thêm đối tượng cần thiết để đối tượng tạo tô mặt, đặt đúng lớp bản vẽ và ghi chú rõ ràng.
+
+### entity_create_line
+
+- **Nhóm:** tạo đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng tạo đường trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần vẽ thêm đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Vẽ thêm đối tượng cần thiết để đối tượng tạo đường, đặt đúng lớp bản vẽ và ghi chú rõ ràng.
+
+### entity_create_mtext
+
+- **Nhóm:** tạo đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng tạo mtext trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần vẽ thêm đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Vẽ thêm đối tượng cần thiết để đối tượng tạo mtext, đặt đúng lớp bản vẽ và ghi chú rõ ràng.
+
+### entity_create_point
+
+- **Nhóm:** tạo đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng tạo điểm trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần vẽ thêm đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Vẽ thêm đối tượng cần thiết để đối tượng tạo điểm, đặt đúng lớp bản vẽ và ghi chú rõ ràng.
+
+### entity_create_polyline
+
+- **Nhóm:** tạo đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng tạo đa tuyến trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần vẽ thêm đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Vẽ thêm đối tượng cần thiết để đối tượng tạo đa tuyến, đặt đúng lớp bản vẽ và ghi chú rõ ràng.
+
+### entity_create_rectangle
+
+- **Nhóm:** tạo đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng tạo hình chữ nhật trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần vẽ thêm đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Vẽ thêm đối tượng cần thiết để đối tượng tạo hình chữ nhật, đặt đúng lớp bản vẽ và ghi chú rõ ràng.
+
+### entity_create_revcloud
+
+- **Nhóm:** tạo đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng tạo revcloud trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần vẽ thêm đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Vẽ thêm đối tượng cần thiết để đối tượng tạo revcloud, đặt đúng lớp bản vẽ và ghi chú rõ ràng.
+
+### entity_create_spline
+
+- **Nhóm:** tạo đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng tạo spline trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần vẽ thêm đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Vẽ thêm đối tượng cần thiết để đối tượng tạo spline, đặt đúng lớp bản vẽ và ghi chú rõ ràng.
+
+### entity_create_table
+
+- **Nhóm:** tạo đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng tạo bảng trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần vẽ thêm đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Vẽ thêm đối tượng cần thiết để đối tượng tạo bảng, đặt đúng lớp bản vẽ và ghi chú rõ ràng.
+
+### entity_create_text
+
+- **Nhóm:** tạo đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng tạo chữ trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần vẽ thêm đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Vẽ thêm đối tượng cần thiết để đối tượng tạo chữ, đặt đúng lớp bản vẽ và ghi chú rõ ràng.
+
+### entity_create_wipeout
+
+- **Nhóm:** tạo đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng tạo wipeout trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần vẽ thêm đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Vẽ thêm đối tượng cần thiết để đối tượng tạo wipeout, đặt đúng lớp bản vẽ và ghi chú rõ ràng.
+
+### entity_delete
+
+- **Nhóm:** sửa đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng xóa trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sửa hoặc biến đổi đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Chụp ảnh trước, thực hiện đối tượng xóa, chụp ảnh sau và liệt kê các đối tượng đã đổi.
+
+### entity_delete_many
+
+- **Nhóm:** sửa đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng xóa many trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sửa hoặc biến đổi đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Chụp ảnh trước, thực hiện đối tượng xóa many, chụp ảnh sau và liệt kê các đối tượng đã đổi.
+
+### entity_edit_geometry
+
+- **Nhóm:** sửa đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng edit geometry trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sửa hoặc biến đổi đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Chụp ảnh trước, thực hiện đối tượng edit geometry, chụp ảnh sau và liệt kê các đối tượng đã đổi.
+
+### entity_edit_text
+
+- **Nhóm:** sửa đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng edit chữ trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sửa hoặc biến đổi đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Chụp ảnh trước, thực hiện đối tượng edit chữ, chụp ảnh sau và liệt kê các đối tượng đã đổi.
+
+### entity_extend
+
+- **Nhóm:** corner_ops
+- **Làm gì:** Thực hiện thao tác đối tượng kéo dài trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Hãy thực hiện đối tượng kéo dài trên bản vẽ và báo cáo kết quả.
+
+### entity_fillet
+
+- **Nhóm:** corner_ops
+- **Làm gì:** Thực hiện thao tác đối tượng fillet trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Hãy thực hiện đối tượng fillet trên bản vẽ và báo cáo kết quả.
+
+### entity_get
+
+- **Nhóm:** tra cứu đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng get trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tìm và đọc thuộc tính đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Tìm các đối tượng liên quan rồi báo cáo đối tượng get, không thay đổi hình học.
+
+### entity_get_xdata
+
+- **Nhóm:** tra cứu đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng get xdata trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tìm và đọc thuộc tính đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Tìm các đối tượng liên quan rồi báo cáo đối tượng get xdata, không thay đổi hình học.
+
+### entity_list
+
+- **Nhóm:** tra cứu đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tìm và đọc thuộc tính đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Tìm các đối tượng liên quan rồi báo cáo đối tượng liệt kê, không thay đổi hình học.
+
+### entity_mirror
+
+- **Nhóm:** sửa đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng đối xứng trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sửa hoặc biến đổi đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Chụp ảnh trước, thực hiện đối tượng đối xứng, chụp ảnh sau và liệt kê các đối tượng đã đổi.
+
+### entity_move
+
+- **Nhóm:** sửa đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng di chuyển trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sửa hoặc biến đổi đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Chụp ảnh trước, thực hiện đối tượng di chuyển, chụp ảnh sau và liệt kê các đối tượng đã đổi.
+
+### entity_offset
+
+- **Nhóm:** sửa đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng song song trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sửa hoặc biến đổi đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Chụp ảnh trước, thực hiện đối tượng song song, chụp ảnh sau và liệt kê các đối tượng đã đổi.
+
+### entity_rotate
+
+- **Nhóm:** sửa đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng xoay trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sửa hoặc biến đổi đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Chụp ảnh trước, thực hiện đối tượng xoay, chụp ảnh sau và liệt kê các đối tượng đã đổi.
+
+### entity_scale
+
+- **Nhóm:** sửa đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng tỷ lệ trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sửa hoặc biến đổi đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Chụp ảnh trước, thực hiện đối tượng tỷ lệ, chụp ảnh sau và liệt kê các đối tượng đã đổi.
+
+### entity_select_smart
+
+- **Nhóm:** nâng cao
+- **Làm gì:** Thực hiện thao tác đối tượng chọn smart trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng nâng cao.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện đối tượng chọn smart nếu backend cho phép.
+
+### entity_set_properties
+
+- **Nhóm:** sửa đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng đặt thuộc tính trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sửa hoặc biến đổi đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Chụp ảnh trước, thực hiện đối tượng đặt thuộc tính, chụp ảnh sau và liệt kê các đối tượng đã đổi.
+
+### entity_set_xdata
+
+- **Nhóm:** sửa đối tượng
+- **Làm gì:** Thực hiện thao tác đối tượng đặt xdata trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sửa hoặc biến đổi đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Chụp ảnh trước, thực hiện đối tượng đặt xdata, chụp ảnh sau và liệt kê các đối tượng đã đổi.
+
+### entity_trim
+
+- **Nhóm:** corner_ops
+- **Làm gì:** Thực hiện thao tác đối tượng cắt trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Hãy thực hiện đối tượng cắt trên bản vẽ và báo cáo kết quả.
+
+### gd_frame
+
+- **Nhóm:** kỹ thuật
+- **Làm gì:** Thực hiện thao tác gd frame trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kỹ thuật.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo gd frame thành lỗi hoặc cảnh báo.
+
+### gear_draw_helical_front_view
+
+- **Nhóm:** kỹ thuật
+- **Làm gì:** Thực hiện thao tác gear draw helical front góc nhìn trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kỹ thuật.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo gear draw helical front góc nhìn thành lỗi hoặc cảnh báo.
+
+### gear_draw_section_aa
+
+- **Nhóm:** kỹ thuật
+- **Làm gì:** Thực hiện thao tác gear draw mặt cắt aa trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kỹ thuật.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo gear draw mặt cắt aa thành lỗi hoặc cảnh báo.
+
+### gear_draw_spur_front_view
+
+- **Nhóm:** kỹ thuật
+- **Làm gì:** Thực hiện thao tác gear draw spur front góc nhìn trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kỹ thuật.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo gear draw spur front góc nhìn thành lỗi hoặc cảnh báo.
+
+### hatch_add_boundary
+
+- **Nhóm:** tạo đối tượng
+- **Làm gì:** Thực hiện thao tác tô mặt add boundary trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần vẽ thêm đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Vẽ thêm đối tượng cần thiết để tô mặt add boundary, đặt đúng lớp bản vẽ và ghi chú rõ ràng.
+
+### hatch_edit
+
+- **Nhóm:** tạo đối tượng
+- **Làm gì:** Thực hiện thao tác tô mặt edit trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần vẽ thêm đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Vẽ thêm đối tượng cần thiết để tô mặt edit, đặt đúng lớp bản vẽ và ghi chú rõ ràng.
+
+### hatch_material
+
+- **Nhóm:** cơ khí
+- **Làm gì:** Thực hiện thao tác tô mặt material trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bản vẽ cơ khí.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên bản vẽ cơ khí, hãy tô mặt material theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn.
+
+### hatch_set_gradient
+
+- **Nhóm:** tạo đối tượng
+- **Làm gì:** Thực hiện thao tác tô mặt đặt gradient trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần vẽ thêm đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Vẽ thêm đối tượng cần thiết để tô mặt đặt gradient, đặt đúng lớp bản vẽ và ghi chú rõ ràng.
+
+### image_attach
+
+- **Nhóm:** tờ bản vẽ
+- **Làm gì:** Thực hiện thao tác hình ảnh đính kèm trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tờ bản vẽ, khung tên và phát hành.
+- **Ví dụ gõ vào LLM:**
+
+  > Chuẩn bị tờ bản vẽ phát hành và thực hiện hình ảnh đính kèm trong khung tên.
+
+### keyway_draw_keyed_bore
+
+- **Nhóm:** kỹ thuật
+- **Làm gì:** Thực hiện thao tác keyway draw keyed bore trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kỹ thuật.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo keyway draw keyed bore thành lỗi hoặc cảnh báo.
+
+### keyway_draw_section
+
+- **Nhóm:** kỹ thuật
+- **Làm gì:** Thực hiện thao tác keyway draw mặt cắt trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kỹ thuật.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo keyway draw mặt cắt thành lỗi hoặc cảnh báo.
+
+### kho_industries
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác kho industries trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện kho industries trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### kho_rules_export
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác kho rules xuất trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện kho rules xuất trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### kho_rules_import
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác kho rules nhập trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện kho rules nhập trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### kho_skill_add
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác kho skill add trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện kho skill add trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### kho_skill_toggle
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác kho skill toggle trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện kho skill toggle trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### kho_skills
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác kho skills trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện kho skills trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### kho_standard_add
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác kho standard add trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện kho standard add trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### kho_standard_delete
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác kho standard xóa trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện kho standard xóa trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### kho_standards
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác kho standards trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện kho standards trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### kho_status
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác kho trạng thái trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện kho trạng thái trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### layer_create
+
+- **Nhóm:** lớp bản vẽ
+- **Làm gì:** Thực hiện thao tác lớp tạo trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tạo và quản lý lớp bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp tạo, không tự đổi tiêu chuẩn nếu chưa hỏi.
+
+### layer_delete
+
+- **Nhóm:** lớp bản vẽ
+- **Làm gì:** Thực hiện thao tác lớp xóa trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tạo và quản lý lớp bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp xóa, không tự đổi tiêu chuẩn nếu chưa hỏi.
+
+### layer_freeze
+
+- **Nhóm:** lớp bản vẽ
+- **Làm gì:** Thực hiện thao tác lớp freeze trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tạo và quản lý lớp bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp freeze, không tự đổi tiêu chuẩn nếu chưa hỏi.
+
+### layer_hide
+
+- **Nhóm:** lớp bản vẽ
+- **Làm gì:** Thực hiện thao tác lớp hide trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tạo và quản lý lớp bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp hide, không tự đổi tiêu chuẩn nếu chưa hỏi.
+
+### layer_isolate
+
+- **Nhóm:** lớp bản vẽ
+- **Làm gì:** Thực hiện thao tác lớp isolate trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tạo và quản lý lớp bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp isolate, không tự đổi tiêu chuẩn nếu chưa hỏi.
+
+### layer_list
+
+- **Nhóm:** lớp bản vẽ
+- **Làm gì:** Thực hiện thao tác lớp liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tạo và quản lý lớp bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp liệt kê, không tự đổi tiêu chuẩn nếu chưa hỏi.
+
+### layer_lock
+
+- **Nhóm:** lớp bản vẽ
+- **Làm gì:** Thực hiện thao tác lớp khóa trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tạo và quản lý lớp bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp khóa, không tự đổi tiêu chuẩn nếu chưa hỏi.
+
+### layer_modify
+
+- **Nhóm:** lớp bản vẽ
+- **Làm gì:** Thực hiện thao tác lớp sửa trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tạo và quản lý lớp bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp sửa, không tự đổi tiêu chuẩn nếu chưa hỏi.
+
+### layer_set_current
+
+- **Nhóm:** lớp bản vẽ
+- **Làm gì:** Thực hiện thao tác lớp đặt hiện tại trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tạo và quản lý lớp bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp đặt hiện tại, không tự đổi tiêu chuẩn nếu chưa hỏi.
+
+### layer_show
+
+- **Nhóm:** lớp bản vẽ
+- **Làm gì:** Thực hiện thao tác lớp show trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tạo và quản lý lớp bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp show, không tự đổi tiêu chuẩn nếu chưa hỏi.
+
+### layer_state_delete
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác lớp state xóa trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo lớp state xóa trước khi thao tác bản vẽ.
+
+### layer_state_list
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác lớp state liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo lớp state liệt kê trước khi thao tác bản vẽ.
+
+### layer_state_restore
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác lớp state restore trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo lớp state restore trước khi thao tác bản vẽ.
+
+### layer_state_save
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác lớp state lưu trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo lớp state lưu trước khi thao tác bản vẽ.
+
+### layer_thaw
+
+- **Nhóm:** lớp bản vẽ
+- **Làm gì:** Thực hiện thao tác lớp thaw trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tạo và quản lý lớp bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp thaw, không tự đổi tiêu chuẩn nếu chưa hỏi.
+
+### layer_unlock
+
+- **Nhóm:** lớp bản vẽ
+- **Làm gì:** Thực hiện thao tác lớp unlock trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tạo và quản lý lớp bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Tổ chức các đối tượng theo lớp bản vẽ bằng cách lớp unlock, không tự đổi tiêu chuẩn nếu chưa hỏi.
+
+### layout_copy
+
+- **Nhóm:** bố cục
+- **Làm gì:** Thực hiện thao tác bố cục sao chép trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bố cục và khung nhìn.
+- **Ví dụ gõ vào LLM:**
+
+  > Thiết lập bố cục A1 và thực hiện bố cục sao chép cho khung tên và khung nhìn.
+
+### layout_create
+
+- **Nhóm:** bố cục
+- **Làm gì:** Thực hiện thao tác bố cục tạo trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bố cục và khung nhìn.
+- **Ví dụ gõ vào LLM:**
+
+  > Thiết lập bố cục A1 và thực hiện bố cục tạo cho khung tên và khung nhìn.
+
+### layout_delete
+
+- **Nhóm:** bố cục
+- **Làm gì:** Thực hiện thao tác bố cục xóa trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bố cục và khung nhìn.
+- **Ví dụ gõ vào LLM:**
+
+  > Thiết lập bố cục A1 và thực hiện bố cục xóa cho khung tên và khung nhìn.
+
+### layout_list
+
+- **Nhóm:** bố cục
+- **Làm gì:** Thực hiện thao tác bố cục liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bố cục và khung nhìn.
+- **Ví dụ gõ vào LLM:**
+
+  > Thiết lập bố cục A1 và thực hiện bố cục liệt kê cho khung tên và khung nhìn.
+
+### layout_rename
+
+- **Nhóm:** bố cục
+- **Làm gì:** Thực hiện thao tác bố cục đổi tên trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bố cục và khung nhìn.
+- **Ví dụ gõ vào LLM:**
+
+  > Thiết lập bố cục A1 và thực hiện bố cục đổi tên cho khung tên và khung nhìn.
+
+### layout_set_current
+
+- **Nhóm:** bố cục
+- **Làm gì:** Thực hiện thao tác bố cục đặt hiện tại trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bố cục và khung nhìn.
+- **Ví dụ gõ vào LLM:**
+
+  > Thiết lập bố cục A1 và thực hiện bố cục đặt hiện tại cho khung tên và khung nhìn.
+
+### leader_create_mleader
+
+- **Nhóm:** tạo đối tượng
+- **Làm gì:** Thực hiện thao tác đường dẫn tạo mleader trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần vẽ thêm đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Vẽ thêm đối tượng cần thiết để đường dẫn tạo mleader, đặt đúng lớp bản vẽ và ghi chú rõ ràng.
+
+### linetype_list
+
+- **Nhóm:** lớp bản vẽ
+- **Làm gì:** Thực hiện thao tác linetype liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tạo và quản lý lớp bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Tổ chức các đối tượng theo lớp bản vẽ bằng cách linetype liệt kê, không tự đổi tiêu chuẩn nếu chưa hỏi.
+
+### linetype_load
+
+- **Nhóm:** lớp bản vẽ
+- **Làm gì:** Thực hiện thao tác linetype nạp trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tạo và quản lý lớp bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Tổ chức các đối tượng theo lớp bản vẽ bằng cách linetype nạp, không tự đổi tiêu chuẩn nếu chưa hỏi.
+
+### mech_dimension_part
+
+- **Nhóm:** cơ khí
+- **Làm gì:** Thực hiện thao tác mech kích thước part trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bản vẽ cơ khí.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên bản vẽ cơ khí, hãy mech kích thước part theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn.
+
+### mech_hole_pattern
+
+- **Nhóm:** cơ khí
+- **Làm gì:** Thực hiện thao tác mech hole pattern trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bản vẽ cơ khí.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên bản vẽ cơ khí, hãy mech hole pattern theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn.
+
+### mech_part_draw
+
+- **Nhóm:** cơ khí
+- **Làm gì:** Thực hiện thao tác mech part draw trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bản vẽ cơ khí.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên bản vẽ cơ khí, hãy mech part draw theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn.
+
+### mech_part_from_spec
+
+- **Nhóm:** cơ khí
+- **Làm gì:** Thực hiện thao tác mech part từ spec trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bản vẽ cơ khí.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên bản vẽ cơ khí, hãy mech part từ spec theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn.
+
+### mech_part_inspect
+
+- **Nhóm:** cơ khí
+- **Làm gì:** Thực hiện thao tác mech part inspect trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bản vẽ cơ khí.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên bản vẽ cơ khí, hãy mech part inspect theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn.
+
+### mech_view_add
+
+- **Nhóm:** cơ khí
+- **Làm gì:** Thực hiện thao tác mech góc nhìn add trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bản vẽ cơ khí.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên bản vẽ cơ khí, hãy mech góc nhìn add theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn.
+
+### mleaderstyle_create
+
+- **Nhóm:** kiểu hiển thị
+- **Làm gì:** Thực hiện thao tác mleaderstyle tạo trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểu và hiển thị.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kiểu hiển thị hiện tại và thực hiện mleaderstyle tạo cho toàn bộ bản vẽ.
+
+### mleaderstyle_list
+
+- **Nhóm:** kiểu hiển thị
+- **Làm gì:** Thực hiện thao tác mleaderstyle liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểu và hiển thị.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kiểu hiển thị hiện tại và thực hiện mleaderstyle liệt kê cho toàn bộ bản vẽ.
+
+### page_setup_apply
+
+- **Nhóm:** thiết lập trang
+- **Làm gì:** Thực hiện thao tác trang cài đặt apply trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần khổ giấy, tỷ lệ và in ấn.
+- **Ví dụ gõ vào LLM:**
+
+  > Thiết lập khổ A1, tỷ lệ 1:100 rồi thực hiện trang cài đặt apply để chuẩn bị phát hành.
+
+### page_setup_list
+
+- **Nhóm:** thiết lập trang
+- **Làm gì:** Thực hiện thao tác trang cài đặt liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần khổ giấy, tỷ lệ và in ấn.
+- **Ví dụ gõ vào LLM:**
+
+  > Thiết lập khổ A1, tỷ lệ 1:100 rồi thực hiện trang cài đặt liệt kê để chuẩn bị phát hành.
+
+### pdf_to_dwg
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác pdf đến dwg trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện pdf đến dwg trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### pdf_vectorize
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác pdf vectorize trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện pdf vectorize trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### pid_equipment_list
+
+- **Nhóm:** P&ID
+- **Làm gì:** Thực hiện thao tác P&ID equipment liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sơ đồ P&ID.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên sơ đồ P&ID, hãy P&ID equipment liệt kê và kiểm tra ký hiệu, đường ống cùng nhãn thiết bị.
+
+### pid_from_spec
+
+- **Nhóm:** P&ID
+- **Làm gì:** Thực hiện thao tác P&ID từ spec trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sơ đồ P&ID.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên sơ đồ P&ID, hãy P&ID từ spec và kiểm tra ký hiệu, đường ống cùng nhãn thiết bị.
+
+### pid_graph
+
+- **Nhóm:** P&ID
+- **Làm gì:** Thực hiện thao tác P&ID graph trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sơ đồ P&ID.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên sơ đồ P&ID, hãy P&ID graph và kiểm tra ký hiệu, đường ống cùng nhãn thiết bị.
+
+### pid_instrument_index
+
+- **Nhóm:** P&ID
+- **Làm gì:** Thực hiện thao tác P&ID instrument index trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sơ đồ P&ID.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên sơ đồ P&ID, hãy P&ID instrument index và kiểm tra ký hiệu, đường ống cùng nhãn thiết bị.
+
+### pid_line_draw
+
+- **Nhóm:** P&ID
+- **Làm gì:** Thực hiện thao tác P&ID đường draw trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sơ đồ P&ID.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên sơ đồ P&ID, hãy P&ID đường draw và kiểm tra ký hiệu, đường ống cùng nhãn thiết bị.
+
+### pid_line_list
+
+- **Nhóm:** P&ID
+- **Làm gì:** Thực hiện thao tác P&ID đường liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sơ đồ P&ID.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên sơ đồ P&ID, hãy P&ID đường liệt kê và kiểm tra ký hiệu, đường ống cùng nhãn thiết bị.
+
+### pid_symbol_insert
+
+- **Nhóm:** P&ID
+- **Làm gì:** Thực hiện thao tác P&ID ký hiệu chèn trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sơ đồ P&ID.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên sơ đồ P&ID, hãy P&ID ký hiệu chèn và kiểm tra ký hiệu, đường ống cùng nhãn thiết bị.
+
+### pid_symbol_list
+
+- **Nhóm:** P&ID
+- **Làm gì:** Thực hiện thao tác P&ID ký hiệu liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sơ đồ P&ID.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên sơ đồ P&ID, hãy P&ID ký hiệu liệt kê và kiểm tra ký hiệu, đường ống cùng nhãn thiết bị.
+
+### pid_tag_parse
+
+- **Nhóm:** P&ID
+- **Làm gì:** Thực hiện thao tác P&ID tag parse trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sơ đồ P&ID.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên sơ đồ P&ID, hãy P&ID tag parse và kiểm tra ký hiệu, đường ống cùng nhãn thiết bị.
+
+### pipe_takeoff
+
+- **Nhóm:** nhà máy
+- **Làm gì:** Thực hiện thao tác pipe takeoff trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bố trí thiết bị nhà máy.
+- **Ví dụ gõ vào LLM:**
+
+  > Trong bản vẽ nhà máy, hãy pipe takeoff và kiểm tra khoảng cách an toàn thiết bị.
+
+### plot_style_list
+
+- **Nhóm:** thiết lập trang
+- **Làm gì:** Thực hiện thao tác plot kiểu liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần khổ giấy, tỷ lệ và in ấn.
+- **Ví dụ gõ vào LLM:**
+
+  > Thiết lập khổ A1, tỷ lệ 1:100 rồi thực hiện plot kiểu liệt kê để chuẩn bị phát hành.
+
+### point_from_snap
+
+- **Nhóm:** nâng cao
+- **Làm gì:** Thực hiện thao tác điểm từ snap trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng nâng cao.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện điểm từ snap nếu backend cho phép.
+
+### point_intersection
+
+- **Nhóm:** nâng cao
+- **Làm gì:** Thực hiện thao tác điểm intersection trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng nâng cao.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện điểm intersection nếu backend cho phép.
+
+### point_tangent
+
+- **Nhóm:** nâng cao
+- **Làm gì:** Thực hiện thao tác điểm tangent trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng nâng cao.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra khả năng hỗ trợ trước, sau đó thực hiện điểm tangent nếu backend cho phép.
+
+### revision_add
+
+- **Nhóm:** tờ bản vẽ
+- **Làm gì:** Thực hiện thao tác revision add trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tờ bản vẽ, khung tên và phát hành.
+- **Ví dụ gõ vào LLM:**
+
+  > Chuẩn bị tờ bản vẽ phát hành và thực hiện revision add trong khung tên.
+
+### section_line
+
+- **Nhóm:** cơ khí
+- **Làm gì:** Thực hiện thao tác mặt cắt đường trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bản vẽ cơ khí.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên bản vẽ cơ khí, hãy mặt cắt đường theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn.
+
+### selection_filter
+
+- **Nhóm:** tra cứu đối tượng
+- **Làm gì:** Thực hiện thao tác selection filter trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tìm và đọc thuộc tính đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Tìm các đối tượng liên quan rồi báo cáo selection filter, không thay đổi hình học.
+
+### selection_get
+
+- **Nhóm:** tra cứu đối tượng
+- **Làm gì:** Thực hiện thao tác selection get trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tìm và đọc thuộc tính đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Tìm các đối tượng liên quan rồi báo cáo selection get, không thay đổi hình học.
+
+### selection_polygon
+
+- **Nhóm:** tra cứu đối tượng
+- **Làm gì:** Thực hiện thao tác selection đa giác trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tìm và đọc thuộc tính đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Tìm các đối tượng liên quan rồi báo cáo selection đa giác, không thay đổi hình học.
+
+### selection_window
+
+- **Nhóm:** tra cứu đối tượng
+- **Làm gì:** Thực hiện thao tác selection window trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tìm và đọc thuộc tính đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Tìm các đối tượng liên quan rồi báo cáo selection window, không thay đổi hình học.
+
+### sheet_frame
+
+- **Nhóm:** tờ bản vẽ
+- **Làm gì:** Thực hiện thao tác tờ bản vẽ frame trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tờ bản vẽ, khung tên và phát hành.
+- **Ví dụ gõ vào LLM:**
+
+  > Chuẩn bị tờ bản vẽ phát hành và thực hiện tờ bản vẽ frame trong khung tên.
+
+### solid_boolean
+
+- **Nhóm:** khối đặc
+- **Làm gì:** Thực hiện thao tác khối đặc boolean trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần hình học ba chiều và khối đặc.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra hình học ba chiều rồi thực hiện khối đặc boolean; không làm hỏng đối tượng gốc.
+
+### solid_box
+
+- **Nhóm:** khối đặc
+- **Làm gì:** Thực hiện thao tác khối đặc khung trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần hình học ba chiều và khối đặc.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra hình học ba chiều rồi thực hiện khối đặc khung; không làm hỏng đối tượng gốc.
+
+### solid_cylinder
+
+- **Nhóm:** khối đặc
+- **Làm gì:** Thực hiện thao tác khối đặc cylinder trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần hình học ba chiều và khối đặc.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra hình học ba chiều rồi thực hiện khối đặc cylinder; không làm hỏng đối tượng gốc.
+
+### solid_extrude
+
+- **Nhóm:** khối đặc
+- **Làm gì:** Thực hiện thao tác khối đặc extrude trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần hình học ba chiều và khối đặc.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra hình học ba chiều rồi thực hiện khối đặc extrude; không làm hỏng đối tượng gốc.
+
+### solid_revolve
+
+- **Nhóm:** khối đặc
+- **Làm gì:** Thực hiện thao tác khối đặc revolve trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần hình học ba chiều và khối đặc.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra hình học ba chiều rồi thực hiện khối đặc revolve; không làm hỏng đối tượng gốc.
+
+### standards_reference
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác standards tham chiếu trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện standards tham chiếu trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### std_feature_draw
+
+- **Nhóm:** cơ khí
+- **Làm gì:** Thực hiện thao tác std feature draw trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bản vẽ cơ khí.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên bản vẽ cơ khí, hãy std feature draw theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn.
+
+### std_part_insert
+
+- **Nhóm:** cơ khí
+- **Làm gì:** Thực hiện thao tác std part chèn trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bản vẽ cơ khí.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên bản vẽ cơ khí, hãy std part chèn theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn.
+
+### std_part_list
+
+- **Nhóm:** cơ khí
+- **Làm gì:** Thực hiện thao tác std part liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bản vẽ cơ khí.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên bản vẽ cơ khí, hãy std part liệt kê theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn.
+
+### structural_qa
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác structural qa trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện structural qa trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### surface_texture
+
+- **Nhóm:** cơ khí
+- **Làm gì:** Thực hiện thao tác surface texture trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bản vẽ cơ khí.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên bản vẽ cơ khí, hãy surface texture theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn.
+
+### system_about
+
+- **Nhóm:** hệ thống
+- **Làm gì:** Thực hiện thao tác hệ thống thông tin trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần trạng thái máy chủ.
+- **Ví dụ gõ vào LLM:**
+
+  > Báo cáo trạng thái MCP, AutoCAD và backend bằng cách hệ thống thông tin.
+
+### system_capabilities
+
+- **Nhóm:** tra cứu đối tượng
+- **Làm gì:** Thực hiện thao tác hệ thống capabilities trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tìm và đọc thuộc tính đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Tìm các đối tượng liên quan rồi báo cáo hệ thống capabilities, không thay đổi hình học.
+
+### system_get_variable
+
+- **Nhóm:** hệ thống
+- **Làm gì:** Thực hiện thao tác hệ thống get variable trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần trạng thái máy chủ.
+- **Ví dụ gõ vào LLM:**
+
+  > Báo cáo trạng thái MCP, AutoCAD và backend bằng cách hệ thống get variable.
+
+### system_launch
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác hệ thống launch trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo hệ thống launch trước khi thao tác bản vẽ.
+
+### system_preferences_get
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác hệ thống preferences get trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo hệ thống preferences get trước khi thao tác bản vẽ.
+
+### system_preferences_set
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác hệ thống preferences đặt trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo hệ thống preferences đặt trước khi thao tác bản vẽ.
+
+### system_prompt_message
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác hệ thống prompt message trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo hệ thống prompt message trước khi thao tác bản vẽ.
+
+### system_run_command
+
+- **Nhóm:** hệ thống
+- **Làm gì:** Thực hiện thao tác hệ thống run command trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần trạng thái máy chủ.
+- **Ví dụ gõ vào LLM:**
+
+  > Báo cáo trạng thái MCP, AutoCAD và backend bằng cách hệ thống run command.
+
+### system_run_lisp
+
+- **Nhóm:** hệ thống
+- **Làm gì:** Thực hiện thao tác hệ thống run lisp trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần trạng thái máy chủ.
+- **Ví dụ gõ vào LLM:**
+
+  > Báo cáo trạng thái MCP, AutoCAD và backend bằng cách hệ thống run lisp.
+
+### system_set_variable
+
+- **Nhóm:** hệ thống
+- **Làm gì:** Thực hiện thao tác hệ thống đặt variable trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần trạng thái máy chủ.
+- **Ví dụ gõ vào LLM:**
+
+  > Báo cáo trạng thái MCP, AutoCAD và backend bằng cách hệ thống đặt variable.
+
+### system_status
+
+- **Nhóm:** hệ thống
+- **Làm gì:** Thực hiện thao tác hệ thống trạng thái trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần trạng thái máy chủ.
+- **Ví dụ gõ vào LLM:**
+
+  > Báo cáo trạng thái MCP, AutoCAD và backend bằng cách hệ thống trạng thái.
+
+### system_variable_describe
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác hệ thống variable describe trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo hệ thống variable describe trước khi thao tác bản vẽ.
+
+### takeoff_compute
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác takeoff compute trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện takeoff compute trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### takeoff_decide
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác takeoff decide trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện takeoff decide trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### takeoff_export
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác takeoff xuất trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện takeoff xuất trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### takeoff_propose
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác takeoff propose trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện takeoff propose trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### takeoff_run
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác takeoff run trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện takeoff run trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### template_apply_layers
+
+- **Nhóm:** mẫu bản vẽ
+- **Làm gì:** Thực hiện thao tác mẫu apply layers trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mẫu bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Tạo bản vẽ mới từ mẫu dự án rồi thực hiện mẫu apply layers theo tiêu chuẩn đã chọn.
+
+### template_list
+
+- **Nhóm:** mẫu bản vẽ
+- **Làm gì:** Thực hiện thao tác mẫu liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần mẫu bản vẽ.
+- **Ví dụ gõ vào LLM:**
+
+  > Tạo bản vẽ mới từ mẫu dự án rồi thực hiện mẫu liệt kê theo tiêu chuẩn đã chọn.
+
+### text_find_replace
+
+- **Nhóm:** sửa đối tượng
+- **Làm gì:** Thực hiện thao tác chữ tìm replace trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sửa hoặc biến đổi đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Chụp ảnh trước, thực hiện chữ tìm replace, chụp ảnh sau và liệt kê các đối tượng đã đổi.
+
+### text_set_background
+
+- **Nhóm:** sửa đối tượng
+- **Làm gì:** Thực hiện thao tác chữ đặt background trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần sửa hoặc biến đổi đối tượng.
+- **Ví dụ gõ vào LLM:**
+
+  > Chụp ảnh trước, thực hiện chữ đặt background, chụp ảnh sau và liệt kê các đối tượng đã đổi.
+
+### textstyle_create
+
+- **Nhóm:** kiểu hiển thị
+- **Làm gì:** Thực hiện thao tác textstyle tạo trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểu và hiển thị.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kiểu hiển thị hiện tại và thực hiện textstyle tạo cho toàn bộ bản vẽ.
+
+### textstyle_list
+
+- **Nhóm:** kiểu hiển thị
+- **Làm gì:** Thực hiện thao tác textstyle liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểu và hiển thị.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kiểu hiển thị hiện tại và thực hiện textstyle liệt kê cho toàn bộ bản vẽ.
+
+### textstyle_set_current
+
+- **Nhóm:** kiểu hiển thị
+- **Làm gì:** Thực hiện thao tác textstyle đặt hiện tại trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểu và hiển thị.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kiểu hiển thị hiện tại và thực hiện textstyle đặt hiện tại cho toàn bộ bản vẽ.
+
+### titleblock_apply
+
+- **Nhóm:** tờ bản vẽ
+- **Làm gì:** Thực hiện thao tác titleblock apply trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tờ bản vẽ, khung tên và phát hành.
+- **Ví dụ gõ vào LLM:**
+
+  > Chuẩn bị tờ bản vẽ phát hành và thực hiện titleblock apply trong khung tên.
+
+### titleblock_apply_iso_a3
+
+- **Nhóm:** kỹ thuật
+- **Làm gì:** Thực hiện thao tác titleblock apply iso a3 trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kỹ thuật.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra bản vẽ theo yêu cầu kỹ thuật và báo cáo titleblock apply iso a3 thành lỗi hoặc cảnh báo.
+
+### transaction_begin
+
+- **Nhóm:** giao dịch
+- **Làm gì:** Thực hiện thao tác giao dịch begin trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần giao dịch thay đổi có kiểm soát.
+- **Ví dụ gõ vào LLM:**
+
+  > Bắt đầu giao dịch, thực hiện giao dịch begin, cho tôi xem thay đổi rồi mới xác nhận.
+
+### transaction_commit
+
+- **Nhóm:** giao dịch
+- **Làm gì:** Thực hiện thao tác giao dịch commit trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần giao dịch thay đổi có kiểm soát.
+- **Ví dụ gõ vào LLM:**
+
+  > Bắt đầu giao dịch, thực hiện giao dịch commit, cho tôi xem thay đổi rồi mới xác nhận.
+
+### transaction_rollback
+
+- **Nhóm:** giao dịch
+- **Làm gì:** Thực hiện thao tác giao dịch rollback trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần giao dịch thay đổi có kiểm soát.
+- **Ví dụ gõ vào LLM:**
+
+  > Bắt đầu giao dịch, thực hiện giao dịch rollback, cho tôi xem thay đổi rồi mới xác nhận.
+
+### ucs_list
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác ucs liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo ucs liệt kê trước khi thao tác bản vẽ.
+
+### ucs_restore
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác ucs restore trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo ucs restore trước khi thao tác bản vẽ.
+
+### ucs_set
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác ucs đặt trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo ucs đặt trước khi thao tác bản vẽ.
+
+### user_pick_point
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác user pick điểm trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo user pick điểm trước khi thao tác bản vẽ.
+
+### user_select
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác user chọn trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo user chọn trước khi thao tác bản vẽ.
+
+### validation_check
+
+- **Nhóm:** xác nhận
+- **Làm gì:** Thực hiện thao tác validation kiểm tra trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra hợp lệ.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra bản vẽ và báo cáo validation kiểm tra theo mức Error, Warning và Info.
+
+### view_named_list
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác góc nhìn named liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo góc nhìn named liệt kê trước khi thao tác bản vẽ.
+
+### view_named_restore
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác góc nhìn named restore trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo góc nhìn named restore trước khi thao tác bản vẽ.
+
+### view_named_save
+
+- **Nhóm:** môi trường
+- **Làm gì:** Thực hiện thao tác góc nhìn named lưu trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần kiểm tra kết nối và cấu hình.
+- **Ví dụ gõ vào LLM:**
+
+  > Kiểm tra kết nối AutoCAD và báo cáo góc nhìn named lưu trước khi thao tác bản vẽ.
+
+### view_render_report
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác góc nhìn kết xuất report trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thực hiện góc nhìn kết xuất report trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+### view_screenshot
+
+- **Nhóm:** góc nhìn
+- **Làm gì:** Thực hiện thao tác góc nhìn screenshot trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần thu phóng, góc nhìn và ảnh chụp.
+- **Ví dụ gõ vào LLM:**
+
+  > Chụp riêng vùng mặt bằng tầng 1, vùng khung tên và vùng kích thước bên phải.
+
+### view_zoom_and_screenshot
+
+- **Nhóm:** góc nhìn
+- **Làm gì:** Thực hiện thao tác góc nhìn thu phóng và screenshot trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần thu phóng, góc nhìn và ảnh chụp.
+- **Ví dụ gõ vào LLM:**
+
+  > Thu toàn bộ bản vẽ vào màn hình rồi chụp ảnh để tôi kiểm tra nhanh.
+
+### view_zoom_extents
+
+- **Nhóm:** góc nhìn
+- **Làm gì:** Thực hiện thao tác góc nhìn thu phóng extents trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần thu phóng, góc nhìn và ảnh chụp.
+- **Ví dụ gõ vào LLM:**
+
+  > Thu phóng để toàn bộ đối tượng của bản vẽ nằm vừa trên màn hình.
+
+### view_zoom_window
+
+- **Nhóm:** góc nhìn
+- **Làm gì:** Thực hiện thao tác góc nhìn thu phóng window trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần thu phóng, góc nhìn và ảnh chụp.
+- **Ví dụ gõ vào LLM:**
+
+  > Phóng to riêng vùng mặt bằng tầng 1 để nhìn rõ cửa, thiết bị và kích thước.
+
+### viewport_create
+
+- **Nhóm:** bố cục
+- **Làm gì:** Thực hiện thao tác khung nhìn tạo trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bố cục và khung nhìn.
+- **Ví dụ gõ vào LLM:**
+
+  > Thiết lập bố cục A1 và thực hiện khung nhìn tạo cho khung tên và khung nhìn.
+
+### viewport_delete
+
+- **Nhóm:** bố cục
+- **Làm gì:** Thực hiện thao tác khung nhìn xóa trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bố cục và khung nhìn.
+- **Ví dụ gõ vào LLM:**
+
+  > Thiết lập bố cục A1 và thực hiện khung nhìn xóa cho khung tên và khung nhìn.
+
+### viewport_list
+
+- **Nhóm:** bố cục
+- **Làm gì:** Thực hiện thao tác khung nhìn liệt kê trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bố cục và khung nhìn.
+- **Ví dụ gõ vào LLM:**
+
+  > Thiết lập bố cục A1 và thực hiện khung nhìn liệt kê cho khung tên và khung nhìn.
+
+### viewport_lock
+
+- **Nhóm:** bố cục
+- **Làm gì:** Thực hiện thao tác khung nhìn khóa trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bố cục và khung nhìn.
+- **Ví dụ gõ vào LLM:**
+
+  > Thiết lập bố cục A1 và thực hiện khung nhìn khóa cho khung tên và khung nhìn.
+
+### viewport_set_scale
+
+- **Nhóm:** bố cục
+- **Làm gì:** Thực hiện thao tác khung nhìn đặt tỷ lệ trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bố cục và khung nhìn.
+- **Ví dụ gõ vào LLM:**
+
+  > Thiết lập bố cục A1 và thực hiện khung nhìn đặt tỷ lệ cho khung tên và khung nhìn.
+
+### weld_symbol
+
+- **Nhóm:** cơ khí
+- **Làm gì:** Thực hiện thao tác mối hàn ký hiệu trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần bản vẽ cơ khí.
+- **Ví dụ gõ vào LLM:**
+
+  > Trên bản vẽ cơ khí, hãy mối hàn ký hiệu theo tiêu chuẩn đã chọn và báo cáo phần chưa chắc chắn.
+
+### xref_attach
+
+- **Nhóm:** tờ bản vẽ
+- **Làm gì:** Thực hiện thao tác tham chiếu ngoài đính kèm trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tờ bản vẽ, khung tên và phát hành.
+- **Ví dụ gõ vào LLM:**
+
+  > Chuẩn bị tờ bản vẽ phát hành và thực hiện tham chiếu ngoài đính kèm trong khung tên.
+
+### xref_manage
+
+- **Nhóm:** tờ bản vẽ
+- **Làm gì:** Thực hiện thao tác tham chiếu ngoài quản lý trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần tờ bản vẽ, khung tên và phát hành.
+- **Ví dụ gõ vào LLM:**
+
+  > Chuẩn bị tờ bản vẽ phát hành và thực hiện tham chiếu ngoài quản lý trong khung tên.
+
