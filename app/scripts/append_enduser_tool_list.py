@@ -78,6 +78,8 @@ WORD_VI = {
     "by": "theo", "from": "từ", "to": "đến", "with": "với", "all": "tất cả", "and": "và",
     "or": "hoặc", "on": "trên", "in": "trong", "of": "của", "at": "tại", "entities": "đối tượng",
     "define": "định nghĩa", "references": "tham chiếu", "reference": "tham chiếu", "find": "tìm",
+    "type": "loại", "opening": "ô cửa", "rooms": "phòng", "room": "phòng", "wall": "tường",
+    "grid": "lưới trục", "stair": "cầu thang", "catalogue": "danh mục", "schedule": "bảng thống kê",
     "load": "nạp", "reload": "nạp lại", "bind": "gắn", "detach": "tháo", "repath": "đổi đường dẫn",
     "current": "hiện tại", "active": "đang hoạt động", "name": "tên", "names": "tên", "all": "tất cả",
     "inside": "bên trong", "outside": "bên ngoài", "near": "gần", "parallel": "song song",
@@ -159,7 +161,10 @@ def main() -> None:
         text = f"Thực hiện thao tác {vietnamese_name(name)} trong bản vẽ CAD."
         when = GROUP_WHEN.get(group, "chức năng mở rộng của cadtroly")
         request = request_example(name, group)
-        index_rows.append(f"- [`{name}`](#{name}) — {GROUP_VI.get(group, group)}")
+        index_rows.append(
+            f"- [`{name}`](#{name}) — {GROUP_VI.get(group, group)}: "
+            f"dùng để {vietnamese_name(name)} trong bản vẽ CAD."
+        )
         detail_sections.append(
             f"### {name}\n\n"
             f"- **Nhóm:** {GROUP_VI.get(group, group)}\n"

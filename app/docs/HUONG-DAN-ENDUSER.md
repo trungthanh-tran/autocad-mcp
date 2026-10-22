@@ -135,278 +135,278 @@ Sau mỗi công việc, yêu cầu MCP/LLM trả về:
 
 Có **272 chức năng**, gồm **247 chức năng nền tảng** và chức năng mở rộng của cadtroly. Bấm vào tên để đi đến phần hướng dẫn tương ứng.
 
-- [`analysis_bounding_box`](#analysis_bounding_box) — phân tích
-- [`analysis_entity_stats`](#analysis_entity_stats) — phân tích
-- [`analysis_find_in_region`](#analysis_find_in_region) — phân tích
-- [`analysis_layer_stats`](#analysis_layer_stats) — phân tích
-- [`analysis_list_properties`](#analysis_list_properties) — phân tích
-- [`analysis_measure_area`](#analysis_measure_area) — phân tích
-- [`analysis_measure_distance`](#analysis_measure_distance) — phân tích
-- [`analysis_measure_entity`](#analysis_measure_entity) — phân tích
-- [`analysis_select_by_layer`](#analysis_select_by_layer) — phân tích
-- [`analysis_select_by_type`](#analysis_select_by_type) — phân tích
-- [`arch_catalogue_insert`](#arch_catalogue_insert) — kiến trúc
-- [`arch_catalogue_list`](#arch_catalogue_list) — kiến trúc
-- [`arch_dimension_chains`](#arch_dimension_chains) — kiến trúc
-- [`arch_grid`](#arch_grid) — kiến trúc
-- [`arch_opening`](#arch_opening) — kiến trúc
-- [`arch_plan_from_spec`](#arch_plan_from_spec) — kiến trúc
-- [`arch_room`](#arch_room) — kiến trúc
-- [`arch_rooms_detect`](#arch_rooms_detect) — kiến trúc
-- [`arch_schedule`](#arch_schedule) — kiến trúc
-- [`arch_stair`](#arch_stair) — kiến trúc
-- [`arch_symbol`](#arch_symbol) — kiến trúc
-- [`arch_wall`](#arch_wall) — kiến trúc
-- [`balloon_add`](#balloon_add) — tờ bản vẽ
-- [`batch_plot`](#batch_plot) — thiết lập trang
-- [`block_create_from_entities`](#block_create_from_entities) — khối
-- [`block_define`](#block_define) — khối
-- [`block_explode`](#block_explode) — khối
-- [`block_find_references`](#block_find_references) — khối
-- [`block_get_attributes`](#block_get_attributes) — khối
-- [`block_insert`](#block_insert) — khối
-- [`block_list`](#block_list) — khối
-- [`block_set_attributes`](#block_set_attributes) — khối
-- [`bom_extract`](#bom_extract) — tờ bản vẽ
-- [`bom_table`](#bom_table) — tờ bản vẽ
-- [`boundary_from_entities`](#boundary_from_entities) — phân tích
-- [`boundary_trace`](#boundary_trace) — phân tích
-- [`cable_takeoff`](#cable_takeoff) — nhà máy
-- [`cad_batch`](#cad_batch) — xử lý hàng loạt
-- [`centre_marks`](#centre_marks) — cơ khí
-- [`check_rulesets`](#check_rulesets) — mở rộng cadtroly
-- [`check_run`](#check_run) — mở rộng cadtroly
-- [`construction_clear`](#construction_clear) — nâng cao
-- [`construction_xline`](#construction_xline) — nâng cao
-- [`data_extract`](#data_extract) — tờ bản vẽ
-- [`datum_feature`](#datum_feature) — kỹ thuật
-- [`dimension_aligned`](#dimension_aligned) — kích thước
-- [`dimension_angular`](#dimension_angular) — kích thước
-- [`dimension_auto`](#dimension_auto) — nâng cao
-- [`dimension_diameter`](#dimension_diameter) — kích thước
-- [`dimension_linear`](#dimension_linear) — kích thước
-- [`dimension_radius`](#dimension_radius) — kích thước
-- [`dimstyle_create`](#dimstyle_create) — kiểu hiển thị
-- [`dimstyle_list`](#dimstyle_list) — kiểu hiển thị
-- [`dimstyle_modify`](#dimstyle_modify) — kiểu hiển thị
-- [`dimstyle_set_current`](#dimstyle_set_current) — kiểu hiển thị
-- [`document_activate`](#document_activate) — môi trường
-- [`document_close`](#document_close) — môi trường
-- [`document_list`](#document_list) — môi trường
-- [`drawing_apply_discipline_standard`](#drawing_apply_discipline_standard) — mở rộng cadtroly
-- [`drawing_apply_iso_layers`](#drawing_apply_iso_layers) — nâng cao
-- [`drawing_apply_standard`](#drawing_apply_standard) — kiểu hiển thị
-- [`drawing_audit`](#drawing_audit) — bản vẽ
-- [`drawing_close`](#drawing_close) — bản vẽ
-- [`drawing_critique`](#drawing_critique) — nâng cao
-- [`drawing_deliver`](#drawing_deliver) — kỹ thuật
-- [`drawing_diff`](#drawing_diff) — đọc hiểu
-- [`drawing_entities`](#drawing_entities) — mở rộng cadtroly
-- [`drawing_export_dwg`](#drawing_export_dwg) — tờ bản vẽ
-- [`drawing_export_dxf`](#drawing_export_dxf) — bản vẽ
-- [`drawing_export_pdf`](#drawing_export_pdf) — bản vẽ
-- [`drawing_finalize`](#drawing_finalize) — kỹ thuật
-- [`drawing_info`](#drawing_info) — tra cứu đối tượng
-- [`drawing_new`](#drawing_new) — bản vẽ
-- [`drawing_open`](#drawing_open) — bản vẽ
-- [`drawing_plan`](#drawing_plan) — nâng cao
-- [`drawing_preflight`](#drawing_preflight) — nâng cao
-- [`drawing_properties_get`](#drawing_properties_get) — môi trường
-- [`drawing_properties_set`](#drawing_properties_set) — môi trường
-- [`drawing_purge`](#drawing_purge) — bản vẽ
-- [`drawing_read`](#drawing_read) — mở rộng cadtroly
-- [`drawing_redo`](#drawing_redo) — bản vẽ
-- [`drawing_refine`](#drawing_refine) — nâng cao
-- [`drawing_save`](#drawing_save) — bản vẽ
-- [`drawing_save_as`](#drawing_save_as) — bản vẽ
-- [`drawing_scale_check`](#drawing_scale_check) — đọc hiểu
-- [`drawing_settings`](#drawing_settings) — hệ thống
-- [`drawing_template_list`](#drawing_template_list) — thiết lập trang
-- [`drawing_template_save`](#drawing_template_save) — thiết lập trang
-- [`drawing_topology_check`](#drawing_topology_check) — đọc hiểu
-- [`drawing_understand`](#drawing_understand) — đọc hiểu
-- [`drawing_undo`](#drawing_undo) — bản vẽ
-- [`entity_array_polar`](#entity_array_polar) — sửa đối tượng
-- [`entity_array_rectangular`](#entity_array_rectangular) — sửa đối tượng
-- [`entity_batch_create`](#entity_batch_create) — xử lý hàng loạt
-- [`entity_batch_modify`](#entity_batch_modify) — xử lý hàng loạt
-- [`entity_chamfer`](#entity_chamfer) — corner_ops
-- [`entity_change_space`](#entity_change_space) — bố cục
-- [`entity_copy`](#entity_copy) — sửa đối tượng
-- [`entity_create_arc`](#entity_create_arc) — tạo đối tượng
-- [`entity_create_block_ref`](#entity_create_block_ref) — khối
-- [`entity_create_circle`](#entity_create_circle) — tạo đối tượng
-- [`entity_create_ellipse`](#entity_create_ellipse) — tạo đối tượng
-- [`entity_create_hatch`](#entity_create_hatch) — tạo đối tượng
-- [`entity_create_line`](#entity_create_line) — tạo đối tượng
-- [`entity_create_mtext`](#entity_create_mtext) — tạo đối tượng
-- [`entity_create_point`](#entity_create_point) — tạo đối tượng
-- [`entity_create_polyline`](#entity_create_polyline) — tạo đối tượng
-- [`entity_create_rectangle`](#entity_create_rectangle) — tạo đối tượng
-- [`entity_create_revcloud`](#entity_create_revcloud) — tạo đối tượng
-- [`entity_create_spline`](#entity_create_spline) — tạo đối tượng
-- [`entity_create_table`](#entity_create_table) — tạo đối tượng
-- [`entity_create_text`](#entity_create_text) — tạo đối tượng
-- [`entity_create_wipeout`](#entity_create_wipeout) — tạo đối tượng
-- [`entity_delete`](#entity_delete) — sửa đối tượng
-- [`entity_delete_many`](#entity_delete_many) — sửa đối tượng
-- [`entity_edit_geometry`](#entity_edit_geometry) — sửa đối tượng
-- [`entity_edit_text`](#entity_edit_text) — sửa đối tượng
-- [`entity_extend`](#entity_extend) — corner_ops
-- [`entity_fillet`](#entity_fillet) — corner_ops
-- [`entity_get`](#entity_get) — tra cứu đối tượng
-- [`entity_get_xdata`](#entity_get_xdata) — tra cứu đối tượng
-- [`entity_list`](#entity_list) — tra cứu đối tượng
-- [`entity_mirror`](#entity_mirror) — sửa đối tượng
-- [`entity_move`](#entity_move) — sửa đối tượng
-- [`entity_offset`](#entity_offset) — sửa đối tượng
-- [`entity_rotate`](#entity_rotate) — sửa đối tượng
-- [`entity_scale`](#entity_scale) — sửa đối tượng
-- [`entity_select_smart`](#entity_select_smart) — nâng cao
-- [`entity_set_properties`](#entity_set_properties) — sửa đối tượng
-- [`entity_set_xdata`](#entity_set_xdata) — sửa đối tượng
-- [`entity_trim`](#entity_trim) — corner_ops
-- [`gd_frame`](#gd_frame) — kỹ thuật
-- [`gear_draw_helical_front_view`](#gear_draw_helical_front_view) — kỹ thuật
-- [`gear_draw_section_aa`](#gear_draw_section_aa) — kỹ thuật
-- [`gear_draw_spur_front_view`](#gear_draw_spur_front_view) — kỹ thuật
-- [`hatch_add_boundary`](#hatch_add_boundary) — tạo đối tượng
-- [`hatch_edit`](#hatch_edit) — tạo đối tượng
-- [`hatch_material`](#hatch_material) — cơ khí
-- [`hatch_set_gradient`](#hatch_set_gradient) — tạo đối tượng
-- [`image_attach`](#image_attach) — tờ bản vẽ
-- [`keyway_draw_keyed_bore`](#keyway_draw_keyed_bore) — kỹ thuật
-- [`keyway_draw_section`](#keyway_draw_section) — kỹ thuật
-- [`kho_industries`](#kho_industries) — mở rộng cadtroly
-- [`kho_rules_export`](#kho_rules_export) — mở rộng cadtroly
-- [`kho_rules_import`](#kho_rules_import) — mở rộng cadtroly
-- [`kho_skill_add`](#kho_skill_add) — mở rộng cadtroly
-- [`kho_skill_toggle`](#kho_skill_toggle) — mở rộng cadtroly
-- [`kho_skills`](#kho_skills) — mở rộng cadtroly
-- [`kho_standard_add`](#kho_standard_add) — mở rộng cadtroly
-- [`kho_standard_delete`](#kho_standard_delete) — mở rộng cadtroly
-- [`kho_standards`](#kho_standards) — mở rộng cadtroly
-- [`kho_status`](#kho_status) — mở rộng cadtroly
-- [`layer_create`](#layer_create) — lớp bản vẽ
-- [`layer_delete`](#layer_delete) — lớp bản vẽ
-- [`layer_freeze`](#layer_freeze) — lớp bản vẽ
-- [`layer_hide`](#layer_hide) — lớp bản vẽ
-- [`layer_isolate`](#layer_isolate) — lớp bản vẽ
-- [`layer_list`](#layer_list) — lớp bản vẽ
-- [`layer_lock`](#layer_lock) — lớp bản vẽ
-- [`layer_modify`](#layer_modify) — lớp bản vẽ
-- [`layer_set_current`](#layer_set_current) — lớp bản vẽ
-- [`layer_show`](#layer_show) — lớp bản vẽ
-- [`layer_state_delete`](#layer_state_delete) — môi trường
-- [`layer_state_list`](#layer_state_list) — môi trường
-- [`layer_state_restore`](#layer_state_restore) — môi trường
-- [`layer_state_save`](#layer_state_save) — môi trường
-- [`layer_thaw`](#layer_thaw) — lớp bản vẽ
-- [`layer_unlock`](#layer_unlock) — lớp bản vẽ
-- [`layout_copy`](#layout_copy) — bố cục
-- [`layout_create`](#layout_create) — bố cục
-- [`layout_delete`](#layout_delete) — bố cục
-- [`layout_list`](#layout_list) — bố cục
-- [`layout_rename`](#layout_rename) — bố cục
-- [`layout_set_current`](#layout_set_current) — bố cục
-- [`leader_create_mleader`](#leader_create_mleader) — tạo đối tượng
-- [`linetype_list`](#linetype_list) — lớp bản vẽ
-- [`linetype_load`](#linetype_load) — lớp bản vẽ
-- [`mech_dimension_part`](#mech_dimension_part) — cơ khí
-- [`mech_hole_pattern`](#mech_hole_pattern) — cơ khí
-- [`mech_part_draw`](#mech_part_draw) — cơ khí
-- [`mech_part_from_spec`](#mech_part_from_spec) — cơ khí
-- [`mech_part_inspect`](#mech_part_inspect) — cơ khí
-- [`mech_view_add`](#mech_view_add) — cơ khí
-- [`mleaderstyle_create`](#mleaderstyle_create) — kiểu hiển thị
-- [`mleaderstyle_list`](#mleaderstyle_list) — kiểu hiển thị
-- [`page_setup_apply`](#page_setup_apply) — thiết lập trang
-- [`page_setup_list`](#page_setup_list) — thiết lập trang
-- [`pdf_to_dwg`](#pdf_to_dwg) — mở rộng cadtroly
-- [`pdf_vectorize`](#pdf_vectorize) — mở rộng cadtroly
-- [`pid_equipment_list`](#pid_equipment_list) — P&ID
-- [`pid_from_spec`](#pid_from_spec) — P&ID
-- [`pid_graph`](#pid_graph) — P&ID
-- [`pid_instrument_index`](#pid_instrument_index) — P&ID
-- [`pid_line_draw`](#pid_line_draw) — P&ID
-- [`pid_line_list`](#pid_line_list) — P&ID
-- [`pid_symbol_insert`](#pid_symbol_insert) — P&ID
-- [`pid_symbol_list`](#pid_symbol_list) — P&ID
-- [`pid_tag_parse`](#pid_tag_parse) — P&ID
-- [`pipe_takeoff`](#pipe_takeoff) — nhà máy
-- [`plot_style_list`](#plot_style_list) — thiết lập trang
-- [`point_from_snap`](#point_from_snap) — nâng cao
-- [`point_intersection`](#point_intersection) — nâng cao
-- [`point_tangent`](#point_tangent) — nâng cao
-- [`revision_add`](#revision_add) — tờ bản vẽ
-- [`section_line`](#section_line) — cơ khí
-- [`selection_filter`](#selection_filter) — tra cứu đối tượng
-- [`selection_get`](#selection_get) — tra cứu đối tượng
-- [`selection_polygon`](#selection_polygon) — tra cứu đối tượng
-- [`selection_window`](#selection_window) — tra cứu đối tượng
-- [`sheet_frame`](#sheet_frame) — tờ bản vẽ
-- [`solid_boolean`](#solid_boolean) — khối đặc
-- [`solid_box`](#solid_box) — khối đặc
-- [`solid_cylinder`](#solid_cylinder) — khối đặc
-- [`solid_extrude`](#solid_extrude) — khối đặc
-- [`solid_revolve`](#solid_revolve) — khối đặc
-- [`standards_reference`](#standards_reference) — mở rộng cadtroly
-- [`std_feature_draw`](#std_feature_draw) — cơ khí
-- [`std_part_insert`](#std_part_insert) — cơ khí
-- [`std_part_list`](#std_part_list) — cơ khí
-- [`structural_qa`](#structural_qa) — mở rộng cadtroly
-- [`surface_texture`](#surface_texture) — cơ khí
-- [`system_about`](#system_about) — hệ thống
-- [`system_capabilities`](#system_capabilities) — tra cứu đối tượng
-- [`system_get_variable`](#system_get_variable) — hệ thống
-- [`system_launch`](#system_launch) — môi trường
-- [`system_preferences_get`](#system_preferences_get) — môi trường
-- [`system_preferences_set`](#system_preferences_set) — môi trường
-- [`system_prompt_message`](#system_prompt_message) — môi trường
-- [`system_run_command`](#system_run_command) — hệ thống
-- [`system_run_lisp`](#system_run_lisp) — hệ thống
-- [`system_set_variable`](#system_set_variable) — hệ thống
-- [`system_status`](#system_status) — hệ thống
-- [`system_variable_describe`](#system_variable_describe) — môi trường
-- [`takeoff_compute`](#takeoff_compute) — mở rộng cadtroly
-- [`takeoff_decide`](#takeoff_decide) — mở rộng cadtroly
-- [`takeoff_export`](#takeoff_export) — mở rộng cadtroly
-- [`takeoff_propose`](#takeoff_propose) — mở rộng cadtroly
-- [`takeoff_run`](#takeoff_run) — mở rộng cadtroly
-- [`template_apply_layers`](#template_apply_layers) — mẫu bản vẽ
-- [`template_list`](#template_list) — mẫu bản vẽ
-- [`text_find_replace`](#text_find_replace) — sửa đối tượng
-- [`text_set_background`](#text_set_background) — sửa đối tượng
-- [`textstyle_create`](#textstyle_create) — kiểu hiển thị
-- [`textstyle_list`](#textstyle_list) — kiểu hiển thị
-- [`textstyle_set_current`](#textstyle_set_current) — kiểu hiển thị
-- [`titleblock_apply`](#titleblock_apply) — tờ bản vẽ
-- [`titleblock_apply_iso_a3`](#titleblock_apply_iso_a3) — kỹ thuật
-- [`transaction_begin`](#transaction_begin) — giao dịch
-- [`transaction_commit`](#transaction_commit) — giao dịch
-- [`transaction_rollback`](#transaction_rollback) — giao dịch
-- [`ucs_list`](#ucs_list) — môi trường
-- [`ucs_restore`](#ucs_restore) — môi trường
-- [`ucs_set`](#ucs_set) — môi trường
-- [`user_pick_point`](#user_pick_point) — môi trường
-- [`user_select`](#user_select) — môi trường
-- [`validation_check`](#validation_check) — xác nhận
-- [`view_named_list`](#view_named_list) — môi trường
-- [`view_named_restore`](#view_named_restore) — môi trường
-- [`view_named_save`](#view_named_save) — môi trường
-- [`view_render_report`](#view_render_report) — mở rộng cadtroly
-- [`view_screenshot`](#view_screenshot) — góc nhìn
-- [`view_zoom_and_screenshot`](#view_zoom_and_screenshot) — góc nhìn
-- [`view_zoom_extents`](#view_zoom_extents) — góc nhìn
-- [`view_zoom_window`](#view_zoom_window) — góc nhìn
-- [`viewport_create`](#viewport_create) — bố cục
-- [`viewport_delete`](#viewport_delete) — bố cục
-- [`viewport_list`](#viewport_list) — bố cục
-- [`viewport_lock`](#viewport_lock) — bố cục
-- [`viewport_set_scale`](#viewport_set_scale) — bố cục
-- [`weld_symbol`](#weld_symbol) — cơ khí
-- [`xref_attach`](#xref_attach) — tờ bản vẽ
-- [`xref_manage`](#xref_manage) — tờ bản vẽ
+- [`analysis_bounding_box`](#analysis_bounding_box) — phân tích: dùng để phân tích giới hạn khung trong bản vẽ CAD.
+- [`analysis_entity_stats`](#analysis_entity_stats) — phân tích: dùng để phân tích đối tượng thống kê trong bản vẽ CAD.
+- [`analysis_find_in_region`](#analysis_find_in_region) — phân tích: dùng để phân tích tìm trong vùng trong bản vẽ CAD.
+- [`analysis_layer_stats`](#analysis_layer_stats) — phân tích: dùng để phân tích lớp thống kê trong bản vẽ CAD.
+- [`analysis_list_properties`](#analysis_list_properties) — phân tích: dùng để phân tích liệt kê thuộc tính trong bản vẽ CAD.
+- [`analysis_measure_area`](#analysis_measure_area) — phân tích: dùng để phân tích đo diện tích trong bản vẽ CAD.
+- [`analysis_measure_distance`](#analysis_measure_distance) — phân tích: dùng để phân tích đo khoảng cách trong bản vẽ CAD.
+- [`analysis_measure_entity`](#analysis_measure_entity) — phân tích: dùng để phân tích đo đối tượng trong bản vẽ CAD.
+- [`analysis_select_by_layer`](#analysis_select_by_layer) — phân tích: dùng để phân tích chọn theo lớp trong bản vẽ CAD.
+- [`analysis_select_by_type`](#analysis_select_by_type) — phân tích: dùng để phân tích chọn theo loại trong bản vẽ CAD.
+- [`arch_catalogue_insert`](#arch_catalogue_insert) — kiến trúc: dùng để arch danh mục chèn trong bản vẽ CAD.
+- [`arch_catalogue_list`](#arch_catalogue_list) — kiến trúc: dùng để arch danh mục liệt kê trong bản vẽ CAD.
+- [`arch_dimension_chains`](#arch_dimension_chains) — kiến trúc: dùng để arch kích thước chains trong bản vẽ CAD.
+- [`arch_grid`](#arch_grid) — kiến trúc: dùng để arch lưới trục trong bản vẽ CAD.
+- [`arch_opening`](#arch_opening) — kiến trúc: dùng để arch ô cửa trong bản vẽ CAD.
+- [`arch_plan_from_spec`](#arch_plan_from_spec) — kiến trúc: dùng để arch mặt bằng từ spec trong bản vẽ CAD.
+- [`arch_room`](#arch_room) — kiến trúc: dùng để arch phòng trong bản vẽ CAD.
+- [`arch_rooms_detect`](#arch_rooms_detect) — kiến trúc: dùng để arch phòng detect trong bản vẽ CAD.
+- [`arch_schedule`](#arch_schedule) — kiến trúc: dùng để arch bảng thống kê trong bản vẽ CAD.
+- [`arch_stair`](#arch_stair) — kiến trúc: dùng để arch cầu thang trong bản vẽ CAD.
+- [`arch_symbol`](#arch_symbol) — kiến trúc: dùng để arch ký hiệu trong bản vẽ CAD.
+- [`arch_wall`](#arch_wall) — kiến trúc: dùng để arch tường trong bản vẽ CAD.
+- [`balloon_add`](#balloon_add) — tờ bản vẽ: dùng để balloon add trong bản vẽ CAD.
+- [`batch_plot`](#batch_plot) — thiết lập trang: dùng để hàng loạt plot trong bản vẽ CAD.
+- [`block_create_from_entities`](#block_create_from_entities) — khối: dùng để khối tạo từ đối tượng trong bản vẽ CAD.
+- [`block_define`](#block_define) — khối: dùng để khối định nghĩa trong bản vẽ CAD.
+- [`block_explode`](#block_explode) — khối: dùng để khối phá khối trong bản vẽ CAD.
+- [`block_find_references`](#block_find_references) — khối: dùng để khối tìm tham chiếu trong bản vẽ CAD.
+- [`block_get_attributes`](#block_get_attributes) — khối: dùng để khối get attributes trong bản vẽ CAD.
+- [`block_insert`](#block_insert) — khối: dùng để khối chèn trong bản vẽ CAD.
+- [`block_list`](#block_list) — khối: dùng để khối liệt kê trong bản vẽ CAD.
+- [`block_set_attributes`](#block_set_attributes) — khối: dùng để khối đặt attributes trong bản vẽ CAD.
+- [`bom_extract`](#bom_extract) — tờ bản vẽ: dùng để bom extract trong bản vẽ CAD.
+- [`bom_table`](#bom_table) — tờ bản vẽ: dùng để bom bảng trong bản vẽ CAD.
+- [`boundary_from_entities`](#boundary_from_entities) — phân tích: dùng để boundary từ đối tượng trong bản vẽ CAD.
+- [`boundary_trace`](#boundary_trace) — phân tích: dùng để boundary trace trong bản vẽ CAD.
+- [`cable_takeoff`](#cable_takeoff) — nhà máy: dùng để cable takeoff trong bản vẽ CAD.
+- [`cad_batch`](#cad_batch) — xử lý hàng loạt: dùng để cad hàng loạt trong bản vẽ CAD.
+- [`centre_marks`](#centre_marks) — cơ khí: dùng để centre marks trong bản vẽ CAD.
+- [`check_rulesets`](#check_rulesets) — mở rộng cadtroly: dùng để kiểm tra rulesets trong bản vẽ CAD.
+- [`check_run`](#check_run) — mở rộng cadtroly: dùng để kiểm tra run trong bản vẽ CAD.
+- [`construction_clear`](#construction_clear) — nâng cao: dùng để construction clear trong bản vẽ CAD.
+- [`construction_xline`](#construction_xline) — nâng cao: dùng để construction xline trong bản vẽ CAD.
+- [`data_extract`](#data_extract) — tờ bản vẽ: dùng để dữ liệu extract trong bản vẽ CAD.
+- [`datum_feature`](#datum_feature) — kỹ thuật: dùng để datum feature trong bản vẽ CAD.
+- [`dimension_aligned`](#dimension_aligned) — kích thước: dùng để kích thước aligned trong bản vẽ CAD.
+- [`dimension_angular`](#dimension_angular) — kích thước: dùng để kích thước angular trong bản vẽ CAD.
+- [`dimension_auto`](#dimension_auto) — nâng cao: dùng để kích thước auto trong bản vẽ CAD.
+- [`dimension_diameter`](#dimension_diameter) — kích thước: dùng để kích thước diameter trong bản vẽ CAD.
+- [`dimension_linear`](#dimension_linear) — kích thước: dùng để kích thước linear trong bản vẽ CAD.
+- [`dimension_radius`](#dimension_radius) — kích thước: dùng để kích thước radius trong bản vẽ CAD.
+- [`dimstyle_create`](#dimstyle_create) — kiểu hiển thị: dùng để dimstyle tạo trong bản vẽ CAD.
+- [`dimstyle_list`](#dimstyle_list) — kiểu hiển thị: dùng để dimstyle liệt kê trong bản vẽ CAD.
+- [`dimstyle_modify`](#dimstyle_modify) — kiểu hiển thị: dùng để dimstyle sửa trong bản vẽ CAD.
+- [`dimstyle_set_current`](#dimstyle_set_current) — kiểu hiển thị: dùng để dimstyle đặt hiện tại trong bản vẽ CAD.
+- [`document_activate`](#document_activate) — môi trường: dùng để document activate trong bản vẽ CAD.
+- [`document_close`](#document_close) — môi trường: dùng để document đóng trong bản vẽ CAD.
+- [`document_list`](#document_list) — môi trường: dùng để document liệt kê trong bản vẽ CAD.
+- [`drawing_apply_discipline_standard`](#drawing_apply_discipline_standard) — mở rộng cadtroly: dùng để bản vẽ apply discipline standard trong bản vẽ CAD.
+- [`drawing_apply_iso_layers`](#drawing_apply_iso_layers) — nâng cao: dùng để bản vẽ apply iso layers trong bản vẽ CAD.
+- [`drawing_apply_standard`](#drawing_apply_standard) — kiểu hiển thị: dùng để bản vẽ apply standard trong bản vẽ CAD.
+- [`drawing_audit`](#drawing_audit) — bản vẽ: dùng để bản vẽ audit trong bản vẽ CAD.
+- [`drawing_close`](#drawing_close) — bản vẽ: dùng để bản vẽ đóng trong bản vẽ CAD.
+- [`drawing_critique`](#drawing_critique) — nâng cao: dùng để bản vẽ critique trong bản vẽ CAD.
+- [`drawing_deliver`](#drawing_deliver) — kỹ thuật: dùng để bản vẽ deliver trong bản vẽ CAD.
+- [`drawing_diff`](#drawing_diff) — đọc hiểu: dùng để bản vẽ diff trong bản vẽ CAD.
+- [`drawing_entities`](#drawing_entities) — mở rộng cadtroly: dùng để bản vẽ đối tượng trong bản vẽ CAD.
+- [`drawing_export_dwg`](#drawing_export_dwg) — tờ bản vẽ: dùng để bản vẽ xuất dwg trong bản vẽ CAD.
+- [`drawing_export_dxf`](#drawing_export_dxf) — bản vẽ: dùng để bản vẽ xuất dxf trong bản vẽ CAD.
+- [`drawing_export_pdf`](#drawing_export_pdf) — bản vẽ: dùng để bản vẽ xuất pdf trong bản vẽ CAD.
+- [`drawing_finalize`](#drawing_finalize) — kỹ thuật: dùng để bản vẽ finalize trong bản vẽ CAD.
+- [`drawing_info`](#drawing_info) — tra cứu đối tượng: dùng để bản vẽ info trong bản vẽ CAD.
+- [`drawing_new`](#drawing_new) — bản vẽ: dùng để bản vẽ new trong bản vẽ CAD.
+- [`drawing_open`](#drawing_open) — bản vẽ: dùng để bản vẽ mở trong bản vẽ CAD.
+- [`drawing_plan`](#drawing_plan) — nâng cao: dùng để bản vẽ mặt bằng trong bản vẽ CAD.
+- [`drawing_preflight`](#drawing_preflight) — nâng cao: dùng để bản vẽ preflight trong bản vẽ CAD.
+- [`drawing_properties_get`](#drawing_properties_get) — môi trường: dùng để bản vẽ thuộc tính get trong bản vẽ CAD.
+- [`drawing_properties_set`](#drawing_properties_set) — môi trường: dùng để bản vẽ thuộc tính đặt trong bản vẽ CAD.
+- [`drawing_purge`](#drawing_purge) — bản vẽ: dùng để bản vẽ dọn dẹp trong bản vẽ CAD.
+- [`drawing_read`](#drawing_read) — mở rộng cadtroly: dùng để bản vẽ đọc trong bản vẽ CAD.
+- [`drawing_redo`](#drawing_redo) — bản vẽ: dùng để bản vẽ redo trong bản vẽ CAD.
+- [`drawing_refine`](#drawing_refine) — nâng cao: dùng để bản vẽ refine trong bản vẽ CAD.
+- [`drawing_save`](#drawing_save) — bản vẽ: dùng để bản vẽ lưu trong bản vẽ CAD.
+- [`drawing_save_as`](#drawing_save_as) — bản vẽ: dùng để bản vẽ lưu as trong bản vẽ CAD.
+- [`drawing_scale_check`](#drawing_scale_check) — đọc hiểu: dùng để bản vẽ tỷ lệ kiểm tra trong bản vẽ CAD.
+- [`drawing_settings`](#drawing_settings) — hệ thống: dùng để bản vẽ thiết lập trong bản vẽ CAD.
+- [`drawing_template_list`](#drawing_template_list) — thiết lập trang: dùng để bản vẽ mẫu liệt kê trong bản vẽ CAD.
+- [`drawing_template_save`](#drawing_template_save) — thiết lập trang: dùng để bản vẽ mẫu lưu trong bản vẽ CAD.
+- [`drawing_topology_check`](#drawing_topology_check) — đọc hiểu: dùng để bản vẽ topology kiểm tra trong bản vẽ CAD.
+- [`drawing_understand`](#drawing_understand) — đọc hiểu: dùng để bản vẽ understand trong bản vẽ CAD.
+- [`drawing_undo`](#drawing_undo) — bản vẽ: dùng để bản vẽ undo trong bản vẽ CAD.
+- [`entity_array_polar`](#entity_array_polar) — sửa đối tượng: dùng để đối tượng array polar trong bản vẽ CAD.
+- [`entity_array_rectangular`](#entity_array_rectangular) — sửa đối tượng: dùng để đối tượng array rectangular trong bản vẽ CAD.
+- [`entity_batch_create`](#entity_batch_create) — xử lý hàng loạt: dùng để đối tượng hàng loạt tạo trong bản vẽ CAD.
+- [`entity_batch_modify`](#entity_batch_modify) — xử lý hàng loạt: dùng để đối tượng hàng loạt sửa trong bản vẽ CAD.
+- [`entity_chamfer`](#entity_chamfer) — corner_ops: dùng để đối tượng chamfer trong bản vẽ CAD.
+- [`entity_change_space`](#entity_change_space) — bố cục: dùng để đối tượng change space trong bản vẽ CAD.
+- [`entity_copy`](#entity_copy) — sửa đối tượng: dùng để đối tượng sao chép trong bản vẽ CAD.
+- [`entity_create_arc`](#entity_create_arc) — tạo đối tượng: dùng để đối tượng tạo cung trong bản vẽ CAD.
+- [`entity_create_block_ref`](#entity_create_block_ref) — khối: dùng để đối tượng tạo khối ref trong bản vẽ CAD.
+- [`entity_create_circle`](#entity_create_circle) — tạo đối tượng: dùng để đối tượng tạo đường tròn trong bản vẽ CAD.
+- [`entity_create_ellipse`](#entity_create_ellipse) — tạo đối tượng: dùng để đối tượng tạo ellipse trong bản vẽ CAD.
+- [`entity_create_hatch`](#entity_create_hatch) — tạo đối tượng: dùng để đối tượng tạo tô mặt trong bản vẽ CAD.
+- [`entity_create_line`](#entity_create_line) — tạo đối tượng: dùng để đối tượng tạo đường trong bản vẽ CAD.
+- [`entity_create_mtext`](#entity_create_mtext) — tạo đối tượng: dùng để đối tượng tạo mtext trong bản vẽ CAD.
+- [`entity_create_point`](#entity_create_point) — tạo đối tượng: dùng để đối tượng tạo điểm trong bản vẽ CAD.
+- [`entity_create_polyline`](#entity_create_polyline) — tạo đối tượng: dùng để đối tượng tạo đa tuyến trong bản vẽ CAD.
+- [`entity_create_rectangle`](#entity_create_rectangle) — tạo đối tượng: dùng để đối tượng tạo hình chữ nhật trong bản vẽ CAD.
+- [`entity_create_revcloud`](#entity_create_revcloud) — tạo đối tượng: dùng để đối tượng tạo revcloud trong bản vẽ CAD.
+- [`entity_create_spline`](#entity_create_spline) — tạo đối tượng: dùng để đối tượng tạo spline trong bản vẽ CAD.
+- [`entity_create_table`](#entity_create_table) — tạo đối tượng: dùng để đối tượng tạo bảng trong bản vẽ CAD.
+- [`entity_create_text`](#entity_create_text) — tạo đối tượng: dùng để đối tượng tạo chữ trong bản vẽ CAD.
+- [`entity_create_wipeout`](#entity_create_wipeout) — tạo đối tượng: dùng để đối tượng tạo wipeout trong bản vẽ CAD.
+- [`entity_delete`](#entity_delete) — sửa đối tượng: dùng để đối tượng xóa trong bản vẽ CAD.
+- [`entity_delete_many`](#entity_delete_many) — sửa đối tượng: dùng để đối tượng xóa many trong bản vẽ CAD.
+- [`entity_edit_geometry`](#entity_edit_geometry) — sửa đối tượng: dùng để đối tượng edit geometry trong bản vẽ CAD.
+- [`entity_edit_text`](#entity_edit_text) — sửa đối tượng: dùng để đối tượng edit chữ trong bản vẽ CAD.
+- [`entity_extend`](#entity_extend) — corner_ops: dùng để đối tượng kéo dài trong bản vẽ CAD.
+- [`entity_fillet`](#entity_fillet) — corner_ops: dùng để đối tượng fillet trong bản vẽ CAD.
+- [`entity_get`](#entity_get) — tra cứu đối tượng: dùng để đối tượng get trong bản vẽ CAD.
+- [`entity_get_xdata`](#entity_get_xdata) — tra cứu đối tượng: dùng để đối tượng get xdata trong bản vẽ CAD.
+- [`entity_list`](#entity_list) — tra cứu đối tượng: dùng để đối tượng liệt kê trong bản vẽ CAD.
+- [`entity_mirror`](#entity_mirror) — sửa đối tượng: dùng để đối tượng đối xứng trong bản vẽ CAD.
+- [`entity_move`](#entity_move) — sửa đối tượng: dùng để đối tượng di chuyển trong bản vẽ CAD.
+- [`entity_offset`](#entity_offset) — sửa đối tượng: dùng để đối tượng song song trong bản vẽ CAD.
+- [`entity_rotate`](#entity_rotate) — sửa đối tượng: dùng để đối tượng xoay trong bản vẽ CAD.
+- [`entity_scale`](#entity_scale) — sửa đối tượng: dùng để đối tượng tỷ lệ trong bản vẽ CAD.
+- [`entity_select_smart`](#entity_select_smart) — nâng cao: dùng để đối tượng chọn smart trong bản vẽ CAD.
+- [`entity_set_properties`](#entity_set_properties) — sửa đối tượng: dùng để đối tượng đặt thuộc tính trong bản vẽ CAD.
+- [`entity_set_xdata`](#entity_set_xdata) — sửa đối tượng: dùng để đối tượng đặt xdata trong bản vẽ CAD.
+- [`entity_trim`](#entity_trim) — corner_ops: dùng để đối tượng cắt trong bản vẽ CAD.
+- [`gd_frame`](#gd_frame) — kỹ thuật: dùng để gd frame trong bản vẽ CAD.
+- [`gear_draw_helical_front_view`](#gear_draw_helical_front_view) — kỹ thuật: dùng để gear draw helical front góc nhìn trong bản vẽ CAD.
+- [`gear_draw_section_aa`](#gear_draw_section_aa) — kỹ thuật: dùng để gear draw mặt cắt aa trong bản vẽ CAD.
+- [`gear_draw_spur_front_view`](#gear_draw_spur_front_view) — kỹ thuật: dùng để gear draw spur front góc nhìn trong bản vẽ CAD.
+- [`hatch_add_boundary`](#hatch_add_boundary) — tạo đối tượng: dùng để tô mặt add boundary trong bản vẽ CAD.
+- [`hatch_edit`](#hatch_edit) — tạo đối tượng: dùng để tô mặt edit trong bản vẽ CAD.
+- [`hatch_material`](#hatch_material) — cơ khí: dùng để tô mặt material trong bản vẽ CAD.
+- [`hatch_set_gradient`](#hatch_set_gradient) — tạo đối tượng: dùng để tô mặt đặt gradient trong bản vẽ CAD.
+- [`image_attach`](#image_attach) — tờ bản vẽ: dùng để hình ảnh đính kèm trong bản vẽ CAD.
+- [`keyway_draw_keyed_bore`](#keyway_draw_keyed_bore) — kỹ thuật: dùng để keyway draw keyed bore trong bản vẽ CAD.
+- [`keyway_draw_section`](#keyway_draw_section) — kỹ thuật: dùng để keyway draw mặt cắt trong bản vẽ CAD.
+- [`kho_industries`](#kho_industries) — mở rộng cadtroly: dùng để kho industries trong bản vẽ CAD.
+- [`kho_rules_export`](#kho_rules_export) — mở rộng cadtroly: dùng để kho rules xuất trong bản vẽ CAD.
+- [`kho_rules_import`](#kho_rules_import) — mở rộng cadtroly: dùng để kho rules nhập trong bản vẽ CAD.
+- [`kho_skill_add`](#kho_skill_add) — mở rộng cadtroly: dùng để kho skill add trong bản vẽ CAD.
+- [`kho_skill_toggle`](#kho_skill_toggle) — mở rộng cadtroly: dùng để kho skill toggle trong bản vẽ CAD.
+- [`kho_skills`](#kho_skills) — mở rộng cadtroly: dùng để kho skills trong bản vẽ CAD.
+- [`kho_standard_add`](#kho_standard_add) — mở rộng cadtroly: dùng để kho standard add trong bản vẽ CAD.
+- [`kho_standard_delete`](#kho_standard_delete) — mở rộng cadtroly: dùng để kho standard xóa trong bản vẽ CAD.
+- [`kho_standards`](#kho_standards) — mở rộng cadtroly: dùng để kho standards trong bản vẽ CAD.
+- [`kho_status`](#kho_status) — mở rộng cadtroly: dùng để kho trạng thái trong bản vẽ CAD.
+- [`layer_create`](#layer_create) — lớp bản vẽ: dùng để lớp tạo trong bản vẽ CAD.
+- [`layer_delete`](#layer_delete) — lớp bản vẽ: dùng để lớp xóa trong bản vẽ CAD.
+- [`layer_freeze`](#layer_freeze) — lớp bản vẽ: dùng để lớp freeze trong bản vẽ CAD.
+- [`layer_hide`](#layer_hide) — lớp bản vẽ: dùng để lớp hide trong bản vẽ CAD.
+- [`layer_isolate`](#layer_isolate) — lớp bản vẽ: dùng để lớp isolate trong bản vẽ CAD.
+- [`layer_list`](#layer_list) — lớp bản vẽ: dùng để lớp liệt kê trong bản vẽ CAD.
+- [`layer_lock`](#layer_lock) — lớp bản vẽ: dùng để lớp khóa trong bản vẽ CAD.
+- [`layer_modify`](#layer_modify) — lớp bản vẽ: dùng để lớp sửa trong bản vẽ CAD.
+- [`layer_set_current`](#layer_set_current) — lớp bản vẽ: dùng để lớp đặt hiện tại trong bản vẽ CAD.
+- [`layer_show`](#layer_show) — lớp bản vẽ: dùng để lớp show trong bản vẽ CAD.
+- [`layer_state_delete`](#layer_state_delete) — môi trường: dùng để lớp state xóa trong bản vẽ CAD.
+- [`layer_state_list`](#layer_state_list) — môi trường: dùng để lớp state liệt kê trong bản vẽ CAD.
+- [`layer_state_restore`](#layer_state_restore) — môi trường: dùng để lớp state restore trong bản vẽ CAD.
+- [`layer_state_save`](#layer_state_save) — môi trường: dùng để lớp state lưu trong bản vẽ CAD.
+- [`layer_thaw`](#layer_thaw) — lớp bản vẽ: dùng để lớp thaw trong bản vẽ CAD.
+- [`layer_unlock`](#layer_unlock) — lớp bản vẽ: dùng để lớp unlock trong bản vẽ CAD.
+- [`layout_copy`](#layout_copy) — bố cục: dùng để bố cục sao chép trong bản vẽ CAD.
+- [`layout_create`](#layout_create) — bố cục: dùng để bố cục tạo trong bản vẽ CAD.
+- [`layout_delete`](#layout_delete) — bố cục: dùng để bố cục xóa trong bản vẽ CAD.
+- [`layout_list`](#layout_list) — bố cục: dùng để bố cục liệt kê trong bản vẽ CAD.
+- [`layout_rename`](#layout_rename) — bố cục: dùng để bố cục đổi tên trong bản vẽ CAD.
+- [`layout_set_current`](#layout_set_current) — bố cục: dùng để bố cục đặt hiện tại trong bản vẽ CAD.
+- [`leader_create_mleader`](#leader_create_mleader) — tạo đối tượng: dùng để đường dẫn tạo mleader trong bản vẽ CAD.
+- [`linetype_list`](#linetype_list) — lớp bản vẽ: dùng để linetype liệt kê trong bản vẽ CAD.
+- [`linetype_load`](#linetype_load) — lớp bản vẽ: dùng để linetype nạp trong bản vẽ CAD.
+- [`mech_dimension_part`](#mech_dimension_part) — cơ khí: dùng để mech kích thước part trong bản vẽ CAD.
+- [`mech_hole_pattern`](#mech_hole_pattern) — cơ khí: dùng để mech hole pattern trong bản vẽ CAD.
+- [`mech_part_draw`](#mech_part_draw) — cơ khí: dùng để mech part draw trong bản vẽ CAD.
+- [`mech_part_from_spec`](#mech_part_from_spec) — cơ khí: dùng để mech part từ spec trong bản vẽ CAD.
+- [`mech_part_inspect`](#mech_part_inspect) — cơ khí: dùng để mech part inspect trong bản vẽ CAD.
+- [`mech_view_add`](#mech_view_add) — cơ khí: dùng để mech góc nhìn add trong bản vẽ CAD.
+- [`mleaderstyle_create`](#mleaderstyle_create) — kiểu hiển thị: dùng để mleaderstyle tạo trong bản vẽ CAD.
+- [`mleaderstyle_list`](#mleaderstyle_list) — kiểu hiển thị: dùng để mleaderstyle liệt kê trong bản vẽ CAD.
+- [`page_setup_apply`](#page_setup_apply) — thiết lập trang: dùng để trang cài đặt apply trong bản vẽ CAD.
+- [`page_setup_list`](#page_setup_list) — thiết lập trang: dùng để trang cài đặt liệt kê trong bản vẽ CAD.
+- [`pdf_to_dwg`](#pdf_to_dwg) — mở rộng cadtroly: dùng để pdf đến dwg trong bản vẽ CAD.
+- [`pdf_vectorize`](#pdf_vectorize) — mở rộng cadtroly: dùng để pdf vectorize trong bản vẽ CAD.
+- [`pid_equipment_list`](#pid_equipment_list) — P&ID: dùng để P&ID equipment liệt kê trong bản vẽ CAD.
+- [`pid_from_spec`](#pid_from_spec) — P&ID: dùng để P&ID từ spec trong bản vẽ CAD.
+- [`pid_graph`](#pid_graph) — P&ID: dùng để P&ID graph trong bản vẽ CAD.
+- [`pid_instrument_index`](#pid_instrument_index) — P&ID: dùng để P&ID instrument index trong bản vẽ CAD.
+- [`pid_line_draw`](#pid_line_draw) — P&ID: dùng để P&ID đường draw trong bản vẽ CAD.
+- [`pid_line_list`](#pid_line_list) — P&ID: dùng để P&ID đường liệt kê trong bản vẽ CAD.
+- [`pid_symbol_insert`](#pid_symbol_insert) — P&ID: dùng để P&ID ký hiệu chèn trong bản vẽ CAD.
+- [`pid_symbol_list`](#pid_symbol_list) — P&ID: dùng để P&ID ký hiệu liệt kê trong bản vẽ CAD.
+- [`pid_tag_parse`](#pid_tag_parse) — P&ID: dùng để P&ID tag parse trong bản vẽ CAD.
+- [`pipe_takeoff`](#pipe_takeoff) — nhà máy: dùng để pipe takeoff trong bản vẽ CAD.
+- [`plot_style_list`](#plot_style_list) — thiết lập trang: dùng để plot kiểu liệt kê trong bản vẽ CAD.
+- [`point_from_snap`](#point_from_snap) — nâng cao: dùng để điểm từ snap trong bản vẽ CAD.
+- [`point_intersection`](#point_intersection) — nâng cao: dùng để điểm intersection trong bản vẽ CAD.
+- [`point_tangent`](#point_tangent) — nâng cao: dùng để điểm tangent trong bản vẽ CAD.
+- [`revision_add`](#revision_add) — tờ bản vẽ: dùng để revision add trong bản vẽ CAD.
+- [`section_line`](#section_line) — cơ khí: dùng để mặt cắt đường trong bản vẽ CAD.
+- [`selection_filter`](#selection_filter) — tra cứu đối tượng: dùng để selection filter trong bản vẽ CAD.
+- [`selection_get`](#selection_get) — tra cứu đối tượng: dùng để selection get trong bản vẽ CAD.
+- [`selection_polygon`](#selection_polygon) — tra cứu đối tượng: dùng để selection đa giác trong bản vẽ CAD.
+- [`selection_window`](#selection_window) — tra cứu đối tượng: dùng để selection window trong bản vẽ CAD.
+- [`sheet_frame`](#sheet_frame) — tờ bản vẽ: dùng để tờ bản vẽ frame trong bản vẽ CAD.
+- [`solid_boolean`](#solid_boolean) — khối đặc: dùng để khối đặc boolean trong bản vẽ CAD.
+- [`solid_box`](#solid_box) — khối đặc: dùng để khối đặc khung trong bản vẽ CAD.
+- [`solid_cylinder`](#solid_cylinder) — khối đặc: dùng để khối đặc cylinder trong bản vẽ CAD.
+- [`solid_extrude`](#solid_extrude) — khối đặc: dùng để khối đặc extrude trong bản vẽ CAD.
+- [`solid_revolve`](#solid_revolve) — khối đặc: dùng để khối đặc revolve trong bản vẽ CAD.
+- [`standards_reference`](#standards_reference) — mở rộng cadtroly: dùng để standards tham chiếu trong bản vẽ CAD.
+- [`std_feature_draw`](#std_feature_draw) — cơ khí: dùng để std feature draw trong bản vẽ CAD.
+- [`std_part_insert`](#std_part_insert) — cơ khí: dùng để std part chèn trong bản vẽ CAD.
+- [`std_part_list`](#std_part_list) — cơ khí: dùng để std part liệt kê trong bản vẽ CAD.
+- [`structural_qa`](#structural_qa) — mở rộng cadtroly: dùng để structural qa trong bản vẽ CAD.
+- [`surface_texture`](#surface_texture) — cơ khí: dùng để surface texture trong bản vẽ CAD.
+- [`system_about`](#system_about) — hệ thống: dùng để hệ thống thông tin trong bản vẽ CAD.
+- [`system_capabilities`](#system_capabilities) — tra cứu đối tượng: dùng để hệ thống capabilities trong bản vẽ CAD.
+- [`system_get_variable`](#system_get_variable) — hệ thống: dùng để hệ thống get variable trong bản vẽ CAD.
+- [`system_launch`](#system_launch) — môi trường: dùng để hệ thống launch trong bản vẽ CAD.
+- [`system_preferences_get`](#system_preferences_get) — môi trường: dùng để hệ thống preferences get trong bản vẽ CAD.
+- [`system_preferences_set`](#system_preferences_set) — môi trường: dùng để hệ thống preferences đặt trong bản vẽ CAD.
+- [`system_prompt_message`](#system_prompt_message) — môi trường: dùng để hệ thống prompt message trong bản vẽ CAD.
+- [`system_run_command`](#system_run_command) — hệ thống: dùng để hệ thống run command trong bản vẽ CAD.
+- [`system_run_lisp`](#system_run_lisp) — hệ thống: dùng để hệ thống run lisp trong bản vẽ CAD.
+- [`system_set_variable`](#system_set_variable) — hệ thống: dùng để hệ thống đặt variable trong bản vẽ CAD.
+- [`system_status`](#system_status) — hệ thống: dùng để hệ thống trạng thái trong bản vẽ CAD.
+- [`system_variable_describe`](#system_variable_describe) — môi trường: dùng để hệ thống variable describe trong bản vẽ CAD.
+- [`takeoff_compute`](#takeoff_compute) — mở rộng cadtroly: dùng để takeoff compute trong bản vẽ CAD.
+- [`takeoff_decide`](#takeoff_decide) — mở rộng cadtroly: dùng để takeoff decide trong bản vẽ CAD.
+- [`takeoff_export`](#takeoff_export) — mở rộng cadtroly: dùng để takeoff xuất trong bản vẽ CAD.
+- [`takeoff_propose`](#takeoff_propose) — mở rộng cadtroly: dùng để takeoff propose trong bản vẽ CAD.
+- [`takeoff_run`](#takeoff_run) — mở rộng cadtroly: dùng để takeoff run trong bản vẽ CAD.
+- [`template_apply_layers`](#template_apply_layers) — mẫu bản vẽ: dùng để mẫu apply layers trong bản vẽ CAD.
+- [`template_list`](#template_list) — mẫu bản vẽ: dùng để mẫu liệt kê trong bản vẽ CAD.
+- [`text_find_replace`](#text_find_replace) — sửa đối tượng: dùng để chữ tìm replace trong bản vẽ CAD.
+- [`text_set_background`](#text_set_background) — sửa đối tượng: dùng để chữ đặt background trong bản vẽ CAD.
+- [`textstyle_create`](#textstyle_create) — kiểu hiển thị: dùng để textstyle tạo trong bản vẽ CAD.
+- [`textstyle_list`](#textstyle_list) — kiểu hiển thị: dùng để textstyle liệt kê trong bản vẽ CAD.
+- [`textstyle_set_current`](#textstyle_set_current) — kiểu hiển thị: dùng để textstyle đặt hiện tại trong bản vẽ CAD.
+- [`titleblock_apply`](#titleblock_apply) — tờ bản vẽ: dùng để titleblock apply trong bản vẽ CAD.
+- [`titleblock_apply_iso_a3`](#titleblock_apply_iso_a3) — kỹ thuật: dùng để titleblock apply iso a3 trong bản vẽ CAD.
+- [`transaction_begin`](#transaction_begin) — giao dịch: dùng để giao dịch begin trong bản vẽ CAD.
+- [`transaction_commit`](#transaction_commit) — giao dịch: dùng để giao dịch commit trong bản vẽ CAD.
+- [`transaction_rollback`](#transaction_rollback) — giao dịch: dùng để giao dịch rollback trong bản vẽ CAD.
+- [`ucs_list`](#ucs_list) — môi trường: dùng để ucs liệt kê trong bản vẽ CAD.
+- [`ucs_restore`](#ucs_restore) — môi trường: dùng để ucs restore trong bản vẽ CAD.
+- [`ucs_set`](#ucs_set) — môi trường: dùng để ucs đặt trong bản vẽ CAD.
+- [`user_pick_point`](#user_pick_point) — môi trường: dùng để user pick điểm trong bản vẽ CAD.
+- [`user_select`](#user_select) — môi trường: dùng để user chọn trong bản vẽ CAD.
+- [`validation_check`](#validation_check) — xác nhận: dùng để validation kiểm tra trong bản vẽ CAD.
+- [`view_named_list`](#view_named_list) — môi trường: dùng để góc nhìn named liệt kê trong bản vẽ CAD.
+- [`view_named_restore`](#view_named_restore) — môi trường: dùng để góc nhìn named restore trong bản vẽ CAD.
+- [`view_named_save`](#view_named_save) — môi trường: dùng để góc nhìn named lưu trong bản vẽ CAD.
+- [`view_render_report`](#view_render_report) — mở rộng cadtroly: dùng để góc nhìn kết xuất report trong bản vẽ CAD.
+- [`view_screenshot`](#view_screenshot) — góc nhìn: dùng để góc nhìn screenshot trong bản vẽ CAD.
+- [`view_zoom_and_screenshot`](#view_zoom_and_screenshot) — góc nhìn: dùng để góc nhìn thu phóng và screenshot trong bản vẽ CAD.
+- [`view_zoom_extents`](#view_zoom_extents) — góc nhìn: dùng để góc nhìn thu phóng extents trong bản vẽ CAD.
+- [`view_zoom_window`](#view_zoom_window) — góc nhìn: dùng để góc nhìn thu phóng window trong bản vẽ CAD.
+- [`viewport_create`](#viewport_create) — bố cục: dùng để khung nhìn tạo trong bản vẽ CAD.
+- [`viewport_delete`](#viewport_delete) — bố cục: dùng để khung nhìn xóa trong bản vẽ CAD.
+- [`viewport_list`](#viewport_list) — bố cục: dùng để khung nhìn liệt kê trong bản vẽ CAD.
+- [`viewport_lock`](#viewport_lock) — bố cục: dùng để khung nhìn khóa trong bản vẽ CAD.
+- [`viewport_set_scale`](#viewport_set_scale) — bố cục: dùng để khung nhìn đặt tỷ lệ trong bản vẽ CAD.
+- [`weld_symbol`](#weld_symbol) — cơ khí: dùng để mối hàn ký hiệu trong bản vẽ CAD.
+- [`xref_attach`](#xref_attach) — tờ bản vẽ: dùng để tham chiếu ngoài đính kèm trong bản vẽ CAD.
+- [`xref_manage`](#xref_manage) — tờ bản vẽ: dùng để tham chiếu ngoài quản lý trong bản vẽ CAD.
 
 ## Hướng dẫn từng chức năng
 
@@ -494,29 +494,29 @@ Có **272 chức năng**, gồm **247 chức năng nền tảng** và chức nă
 ### analysis_select_by_type
 
 - **Nhóm:** phân tích
-- **Làm gì:** Thực hiện thao tác phân tích chọn theo type trong bản vẽ CAD.
+- **Làm gì:** Thực hiện thao tác phân tích chọn theo loại trong bản vẽ CAD.
 - **Dùng khi nào:** Khi cần đọc/đo/phân tích, không sửa bản vẽ.
 - **Ví dụ gõ vào LLM:**
 
-  > Đọc bản vẽ và báo cáo phân tích chọn theo type; không sửa file gốc.
+  > Đọc bản vẽ và báo cáo phân tích chọn theo loại; không sửa file gốc.
 
 ### arch_catalogue_insert
 
 - **Nhóm:** kiến trúc
-- **Làm gì:** Thực hiện thao tác arch catalogue chèn trong bản vẽ CAD.
+- **Làm gì:** Thực hiện thao tác arch danh mục chèn trong bản vẽ CAD.
 - **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
 - **Ví dụ gõ vào LLM:**
 
-  > Trên mặt bằng kiến trúc, hãy arch catalogue chèn và giữ đúng tỷ lệ bản vẽ.
+  > Trên mặt bằng kiến trúc, hãy arch danh mục chèn và giữ đúng tỷ lệ bản vẽ.
 
 ### arch_catalogue_list
 
 - **Nhóm:** kiến trúc
-- **Làm gì:** Thực hiện thao tác arch catalogue liệt kê trong bản vẽ CAD.
+- **Làm gì:** Thực hiện thao tác arch danh mục liệt kê trong bản vẽ CAD.
 - **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
 - **Ví dụ gõ vào LLM:**
 
-  > Trên mặt bằng kiến trúc, hãy arch catalogue liệt kê và giữ đúng tỷ lệ bản vẽ.
+  > Trên mặt bằng kiến trúc, hãy arch danh mục liệt kê và giữ đúng tỷ lệ bản vẽ.
 
 ### arch_dimension_chains
 
@@ -530,20 +530,20 @@ Có **272 chức năng**, gồm **247 chức năng nền tảng** và chức nă
 ### arch_grid
 
 - **Nhóm:** kiến trúc
-- **Làm gì:** Thực hiện thao tác arch grid trong bản vẽ CAD.
+- **Làm gì:** Thực hiện thao tác arch lưới trục trong bản vẽ CAD.
 - **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
 - **Ví dụ gõ vào LLM:**
 
-  > Trên mặt bằng kiến trúc, hãy arch grid và giữ đúng tỷ lệ bản vẽ.
+  > Trên mặt bằng kiến trúc, hãy arch lưới trục và giữ đúng tỷ lệ bản vẽ.
 
 ### arch_opening
 
 - **Nhóm:** kiến trúc
-- **Làm gì:** Thực hiện thao tác arch opening trong bản vẽ CAD.
+- **Làm gì:** Thực hiện thao tác arch ô cửa trong bản vẽ CAD.
 - **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
 - **Ví dụ gõ vào LLM:**
 
-  > Trên mặt bằng kiến trúc, hãy arch opening và giữ đúng tỷ lệ bản vẽ.
+  > Trên mặt bằng kiến trúc, hãy arch ô cửa và giữ đúng tỷ lệ bản vẽ.
 
 ### arch_plan_from_spec
 
@@ -557,38 +557,38 @@ Có **272 chức năng**, gồm **247 chức năng nền tảng** và chức nă
 ### arch_room
 
 - **Nhóm:** kiến trúc
-- **Làm gì:** Thực hiện thao tác arch room trong bản vẽ CAD.
+- **Làm gì:** Thực hiện thao tác arch phòng trong bản vẽ CAD.
 - **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
 - **Ví dụ gõ vào LLM:**
 
-  > Trên mặt bằng kiến trúc, hãy arch room và giữ đúng tỷ lệ bản vẽ.
+  > Trên mặt bằng kiến trúc, hãy arch phòng và giữ đúng tỷ lệ bản vẽ.
 
 ### arch_rooms_detect
 
 - **Nhóm:** kiến trúc
-- **Làm gì:** Thực hiện thao tác arch rooms detect trong bản vẽ CAD.
+- **Làm gì:** Thực hiện thao tác arch phòng detect trong bản vẽ CAD.
 - **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
 - **Ví dụ gõ vào LLM:**
 
-  > Trên mặt bằng kiến trúc, hãy arch rooms detect và giữ đúng tỷ lệ bản vẽ.
+  > Trên mặt bằng kiến trúc, hãy arch phòng detect và giữ đúng tỷ lệ bản vẽ.
 
 ### arch_schedule
 
 - **Nhóm:** kiến trúc
-- **Làm gì:** Thực hiện thao tác arch schedule trong bản vẽ CAD.
+- **Làm gì:** Thực hiện thao tác arch bảng thống kê trong bản vẽ CAD.
 - **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
 - **Ví dụ gõ vào LLM:**
 
-  > Trên mặt bằng kiến trúc, hãy arch schedule và giữ đúng tỷ lệ bản vẽ.
+  > Trên mặt bằng kiến trúc, hãy arch bảng thống kê và giữ đúng tỷ lệ bản vẽ.
 
 ### arch_stair
 
 - **Nhóm:** kiến trúc
-- **Làm gì:** Thực hiện thao tác arch stair trong bản vẽ CAD.
+- **Làm gì:** Thực hiện thao tác arch cầu thang trong bản vẽ CAD.
 - **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
 - **Ví dụ gõ vào LLM:**
 
-  > Trên mặt bằng kiến trúc, hãy arch stair và giữ đúng tỷ lệ bản vẽ.
+  > Trên mặt bằng kiến trúc, hãy arch cầu thang và giữ đúng tỷ lệ bản vẽ.
 
 ### arch_symbol
 
@@ -602,11 +602,11 @@ Có **272 chức năng**, gồm **247 chức năng nền tảng** và chức nă
 ### arch_wall
 
 - **Nhóm:** kiến trúc
-- **Làm gì:** Thực hiện thao tác arch wall trong bản vẽ CAD.
+- **Làm gì:** Thực hiện thao tác arch tường trong bản vẽ CAD.
 - **Dùng khi nào:** Khi cần mặt bằng, mặt đứng, mặt cắt kiến trúc.
 - **Ví dụ gõ vào LLM:**
 
-  > Trên mặt bằng kiến trúc, hãy arch wall và giữ đúng tỷ lệ bản vẽ.
+  > Trên mặt bằng kiến trúc, hãy arch tường và giữ đúng tỷ lệ bản vẽ.
 
 ### balloon_add
 
