@@ -1,5 +1,5 @@
 ---
-name: vn-construction-method
+name: bien-phap-thi-cong-vn
 description: Lập và kiểm tra bản vẽ biện pháp thi công theo QCVN 18:2021/BXD. Dùng khi yêu cầu nhắc tới biện pháp, an toàn, giàn giáo, lan can, lưới, hố đào, cốp pha.
 version: 0.1
 ---

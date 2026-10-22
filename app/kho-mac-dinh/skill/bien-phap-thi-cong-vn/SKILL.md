@@ -1,5 +1,5 @@
 ---
-name: vn-construction-method
+name: bien-phap-thi-cong-vn
 description: Lập và kiểm tra bản vẽ biện pháp thi công theo QCVN 18:2021/BXD.
 version: 0.1
 ---

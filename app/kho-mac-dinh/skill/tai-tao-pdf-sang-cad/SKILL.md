@@ -1,5 +1,5 @@
 ---
-name: pdf-to-cad-reconstruction
+name: tai-tao-pdf-sang-cad
 description: Tái tạo PDF bản vẽ thành DWG có hình học, kích thước, annotation và layer có thể chỉnh sửa.
 version: 0.1
 ---

@@ -1,5 +1,5 @@
 ---
-name: cad-layer-management
+name: quan-tri-layer-cad
 description: Tổ chức, đặt tên, ánh xạ và kiểm tra layer CAD để bản vẽ dễ đọc, sửa, bật/tắt và bàn giao.
 version: 0.1
 ---
