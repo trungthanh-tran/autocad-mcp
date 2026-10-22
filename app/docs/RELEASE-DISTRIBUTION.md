@@ -1,4 +1,8 @@
-# Release & Distribution Runbook (v1.4.0+)
+# Release & Distribution Runbook (cadtroly 0.2.0+)
+
+> Ghi chú: phần bên dưới giữ lại quy trình phát hành upstream/PyPI. Gói người
+> dùng hiện tại là ZIP `dist/cadtroly-0.2.0-vscode-qa.zip`, chạy qua VSCode;
+> không gửi bản vẽ DWG/PDF cá nhân trong ZIP.
 
 The code side of a release is fully automated; three account-bound steps need
 a human once, plus the directory submissions. Track them here.

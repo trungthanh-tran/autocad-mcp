@@ -1,5 +1,8 @@
-AI TRỢ LÝ AUTOCAD — HƯỚNG DẪN NHANH
+AI TRỢ LÝ AUTOCAD — HƯỚNG DẪN NHANH (GÓI UI LEGACY)
 =====================================
+
+Tài liệu này dành cho gói UI đóng độc lập. Người dùng MCP + VSCode dùng
+`CAI_DAT.bat` và `DEPLOY_VSCODE.md` ở thư mục gốc project.
 
 1. Giải nén cả thư mục. Bấm đúp AI-Tro-ly-AutoCAD.exe (Linux: ./AI-Tro-ly-AutoCAD).
    Không cần cài Python hay AutoCAD. Lần đầu mở có thể chậm vài giây.

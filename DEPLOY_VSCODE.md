@@ -21,7 +21,7 @@ Converter.
 
 ## B. Cài cadtroly
 
-1. Tải file `cadtroly-0.2.0-vscode.zip`.
+1. Tải file `cadtroly-0.2.0-vscode-qa.zip`.
 2. Nhấp chuột phải → **Extract All…**.
 3. Chọn nơi dễ nhớ, ví dụ `D:\cadtroly`.
 4. Mở thư mục đã giải nén; mã chương trình nằm trong thư mục `code`.
@@ -180,6 +180,20 @@ MCP có thể lưu DWG/DXF, xuất PDF/ảnh xem trước và dọn thư mục t
 khi hoàn tất PDF → DWG. File nguồn và file kết quả không tự xóa.
 
 > Chuyển PDF thành DWG, lưu kết quả, xóa DXF và file tạm nhưng giữ PDF nguồn.
+
+### 8. Skill mặc định
+
+Skill nằm trong `code\\kho-mac-dinh\\skill` và được MCP đọc trực tiếp:
+
+- `quan-tri-layer-cad`: tách và quản trị layer.
+- `tai-tao-pdf-sang-cad`: dựng PDF thành CAD có thể sửa.
+- `annotation-dim-qa`: kiểm tra text, dim, hatch và tỷ lệ.
+- `bo-tri-ho-so-thiet-ke`: quản lý tên file, sheet và revision.
+- `kiem-tra-ban-ve-civil-bridge`: kiểm tra bản vẽ đường và cầu.
+- `bien-phap-thi-cong-vn`: biện pháp thi công Việt Nam.
+
+Tên thư mục kỹ thuật dùng ASCII; nội dung hướng dẫn và trao đổi với người dùng
+vẫn bằng tiếng Việt.
 
 ## G. Bảng chức năng MCP cho người dùng
 

@@ -86,7 +86,8 @@ Lệnh chỉ update khi code local sạch; nếu có sửa local chưa commit, l
   "env": {"CADTROLY_KHO": "D:\\CAD-kho", "AUTOCAD_MCP_BACKEND": "auto", "TOOL_PROFILE": "lean"}}}}
 ```
 
-Rồi hỏi tự nhiên: *"bóc khối lượng file samples/mat-bang-tang-3.dxf"*, *"kiểm tra bản vẽ theo chuan-cong-ty"*.
+Rồi hỏi tự nhiên: *"bóc khối lượng file samples/mat-bang-tang-3.dxf"*, *"kiểm tra bản vẽ theo chuan-cong-ty"*,
+hoặc *"tìm các đối tượng hình học trùng nhau"*.
 
 ## Tool
 
@@ -95,7 +96,7 @@ Rồi hỏi tự nhiên: *"bóc khối lượng file samples/mat-bang-tang-3.dxf
 | đọc | `drawing_read`, `drawing_entities` | số liệu bản vẽ, handle, toạ độ, dài, diện tích, text |
 | bóc KL (luồng A) | `takeoff_propose` → `takeoff_decide` → `takeoff_compute` → `takeoff_export`; `takeoff_run` cả thư mục | ánh xạ A/B/C, tính, Excel 4 sheet có handle + lệnh zoom |
 | kiểm tra (luồng D) | `check_rulesets`, `check_run` | rà theo `.rules.json`, kết quả kèm điều khoản, handle, tự sửa được không |
-| kho | `kho_status`, `kho_rules_export/import`, `kho_skills`, `kho_skill_toggle`, resource `cadtroly://skill/{name}` | kho thư mục, không train |
+| kho | `kho_status`, `kho_rules_export/import`, `kho_skills`, `kho_skill_toggle`, resource `cadtroly://skill/{name}` | kho mặc định trong MCP + dữ liệu người dùng |
 | AutoCAD (upstream) | `drawing_open`, `entity_*`, `layer_*`, `block_*`, `dimension_*`, `system_run_lisp`, `view_screenshot`, `transaction_*`, `arch_*`, `drawing_understand`, `drawing_diff`… (59 ở `TOOL_PROFILE=lean`, 247 ở `full`) | mở/lưu, tạo/sửa entity, layer, block, dimension, LISP, screenshot, transaction/undo, arch_*, understand, diff |
 
 ## Kho (thư mục trên máy người dùng)
@@ -121,8 +122,8 @@ Mẫu trong `samples/kho/`.
 ## Test
 
 ```bash
-python -m pytest -q                      # 11 test cadtroly (reader, bóc KL, Excel, check, MCP, web API, LLM mock)
-python -m pytest -q upstream_tests/      # test của upstream (182 file, chạy lâu)
+python -m pytest -q                      # test toàn bộ suite hiện tại
+python -m pytest -q upstream_tests/      # test upstream nếu cần, chạy lâu
 ```
 
 ## Chưa làm / cần máy có AutoCAD
