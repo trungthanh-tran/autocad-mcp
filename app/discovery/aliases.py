@@ -1831,6 +1831,27 @@ TOOL_ALIASES: dict[str, ToolAliases] = {
             "standard styles units and layers",
         ),
     ),
+    "standards_reference": ToolAliases(
+        acad=(),
+        synonyms=(
+            "cad standards for building road bridge",
+            "civil cad standards",
+            "list drawing standards references",
+            "layer standard for road",
+            "layer standard for bridge",
+            "layer standard for building",
+        ),
+    ),
+    "drawing_apply_discipline_standard": ToolAliases(
+        acad=(),
+        synonyms=(
+            "apply building cad standard",
+            "apply road cad standard",
+            "apply bridge cad standard",
+            "set up civil drawing layers",
+            "apply architecture layers",
+        ),
+    ),
     "mleaderstyle_create": ToolAliases(
         acad=("MLEADERSTYLE",),
         synonyms=(

@@ -963,6 +963,8 @@ LEAN_TOOL_NAMES = frozenset(
         "dimstyle_set_current",
         "textstyle_set_current",
         "drawing_apply_standard",
+        "standards_reference",
+        "drawing_apply_discipline_standard",
         # Page setup (track E) — the two a lean client needs to set the
         # sheet and plot it. Core-pack tools, so TOOL_PACKS=core leaves
         # them on the lean surface; with S's three above, lean is 55.
@@ -7451,6 +7453,75 @@ async def drawing_apply_standard(
 
     await ctx.info(f"Applying the {standard} drafting standard")
     return await apply_standard(_backend(ctx), standard, layers, units)
+
+
+@cad_tool(
+    summary="List CAD drafting references and layer roles for building, road or bridge work.",
+    cost="read",
+)
+@mcp.tool(
+    annotations={"title": "List Civil CAD Standards", "readOnlyHint": True},
+    tags={"style", "drawing", "civil", "standards"},
+)
+async def standards_reference(
+    discipline: Annotated[str | None, "building | road | bridge; omit to list all"] = None,
+    ctx: Context = None,
+) -> dict:
+    """Read the built-in project reference catalogue.
+
+    These entries guide layer naming and drafting setup; they do not certify
+    regulatory compliance.  Confirm the approved edition in the project
+    standards register before issuing construction documents.
+    """
+    from engineering.standards.civil_arch import REFERENCE_SETS, resolve_reference_set
+
+    if discipline is None:
+        rows = {key: dict(value) for key, value in REFERENCE_SETS.items()}
+    else:
+        try:
+            key, value = resolve_reference_set(discipline)
+        except ValueError as exc:
+            raise ToolError(str(exc)) from exc
+        rows = {key: dict(value)}
+    return {
+        "ok": True,
+        "references": rows,
+        "note": "Tham khảo để khởi tạo CAD; phải kiểm tra phiên bản và yêu cầu dự án trước khi phát hành.",
+    }
+
+
+@cad_tool(
+    summary="Apply ISO drafting styles, units and a building, road or bridge layer set.",
+    cost="mutate",
+)
+@mcp.tool(
+    annotations={"title": "Apply Civil CAD Standard", "readOnlyHint": False},
+    tags={"style", "drawing", "civil", "standards"},
+)
+async def drawing_apply_discipline_standard(
+    discipline: Annotated[str, "building | road | bridge (aliases: nha | duong | cau)"],
+    layers: Annotated[bool, "Create the discipline layer set"] = True,
+    units: Annotated[bool, "Apply ISO-25/ISOCP and millimetre drafting units"] = True,
+    ctx: Context = None,
+) -> dict:
+    """Set up a drawing for a civil/architectural discipline in one call."""
+    from engineering.layers import apply_layer_set
+    from engineering.standards.apply import apply_standard
+    from engineering.standards.civil_arch import resolve_reference_set
+
+    try:
+        key, reference = resolve_reference_set(discipline)
+    except ValueError as exc:
+        raise ToolError(str(exc)) from exc
+    result = await apply_standard(_backend(ctx), "iso", layers=False, units=units)
+    if layers:
+        result["layers"] = {
+            "layer_set": reference["layer_set"],
+            "layers": await apply_layer_set(_backend(ctx), reference["layer_set"]),
+        }
+    result["discipline"] = key
+    result["references"] = reference["references"]
+    return result
 
 
 # ---------------------------------------------------------------------------
