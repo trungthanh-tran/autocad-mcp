@@ -127,7 +127,7 @@ phải kiểm tra lại trong AutoCAD trước khi phát hành.
 | QA tổng hợp | skill `qa-ban-ve-toan-dien` | điều phối PDF→DWG, layer, annotation, kết cấu, sửa trước/sau, tư vấn và dựng bản vẽ |
 | chịu lực/an toàn/PCCC | skills `tinh-toan-chiu-luc`, `an-toan-ket-cau`, `kiem-tra-pccc` | kiểm tra đầu vào, rà soát sơ bộ, phân loại lỗi và yêu cầu kỹ sư xác nhận |
 | tiêu chuẩn theo ngành | `kho_industries`, `kho_standards`, `docs/STANDARDS-SAFETY-BY-INDUSTRY.md` | danh mục 18 ngành, tiêu chuẩn tham chiếu, nội dung QA và giới hạn an toàn |
-| hướng dẫn enduser | `docs/HUONG-DAN-ENDUSER.md` | Cách dùng MCP bằng tiếng Việt, không cần biết code hoặc tên tool |
+| hướng dẫn enduser | `../HUONG-DAN-ENDUSER.md` | Cách dùng MCP bằng tiếng Việt, không cần biết code hoặc tên tool |
 | catalog MCP | `docs/MCP-TOOL-CATALOG.md`, `docs/MCP-TOOL-USAGE.md`, `docs/tool-inventory.json` | project hiện tại: 272 tool đăng ký, 267 bật, 9 resources, 5 prompt templates; inventory 247 là upstream |
 | AutoCAD (upstream) | `drawing_open`, `entity_*`, `layer_*`, `block_*`, `dimension_*`, `system_run_lisp`, `view_screenshot`, `transaction_*`, `arch_*`, `drawing_understand`, `drawing_diff`… (bật toàn bộ `TOOL_PROFILE=full`, `TOOL_PACKS=all`) | mở/lưu, tạo/sửa entity, layer, block, dimension, LISP, screenshot, transaction/undo, arch_*, understand, diff |
 

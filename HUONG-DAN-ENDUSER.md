@@ -114,7 +114,7 @@ Hoặc:
 
 ## 8. Xem danh sách tool đầy đủ
 
-File [MCP-TOOL-USAGE.md](MCP-TOOL-USAGE.md) là tài liệu kỹ thuật; file này chỉ dành cho enduser và tập trung vào câu lệnh gõ vào LLM.
+File [MCP-TOOL-USAGE.md](app/docs/MCP-TOOL-USAGE.md) là tài liệu kỹ thuật; file này chỉ dành cho enduser và tập trung vào câu lệnh gõ vào LLM.
 
 Người dùng cuối thường không cần gọi trực tiếp tên tool. Chỉ dùng danh sách này khi cần kiểm tra LLM đã chọn đúng chức năng hoặc muốn yêu cầu một tool cụ thể.
 

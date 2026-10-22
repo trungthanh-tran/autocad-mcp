@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DOC = ROOT / "docs" / "HUONG-DAN-ENDUSER.md"
+DOC = ROOT.parent / "HUONG-DAN-ENDUSER.md"
 INVENTORY = ROOT / "docs" / "tool-inventory.json"
 MARKER = "<!-- GENERATED-ALL-TOOLS -->"
 
