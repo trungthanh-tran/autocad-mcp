@@ -71,6 +71,34 @@ Trong VSCode:
 }
 ```
 
+### Giải thích từng trường cấu hình
+
+| Trường | Ý nghĩa | Người dùng có cần sửa không? |
+|---|---|---|
+| `servers` | Danh sách các MCP server mà VSCode được phép kết nối. | Giữ nguyên. |
+| `cadtroly` | Tên server cadtroly; có thể dùng tên khác nhưng nên giữ để dễ nhận biết. | Không cần sửa. |
+| `type: "stdio"` | VSCode giao tiếp với MCP qua tiến trình chạy trên chính máy này. | Giữ nguyên. |
+| `command` | Đường dẫn Python trong môi trường `.venv` của cadtroly. | Chỉ sửa nếu giải nén ở ổ/thư mục khác. |
+| `args` | Lệnh Python yêu cầu chạy module `cadtroly.mcp`. | Giữ nguyên. |
+| `cwd` | Thư mục làm việc chính, phải trỏ tới thư mục `app`. | Chỉ sửa nếu đường dẫn khác. |
+| `env` | Các thiết lập môi trường gửi cho MCP khi khởi động. | Có thể sửa theo nhu cầu. |
+| `CADTROLY_KHO` | Thư mục dữ liệu cá nhân: log, Excel, cấu hình và phần bổ sung. Bộ mặc định vẫn nằm trong MCP. | Có thể đổi, nhưng nên giữ `D:\CAD-kho`. |
+| `AUTOCAD_MCP_BACKEND` | Cách MCP kết nối bản vẽ: `auto` tự chọn, `com` dùng AutoCAD đang mở, `ezdxf` chạy không cần AutoCAD. | Nên giữ `auto`. |
+| `TOOL_PROFILE` | Số lượng chức năng được hiện ra. `lean` gọn hơn; `full` hiện đầy đủ. | Người mới nên giữ `lean`. |
+| `TOOL_PACKS` | Nhóm chức năng được bật. `core,arch` gồm chức năng cơ bản và kiến trúc. | Giữ nguyên; đổi thành `all` khi cần toàn bộ. |
+| `PYTHONIOENCODING` | Mã chữ giúp tiếng Việt hiển thị đúng trong giao tiếp MCP. | Giữ nguyên `utf-8`. |
+
+### Chỉ cần sửa hai chỗ khi đổi thư mục
+
+Nếu giải nén vào `E:\PhanMem\cadtroly\app`, sửa:
+
+```json
+"command": "E:\\PhanMem\\cadtroly\\app\\.venv\\Scripts\\python.exe",
+"cwd": "E:\\PhanMem\\cadtroly\\app"
+```
+
+Các dấu `\\` trong JSON là bắt buộc; không đổi thành một dấu `\`.
+
 ## E. Dùng thử
 
 Mở một cuộc trò chuyện trong VSCode và nói:
