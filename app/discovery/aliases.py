@@ -1146,6 +1146,16 @@ TOOL_ALIASES: dict[str, ToolAliases] = {
             "boc tach pdf",
         ),
     ),
+    "pdf_to_dwg": ToolAliases(
+        acad=("PDFIMPORT", "SAVEAS"),
+        synonyms=(
+            "pdf to semantic dwg",
+            "convert pdf directly to dwg",
+            "pdf to dwg without intermediate files",
+            "clean pdf dwg export",
+            "xuat dwg tu pdf",
+        ),
+    ),
     "data_extract": ToolAliases(
         acad=("DATAEXTRACTION", "EATTEXT"),
         synonyms=(

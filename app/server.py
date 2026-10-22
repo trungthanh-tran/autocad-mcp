@@ -9916,6 +9916,110 @@ async def pdf_vectorize(
     return {"ok": True, "source": str(source_path), "target": str(target_path), **stats}
 
 
+@cad_tool(summary="Convert a PDF sheet directly to a semantic A1 DWG and remove intermediates.", cost="mutate")
+@mcp.tool(
+    annotations={"title": "PDF to Semantic DWG", "destructiveHint": False},
+    tags={"drawing", "sheet", "create", "export"},
+)
+async def pdf_to_dwg(
+    source: Annotated[str, Field(description="Full path to a single-page PDF sheet.")],
+    target: Annotated[str, Field(description="Full output path ending in .dwg.")],
+    paper: Annotated[str, Field(description="Paper size for the sheet layout, default A1.")] = "A1",
+    orientation: Annotated[str, Field(description="landscape or portrait.")] = "landscape",
+    layout: Annotated[str, Field(description="Paper-space layout name.")] = "A1-SEMANTIC",
+    ctx: Context = None,
+) -> dict:
+    """Create the final semantic DWG in one MCP call.
+
+    The PDF is vectorized to a private temporary DXF, opened through the live
+    AutoCAD backend, placed on an A-series layout and saved as DWG. The
+    temporary DXF and its lock files are removed in ``finally`` after the DWG
+    is saved, so callers do not have to manage intermediate artifacts.
+    """
+    source_path = validate_path(source)
+    target_path = validate_path(target)
+    if source_path.suffix.lower() != ".pdf":
+        raise ValueError("pdf_to_dwg: source must end in .pdf")
+    if target_path.suffix.lower() != ".dwg":
+        raise ValueError("pdf_to_dwg: target must end in .dwg")
+    backend = _backend(ctx)
+    if not _backend_supports(backend, "dwg"):
+        raise ToolError(
+            "pdf_to_dwg cần live AutoCAD COM để ghi DWG thật; "
+            f"backend hiện tại là {backend.name}."
+        )
+
+    from cadtroly.pdf_vectorize import convert
+    from engineering.standards.papers import resolve_page_setup
+
+    temp_dir = target_path.parent / f".{target_path.stem}.mcp-tmp"
+    temp_dxf = temp_dir / f"{target_path.stem}.dxf"
+    opened = False
+    cleaned = True
+    stats: dict = {}
+    result: dict | None = None
+    try:
+        await ctx.info(f"PDF to semantic DWG: {source_path}")
+        stats = await asyncio.to_thread(convert, source_path, temp_dxf)
+        await backend.drawing_open(str(temp_dxf))
+        opened = True
+        await backend.layout_create(layout)
+        setup = resolve_page_setup(
+            paper=paper,
+            orientation=orientation,
+            plot_style="monochrome.ctb",
+            scale="fit",
+            plot_area="layout",
+            device="DWG To PDF.pc3",
+            center=True,
+        )
+        await backend.page_setup_apply(layout, setup)
+        sheet_width, sheet_height = (float(v) for v in setup["size_mm"])
+        await backend.viewport_create(
+            layout,
+            sheet_width / 2,
+            sheet_height / 2,
+            max(1.0, sheet_width - 20.0),
+            max(1.0, sheet_height - 20.0),
+            420.5,
+            297.0,
+            1.0,
+        )
+        saved = await backend.drawing_save_as(str(target_path), "dwg")
+        result = {
+            "ok": True,
+            "source": str(source_path),
+            "target": str(target_path),
+            "temporary": str(temp_dxf),
+            "cleaned": cleaned,
+            "paper_layout": {"layout": layout, "paper": paper, "orientation": orientation},
+            **stats,
+            "save": saved,
+        }
+    finally:
+        if opened:
+            try:
+                # SAVEAS makes the temporary AutoCAD document point at the
+                # final DWG path. Close that exact document, not whichever tab
+                # happens to be active after COM returns.
+                await backend.document_close(str(target_path), save=False, discard=True)
+            except Exception as exc:
+                log.warning("pdf_to_dwg: could not close temporary drawing: %s", exc)
+        for path in (temp_dxf, temp_dxf.with_suffix(".dwl"), temp_dxf.with_suffix(".dwl2")):
+            try:
+                path.unlink(missing_ok=True)
+            except OSError as exc:
+                cleaned = False
+                log.warning("pdf_to_dwg: could not remove temporary file %s: %s", path, exc)
+        try:
+            temp_dir.rmdir()
+        except OSError:
+            pass
+    assert result is not None
+    result["cleaned"] = cleaned
+    return result
+
+
 @cad_tool(
     summary="Write the bill of materials to a CSV file, or to XLSX when openpyxl is present.",
     cost="safe",
