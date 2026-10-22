@@ -3,7 +3,7 @@
   drawing_read / drawing_entities      đọc bản vẽ thành số liệu (reader riêng, ezdxf)
   takeoff_propose/decide/compute/export/run   luồng A bóc khối lượng ra Excel có truy vết
   check_rulesets / check_run           luồng D kiểm tra theo bộ quy tắc
-  kho_*                                kho tri thức, skill
+  knowledge_*                          kho tri thức, skill
 Các tool AutoCAD (drawing_open, entity_*, layer_*, system_run_lisp, view_screenshot, transaction_*…)
 là của upstream trong server.py, dùng chung lifespan: ctx.lifespan_context có backend + cfg + kho + state.
 """
@@ -27,8 +27,8 @@ CADTROLY_TOOL_NAMES = frozenset({
     "drawing_read", "drawing_entities",
     "takeoff_propose", "takeoff_decide", "takeoff_compute", "takeoff_export", "takeoff_run",
     "check_rulesets", "check_run",
-    "kho_industries", "kho_standards", "kho_standard_add", "kho_standard_delete",
-    "kho_status", "kho_rules_export", "kho_rules_import", "kho_skills", "kho_skill_toggle", "kho_skill_add",
+    "knowledge_industries", "knowledge_standards", "knowledge_standard_add", "knowledge_standard_delete",
+    "knowledge_status", "knowledge_rules_export", "knowledge_rules_import", "knowledge_skills", "knowledge_skill_toggle", "knowledge_skill_add",
 })
 
 
@@ -177,21 +177,21 @@ def register(mcp: FastMCP) -> None:
         kho.log("check", "run", path=path, ruleset=rs.id, **summarize(findings))
         return {"ruleset": rs.id, "summary": summarize(findings), "findings": [f.to_dict() for f in findings]}
 
-    @mcp.tool(tags={"kho", "check"}, annotations={"readOnlyHint": True})
-    async def kho_industries(ctx: Context = None) -> dict:
+    @mcp.tool(name="knowledge_industries", tags={"kho", "check"}, annotations={"readOnlyHint": True})
+    async def knowledge_industries(ctx: Context = None) -> dict:
         """Liệt kê danh mục ngành với mã máy và tên tiếng Việt để chọn tiêu chuẩn."""
         return {"industries": _ctx(ctx)["kho"].industries()}
 
-    @mcp.tool(tags={"kho", "check"}, annotations={"readOnlyHint": True})
-    async def kho_standards(
+    @mcp.tool(name="knowledge_standards", tags={"kho", "check"}, annotations={"readOnlyHint": True})
+    async def knowledge_standards(
         industry: Annotated[str | None, "building, structural, fire, mechanical, pid, architecture, civil hoặc bỏ trống"] = None,
         ctx: Context = None,
     ) -> dict:
         """Liệt kê tiêu chuẩn/rule theo ngành, phiên bản, nguồn và trạng thái duyệt."""
         return {"standards": _ctx(ctx)["kho"].standard_list(industry)}
 
-    @mcp.tool(tags={"kho", "check"})
-    async def kho_standard_add(
+    @mcp.tool(name="knowledge_standard_add", tags={"kho", "check"})
+    async def knowledge_standard_add(
         standard: Annotated[dict, "id, nganh, ten, phien_ban, nguon, hieu_luc và rules"],
         overwrite: Annotated[bool, "Cho phép cập nhật tiêu chuẩn do người dùng đã thêm"] = False,
         ctx: Context = None,
@@ -205,8 +205,8 @@ def register(mcp: FastMCP) -> None:
         kho.log("standard", "add", id=standard.get("id"), path=str(path), overwrite=overwrite)
         return {"ok": True, "path": str(path), "standards": kho.standard_list()}
 
-    @mcp.tool(tags={"kho"})
-    async def kho_standard_delete(
+    @mcp.tool(name="knowledge_standard_delete", tags={"kho"})
+    async def knowledge_standard_delete(
         standard_id: str,
         confirm: Annotated[bool, "Bắt buộc True để xóa tiêu chuẩn người dùng"] = False,
         ctx: Context = None,
@@ -223,38 +223,38 @@ def register(mcp: FastMCP) -> None:
         return {"ok": True, "deleted": str(path), "standards": kho.standard_list()}
 
     # ------------------------------------------------------------------- kho
-    @mcp.tool(tags={"kho"}, annotations={"readOnlyHint": True})
-    async def kho_status(ctx: Context = None) -> dict:
+    @mcp.tool(name="knowledge_status", tags={"kho"}, annotations={"readOnlyHint": True})
+    async def knowledge_status(ctx: Context = None) -> dict:
         """Tình trạng kho tri thức, backend AutoCAD, nguồn AI."""
         lc = _ctx(ctx)
         b = lc["backend"]
         return lc["kho"].status() | {"backend": getattr(b, "name", None), "backend_error": lc.get("init_error"),
                                      "llm": lc["cfg"].llm.provider, "version": lc["cfg"].version}
 
-    @mcp.tool(tags={"kho"}, annotations={"readOnlyHint": True})
-    async def kho_rules_export(ctx: Context = None) -> dict:
+    @mcp.tool(name="knowledge_rules_export", tags={"kho"}, annotations={"readOnlyHint": True})
+    async def knowledge_rules_export(ctx: Context = None) -> dict:
         """Xuất quy tắc ánh xạ của đơn vị (chỉ quy tắc, không bản vẽ) để chia sẻ."""
         return {"rules": _ctx(ctx)["kho"].rules.export()}
 
-    @mcp.tool(tags={"kho"})
-    async def kho_rules_import(rules: list[dict], ctx: Context = None) -> dict:
+    @mcp.tool(name="knowledge_rules_import", tags={"kho"})
+    async def knowledge_rules_import(rules: list[dict], ctx: Context = None) -> dict:
         """Nhập quy tắc ánh xạ từ nơi khác (ghi đè theo pattern)."""
         n = _ctx(ctx)["kho"].rules.import_rules(rules)
         return {"imported": n}
 
-    @mcp.tool(tags={"kho"}, annotations={"readOnlyHint": True})
-    async def kho_skills(ctx: Context = None) -> dict:
+    @mcp.tool(name="knowledge_skills", tags={"kho"}, annotations={"readOnlyHint": True})
+    async def knowledge_skills(ctx: Context = None) -> dict:
         """Skill chuyên ngành trong kho/skill (mỗi thư mục một SKILL.md), bật/tắt."""
         return {"skills": _ctx(ctx)["kho"].skills()}
 
-    @mcp.tool(tags={"kho"})
-    async def kho_skill_toggle(name: str, enabled: bool, ctx: Context = None) -> dict:
+    @mcp.tool(name="knowledge_skill_toggle", tags={"kho"})
+    async def knowledge_skill_toggle(name: str, enabled: bool, ctx: Context = None) -> dict:
         """Bật/tắt một skill."""
         _ctx(ctx)["kho"].set_skill(name, enabled)
         return {"ok": True, "skills": _ctx(ctx)["kho"].skills()}
 
-    @mcp.tool(tags={"kho"})
-    async def kho_skill_add(
+    @mcp.tool(name="knowledge_skill_add", tags={"kho"})
+    async def knowledge_skill_add(
         name: Annotated[str, "Tên ASCII kebab-case, ví dụ qa-mep"],
         content: Annotated[str, "Nội dung SKILL.md có YAML frontmatter"],
         overwrite: Annotated[bool, "Cho phép cập nhật skill do người dùng đã tạo"] = False,

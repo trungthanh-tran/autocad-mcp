@@ -266,7 +266,7 @@ cadtroly — AI Trợ lý AutoCAD (fork của AutoCAD MCP Pro, U-C4N, MIT).
 Tool riêng của cadtroly:
   Luồng A bóc khối lượng: drawing_read → takeoff_propose → takeoff_decide (nhóm B/C) → takeoff_compute → takeoff_export
   Luồng D kiểm tra chuẩn: check_rulesets → check_run
-  Kho tri thức: kho_status, kho_industries, kho_standards, kho_standard_add/delete, kho_rules_export/import, kho_skills, kho_skill_toggle, kho_skill_add, resource cadtroly://skill/{name}
+  Knowledge base: knowledge_status, knowledge_industries, knowledge_standards, knowledge_standard_add/delete, knowledge_rules_export/import, knowledge_skills, knowledge_skill_toggle, knowledge_skill_add, resource cadtroly://skill/{name}
 Sửa vẽ live dùng các tool AutoCAD bên dưới: preview trước, mỗi cụm trong transaction_begin/commit, không tự lưu file.
 
 AutoCAD MCP Pro provides complete AutoCAD automation through a large tool surface.
@@ -1150,7 +1150,7 @@ def _profile_enabled_names(profile: str, registered: set[str]) -> set[str]:
     )
     enabled = set(registered) - hidden_by_pack
     if profile == "lean":
-        # cadtroly: tool riêng (takeoff_/check_/kho_/drawing_read/drawing_entities) luôn bật ở mọi profile
+        # cadtroly: tool riêng (takeoff_/check_/knowledge_/drawing_read/drawing_entities) luôn bật ở mọi profile
         enabled &= LEAN_TOOL_NAMES | CADTROLY_TOOL_NAMES
     if not config.settings.enable_3d:
         # Capability-aware discovery: don't advertise opt-in 3D tools that

@@ -81,13 +81,13 @@ Các tool này không nằm trong inventory 247 upstream:
 
 ### Kiểm tra và quản lý tiêu chuẩn
 
-`check_rulesets`, `check_run`, `kho_industries`, `kho_standards`,
-`kho_standard_add`, `kho_standard_delete`.
+`check_rulesets`, `check_run`, `knowledge_industries`, `knowledge_standards`,
+`knowledge_standard_add`, `knowledge_standard_delete`.
 
 ### Kho skill và trạng thái
 
-`kho_status`, `kho_rules_export`, `kho_rules_import`, `kho_skills`,
-`kho_skill_toggle`, `kho_skill_add`.
+`knowledge_status`, `knowledge_rules_export`, `knowledge_rules_import`, `knowledge_skills`,
+`knowledge_skill_toggle`, `knowledge_skill_add`.
 
 ## 9 resources
 

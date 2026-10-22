@@ -1679,19 +1679,19 @@ TOOL_ALIASES: dict[str, ToolAliases] = {
             "kiem tra ket cau",
         ),
     ),
-    "kho_skill_add": ToolAliases(
+    "knowledge_skill_add": ToolAliases(
         synonyms=("add skill", "create skill", "install skill to cad mcp", "them skill", "tao skill"),
     ),
-    "kho_standards": ToolAliases(
+    "knowledge_standards": ToolAliases(
         synonyms=("list safety standards", "list cad standards", "standards by industry", "liet ke tieu chuan", "tieu chuan an toan"),
     ),
-    "kho_industries": ToolAliases(
+    "knowledge_industries": ToolAliases(
         synonyms=("list industries", "cad disciplines", "danh sach nganh", "liet ke nganh", "nganh thiet ke"),
     ),
-    "kho_standard_add": ToolAliases(
+    "knowledge_standard_add": ToolAliases(
         synonyms=("add safety standard", "add industry standard", "update cad standard", "them tieu chuan", "cap nhat tieu chuan"),
     ),
-    "kho_standard_delete": ToolAliases(
+    "knowledge_standard_delete": ToolAliases(
         synonyms=("delete user standard", "remove standard", "xoa tieu chuan"),
     ),
     # ── View & screenshot ───────────────────────────────────────────────────

@@ -120,13 +120,13 @@ phải kiểm tra lại trong AutoCAD trước khi phát hành.
 | đọc | `drawing_read`, `drawing_entities` | số liệu bản vẽ, handle, toạ độ, dài, diện tích, text |
 | bóc KL (luồng A) | `takeoff_propose` → `takeoff_decide` → `takeoff_compute` → `takeoff_export`; `takeoff_run` cả thư mục | ánh xạ A/B/C, tính, Excel 4 sheet có handle + lệnh zoom |
 | kiểm tra (luồng D) | `check_rulesets`, `check_run` | rà theo `.rules.json`, kết quả kèm điều khoản, handle, tự sửa được không |
-| kho | `kho_status`, `kho_industries`, `kho_standards`, `kho_standard_add/delete`, `kho_rules_export/import`, `kho_skills`, `kho_skill_toggle`, `kho_skill_add` | LLM xem ngành tiếng Việt, liệt kê/thêm/xóa tiêu chuẩn và quản lý skill |
+| knowledge | `knowledge_status`, `knowledge_industries`, `knowledge_standards`, `knowledge_standard_add/delete`, `knowledge_rules_export/import`, `knowledge_skills`, `knowledge_skill_toggle`, `knowledge_skill_add` | LLM xem ngành tiếng Việt, liệt kê/thêm/xóa tiêu chuẩn và quản lý kỹ năng |
 | phiên bản vẽ | `document_list`, `document_activate`, `document_close` | mở/đóng nhiều file; mỗi file có `document_id` |
 | render QA | `view_render_report` | báo cáo loại đối tượng có thể thiếu trong preview |
 | kết cấu | `structural_qa` | kiểm tra layer/hình học kết cấu, trả về `error`, `warning` và đề xuất tối ưu |
 | QA tổng hợp | skill `qa-ban-ve-toan-dien` | điều phối PDF→DWG, layer, annotation, kết cấu, sửa trước/sau, tư vấn và dựng bản vẽ |
 | chịu lực/an toàn/PCCC | skills `tinh-toan-chiu-luc`, `an-toan-ket-cau`, `kiem-tra-pccc` | kiểm tra đầu vào, rà soát sơ bộ, phân loại lỗi và yêu cầu kỹ sư xác nhận |
-| tiêu chuẩn theo ngành | `kho_industries`, `kho_standards`, `docs/STANDARDS-SAFETY-BY-INDUSTRY.md` | danh mục 18 ngành, tiêu chuẩn tham chiếu, nội dung QA và giới hạn an toàn |
+| tiêu chuẩn theo ngành | `knowledge_industries`, `knowledge_standards`, `docs/STANDARDS-SAFETY-BY-INDUSTRY.md` | danh mục 18 ngành, tiêu chuẩn tham chiếu, nội dung QA và giới hạn an toàn |
 | hướng dẫn enduser | `../HUONG-DAN-ENDUSER.md` | Cách dùng MCP bằng tiếng Việt, không cần biết code hoặc tên tool |
 | catalog MCP | `docs/MCP-TOOL-CATALOG.md`, `docs/MCP-TOOL-USAGE.md`, `docs/tool-inventory.json` | project hiện tại: 272 tool đăng ký, 267 bật, 9 resources, 5 prompt templates; inventory 247 là upstream |
 | AutoCAD (upstream) | `drawing_open`, `entity_*`, `layer_*`, `block_*`, `dimension_*`, `system_run_lisp`, `view_screenshot`, `transaction_*`, `arch_*`, `drawing_understand`, `drawing_diff`… (bật toàn bộ `TOOL_PROFILE=full`, `TOOL_PACKS=all`) | mở/lưu, tạo/sửa entity, layer, block, dimension, LISP, screenshot, transaction/undo, arch_*, understand, diff |

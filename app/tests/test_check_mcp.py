@@ -34,9 +34,9 @@ async def test_mcp_flow(sample_dxf, kho_dir):
     P = str(sample_dxf)
     async with Client(mcp) as c:
         names = [t.name for t in await c.list_tools()]
-        assert {"drawing_read", "takeoff_propose", "takeoff_decide", "takeoff_export", "check_run", "kho_status"} <= set(names)
+        assert {"drawing_read", "takeoff_propose", "takeoff_decide", "takeoff_export", "check_run", "knowledge_status"} <= set(names)
         assert {"drawing_open", "drawing_info", "transaction_begin", "view_screenshot"} <= set(names)   # tool upstream cùng server (lean)
-        st = _data(await c.call_tool("kho_status", {}))
+        st = _data(await c.call_tool("knowledge_status", {}))
         assert st["backend"] == "ezdxf"
         r = _data(await c.call_tool("takeoff_propose", {"path": P}))
         assert r["stats"]["A"] == 0
@@ -54,7 +54,7 @@ async def test_mcp_flow(sample_dxf, kho_dir):
         with pytest.raises(Exception):
             await c.call_tool("takeoff_decide", {"path": P, "kind": "block", "name": "KHONG-CO",
                                                  "cong_tac": "x", "don_vi": "x", "cach_tinh": "count"})
-        r = _data(await c.call_tool("kho_rules_export", {}))
+        r = _data(await c.call_tool("knowledge_rules_export", {}))
         assert r["rules"][0]["pattern"] == "WD_2"
     assert (kho_dir / "log").glob("*.log")
 

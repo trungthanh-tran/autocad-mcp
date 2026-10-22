@@ -6,9 +6,9 @@ chứng nhận thiết kế, thẩm tra kết cấu hay thẩm duyệt PCCC.
 
 ## Cách dùng trong MCP
 
-1. Gọi `kho_industries` để xem mã ngành và tên tiếng Việt.
-2. Gọi `kho_standards(industry="...")` để xem tiêu chuẩn đã có trong kho.
-3. Khi tiêu chuẩn thay đổi, dùng `kho_standard_add` với phiên bản/nguồn mới;
+1. Gọi `knowledge_industries` để xem mã ngành và tên tiếng Việt.
+2. Gọi `knowledge_standards(industry="...")` để xem tiêu chuẩn đã có trong kho.
+3. Khi tiêu chuẩn thay đổi, dùng `knowledge_standard_add` với phiên bản/nguồn mới;
    giữ bản cũ cho hồ sơ đã phát hành.
 4. Chạy `check_run` với đúng `ruleset`, phiên bản và ngày hiệu lực.
 5. Nếu thiếu tiêu chuẩn hoặc dữ liệu, trả `review`, không tự suy luận.

@@ -19,7 +19,7 @@ LLM sẽ tự chọn tool phù hợp. Không cần tự gõ tên tool, trừ khi
 ## Tên tool và ngôn ngữ sử dụng
 
 Tên tool MCP được giữ bằng tiếng Anh để kết nối ổn định, ví dụ `pdf_to_dwg`,
-`view_screenshot` hoặc `kho_standard_add`. Người dùng không cần nhớ các tên này.
+`view_screenshot` hoặc `knowledge_standard_add`. Người dùng không cần nhớ các tên này.
 
 Bạn chỉ cần gõ tiếng Việt trong ô chat. LLM sẽ hiểu yêu cầu, tự chọn đúng tool
 tiếng Anh, tự điền tham số và gọi MCP. Ví dụ:
@@ -445,16 +445,16 @@ _Các chức năng riêng của project cadtroly như tiêu chuẩn, QA và kh�
 - [`drawing_apply_discipline_standard`](#drawing_apply_discipline_standard) — mở rộng cadtroly: dùng để áp dụng tiêu chuẩn bộ môn cho bản vẽ trong bản vẽ CAD.
 - [`drawing_entities`](#drawing_entities) — mở rộng cadtroly: dùng để đọc các đối tượng trong bản vẽ trong bản vẽ CAD.
 - [`drawing_read`](#drawing_read) — mở rộng cadtroly: dùng để đọc bản vẽ trong bản vẽ CAD.
-- [`kho_industries`](#kho_industries) — mở rộng cadtroly: dùng để liệt kê các ngành trong kho trong bản vẽ CAD.
-- [`kho_rules_export`](#kho_rules_export) — mở rộng cadtroly: dùng để xuất bộ quy tắc trong kho trong bản vẽ CAD.
-- [`kho_rules_import`](#kho_rules_import) — mở rộng cadtroly: dùng để nhập bộ quy tắc vào kho trong bản vẽ CAD.
-- [`kho_skill_add`](#kho_skill_add) — mở rộng cadtroly: dùng để thêm kỹ năng vào kho trong bản vẽ CAD.
-- [`kho_skill_toggle`](#kho_skill_toggle) — mở rộng cadtroly: dùng để bật hoặc tắt kỹ năng trong kho trong bản vẽ CAD.
-- [`kho_skills`](#kho_skills) — mở rộng cadtroly: dùng để liệt kê kỹ năng trong kho trong bản vẽ CAD.
-- [`kho_standard_add`](#kho_standard_add) — mở rộng cadtroly: dùng để thêm tiêu chuẩn vào kho trong bản vẽ CAD.
-- [`kho_standard_delete`](#kho_standard_delete) — mở rộng cadtroly: dùng để xóa tiêu chuẩn khỏi kho trong bản vẽ CAD.
-- [`kho_standards`](#kho_standards) — mở rộng cadtroly: dùng để liệt kê tiêu chuẩn trong kho trong bản vẽ CAD.
-- [`kho_status`](#kho_status) — mở rộng cadtroly: dùng để kiểm tra trạng thái kho trong bản vẽ CAD.
+- [`knowledge_industries`](#knowledge_industries) — mở rộng cadtroly: dùng để liệt kê các ngành trong kho trong bản vẽ CAD.
+- [`knowledge_rules_export`](#knowledge_rules_export) — mở rộng cadtroly: dùng để xuất bộ quy tắc trong kho trong bản vẽ CAD.
+- [`knowledge_rules_import`](#knowledge_rules_import) — mở rộng cadtroly: dùng để nhập bộ quy tắc vào kho trong bản vẽ CAD.
+- [`knowledge_skill_add`](#knowledge_skill_add) — mở rộng cadtroly: dùng để thêm kỹ năng vào kho trong bản vẽ CAD.
+- [`knowledge_skill_toggle`](#knowledge_skill_toggle) — mở rộng cadtroly: dùng để bật hoặc tắt kỹ năng trong kho trong bản vẽ CAD.
+- [`knowledge_skills`](#knowledge_skills) — mở rộng cadtroly: dùng để liệt kê kỹ năng trong kho trong bản vẽ CAD.
+- [`knowledge_standard_add`](#knowledge_standard_add) — mở rộng cadtroly: dùng để thêm tiêu chuẩn vào kho trong bản vẽ CAD.
+- [`knowledge_standard_delete`](#knowledge_standard_delete) — mở rộng cadtroly: dùng để xóa tiêu chuẩn khỏi kho trong bản vẽ CAD.
+- [`knowledge_standards`](#knowledge_standards) — mở rộng cadtroly: dùng để liệt kê tiêu chuẩn trong kho trong bản vẽ CAD.
+- [`knowledge_status`](#knowledge_status) — mở rộng cadtroly: dùng để kiểm tra trạng thái kho trong bản vẽ CAD.
 - [`pdf_to_dwg`](#pdf_to_dwg) — mở rộng cadtroly: dùng để chuyển PDF sang DWG trong bản vẽ CAD.
 - [`pdf_vectorize`](#pdf_vectorize) — mở rộng cadtroly: dùng để chuyển PDF thành hình học véc-tơ trong bản vẽ CAD.
 - [`standards_reference`](#standards_reference) — mở rộng cadtroly: dùng để tra cứu tiêu chuẩn trong bản vẽ CAD.
@@ -2781,7 +2781,7 @@ Các chức năng riêng của project cadtroly như tiêu chuẩn, QA và khố
 
   > Thực hiện đọc bản vẽ trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
 
-#### kho_industries
+#### knowledge_industries
 
 - **Nhóm:** mở rộng cadtroly
 - **Làm gì:** Thực hiện thao tác liệt kê các ngành trong kho trong bản vẽ CAD.
@@ -2790,7 +2790,7 @@ Các chức năng riêng của project cadtroly như tiêu chuẩn, QA và khố
 
   > Thực hiện liệt kê các ngành trong kho trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
 
-#### kho_rules_export
+#### knowledge_rules_export
 
 - **Nhóm:** mở rộng cadtroly
 - **Làm gì:** Thực hiện thao tác xuất bộ quy tắc trong kho trong bản vẽ CAD.
@@ -2799,7 +2799,7 @@ Các chức năng riêng của project cadtroly như tiêu chuẩn, QA và khố
 
   > Thực hiện xuất bộ quy tắc trong kho trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
 
-#### kho_rules_import
+#### knowledge_rules_import
 
 - **Nhóm:** mở rộng cadtroly
 - **Làm gì:** Thực hiện thao tác nhập bộ quy tắc vào kho trong bản vẽ CAD.
@@ -2808,7 +2808,7 @@ Các chức năng riêng của project cadtroly như tiêu chuẩn, QA và khố
 
   > Thực hiện nhập bộ quy tắc vào kho trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
 
-#### kho_skill_add
+#### knowledge_skill_add
 
 - **Nhóm:** mở rộng cadtroly
 - **Làm gì:** Thực hiện thao tác thêm kỹ năng vào kho trong bản vẽ CAD.
@@ -2817,7 +2817,7 @@ Các chức năng riêng của project cadtroly như tiêu chuẩn, QA và khố
 
   > Thực hiện thêm kỹ năng vào kho trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
 
-#### kho_skill_toggle
+#### knowledge_skill_toggle
 
 - **Nhóm:** mở rộng cadtroly
 - **Làm gì:** Thực hiện thao tác bật hoặc tắt kỹ năng trong kho trong bản vẽ CAD.
@@ -2826,7 +2826,7 @@ Các chức năng riêng của project cadtroly như tiêu chuẩn, QA và khố
 
   > Thực hiện bật hoặc tắt kỹ năng trong kho trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
 
-#### kho_skills
+#### knowledge_skills
 
 - **Nhóm:** mở rộng cadtroly
 - **Làm gì:** Thực hiện thao tác liệt kê kỹ năng trong kho trong bản vẽ CAD.
@@ -2835,7 +2835,7 @@ Các chức năng riêng của project cadtroly như tiêu chuẩn, QA và khố
 
   > Thực hiện liệt kê kỹ năng trong kho trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
 
-#### kho_standard_add
+#### knowledge_standard_add
 
 - **Nhóm:** mở rộng cadtroly
 - **Làm gì:** Thực hiện thao tác thêm tiêu chuẩn vào kho trong bản vẽ CAD.
@@ -2844,7 +2844,7 @@ Các chức năng riêng của project cadtroly như tiêu chuẩn, QA và khố
 
   > Thực hiện thêm tiêu chuẩn vào kho trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
 
-#### kho_standard_delete
+#### knowledge_standard_delete
 
 - **Nhóm:** mở rộng cadtroly
 - **Làm gì:** Thực hiện thao tác xóa tiêu chuẩn khỏi kho trong bản vẽ CAD.
@@ -2853,7 +2853,7 @@ Các chức năng riêng của project cadtroly như tiêu chuẩn, QA và khố
 
   > Thực hiện xóa tiêu chuẩn khỏi kho trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
 
-#### kho_standards
+#### knowledge_standards
 
 - **Nhóm:** mở rộng cadtroly
 - **Làm gì:** Thực hiện thao tác liệt kê tiêu chuẩn trong kho trong bản vẽ CAD.
@@ -2862,7 +2862,7 @@ Các chức năng riêng của project cadtroly như tiêu chuẩn, QA và khố
 
   > Thực hiện liệt kê tiêu chuẩn trong kho trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
 
-#### kho_status
+#### knowledge_status
 
 - **Nhóm:** mở rộng cadtroly
 - **Làm gì:** Thực hiện thao tác kiểm tra trạng thái kho trong bản vẽ CAD.

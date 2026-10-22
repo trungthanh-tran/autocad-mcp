@@ -272,8 +272,8 @@ Skill nằm trong `code\\kho-mac-dinh\\skill` và được MCP đọc trực ti�
   hồ sơ tính kết cấu được phê duyệt.
 - `an-toan-ket-cau`: rà soát liên tục cấu kiện và dấu hiệu mất an toàn.
 - `kiem-tra-pccc`: rà soát sơ bộ lối thoát, khoang cháy, tiếp cận và ký hiệu PCCC.
-- LLM có thể gọi `kho_skills` để xem skill, `kho_skill_toggle` để bật/tắt và
-  `kho_skill_add` để thêm skill mới vào `CAD-kho/skill`.
+- LLM có thể gọi `knowledge_skills` để xem kỹ năng, `knowledge_skill_toggle` để bật/tắt và
+  `knowledge_skill_add` để thêm kỹ năng mới vào `CAD-kho/skill`.
 - `bien-phap-thi-cong-vn`: biện pháp thi công Việt Nam.
 
 Tên thư mục kỹ thuật dùng ASCII; nội dung hướng dẫn và trao đổi với người dùng
@@ -327,13 +327,13 @@ ghi rõ tiêu chuẩn dự án cần hỏi lại. Sau đó thêm vào MCP và b�
 
 LLM sẽ thực hiện theo luồng:
 
-1. Gọi `kho_skills` để tránh trùng tên.
+1. Gọi `knowledge_skills` để tránh trùng tên.
 2. Soạn `SKILL.md` có frontmatter `name`, `description`, `version`.
-3. Gọi `kho_skill_add` để ghi vào `CAD-kho\skill\qa-mep\SKILL.md`.
-4. Gọi `kho_skill_toggle(name="qa-mep", enabled=true)` nếu skill đang tắt.
+3. Gọi `knowledge_skill_add` để ghi vào `CAD-kho\skill\qa-mep\SKILL.md`.
+4. Gọi `knowledge_skill_toggle(name="qa-mep", enabled=true)` nếu kỹ năng đang tắt.
 5. Đọc resource `cadtroly://skill/qa-mep` trước khi áp dụng.
 
-`kho_skill_add` chỉ cho phép ghi một file Markdown vào kho người dùng; không
+`knowledge_skill_add` chỉ cho phép ghi một file Markdown vào kho người dùng; không
 chạy Python/LISP, không ghi vào thư mục skill mặc định và không tự ghi đè skill
 đã có. Nếu tên trùng hoặc nội dung không hợp lệ, MCP trả lỗi để LLM hỏi lại.
 
@@ -354,9 +354,9 @@ Xóa tiêu chuẩn fire-demo do người dùng thêm.
 Chỉ xóa sau khi tôi xác nhận.
 ```
 
-Gọi `kho_industries` để xem mã ngành và tên tiếng Việt trước. MCP dùng
-`kho_standards` để liệt kê/lọc theo `nganh`, `kho_standard_add` để
-thêm JSON rule vào `CAD-kho\\tieu-chuan`, và `kho_standard_delete` với
+Gọi `knowledge_industries` để xem mã ngành và tên tiếng Việt trước. MCP dùng
+`knowledge_standards` để liệt kê/lọc theo `nganh`, `knowledge_standard_add` để
+thêm JSON rule vào `CAD-kho\\tieu-chuan`, và `knowledge_standard_delete` với
 `confirm=true` để xóa. Tiêu chuẩn đóng gói mặc định trong MCP không thể xóa.
 
 Danh mục chi tiết tiêu chuẩn an toàn theo 18 ngành nằm tại

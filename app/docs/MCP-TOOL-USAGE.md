@@ -5036,12 +5036,12 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 **Lưu ý:** Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng.
 
-### `kho_industries`
+### `knowledge_industries`
 
 **Nhóm:** `cadtroly`  
 **Làm gì:** Liệt kê danh mục ngành với mã máy và tên tiếng Việt để chọn tiêu chuẩn.
 
-**Dùng khi nào:** Khi cần dùng chức năng `kho_industries` trong quy trình CAD.
+**Dùng khi nào:** Khi cần dùng chức năng `knowledge_industries` trong quy trình CAD.
 
 **Tham số**
 
@@ -5057,12 +5057,12 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 **Lưu ý:** Chỉ đọc; có thể dùng trước khi chỉnh sửa.
 
-### `kho_rules_export`
+### `knowledge_rules_export`
 
 **Nhóm:** `cadtroly`  
 **Làm gì:** Xuất quy tắc ánh xạ của đơn vị (chỉ quy tắc, không bản vẽ) để chia sẻ.
 
-**Dùng khi nào:** Khi cần dùng chức năng `kho_rules_export` trong quy trình CAD.
+**Dùng khi nào:** Khi cần dùng chức năng `knowledge_rules_export` trong quy trình CAD.
 
 **Tham số**
 
@@ -5078,12 +5078,12 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 **Lưu ý:** Chỉ đọc; có thể dùng trước khi chỉnh sửa.
 
-### `kho_rules_import`
+### `knowledge_rules_import`
 
 **Nhóm:** `cadtroly`  
 **Làm gì:** Nhập quy tắc ánh xạ từ nơi khác (ghi đè theo pattern).
 
-**Dùng khi nào:** Khi cần dùng chức năng `kho_rules_import` trong quy trình CAD.
+**Dùng khi nào:** Khi cần dùng chức năng `knowledge_rules_import` trong quy trình CAD.
 
 **Tham số**
 
@@ -5101,12 +5101,12 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 **Lưu ý:** Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng.
 
-### `kho_skill_add`
+### `knowledge_skill_add`
 
 **Nhóm:** `cadtroly`  
 **Làm gì:** Thêm skill do LLM soạn vào kho người dùng; chỉ ghi SKILL.md, không chạy mã.
 
-**Dùng khi nào:** Khi cần dùng chức năng `kho_skill_add` trong quy trình CAD.
+**Dùng khi nào:** Khi cần dùng chức năng `knowledge_skill_add` trong quy trình CAD.
 
 **Tham số**
 
@@ -5128,12 +5128,12 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 **Lưu ý:** Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng.
 
-### `kho_skill_toggle`
+### `knowledge_skill_toggle`
 
 **Nhóm:** `cadtroly`  
 **Làm gì:** Bật/tắt một skill.
 
-**Dùng khi nào:** Khi cần dùng chức năng `kho_skill_toggle` trong quy trình CAD.
+**Dùng khi nào:** Khi cần dùng chức năng `knowledge_skill_toggle` trong quy trình CAD.
 
 **Tham số**
 
@@ -5153,12 +5153,12 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 **Lưu ý:** Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng.
 
-### `kho_skills`
+### `knowledge_skills`
 
 **Nhóm:** `cadtroly`  
 **Làm gì:** Skill chuyên ngành trong kho/skill (mỗi thư mục một SKILL.md), bật/tắt.
 
-**Dùng khi nào:** Khi cần dùng chức năng `kho_skills` trong quy trình CAD.
+**Dùng khi nào:** Khi cần dùng chức năng `knowledge_skills` trong quy trình CAD.
 
 **Tham số**
 
@@ -5174,12 +5174,12 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 **Lưu ý:** Chỉ đọc; có thể dùng trước khi chỉnh sửa.
 
-### `kho_standard_add`
+### `knowledge_standard_add`
 
 **Nhóm:** `cadtroly`  
 **Làm gì:** Thêm tiêu chuẩn/rule JSON vào kho người dùng; không ghi vào bộ mặc định.
 
-**Dùng khi nào:** Khi cần dùng chức năng `kho_standard_add` trong quy trình CAD.
+**Dùng khi nào:** Khi cần dùng chức năng `knowledge_standard_add` trong quy trình CAD.
 
 **Tham số**
 
@@ -5203,12 +5203,12 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 **Lưu ý:** Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng.
 
-### `kho_standard_delete`
+### `knowledge_standard_delete`
 
 **Nhóm:** `cadtroly`  
 **Làm gì:** Xóa tiêu chuẩn do người dùng thêm; tiêu chuẩn mặc định không thể xóa.
 
-**Dùng khi nào:** Khi cần dùng chức năng `kho_standard_delete` trong quy trình CAD.
+**Dùng khi nào:** Khi cần dùng chức năng `knowledge_standard_delete` trong quy trình CAD.
 
 **Tham số**
 
@@ -5228,12 +5228,12 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 **Lưu ý:** Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng.
 
-### `kho_standards`
+### `knowledge_standards`
 
 **Nhóm:** `cadtroly`  
 **Làm gì:** Liệt kê tiêu chuẩn/rule theo ngành, phiên bản, nguồn và trạng thái duyệt.
 
-**Dùng khi nào:** Khi cần dùng chức năng `kho_standards` trong quy trình CAD.
+**Dùng khi nào:** Khi cần dùng chức năng `knowledge_standards` trong quy trình CAD.
 
 **Tham số**
 
@@ -5251,12 +5251,12 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 **Lưu ý:** Chỉ đọc; có thể dùng trước khi chỉnh sửa.
 
-### `kho_status`
+### `knowledge_status`
 
 **Nhóm:** `cadtroly`  
 **Làm gì:** Tình trạng kho tri thức, backend AutoCAD, nguồn AI.
 
-**Dùng khi nào:** Khi cần dùng chức năng `kho_status` trong quy trình CAD.
+**Dùng khi nào:** Khi cần dùng chức năng `knowledge_status` trong quy trình CAD.
 
 **Tham số**
 

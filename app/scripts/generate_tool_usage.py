@@ -56,12 +56,12 @@ EXAMPLE_OVERRIDES = {
         "paper": "A1",
         "orientation": "landscape",
     },
-    "kho_standards": {"industry": "architecture"},
-    "kho_standard_add": {
+    "knowledge_standards": {"industry": "architecture"},
+    "knowledge_standard_add": {
         "industry": "architecture",
         "standard": {"code": "TCVN-EXAMPLE", "title": "Tiêu chuẩn dự án", "source": "internal"},
     },
-    "kho_skill_add": {
+    "knowledge_skill_add": {
         "name": "my-project-rule",
         "content": "---\ntitle: Quy tắc dự án\n---\nNội dung hướng dẫn cho LLM.",
         "overwrite": False,
