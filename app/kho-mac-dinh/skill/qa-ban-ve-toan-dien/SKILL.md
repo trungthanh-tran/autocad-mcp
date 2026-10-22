@@ -42,6 +42,16 @@ Skill này gọi các skill chuyên môn theo bằng chứng của bản vẽ, k
 9. Tính toán/rà soát an toàn kết cấu và PCCC: chỉ chạy khi đủ đầu vào, ghi rõ
    tiêu chuẩn áp dụng, giả định, độ tin cậy và yêu cầu kỹ sư xác nhận.
 
+## Câu lệnh nhanh cho người dùng
+
+- “Kiểm tra toàn bộ bản vẽ và báo lỗi trước khi phát hành.”
+- “Đọc PDF này, dựng DWG, tách layer và báo phần không chắc chắn.”
+- “Sửa khu vực được chọn, chụp trước/sau, chạy diff rồi lưu bản mới.”
+- “Lập bảng cấu kiện và dữ liệu đầu vào cho tính chịu lực; không tự kết luận đạt.”
+- “Rà soát an toàn kết cấu, đánh dấu mọi cấu kiện không liên tục.”
+- “Kiểm tra PCCC sơ bộ và hỏi tôi nếu thiếu tiêu chuẩn hoặc số người.”
+- “Bóc tách khối lượng cửa, thiết bị, tường và xuất Excel có handle truy vết.”
+
 ## Mức kết quả
 
 - `error`: lỗi chắc chắn cần xử lý trước khi phát hành.

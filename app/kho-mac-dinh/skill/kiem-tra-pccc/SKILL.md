@@ -28,3 +28,11 @@ công trình, công năng, số người, cấp nguy hiểm cháy, tiêu chuẩn
 - `error`: lối thoát bị chặn rõ ràng hoặc dữ liệu bắt buộc mâu thuẫn.
 - `warning`: dấu hiệu không phù hợp cần kiểm tra.
 - `review`: chưa đủ thông tin để kết luận.
+
+## Use case mẫu
+
+- “Kiểm tra sơ bộ lối thoát nạn của mặt bằng này và đánh dấu chỗ bị chặn.”
+- “Tìm cửa thoát mở sai hướng, hành lang không liên tục và cầu thang chưa nối tới lối ra.”
+- “Đối chiếu số người, khoảng cách thoát và diện tích theo tiêu chuẩn tôi cung cấp.”
+- “Kiểm tra vị trí ký hiệu báo cháy, chữa cháy, hút khói và đường xe chữa cháy.”
+- “Lập báo cáo PCCC gồm error, warning, review và ảnh từng khu vực.”

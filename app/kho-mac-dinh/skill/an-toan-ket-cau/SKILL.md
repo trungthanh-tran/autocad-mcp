@@ -20,3 +20,10 @@ version: 0.1
 Kết quả CAD chỉ là rà soát hồ sơ và dữ liệu. Không dùng để chứng nhận ổn định,
 độ võng, chống sập, kháng chấn, chịu lửa hoặc an toàn thi công. Mọi kết luận
 an toàn phải do kỹ sư kết cấu/chủ trì thiết kế kiểm tra và phê duyệt.
+
+## Use case mẫu
+
+- “Kiểm tra cột, dầm, vách và sàn có liên tục giữa mặt bằng, mặt đứng và mặt cắt không.”
+- “Tìm cấu kiện kết cấu bị đứt, lệch trục, trùng hình hoặc nằm sai layer.”
+- “Chụp ảnh các vùng nghi ngờ và lập danh sách review theo sheet, layer và handle.”
+- “Kiểm tra bản vẽ có đủ ghi chú tải trọng, vật liệu, liên kết và chống cháy chưa.”

@@ -27,3 +27,10 @@ móng và kỹ sư có thẩm quyền xác nhận.
 - `warning`: dữ liệu có dấu hiệu bất thường cần kiểm tra.
 - `review`: giả định hoặc kết quả sơ bộ cần kỹ sư xác nhận.
 - `suggestion`: đề xuất bổ sung dữ liệu hoặc chuẩn hóa mô hình.
+
+## Use case mẫu
+
+- “Đọc mặt bằng kết cấu, lập bảng cột/dầm/sàn theo trục và chỉ ra dữ liệu còn thiếu.”
+- “Kiểm tra đơn vị, nhịp, tiết diện và vật liệu trước khi đưa vào mô hình tính.”
+- “Lập tính sơ bộ dầm theo tải trọng tôi cung cấp, ghi rõ mọi giả định và xuất bảng để kỹ sư kiểm tra.”
+- “So sánh mặt bằng kết cấu với mặt cắt, tìm cấu kiện lệch hoặc không liên tục.”

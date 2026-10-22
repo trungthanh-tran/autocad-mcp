@@ -313,6 +313,27 @@ vẫn bằng tiếng Việt.
 | Bóc khối lượng | “Đếm cửa, thiết bị và chiều dài tường, xuất Excel.” | Số lượng có layer, handle, nguồn đo và độ tin cậy. |
 | Tối ưu CAD | “Tìm đối tượng trùng, layer rỗng và lỗi ByLayer.” | Danh sách lỗi/cảnh báo và đề xuất dọn dẹp không phá hủy. |
 
+Các câu lệnh chuyên môn có thể dùng trực tiếp:
+
+```text
+Đọc mặt bằng kết cấu, lập bảng cột/dầm/sàn theo trục và chỉ ra dữ liệu còn thiếu.
+```
+
+```text
+Kiểm tra cột, dầm, vách và sàn có liên tục giữa mặt bằng, mặt đứng và mặt cắt không.
+Chụp ảnh các vùng nghi ngờ.
+```
+
+```text
+Kiểm tra sơ bộ lối thoát nạn, cửa thoát, hành lang, cầu thang và ký hiệu PCCC.
+Nếu thiếu tiêu chuẩn hoặc số người thì hỏi tôi, không tự điền.
+```
+
+```text
+Lập tính sơ bộ dầm theo tải trọng tôi cung cấp, ghi rõ giả định,
+phân loại review và xuất bảng để kỹ sư kiểm tra.
+```
+
 ### Các cột trong bảng Excel khối lượng
 
 | Cột | Ý nghĩa |
