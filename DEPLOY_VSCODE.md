@@ -21,7 +21,7 @@ Converter.
 
 ## B. Cài cadtroly
 
-1. Tải file `cadtroly-0.2.0-vscode-qa.zip`.
+1. Tải file `cadtroly-0.2.0-vscode-core.zip`.
 2. Nhấp chuột phải → **Extract All…**.
 3. Chọn nơi dễ nhớ, ví dụ `D:\cadtroly`.
 4. Mở thư mục đã giải nén; mã chương trình nằm trong thư mục `code`.
