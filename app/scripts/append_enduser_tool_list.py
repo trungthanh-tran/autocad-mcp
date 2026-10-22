@@ -144,11 +144,12 @@ def main() -> None:
         text = f"Thực hiện thao tác {vietnamese_name(name)} trong bản vẽ CAD."
         when = GROUP_WHEN.get(group, "chức năng mở rộng của cadtroly")
         example = tool_example(tool)
-        rows.append(f"| `{name}` | {GROUP_VI.get(group, group)} | {text} | Khi cần {when}. | `{example}` |")
+        request = f"Dùng `{name}` để {vietnamese_name(name)} trong bản vẽ hiện tại."
+        rows.append(f"| `{name}` | {GROUP_VI.get(group, group)} | {text} | Khi cần {when}. | {request} | `{example}` |")
     generated = (
         f"{MARKER}\n\n## Danh sách đầy đủ tất cả tool\n\n"
         f"Bảng này gồm **{len(rows)} tool** đang đăng ký, bao gồm cả **247 tool nền tảng** và tool mở rộng của cadtroly. Bạn có thể nói tên tool trong yêu cầu nếu muốn gọi trực tiếp.\n\n"
-        "| Tên tool | Nhóm | Làm gì | Dùng khi nào | Ví dụ tham số |\n|---|---|---|---|---|\n"
+        "| Tên tool | Nhóm | Làm gì | Dùng khi nào | Ví dụ yêu cầu tiếng Việt | Ví dụ tham số |\n|---|---|---|---|---|---|\n"
         + "\n".join(rows)
         + "\n"
     )
