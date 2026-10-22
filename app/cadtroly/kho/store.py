@@ -72,6 +72,9 @@ class Kho:
             out.append({
                 "id": data.get("id", f.stem.replace(".rules", "")),
                 "ten": data.get("ten", f.stem),
+                "nganh": data.get("nganh", data.get("industry", "unknown")),
+                "phien_ban": data.get("phien_ban", data.get("version", "unknown")),
+                "nguon": data.get("nguon", data.get("source", "unknown")),
                 "hieu_luc": data.get("hieu_luc", "unknown"),
                 "so_quy_tac": len(rules),
                 "cho_duyet": sum(1 for r in rules if not r.get("duyet")),
@@ -86,9 +89,48 @@ class Kho:
         return json.loads(f.read_text(encoding="utf-8"))
 
     def save_standard(self, data: dict) -> Path:
-        f = self.root / "tieu-chuan" / f"{data['id']}.rules.json"
+        standard_id = str(data.get("id", "")).strip().lower()
+        if not re.fullmatch(r"[a-z0-9][a-z0-9-]{1,63}", standard_id):
+            raise ValueError("standard id must be ASCII kebab-case, 2-64 characters")
+        if not isinstance(data.get("rules"), list):
+            raise ValueError("standard rules must be a list")
+        data = dict(data)
+        data["id"] = standard_id
+        data.setdefault("nganh", "unknown")
+        data.setdefault("phien_ban", data.get("version", "unknown"))
+        data.setdefault("nguon", "user")
+        f = self.root / "tieu-chuan" / f"{standard_id}.rules.json"
         f.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
         return f
+
+    def standard_list(self, industry: str | None = None) -> list[dict]:
+        """List standards/rules with an optional industry filter."""
+        wanted = industry.strip().lower() if industry else None
+        rows = self.rulesets()
+        if wanted:
+            rows = [r for r in rows if str(r.get("nganh", r.get("industry", "unknown"))).lower() == wanted]
+        return rows
+
+    def standard_add(self, data: dict, *, overwrite: bool = False) -> Path:
+        standard_id = str(data.get("id", "")).strip().lower()
+        existing = self.ruleset_path(standard_id) if standard_id else None
+        target = self.root / "tieu-chuan" / f"{standard_id}.rules.json"
+        if existing is not None and not (overwrite and target.exists()):
+            raise FileExistsError(f"standard already exists: {standard_id}")
+        return self.save_standard(data)
+
+    def standard_delete(self, standard_id: str) -> Path:
+        clean = str(standard_id).strip().lower()
+        if not re.fullmatch(r"[a-z0-9][a-z0-9-]{1,63}", clean):
+            raise ValueError("standard id must be ASCII kebab-case, 2-64 characters")
+        for folder in (self.root / "tieu-chuan", self.root / "quy-tac"):
+            target = folder / f"{clean}.rules.json"
+            if target.exists():
+                target.unlink()
+                return target
+        if self.ruleset_path(clean) is not None:
+            raise PermissionError("bundled standards cannot be deleted")
+        raise FileNotFoundError(clean)
 
     # ---- chi tiết ----
     def details(self) -> list[dict]:

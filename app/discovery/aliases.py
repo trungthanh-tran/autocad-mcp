@@ -1682,6 +1682,15 @@ TOOL_ALIASES: dict[str, ToolAliases] = {
     "kho_skill_add": ToolAliases(
         synonyms=("add skill", "create skill", "install skill to cad mcp", "them skill", "tao skill"),
     ),
+    "kho_standards": ToolAliases(
+        synonyms=("list safety standards", "list cad standards", "standards by industry", "liet ke tieu chuan", "tieu chuan an toan"),
+    ),
+    "kho_standard_add": ToolAliases(
+        synonyms=("add safety standard", "add industry standard", "update cad standard", "them tieu chuan", "cap nhat tieu chuan"),
+    ),
+    "kho_standard_delete": ToolAliases(
+        synonyms=("delete user standard", "remove standard", "xoa tieu chuan"),
+    ),
     # ── View & screenshot ───────────────────────────────────────────────────
     "view_screenshot": ToolAliases(
         synonyms=(

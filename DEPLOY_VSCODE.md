@@ -337,6 +337,27 @@ LLM sẽ thực hiện theo luồng:
 chạy Python/LISP, không ghi vào thư mục skill mặc định và không tự ghi đè skill
 đã có. Nếu tên trùng hoặc nội dung không hợp lệ, MCP trả lỗi để LLM hỏi lại.
 
+### Quản lý tiêu chuẩn theo ngành
+
+```text
+Liệt kê toàn bộ tiêu chuẩn ngành fire và structural đang có trong MCP,
+hiển thị phiên bản, nguồn, ngày hiệu lực và số rule.
+```
+
+```text
+Thêm tiêu chuẩn fire-demo vào kho người dùng, ngành fire,
+phiên bản 2026.1, nguồn dự án; không ghi đè tiêu chuẩn cũ.
+```
+
+```text
+Xóa tiêu chuẩn fire-demo do người dùng thêm.
+Chỉ xóa sau khi tôi xác nhận.
+```
+
+MCP dùng `kho_standards` để liệt kê/lọc theo `nganh`, `kho_standard_add` để
+thêm JSON rule vào `CAD-kho\\tieu-chuan`, và `kho_standard_delete` với
+`confirm=true` để xóa. Tiêu chuẩn đóng gói mặc định trong MCP không thể xóa.
+
 Các câu lệnh chuyên môn có thể dùng trực tiếp:
 
 ```text

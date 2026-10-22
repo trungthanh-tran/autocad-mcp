@@ -27,6 +27,7 @@ CADTROLY_TOOL_NAMES = frozenset({
     "drawing_read", "drawing_entities",
     "takeoff_propose", "takeoff_decide", "takeoff_compute", "takeoff_export", "takeoff_run",
     "check_rulesets", "check_run",
+    "kho_standards", "kho_standard_add", "kho_standard_delete",
     "kho_status", "kho_rules_export", "kho_rules_import", "kho_skills", "kho_skill_toggle", "kho_skill_add",
 })
 
@@ -175,6 +176,46 @@ def register(mcp: FastMCP) -> None:
         findings = check_drawing(d, rs, only_approved=not include_unapproved)
         kho.log("check", "run", path=path, ruleset=rs.id, **summarize(findings))
         return {"ruleset": rs.id, "summary": summarize(findings), "findings": [f.to_dict() for f in findings]}
+
+    @mcp.tool(tags={"kho", "check"}, annotations={"readOnlyHint": True})
+    async def kho_standards(
+        industry: Annotated[str | None, "building, structural, fire, mechanical, pid, architecture, civil hoặc bỏ trống"] = None,
+        ctx: Context = None,
+    ) -> dict:
+        """Liệt kê tiêu chuẩn/rule theo ngành, phiên bản, nguồn và trạng thái duyệt."""
+        return {"standards": _ctx(ctx)["kho"].standard_list(industry)}
+
+    @mcp.tool(tags={"kho", "check"})
+    async def kho_standard_add(
+        standard: Annotated[dict, "id, nganh, ten, phien_ban, nguon, hieu_luc và rules"],
+        overwrite: Annotated[bool, "Cho phép cập nhật tiêu chuẩn do người dùng đã thêm"] = False,
+        ctx: Context = None,
+    ) -> dict:
+        """Thêm tiêu chuẩn/rule JSON vào kho người dùng; không ghi vào bộ mặc định."""
+        kho = _ctx(ctx)["kho"]
+        try:
+            path = kho.standard_add(standard, overwrite=overwrite)
+        except (FileExistsError, ValueError) as exc:
+            raise ToolError(str(exc)) from exc
+        kho.log("standard", "add", id=standard.get("id"), path=str(path), overwrite=overwrite)
+        return {"ok": True, "path": str(path), "standards": kho.standard_list()}
+
+    @mcp.tool(tags={"kho"})
+    async def kho_standard_delete(
+        standard_id: str,
+        confirm: Annotated[bool, "Bắt buộc True để xóa tiêu chuẩn người dùng"] = False,
+        ctx: Context = None,
+    ) -> dict:
+        """Xóa tiêu chuẩn do người dùng thêm; tiêu chuẩn mặc định không thể xóa."""
+        if not confirm:
+            raise ToolError("Cần confirm=true để xóa tiêu chuẩn.")
+        kho = _ctx(ctx)["kho"]
+        try:
+            path = kho.standard_delete(standard_id)
+        except (FileNotFoundError, PermissionError, ValueError) as exc:
+            raise ToolError(str(exc)) from exc
+        kho.log("standard", "delete", id=standard_id, path=str(path))
+        return {"ok": True, "deleted": str(path), "standards": kho.standard_list()}
 
     # ------------------------------------------------------------------- kho
     @mcp.tool(tags={"kho"}, annotations={"readOnlyHint": True})
