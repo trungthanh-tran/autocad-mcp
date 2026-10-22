@@ -1,0 +1,13 @@
+# Generated from the working MCP environment.  Keep this file in sync with
+# pyproject.toml when releasing a new cadtroly version.
+fastmcp==3.4.11
+ezdxf==1.4.5
+pydantic==2.14.1
+openpyxl==3.1.5
+matplotlib==3.11.2
+Pillow==13.0.0
+PyMuPDF==2.0
+PyYAML==6.0.3
+fastapi==0.159.1
+uvicorn==0.54.0
+python-multipart==0.0.32

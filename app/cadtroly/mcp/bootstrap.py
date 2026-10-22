@@ -45,7 +45,11 @@ def ensure_runtime_dependencies() -> dict:
         file=sys.stderr,
         flush=True,
     )
-    command = [sys.executable, "-m", "pip", "install", "-e", str(project_dir)]
+    lock_file = project_dir / "requirements-mcp.lock"
+    command = [sys.executable, "-m", "pip", "install"]
+    if lock_file.is_file():
+        command.extend(["-r", str(lock_file)])
+    command.extend(["-e", str(project_dir)])
     try:
         subprocess.run(command, check=True)
     except subprocess.CalledProcessError as exc:

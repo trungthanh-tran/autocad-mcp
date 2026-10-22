@@ -8,13 +8,17 @@ from pathlib import Path
 
 
 def package_version() -> str:
-    """Return the canonical project version without a duplicate constant."""
-    try:
-        return version("autocad-mcp-pro")
-    except PackageNotFoundError:
-        pyproject = Path(__file__).with_name("pyproject.toml")
+    """Return the source version, or installed metadata outside a checkout."""
+    pyproject = Path(__file__).with_name("pyproject.toml")
+    if pyproject.is_file():
         with pyproject.open("rb") as stream:
             return str(tomllib.load(stream)["project"]["version"])
+    for distribution in ("cadtroly", "autocad-mcp-pro"):
+        try:
+            return version(distribution)
+        except PackageNotFoundError:
+            continue
+    return "0.0.0"
 
 
 __version__ = package_version()

@@ -54,7 +54,7 @@ class Config:
     llm: LLMConfig = field(default_factory=LLMConfig)
     acad: AcadConfig = field(default_factory=AcadConfig)
     report: ReportConfig = field(default_factory=ReportConfig)
-    version: str = "0.1.0"
+    version: str = "0.2.0"
 
     @property
     def path(self) -> Path:

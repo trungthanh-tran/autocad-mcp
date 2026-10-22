@@ -1,18 +1,18 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.u-c4n/autocad-mcp",
-  "title": "AutoCAD MCP Pro",
-  "description": "AutoCAD for AI agents, live or headless: drafting, P&ID, mechanical parts, architecture, takeoffs.",
+  "name": "io.github.trungthanh-tran/cadtroly",
+  "title": "cadtroly AutoCAD MCP",
+  "description": "Vietnamese AutoCAD MCP for PDF/DWG conversion, drafting, standards and takeoffs.",
   "repository": {
-    "url": "https://github.com/U-C4N/Autocad-MCP",
+    "url": "https://github.com/trungthanh-tran/autocad-mcp",
     "source": "github"
   },
-  "version": "1.6.0",
+  "version": "0.2.0",
   "packages": [
     {
       "registryType": "pypi",
-      "identifier": "autocad-mcp-pro",
-      "version": "1.6.0",
+      "identifier": "cadtroly",
+      "version": "0.2.0",
       "transport": {
         "type": "stdio"
       },

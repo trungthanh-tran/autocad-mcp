@@ -10,4 +10,4 @@ Lớp riêng trên nền autocad-mcp-pro (U-C4N, MIT):
 - web:     API + palette HTML (sau này nhúng vào AutoCAD qua WebView2)
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"

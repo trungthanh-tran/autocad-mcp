@@ -65,6 +65,10 @@ cần cho PDF/DXF, AutoCAD COM và các tool vẽ. Chỉ gói còn thiếu mới
 qua `python -m pip install -e .`; không cài lại ở mỗi lần chạy. Tắt hành vi này
 bằng `CADTROLY_AUTO_INSTALL=false` nếu máy bị giới hạn mạng.
 
+Phiên bản hiện tại: **cadtroly 0.2.0**. Các phiên bản package đã kiểm thử được
+ghi trong `requirements-mcp.lock`; gửi cả thư mục `app` và file lock sang máy
+khác để cài lại nhanh, đồng nhất.
+
 `.mcp.json` (có sẵn trong thư mục này):
 
 ```json
