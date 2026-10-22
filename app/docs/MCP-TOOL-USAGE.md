@@ -4,11 +4,12 @@ Tài liệu này mô tả **từng tool đang đăng ký trong project cadtroly*
 
 ## Tổng quan
 
-- Registered tools: **272**
-- Enabled với `TOOL_PROFILE=full`, `TOOL_PACKS=all`: **267**
+- Registered tools: **282**
+- Enabled với `TOOL_PROFILE=full`, `TOOL_PACKS=all`: **277**
 - Hidden/giới hạn backend: **5**
 - Resources: **9**; prompt templates: **5**
-- Tool upstream trong `tool-inventory.json`: **247**; phần còn lại là extension của project.
+- Tool upstream trong `tool-inventory.json`: **247**; phần còn lại là extension và alias tương thích của project.
+- Alias tương thích tên cũ `kho_*`: **10**; tên chuẩn mới dùng `knowledge_*`.
 
 ## Cách gọi chung
 
@@ -27,7 +28,7 @@ LLM gọi đúng tên tool và truyền một JSON object theo bảng tham số:
 
 ### `analysis_bounding_box`
 
-**Nhóm:** `analysis`  
+**Nhóm:** `analysis`
 **Làm gì:** Get the bounding box (extents) of all entities in the drawing.
 
 **Dùng khi nào:** Khi cần đọc, đo, thống kê hoặc phân tích bản vẽ mà không sửa dữ liệu.
@@ -48,7 +49,7 @@ LLM gọi đúng tên tool và truyền một JSON object theo bảng tham số:
 
 ### `analysis_entity_stats`
 
-**Nhóm:** `analysis`  
+**Nhóm:** `analysis`
 **Làm gì:** Analyze the drawing and return entity counts grouped by type and by layer.
 
 Returns: total_entities, by_type (sorted by count), by_layer (sorted by count).
@@ -72,7 +73,7 @@ This is unique to AutoCAD MCP Pro – no other MCP server provides this!
 
 ### `analysis_find_in_region`
 
-**Nhóm:** `analysis`  
+**Nhóm:** `analysis`
 **Làm gì:** Find all entities within a rectangular region (crossing selection).
 
 Uncapped: a window over a busy drawing returns every hit. Project with
@@ -108,7 +109,7 @@ Uncapped: a window over a busy drawing returns every hit. Project with
 
 ### `analysis_layer_stats`
 
-**Nhóm:** `analysis`  
+**Nhóm:** `analysis`
 **Làm gì:** Return detailed statistics for each layer: entity count, types present.
 
 **Dùng khi nào:** Khi cần đọc, đo, thống kê hoặc phân tích bản vẽ mà không sửa dữ liệu.
@@ -129,7 +130,7 @@ Uncapped: a window over a busy drawing returns every hit. Project with
 
 ### `analysis_list_properties`
 
-**Nhóm:** `analysis`  
+**Nhóm:** `analysis`
 **Làm gì:** AutoCAD's LIST: the full DXF attribute set for one handle.
 
 `dxf_attributes` is the raw attribute set `entity_get` deliberately does
@@ -156,7 +157,7 @@ and `extrusion` is reported so the entity's own frame is still visible.
 
 ### `analysis_measure_area`
 
-**Nhóm:** `analysis`  
+**Nhóm:** `analysis`
 **Làm gì:** Area and perimeter of a polygon you supply the vertices for.
 
 This measures the numbers in the call, NOT the drawing. To measure something
@@ -187,7 +188,7 @@ semicircular edge), which is why `assumes` says what was taken on faith.
 
 ### `analysis_measure_distance`
 
-**Nhóm:** `analysis`  
+**Nhóm:** `analysis`
 **Làm gì:** Measure the Euclidean distance between two points.
 
 **Dùng khi nào:** Khi cần đọc, đo, thống kê hoặc phân tích bản vẽ mà không sửa dữ liệu.
@@ -216,7 +217,7 @@ semicircular edge), which is why `assumes` says what was taken on faith.
 
 ### `analysis_measure_entity`
 
-**Nhóm:** `analysis`  
+**Nhóm:** `analysis`
 **Làm gì:** Measure something already in the drawing, by handle.
 
 Reads the real geometry, so polyline bulges (arc edges) are included —
@@ -257,7 +258,7 @@ bowtie measures 0.0 and that number is worse than useless unflagged.
 
 ### `analysis_select_by_layer`
 
-**Nhóm:** `analysis`  
+**Nhóm:** `analysis`
 **Làm gì:** Get all entities on a specific layer. Returns entity list with handles.
 
 Capped at MAX_LIST_LIMIT (default 5000). The plain list cannot say it was
@@ -289,7 +290,7 @@ layer's real population and `truncated` states whether the cap fired.
 
 ### `analysis_select_by_type`
 
-**Nhóm:** `analysis`  
+**Nhóm:** `analysis`
 **Làm gì:** Get all entities of a specific type. Returns entity list with handles.
 
 Capped at MAX_LIST_LIMIT (default 5000); as with analysis_select_by_layer,
@@ -319,7 +320,7 @@ Capped at MAX_LIST_LIMIT (default 5000); as with analysis_select_by_layer,
 
 ### `arch_catalogue_insert`
 
-**Nhóm:** `architecture`  
+**Nhóm:** `architecture`
 **Làm gì:** Define the item's block ARCH_<NAME> once, insert it on the furniture or sanitary layer.
 
 The block carries an invisible ITEM attribute with the catalogue name. Its
@@ -355,7 +356,7 @@ the drawing lacks it. Refusals, all before any write: an unknown name
 
 ### `arch_catalogue_list`
 
-**Nhóm:** `architecture`  
+**Nhóm:** `architecture`
 **Làm gì:** Catalogue rows: name, family, both labels, nominal size [w, d] in mm, block name, layer.
 
 Sizes are nominal catalogue dimensions - what a furniture or appliance
@@ -388,7 +389,7 @@ other than en/tr, each with the list.
 
 ### `arch_dimension_chains`
 
-**Nhóm:** `architecture`  
+**Nhóm:** `architecture`
 **Làm gì:** The three exterior chains an architectural plan carries, as real DIMENSIONs.
 
 Nearest first: the openings row (every jamb in that facade), the walls row
@@ -430,7 +431,7 @@ non-positive scale, offset or step.
 
 ### `arch_grid`
 
-**Nhóm:** `architecture`  
+**Nhóm:** `architecture`
 **Làm gì:** Axis lines on the arch grid layer (its CENTER linetype comes from the layer) and a
 5 mm bubble with its label at both ends of each axis, on the symbol layer.
 
@@ -470,7 +471,7 @@ non-positive `extension` or `scale`.
 
 ### `arch_opening`
 
-**Nhóm:** `architecture`  
+**Nhóm:** `architecture`
 **Làm gì:** A door or a window in a wall already drawn, found by its id; the wall is redrawn cut.
 
 The opening removes its width from both wall faces and each edge is closed
@@ -529,7 +530,7 @@ swing, hand or language.
 
 ### `arch_plan_from_spec`
 
-**Nhóm:** `architecture`  
+**Nhóm:** `architecture`
 **Làm gì:** A whole plan drawn inside one transaction: walls with their hosted doors and
 windows, stairs, room labels whose areas are measured off the walls just drawn,
 the exterior dimension chains and the door / window / room schedules.
@@ -570,7 +571,7 @@ the grid and symbols are separate tools (`arch_catalogue_insert`, `arch_grid`,
 
 ### `arch_room`
 
-**Nhóm:** `architecture`  
+**Nhóm:** `architecture`
 **Làm gì:** Label the room around (x, y) with its name, number and MEASURED area.
 
 The area is never typed: the tool reads the wall faces on the `wall` layer
@@ -622,7 +623,7 @@ schedule).
 
 ### `arch_rooms_detect`
 
-**Nhóm:** `architecture`  
+**Nhóm:** `architecture`
 **Làm gì:** Read the rooms of a plan - ours or a foreign one made of plain lines.
 
 Every LINE and lightweight polyline on the layers is split where lines
@@ -668,7 +669,7 @@ layer matching WALL or DUVAR when `layers` is omitted.
 
 ### `arch_schedule`
 
-**Nhóm:** `architecture`  
+**Nhóm:** `architecture`
 **Làm gì:** Draw a door, window or room schedule as a real TABLE - a read of the drawing.
 
 The rows come from the `ACADMCP_ARCH` records on the drawing (what
@@ -713,7 +714,7 @@ TABLE takes (198).
 
 ### `arch_stair`
 
-**Nhóm:** `architecture`  
+**Nhóm:** `architecture`
 **Làm gì:** A stair in plan: every riser as a line, the outline, the walking line with its arrow.
 
 The label ("UP" / "ÇIKIŞ") sits on the first tread at 2.5 mm × `scale`. The
@@ -769,7 +770,7 @@ or language.
 
 ### `arch_symbol`
 
-**Nhóm:** `architecture`  
+**Nhóm:** `architecture`
 **Làm gì:** Draw one architectural symbol on the arch symbol layer.
 
 Sizes are this server's declared drafting sizes in paper millimetres times
@@ -811,7 +812,7 @@ other than en/tr.
 
 ### `arch_wall`
 
-**Nhóm:** `architecture`  
+**Nhóm:** `architecture`
 **Làm gì:** Add walls to the plan network already on the drawing and resolve every junction.
 
 Two ends at one point mitre into a clean L; an end inside another wall is a
@@ -852,7 +853,7 @@ supported: an axis is straight segments only.
 
 ### `balloon_add`
 
-**Nhóm:** `sheet`  
+**Nhóm:** `sheet`
 **Làm gì:** One ISO 6433 item reference: a numbered balloon, a leader, and a dot on
 the item.
 
@@ -899,7 +900,7 @@ balloon for different targets — named with that balloon's handle.
 
 ### `batch_plot`
 
-**Nhóm:** `page_setup`  
+**Nhóm:** `page_setup`
 **Làm gì:** AutoCAD's PUBLISH for a PDF set, through `drawing_export_pdf(layout=…)`.
 
 One row per sheet: `path`, `bytes`, and `mediabox_mm` **parsed from the
@@ -939,7 +940,7 @@ no readable MediaBox is reported with `mediabox_mm: null` and an `error`.
 
 ### `block_create_from_entities`
 
-**Nhóm:** `blocks`  
+**Nhóm:** `blocks`
 **Làm gì:** Create a new block definition from existing entities in the drawing.
 
 Works on both engines. The originals stay in model space — this defines a
@@ -977,7 +978,7 @@ definition behind.
 
 ### `block_define`
 
-**Nhóm:** `blocks`  
+**Nhóm:** `blocks`
 **Làm gì:** Create a block definition with attribute definitions from typed specs.
 
 The whole request is validated before anything is written: one malformed
@@ -1025,7 +1026,7 @@ INSERT's layer supplies colour and lineweight. Insert with
 
 ### `block_explode`
 
-**Nhóm:** `blocks`  
+**Nhóm:** `blocks`
 **Làm gì:** Explode a block reference into its component entities, keeping its
 attribute text (the Express Tools BURST rule, on both engines).
 
@@ -1067,7 +1068,7 @@ live engine hands those to AutoCAD. Not undoable except through
 
 ### `block_find_references`
 
-**Nhóm:** `blocks`  
+**Nhóm:** `blocks`
 **Làm gì:** Find all insert references to a specific block definition.
 
 Bounded by the backend's own default entity_list page (200 INSERTs scanned),
@@ -1098,7 +1099,7 @@ counts the references found within that scan.
 
 ### `block_get_attributes`
 
-**Nhóm:** `blocks`  
+**Nhóm:** `blocks`
 **Làm gì:** Get all attribute values from a block reference as {TAG: value} dict.
 
 A multi-line attribute reports its whole content with `\P` between the
@@ -1124,7 +1125,7 @@ lines (AutoCAD's `TextString`), on both engines.
 
 ### `block_insert`
 
-**Nhóm:** `blocks`  
+**Nhóm:** `blocks`
 **Làm gì:** Insert a block and optionally set attribute values.
 
 Refused before any write, on both engines: an undefined or layout block
@@ -1168,7 +1169,7 @@ the block does not define are ignored.
 
 ### `block_list`
 
-**Nhóm:** `blocks`  
+**Nhóm:** `blocks`
 **Làm gì:** List all block definitions in the drawing (name, origin, attribute count, entity count).
 
 Never truncated — the whole block table is returned — so a compact envelope
@@ -1196,7 +1197,7 @@ here always reports truncated=false.
 
 ### `block_set_attributes`
 
-**Nhóm:** `blocks`  
+**Nhóm:** `blocks`
 **Làm gì:** Update attribute values in a block reference.
 
 Same value rule as `block_insert`: strings and numbers are written,
@@ -1230,7 +1231,7 @@ value written is the one `block_get_attributes` reads back and
 
 ### `bom_extract`
 
-**Nhóm:** `sheet`  
+**Nhóm:** `sheet`
 **Làm gì:** Walk the INSERTs and return the ISO 7573 item rows. Never modifies the
 drawing. `bom_table` is what draws them.
 
@@ -1272,7 +1273,7 @@ list of the ones there are.
 
 ### `bom_table`
 
-**Nhóm:** `sheet`  
+**Nhóm:** `sheet`
 **Làm gì:** Draw the ISO 7573 item list as a real TABLE entity, 180 mm wide (the
 title-block width), growing upwards from directly above the title block.
 
@@ -1325,7 +1326,7 @@ direction, a `layout` that does not exist.
 
 ### `boundary_from_entities`
 
-**Nhóm:** `analysis`  
+**Nhóm:** `analysis`
 **Làm gì:** Chain the given entities into one closed polyline.
 
 The handles may arrive in any order — putting them in chain order is the
@@ -1354,7 +1355,7 @@ coordinates of the gap.
 
 ### `boundary_trace`
 
-**Nhóm:** `analysis`  
+**Nhóm:** `analysis`
 **Làm gì:** AutoCAD's BOUNDARY/BPOLY: create a closed polyline around a seed point.
 
 Returns the *nearest enclosing* loop, so a seed inside an island gives the
@@ -1389,7 +1390,7 @@ gap when the edges nearly close.
 
 ### `cable_takeoff`
 
-**Nhóm:** `plant`  
+**Nhóm:** `plant`
 **Làm gì:** A cable takeoff: one row per electrical load, the shop's cable method made repeatable.
 
 Power, phases, voltage, neutral and VFD come from the P&ID's electrical
@@ -1450,7 +1451,7 @@ naming the `office` extra; the CSV files are written all the same.
 
 ### `cad_batch`
 
-**Nhóm:** `batch`  
+**Nhóm:** `batch`
 **Làm gì:** Execute an ordered list of tool calls in ONE round trip.
 
 N calls collapse into one request/response pair, and `bind` lets a later
@@ -1514,7 +1515,7 @@ still (no per-step tool name) - and it can be one step of a cad_batch.
 
 ### `centre_marks`
 
-**Nhóm:** `mechanical`  
+**Nhóm:** `mechanical`
 **Làm gì:** Centre marks on the CENTER layer, whose linetype carries ISO 128-23's dash pattern.
 
 Pass `handles` and the radii are read back with `entity_get` rather than
@@ -1553,7 +1554,7 @@ no radius in this frame), a `style` outside mark/lines, a non-positive
 
 ### `check_rulesets`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Liệt kê bộ quy tắc trong kho (tiêu chuẩn đã bóc + chuẩn công ty), kèm hiệu lực và số dòng chờ duyệt.
 
 **Dùng khi nào:** Khi cần dùng chức năng `check_rulesets` trong quy trình CAD.
@@ -1574,7 +1575,7 @@ no radius in this frame), a `style` outside mark/lines, a non-positive
 
 ### `check_run`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Luồng D: rà bản vẽ theo bộ quy tắc. Trả về từng vấn đề kèm điều khoản, handle, vị trí, có tự sửa được không.
 
 **Dùng khi nào:** Khi cần dùng chức năng `check_run` trong quy trình CAD.
@@ -1601,7 +1602,7 @@ no radius in this frame), a `style` outside mark/lines, a non-positive
 
 ### `construction_clear`
 
-**Nhóm:** `premium`  
+**Nhóm:** `premium`
 **Làm gì:** Delete every entity on the CONSTRUCTION layer. Idempotent.
 Must be called before `drawing_finalize` to satisfy `construction_left` critique.
 
@@ -1625,7 +1626,7 @@ Must be called before `drawing_finalize` to satisfy `construction_left` critique
 
 ### `construction_xline`
 
-**Nhóm:** `premium`  
+**Nhóm:** `premium`
 **Làm gì:** Create an infinite construction line on the CONSTRUCTION layer.
 Use as scaffolding; call `construction_clear()` before finalize.
 
@@ -1655,7 +1656,7 @@ Use as scaffolding; call `construction_clear()` before finalize.
 
 ### `data_extract`
 
-**Nhóm:** `sheet`  
+**Nhóm:** `sheet`
 **Làm gì:** The same rows `bom_extract` returns, written to a file.
 
 Refusals: a format that is not 'csv' or 'xlsx'; a drawing with nothing to
@@ -1691,7 +1692,7 @@ and the CSV route that always works.
 
 ### `datum_feature`
 
-**Nhóm:** `engineering`  
+**Nhóm:** `engineering`
 **Làm gì:** Place a datum feature symbol (filled triangle + boxed letter).
 
 Establishes the datum so a feature control frame referencing this letter
@@ -1725,7 +1726,7 @@ passes the `gdt` critique focus.
 
 ### `dimension_aligned`
 
-**Nhóm:** `dimensions`  
+**Nhóm:** `dimensions`
 **Làm gì:** Create an aligned dimension that measures the true distance between two points.
 
 **Dùng khi nào:** Khi tạo hoặc hiệu chỉnh kích thước, ghi chú kích thước.
@@ -1760,7 +1761,7 @@ passes the `gdt` critique focus.
 
 ### `dimension_angular`
 
-**Nhóm:** `dimensions`  
+**Nhóm:** `dimensions`
 **Làm gì:** Create an angular dimension measuring the angle between two lines from a vertex.
 
 **Dùng khi nào:** Khi tạo hoặc hiệu chỉnh kích thước, ghi chú kích thước.
@@ -1799,7 +1800,7 @@ passes the `gdt` critique focus.
 
 ### `dimension_auto`
 
-**Nhóm:** `premium`  
+**Nhóm:** `premium`
 **Làm gì:** Generate ISO 129 dimensions across the listed entities in the chosen style.
 V1 supports LINE entities only.
 
@@ -1827,7 +1828,7 @@ V1 supports LINE entities only.
 
 ### `dimension_diameter`
 
-**Nhóm:** `dimensions`  
+**Nhóm:** `dimensions`
 **Làm gì:** Create a diameter dimension for a circle, optionally toleranced (e.g. ⌀20 H7).
 
 **Dùng khi nào:** Khi tạo hoặc hiệu chỉnh kích thước, ghi chú kích thước.
@@ -1870,7 +1871,7 @@ V1 supports LINE entities only.
 
 ### `dimension_linear`
 
-**Nhóm:** `dimensions`  
+**Nhóm:** `dimensions`
 **Làm gì:** Create a linear dimension, optionally toleranced (ISO 129 or ISO 286 fit).
 
 **Dùng khi nào:** Khi tạo hoặc hiệu chỉnh kích thước, ghi chú kích thước.
@@ -1917,7 +1918,7 @@ V1 supports LINE entities only.
 
 ### `dimension_radius`
 
-**Nhóm:** `dimensions`  
+**Nhóm:** `dimensions`
 **Làm gì:** Create a radius dimension for a circle or arc, optionally toleranced.
 
 **Dùng khi nào:** Khi tạo hoặc hiệu chỉnh kích thước, ghi chú kích thước.
@@ -1960,7 +1961,7 @@ V1 supports LINE entities only.
 
 ### `dimstyle_create`
 
-**Nhóm:** `styles`  
+**Nhóm:** `styles`
 **Làm gì:** Create a dimension style: preset values first, then `overrides`.
 
 Refuses, before anything is written: an unknown preset; an override key
@@ -2004,7 +2005,7 @@ With `set_current` the next dimension carries the style on both engines.
 
 ### `dimstyle_list`
 
-**Nhóm:** `styles`  
+**Nhóm:** `styles`
 **Làm gì:** Every DIMSTYLE table entry with the seventeen preset variables
 (DIMTXT, DIMASZ, DIMEXE, DIMEXO, DIMGAP, DIMTAD, DIMTIH, DIMTOH, DIMDEC,
 DIMDSEP, DIMLUNIT, DIMZIN, DIMBLK, DIMTXSTY, DIMLWD, DIMLWE, DIMSCALE).
@@ -2033,7 +2034,7 @@ style to read it. Never refuses on an open drawing.
 
 ### `dimstyle_modify`
 
-**Nhóm:** `styles`  
+**Nhóm:** `styles`
 **Làm gì:** Change variables on an existing dimension style.
 
 `changed` names only the variables that actually moved — re-setting a
@@ -2070,7 +2071,7 @@ discarded, which is AutoCAD's own DIMSTYLE rule).
 
 ### `dimstyle_set_current`
 
-**Nhóm:** `styles`  
+**Nhóm:** `styles`
 **Làm gì:** Set `$DIMSTYLE` and load the style's variables as the current DIM*
 settings — what a live seat's DIMSTYLE Restore does — so `dimension_*`
 and `dimension_auto` draw with it on both engines. Per-dimension
@@ -2097,7 +2098,7 @@ the drawing does not hold. Returns `previous` and `changed`.
 
 ### `document_activate`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** Make one open document the active one; reports `previous`.
 
 Matches the full path first, then the file name; an ambiguous name is
@@ -2126,7 +2127,7 @@ the ways out. Pack: settings · lean: no.
 
 ### `document_close`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** Close a document and report `saved`, `discarded_changes` and the new `active`.
 
 Refusals, all before anything is closed: unsaved changes with neither
@@ -2161,7 +2162,7 @@ with its 1.4 contract kept. Pack: settings · lean: no.
 
 ### `document_list`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** Every open document with `document_id`, `name`, `path`, `active`, `saved` and
 `entity_count`.
 
@@ -2189,7 +2190,7 @@ backend answers with an empty list. Pack: settings · lean: no.
 
 ### `drawing_apply_discipline_standard`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Set up a drawing for a civil/architectural discipline in one call.
 
 **Dùng khi nào:** Khi cần dùng chức năng `drawing_apply_discipline_standard` trong quy trình CAD.
@@ -2218,7 +2219,7 @@ backend answers with an empty list. Pack: settings · lean: no.
 
 ### `drawing_apply_iso_layers`
 
-**Nhóm:** `premium`  
+**Nhóm:** `premium`
 **Làm gì:** Bootstrap a full ISO-conformant layer set with correct colors and lineweights.
 Idempotent — existing layers are not modified.
 
@@ -2244,7 +2245,7 @@ Refused by name: a standard that is not one of mech, pid, iso13567, arch.
 
 ### `drawing_apply_standard`
 
-**Nhóm:** `styles`  
+**Nhóm:** `styles`
 **Làm gì:** One call for the common case: the standard's dimension style (created
 if missing, then current), its text style (created if missing, then
 current), the shared units, and with `layers` the `mech` layer set (ANSI
@@ -2282,7 +2283,7 @@ refusals (`dimstyle_create`, `textstyle_create`) apply unchanged. In the
 
 ### `drawing_audit`
 
-**Nhóm:** `drawing`  
+**Nhóm:** `drawing`
 **Làm gì:** Audit the drawing: repair every fixable structural problem, and report it.
 
 This mutates the drawing. `fixes` lists repairs that have ALREADY been
@@ -2309,7 +2310,7 @@ than as zero.
 
 ### `drawing_close`
 
-**Nhóm:** `drawing`  
+**Nhóm:** `drawing`
 **Làm gì:** Close the active document. If save is True (default), the drawing is
 saved to its current path before closing; an untitled document is closed
 and `warning` says its changes were discarded (headless) or the call is
@@ -2337,7 +2338,7 @@ closed, call drawing_new or drawing_open before any other tool.
 
 ### `drawing_critique`
 
-**Nhóm:** `premium`  
+**Nhóm:** `premium`
 **Làm gì:** Run premium-quality checks. Returns zero issues for a clean drawing.
 
 Standard production gate: must return [] before `drawing_finalize`.
@@ -2362,7 +2363,7 @@ Standard production gate: must return [] before `drawing_finalize`.
 
 ### `drawing_deliver`
 
-**Nhóm:** `engineering`  
+**Nhóm:** `engineering`
 **Làm gì:** Create a hashed, validated delivery bundle and verify DXF save/reopen parity.
 
 The result status is ``success``, ``failed_validation`` or ``failed_export``.
@@ -2396,7 +2397,7 @@ Failure intentionally keeps all generated artifacts for diagnosis.
 
 ### `drawing_diff`
 
-**Nhóm:** `understanding`  
+**Nhóm:** `understanding`
 **Làm gì:** Compare two revisions of one drawing by geometric signature (spec §10).
 
 Entities are matched exactly first (type, layer, geometry rounded to `tol`,
@@ -2453,7 +2454,7 @@ readable DXF, and a non-positive `tol` or `move_tol`.
 
 ### `drawing_entities`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Liệt kê đối tượng theo layer/block/loại kèm handle, toạ độ, chiều dài, diện tích, text.
 
 **Dùng khi nào:** Khi cần dùng chức năng `drawing_entities` trong quy trình CAD.
@@ -2484,7 +2485,7 @@ readable DXF, and a non-positive `tol` or `move_tol`.
 
 ### `drawing_export_dwg`
 
-**Nhóm:** `sheet`  
+**Nhóm:** `sheet`
 **Làm gì:** Write a real DWG — not a DXF under a .dwg name.
 
 On a live AutoCAD seat this is `Document.SaveAs` with the matching
@@ -2518,7 +2519,7 @@ without a restart. An unknown version is refused by name with the six.
 
 ### `drawing_export_dxf`
 
-**Nhóm:** `drawing`  
+**Nhóm:** `drawing`
 **Làm gì:** Export the current drawing as a DXF file.
 
 **Dùng khi nào:** Khi mở, lưu, đóng, xuất hoặc kiểm tra trạng thái bản vẽ.
@@ -2541,7 +2542,7 @@ without a restart. An unknown version is refused by name with the six.
 
 ### `drawing_export_pdf`
 
-**Nhóm:** `drawing`  
+**Nhóm:** `drawing`
 **Làm gì:** Export the current drawing (or a paper-space layout) to PDF.
 
 **Dùng khi nào:** Khi mở, lưu, đóng, xuất hoặc kiểm tra trạng thái bản vẽ.
@@ -2566,7 +2567,7 @@ without a restart. An unknown version is refused by name with the six.
 
 ### `drawing_finalize`
 
-**Nhóm:** `engineering`  
+**Nhóm:** `engineering`
 **Làm gì:** Premium completion gate: runs BOTH the 8-step validator AND the premium critique focuses
 (iso128, layer_color, dim_overlap, untrimmed_corner, duplicate_entities, construction_left,
 gdt, plus the P&ID focuses pid_dangling_line, pid_duplicate_tag,
@@ -2611,7 +2612,7 @@ under payload['critique'] without failing the gate by default.
 
 ### `drawing_info`
 
-**Nhóm:** `entity_query`  
+**Nhóm:** `entity_query`
 **Làm gì:** Get comprehensive metadata for the current drawing.
 
 Returns: name, path, entity_count, layer_count, block_count,
@@ -2635,7 +2636,7 @@ extents (min/max), units, version, backend name.
 
 ### `drawing_new`
 
-**Nhóm:** `drawing`  
+**Nhóm:** `drawing`
 **Làm gì:** Create a new drawing, optionally from a template.
 
 A bundled name resolves to `templates/<name>.dxf` headlessly and
@@ -2678,7 +2679,7 @@ afterwards — idempotent on a template that already has them.
 
 ### `drawing_open`
 
-**Nhóm:** `drawing`  
+**Nhóm:** `drawing`
 **Làm gì:** Open an existing DXF drawing file (DWG too, on the live COM backend).
 
 T0.2: a .dwg path is refused up front when the active backend has no `dwg`
@@ -2706,7 +2707,7 @@ does not exist in that format.
 
 ### `drawing_plan`
 
-**Nhóm:** `premium`  
+**Nhóm:** `premium`
 **Làm gì:** Commit a PlanSpec before any geometry is created.
 
 The PlanSpec is stored on the backend and surfaced for reference during
@@ -2749,7 +2750,7 @@ in a premium workflow.
 
 ### `drawing_preflight`
 
-**Nhóm:** `premium`  
+**Nhóm:** `premium`
 **Làm gì:** Validate and normalize requirements before committing a drawing plan.
 
 **Dùng khi nào:** Khi dùng chức năng nâng cao; kiểm tra capability trước nếu backend không hỗ trợ.
@@ -2786,7 +2787,7 @@ in a premium workflow.
 
 ### `drawing_properties_get`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** The DWGPROPS dialog as data: `summary` (title, subject, author, keywords,
 comments), `summary_available`, and `custom` ({key: value}).
 
@@ -2814,7 +2815,7 @@ claim the drawing has no title. Custom properties (`$CUSTOMPROPERTYTAG` /
 
 ### `drawing_properties_set`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** Write DWGPROPS fields. Only the arguments given are touched; returns
 `summary_written`, `custom_written` and `custom_deleted` (a key that was
 never there is not reported deleted).
@@ -2872,7 +2873,7 @@ RemoveCustomByKey, and its 'Key not found' is reported as not deleted.
 
 ### `drawing_purge`
 
-**Nhóm:** `drawing`  
+**Nhóm:** `drawing`
 **Làm gì:** Purge all unused objects (layers, blocks, linetypes, styles) from the drawing.
 
 **Dùng khi nào:** Khi mở, lưu, đóng, xuất hoặc kiểm tra trạng thái bản vẽ.
@@ -2893,7 +2894,7 @@ RemoveCustomByKey, and its 'Key not found' is reported as not deleted.
 
 ### `drawing_read`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Đọc bản vẽ thành số liệu: layer, block, số đối tượng, đơn vị. Không gửi gì đi.
 
 **Dùng khi nào:** Khi cần dùng chức năng `drawing_read` trong quy trình CAD.
@@ -2916,7 +2917,7 @@ RemoveCustomByKey, and its 'Key not found' is reported as not deleted.
 
 ### `drawing_redo`
 
-**Nhóm:** `drawing`  
+**Nhóm:** `drawing`
 **Làm gì:** Reapply the operation you just undid.
 
 Same history as `drawing_undo`, so the headless backend needs
@@ -2942,7 +2943,7 @@ geometry you had removed reappearing beside geometry you drew afterwards.
 
 ### `drawing_refine`
 
-**Nhóm:** `premium`  
+**Nhóm:** `premium`
 **Làm gì:** Run a bounded, transaction-safe critique/repair/re-critique loop.
 
 **Dùng khi nào:** Khi dùng chức năng nâng cao; kiểm tra capability trước nếu backend không hỗ trợ.
@@ -2973,7 +2974,7 @@ geometry you had removed reappearing beside geometry you drew afterwards.
 
 ### `drawing_save`
 
-**Nhóm:** `drawing`  
+**Nhóm:** `drawing`
 **Làm gì:** Save the current drawing. Optionally specify a new path.
 
 **Dùng khi nào:** Khi mở, lưu, đóng, xuất hoặc kiểm tra trạng thái bản vẽ.
@@ -2996,7 +2997,7 @@ geometry you had removed reappearing beside geometry you drew afterwards.
 
 ### `drawing_save_as`
 
-**Nhóm:** `drawing`  
+**Nhóm:** `drawing`
 **Làm gì:** Save current drawing to a new path/format (DWG, DXF, or DWT template).
 
 The on-disk format is derived from the file extension so the bytes always
@@ -3025,7 +3026,7 @@ only when the path has no recognised extension.
 
 ### `drawing_scale_check`
 
-**Nhóm:** `understanding`  
+**Nhóm:** `understanding`
 **Làm gì:** Is the drawing to scale against the reference - or a schematic whose lengths
 are lengths of drawn line, not of pipe? Read-only on both drawings.
 
@@ -3076,7 +3077,7 @@ variable), a file the engine cannot parse (a DWG headlessly), and a
 
 ### `drawing_settings`
 
-**Nhóm:** `system`  
+**Nhóm:** `system`
 **Làm gì:** Read or change common AutoCAD drawing settings by friendly name.
 
 A convenience facade over the system variables (INSUNITS, LUPREC, LTSCALE,
@@ -3126,7 +3127,7 @@ scale in the variable dictionary — the places AutoCAD reads them from.
 
 ### `drawing_template_list`
 
-**Nhóm:** `page_setup`  
+**Nhóm:** `page_setup`
 **Làm gì:** The templates `drawing_new(template=<name>)` can start from.
 
 Each row: `standard` (ISO/ANSI), `sheet`, `paper`, `layout` (the sheet tab's
@@ -3155,7 +3156,7 @@ refuses; it reads a catalogue.
 
 ### `drawing_template_save`
 
-**Nhóm:** `page_setup`  
+**Nhóm:** `page_setup`
 **Làm gì:** AutoCAD's SAVEAS → Drawing Template, on both engines.
 
 Live AutoCAD writes a real `.dwt` (`SaveAs(path, ac2018_Template)`) and
@@ -3194,7 +3195,7 @@ Pack: core · lean: no (`drawing_save_as` is not lean either).
 
 ### `drawing_topology_check`
 
-**Nhóm:** `understanding`  
+**Nhóm:** `understanding`
 **Làm gì:** Topology of a line network (spec §11): dangling ends, near misses (end to end and
 end to line within `gap`) and interior crossings (two lines of one layer crossing
 away from their ends). Never modifies the drawing.
@@ -3237,7 +3238,7 @@ a non-positive `tol` or `gap`, and a `gap` that does not exceed `tol`.
 
 ### `drawing_understand`
 
-**Nhóm:** `understanding`  
+**Nhóm:** `understanding`
 **Làm gì:** One report on a drawing somebody else made, every claim with its evidence
 and a confidence. Never modifies the drawing: a file is read as it is, and
 the current document through a snapshot (headless: the document in memory;
@@ -3288,7 +3289,7 @@ the engine cannot parse (a DWG headlessly: ezdxf reads DXF only).
 
 ### `drawing_undo`
 
-**Nhóm:** `drawing`  
+**Nhóm:** `drawing`
 **Làm gì:** Undo the last drawing operation.
 
 On the live COM backend this is AutoCAD's own undo. The headless backend has
@@ -3318,7 +3319,7 @@ Drawing something after an undo discards the redo branch, as in AutoCAD.
 
 ### `entity_array_polar`
 
-**Nhóm:** `entity_modification`  
+**Nhóm:** `entity_modification`
 **Làm gì:** Create a polar (circular) array of copies around a center point.
 
 `count` is unbounded, so the same result-shaping applies as for the
@@ -3356,7 +3357,7 @@ rectangular array: fields=["handle"] when the geometry is already known.
 
 ### `entity_array_rectangular`
 
-**Nhóm:** `entity_modification`  
+**Nhóm:** `entity_modification`
 **Làm gì:** Create a rectangular array of copies. Returns info of all created copies.
 
 rows x cols is unbounded, so this is a result-heavy tool despite being a
@@ -3395,7 +3396,7 @@ usually all a caller needs from it.
 
 ### `entity_batch_create`
 
-**Nhóm:** `batch`  
+**Nhóm:** `batch`
 **Làm gì:** Create multiple entities in a single call for better performance.
 
 Each entity dict must have a 'type' key and the parameters for that type.
@@ -3425,7 +3426,7 @@ differ, must be ordered, or must feed each other.
 
 ### `entity_batch_modify`
 
-**Nhóm:** `batch`  
+**Nhóm:** `batch`
 **Làm gì:** Apply multiple modifications in a single call.
 
 Example: [{"handle": "1A", "action": "move", "dx": 10, "dy": 20}, {"handle": "2B", "action": "delete"}]
@@ -3453,7 +3454,7 @@ ordering, or to feed one step's result into the next, use cad_batch.
 
 ### `entity_chamfer`
 
-**Nhóm:** `corner_ops`  
+**Nhóm:** `corner_ops`
 **Làm gì:** Bevel a corner with a chamfer line. Returns info on the new chamfer LINE.
 V1 supports LINE+LINE only.
 
@@ -3485,7 +3486,7 @@ V1 supports LINE+LINE only.
 
 ### `entity_change_space`
 
-**Nhóm:** `layouts`  
+**Nhóm:** `layouts`
 **Làm gì:** AutoCAD's CHSPACE: move entities across spaces, rescaled by the viewport.
 
 Geometry is transformed by the viewport's own matrix so it stays the same
@@ -3523,7 +3524,7 @@ outside the viewport or off the sheet are moved and flagged, not refused.
 
 ### `entity_copy`
 
-**Nhóm:** `entity_modification`  
+**Nhóm:** `entity_modification`
 **Làm gì:** Copy an entity and move the copy by (dx, dy, dz). Returns info of the new copy.
 
 **Dùng khi nào:** Khi cần sửa, di chuyển, xoay, scale hoặc biến đổi đối tượng.
@@ -3552,7 +3553,7 @@ outside the viewport or off the sheet are moved and flagged, not refused.
 
 ### `entity_create_arc`
 
-**Nhóm:** `entity_creation`  
+**Nhóm:** `entity_creation`
 **Làm gì:** Create a circular arc. Angles are in degrees, measured counter-clockwise from the positive X axis.
 
 **Dùng khi nào:** Khi cần vẽ thêm đối tượng hình học vào bản vẽ.
@@ -3587,7 +3588,7 @@ outside the viewport or off the sheet are moved and flagged, not refused.
 
 ### `entity_create_block_ref`
 
-**Nhóm:** `blocks`  
+**Nhóm:** `blocks`
 **Làm gì:** Insert a block reference (instance of an existing block definition).
 
 Refused before any write, on both engines: a name that is not a block
@@ -3628,7 +3629,7 @@ this tool is the no-attributes form.
 
 ### `entity_create_circle`
 
-**Nhóm:** `entity_creation`  
+**Nhóm:** `entity_creation`
 **Làm gì:** Create a circle at (cx, cy) with given radius.
 
 **Dùng khi nào:** Khi cần vẽ thêm đối tượng hình học vào bản vẽ.
@@ -3659,7 +3660,7 @@ this tool is the no-attributes form.
 
 ### `entity_create_ellipse`
 
-**Nhóm:** `entity_creation`  
+**Nhóm:** `entity_creation`
 **Làm gì:** Create an ellipse. major_x/major_y define the major axis vector from the center.
 
 **Dùng khi nào:** Khi cần vẽ thêm đối tượng hình học vào bản vẽ.
@@ -3694,7 +3695,7 @@ this tool is the no-attributes form.
 
 ### `entity_create_hatch`
 
-**Nhóm:** `entity_creation`  
+**Nhóm:** `entity_creation`
 **Làm gì:** Create a hatch fill pattern inside a closed boundary polygon.
 
 **Dùng khi nào:** Khi cần vẽ thêm đối tượng hình học vào bản vẽ.
@@ -3727,7 +3728,7 @@ this tool is the no-attributes form.
 
 ### `entity_create_line`
 
-**Nhóm:** `entity_creation`  
+**Nhóm:** `entity_creation`
 **Làm gì:** Create a line from (x1,y1) to (x2,y2). Returns entity info with handle.
 
 **Dùng khi nào:** Khi cần vẽ thêm đối tượng hình học vào bản vẽ.
@@ -3766,7 +3767,7 @@ this tool is the no-attributes form.
 
 ### `entity_create_mtext`
 
-**Nhóm:** `entity_creation`  
+**Nhóm:** `entity_creation`
 **Làm gì:** Create a multi-line text entity (MTEXT) with word-wrap at the specified width.
 
 **Dùng khi nào:** Khi cần vẽ thêm đối tượng hình học vào bản vẽ.
@@ -3803,7 +3804,7 @@ this tool is the no-attributes form.
 
 ### `entity_create_point`
 
-**Nhóm:** `entity_creation`  
+**Nhóm:** `entity_creation`
 **Làm gì:** Create a point marker entity at (x, y).
 
 **Dùng khi nào:** Khi cần vẽ thêm đối tượng hình học vào bản vẽ.
@@ -3832,7 +3833,7 @@ this tool is the no-attributes form.
 
 ### `entity_create_polyline`
 
-**Nhóm:** `entity_creation`  
+**Nhóm:** `entity_creation`
 **Làm gì:** Create a lightweight 2D polyline through the given points.
 
 Example: points=[[0,0],[100,0],[100,100],[0,100]], closed=true → rectangle
@@ -3863,7 +3864,7 @@ Example: points=[[0,0],[100,0],[100,100],[0,100]], closed=true → rectangle
 
 ### `entity_create_rectangle`
 
-**Nhóm:** `entity_creation`  
+**Nhóm:** `entity_creation`
 **Làm gì:** Create a closed rectangular polyline between two corner points.
 
 Convenience wrapper around entity_create_polyline.
@@ -3898,7 +3899,7 @@ Convenience wrapper around entity_create_polyline.
 
 ### `entity_create_revcloud`
 
-**Nhóm:** `entity_creation`  
+**Nhóm:** `entity_creation`
 **Làm gì:** Draw a revision cloud: a polyline whose every segment carries an arc.
 
 A `segment_length` longer than the shortest edge is refused — the result
@@ -3931,7 +3932,7 @@ cloud.
 
 ### `entity_create_spline`
 
-**Nhóm:** `entity_creation`  
+**Nhóm:** `entity_creation`
 **Làm gì:** Create a NURBS spline curve passing through the specified fit points.
 
 **Dùng khi nào:** Khi cần vẽ thêm đối tượng hình học vào bản vẽ.
@@ -3958,7 +3959,7 @@ cloud.
 
 ### `entity_create_table`
 
-**Nhóm:** `entity_creation`  
+**Nhóm:** `entity_creation`
 **Làm gì:** Create a native COM table or an explicitly-labelled ezdxf composite table.
 
 **Dùng khi nào:** Khi cần vẽ thêm đối tượng hình học vào bản vẽ.
@@ -3997,7 +3998,7 @@ cloud.
 
 ### `entity_create_text`
 
-**Nhóm:** `entity_creation`  
+**Nhóm:** `entity_creation`
 **Làm gì:** Create a single-line text entity (DTEXT/TEXT).
 
 **Dùng khi nào:** Khi cần vẽ thêm đối tượng hình học vào bản vẽ.
@@ -4032,7 +4033,7 @@ cloud.
 
 ### `entity_create_wipeout`
 
-**Nhóm:** `entity_creation`  
+**Nhóm:** `entity_creation`
 **Làm gì:** Create a WIPEOUT that hides drawing content behind its outline.
 
 Refuses fewer than three points: a zero-area mask hides nothing while
@@ -4060,7 +4061,7 @@ reporting success.
 
 ### `entity_delete`
 
-**Nhóm:** `entity_modification`  
+**Nhóm:** `entity_modification`
 **Làm gì:** Permanently delete an entity by its handle.
 
 **Dùng khi nào:** Khi cần sửa, di chuyển, xoay, scale hoặc biến đổi đối tượng.
@@ -4083,7 +4084,7 @@ reporting success.
 
 ### `entity_delete_many`
 
-**Nhóm:** `entity_modification`  
+**Nhóm:** `entity_modification`
 **Làm gì:** Delete multiple entities in one call. Returns count of deleted entities.
 
 **Dùng khi nào:** Khi cần sửa, di chuyển, xoay, scale hoặc biến đổi đối tượng.
@@ -4106,7 +4107,7 @@ reporting success.
 
 ### `entity_edit_geometry`
 
-**Nhóm:** `entity_modification`  
+**Nhóm:** `entity_modification`
 **Làm gì:** Edit the defining geometry of an existing entity in place (no delete/recreate).
 
 CIRCLE: cx/cy/radius · LINE: x1/y1/x2/y2 · ARC: cx/cy/radius/start_angle/end_angle.
@@ -4150,7 +4151,7 @@ Any argument left out is unchanged; the handle is preserved.
 
 ### `entity_edit_text`
 
-**Nhóm:** `entity_modification`  
+**Nhóm:** `entity_modification`
 **Làm gì:** Edit an existing text label in place — change its content, height, or rotation.
 
 Use this to rename/relabel without deleting and recreating (which would lose
@@ -4182,7 +4183,7 @@ the handle). Works on both TEXT and MTEXT.
 
 ### `entity_extend`
 
-**Nhóm:** `corner_ops`  
+**Nhóm:** `corner_ops`
 **Làm gì:** Extend `target` to meet `boundary`. If end_x/end_y is None, the target
 endpoint nearest the boundary is auto-selected.
 
@@ -4214,7 +4215,7 @@ V1 supports LINE+LINE only. Raises if the lines are parallel.
 
 ### `entity_fillet`
 
-**Nhóm:** `corner_ops`  
+**Nhóm:** `corner_ops`
 **Làm gì:** Round a corner with a tangent arc. Returns info on the new ARC entity
 (or the first source line for radius=0). V1 supports LINE+LINE only.
 
@@ -4244,7 +4245,7 @@ V1 supports LINE+LINE only. Raises if the lines are parallel.
 
 ### `entity_get`
 
-**Nhóm:** `entity_query`  
+**Nhóm:** `entity_query`
 **Làm gì:** Get all properties of a specific entity by its handle.
 
 **Dùng khi nào:** Khi cần tìm và đọc thuộc tính đối tượng theo handle hoặc điều kiện.
@@ -4267,7 +4268,7 @@ V1 supports LINE+LINE only. Raises if the lines are parallel.
 
 ### `entity_get_xdata`
 
-**Nhóm:** `entity_query`  
+**Nhóm:** `entity_query`
 **Làm gì:** Extended entity data as {app: [values]}. An app with no XDATA is simply absent.
 
 **Dùng khi nào:** Khi cần tìm và đọc thuộc tính đối tượng theo handle hoặc điều kiện.
@@ -4292,7 +4293,7 @@ V1 supports LINE+LINE only. Raises if the lines are parallel.
 
 ### `entity_list`
 
-**Nhóm:** `entity_query`  
+**Nhóm:** `entity_query`
 **Làm gì:** List entities in the drawing with optional type and layer filters.
 
 Returns handle, type, layer, color, and type-specific properties.
@@ -4338,7 +4339,7 @@ the page, so `compact=True` is the only mode that reports `total`,
 
 ### `entity_mirror`
 
-**Nhóm:** `entity_modification`  
+**Nhóm:** `entity_modification`
 **Làm gì:** Mirror an entity across a line defined by two points. Returns the mirrored copy.
 
 **Dùng khi nào:** Khi cần sửa, di chuyển, xoay, scale hoặc biến đổi đối tượng.
@@ -4371,7 +4372,7 @@ the page, so `compact=True` is the only mode that reports `total`,
 
 ### `entity_move`
 
-**Nhóm:** `entity_modification`  
+**Nhóm:** `entity_modification`
 **Làm gì:** Move an entity by the specified displacement vector (dx, dy, dz).
 
 **Dùng khi nào:** Khi cần sửa, di chuyển, xoay, scale hoặc biến đổi đối tượng.
@@ -4400,7 +4401,7 @@ the page, so `compact=True` is the only mode that reports `total`,
 
 ### `entity_offset`
 
-**Nhóm:** `entity_modification`  
+**Nhóm:** `entity_modification`
 **Làm gì:** Create a parallel copy of a line, circle, or polyline at the given distance.
 
 **Dùng khi nào:** Khi cần sửa, di chuyển, xoay, scale hoặc biến đổi đối tượng.
@@ -4429,7 +4430,7 @@ the page, so `compact=True` is the only mode that reports `total`,
 
 ### `entity_rotate`
 
-**Nhóm:** `entity_modification`  
+**Nhóm:** `entity_modification`
 **Làm gì:** Rotate an entity around a base point by the specified angle.
 
 **Dùng khi nào:** Khi cần sửa, di chuyển, xoay, scale hoặc biến đổi đối tượng.
@@ -4458,7 +4459,7 @@ the page, so `compact=True` is the only mode that reports `total`,
 
 ### `entity_scale`
 
-**Nhóm:** `entity_modification`  
+**Nhóm:** `entity_modification`
 **Làm gì:** Scale an entity uniformly from a base point.
 
 **Dùng khi nào:** Khi cần sửa, di chuyển, xoay, scale hoặc biến đổi đối tượng.
@@ -4487,7 +4488,7 @@ the page, so `compact=True` is the only mode that reports `total`,
 
 ### `entity_select_smart`
 
-**Nhóm:** `premium`  
+**Nhóm:** `premium`
 **Làm gì:** Select entities by semantic predicate instead of memorising handles.
 
 Uncapped. The usual next step is dimension_auto(handles), so
@@ -4517,7 +4518,7 @@ fields=["handle"] is normally all this needs to return.
 
 ### `entity_set_properties`
 
-**Nhóm:** `entity_modification`  
+**Nhóm:** `entity_modification`
 **Làm gì:** Change one or more properties of an entity (layer, color, linetype, lineweight, visibility).
 
 **Dùng khi nào:** Khi cần sửa, di chuyển, xoay, scale hoặc biến đổi đối tượng.
@@ -4550,7 +4551,7 @@ fields=["handle"] is normally all this needs to return.
 
 ### `entity_set_xdata`
 
-**Nhóm:** `entity_modification`  
+**Nhóm:** `entity_modification`
 **Làm gì:** Replace the named app's XDATA on one entity; an empty list removes it.
 
 Limits are AutoCAD's and are enforced before writing: 255 characters per
@@ -4580,7 +4581,7 @@ string and 16 KB per entity.
 
 ### `entity_trim`
 
-**Nhóm:** `corner_ops`  
+**Nhóm:** `corner_ops`
 **Làm gì:** Trim `target` against `cutter`, keeping the segment containing (keep_x, keep_y).
 
 V1 supports LINE+LINE only. Cutter is treated as an infinite ray (AutoCAD's
@@ -4612,7 +4613,7 @@ default 'implied extend' trim mode). Raises if the lines are parallel.
 
 ### `gd_frame`
 
-**Nhóm:** `engineering`  
+**Nhóm:** `engineering`
 **Làm gì:** Draw an ISO 1101 feature control frame from LINE + TEXT primitives.
 
 Renders identically on COM and ezdxf. Referenced datums are recorded so the
@@ -4654,7 +4655,7 @@ Renders identically on COM and ezdxf. Referenced datums are recorded so the
 
 ### `gear_draw_helical_front_view`
 
-**Nhóm:** `engineering`  
+**Nhóm:** `engineering`
 **Làm gì:** Deterministic helical gear front view: full involute outline (40 pts/flank),
 pitch/base/outer/root circles, helix symbol, optional bore + keyway.
 
@@ -4698,7 +4699,7 @@ Returns a handle bundle plus 'metadata' for downstream gear_draw_section_aa.
 
 ### `gear_draw_section_aa`
 
-**Nhóm:** `engineering`  
+**Nhóm:** `engineering`
 **Làm gì:** Deterministic side cross-section of a gear created by gear_draw_*_front_view.
 Includes top/bottom/left/right boundaries, bore lines, keyway notch, ANSI31 hatch.
 
@@ -4726,7 +4727,7 @@ Includes top/bottom/left/right boundaries, bore lines, keyway notch, ANSI31 hatc
 
 ### `gear_draw_spur_front_view`
 
-**Nhóm:** `engineering`  
+**Nhóm:** `engineering`
 **Làm gì:** Deterministic spur gear front view (no helix symbol).
 
 **Dùng khi nào:** Khi cần kiểm tra hoặc thao tác theo yêu cầu kỹ thuật.
@@ -4763,7 +4764,7 @@ Includes top/bottom/left/right boundaries, bore lines, keyway notch, ANSI31 hatc
 
 ### `hatch_add_boundary`
 
-**Nhóm:** `entity_creation`  
+**Nhóm:** `entity_creation`
 **Làm gì:** Add one boundary path built from typed edges - an island inside the hatch.
 
 Typed edges exist because a boundary that only accepts vertex lists
@@ -4796,7 +4797,7 @@ A loop that does not close is refused by AutoCAD and nothing is added.
 
 ### `hatch_edit`
 
-**Nhóm:** `entity_creation`  
+**Nhóm:** `entity_creation`
 **Làm gì:** Edit an existing hatch in place.
 
 Omitted parameters are left alone — a partial edit that resets the rest is
@@ -4834,7 +4835,7 @@ false positive.
 
 ### `hatch_material`
 
-**Nhóm:** `mechanical`  
+**Nhóm:** `mechanical`
 **Làm gì:** Section-hatch a cut face with the pattern ISO 128-50 gives its material.
 
 Refusals: an unknown material (named, with the full list, before anything
@@ -4886,7 +4887,7 @@ area is refused instead of writing a HATCH of area 0.0.
 
 ### `hatch_set_gradient`
 
-**Nhóm:** `entity_creation`  
+**Nhóm:** `entity_creation`
 **Làm gì:** Fill a hatch with a gradient instead of a pattern.
 
 **Dùng khi nào:** Khi cần vẽ thêm đối tượng hình học vào bản vẽ.
@@ -4923,7 +4924,7 @@ area is refused instead of writing a HATCH of area 0.0.
 
 ### `image_attach`
 
-**Nhóm:** `sheet`  
+**Nhóm:** `sheet`
 **Làm gì:** Attach a raster underlay at the file's own aspect ratio. Both engines.
 
 `scale` is drawing units per pixel, so the placed size is the image's pixel
@@ -4972,7 +4973,7 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 ### `keyway_draw_keyed_bore`
 
-**Nhóm:** `engineering`  
+**Nhóm:** `engineering`
 **Làm gì:** Bore + DIN 6885 keyway in front view. Auto-sizes keyway from bore if width/depth omitted.
 
 **Dùng khi nào:** Khi cần kiểm tra hoặc thao tác theo yêu cầu kỹ thuật.
@@ -5005,7 +5006,7 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 ### `keyway_draw_section`
 
-**Nhóm:** `engineering`  
+**Nhóm:** `engineering`
 **Làm gì:** Side cross-section view of a keyed bore.
 
 **Dùng khi nào:** Khi cần kiểm tra hoặc thao tác theo yêu cầu kỹ thuật.
@@ -5036,9 +5037,241 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 **Lưu ý:** Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng.
 
+### `kho_industries`
+
+**Nhóm:** `cadtroly`
+**Làm gì:** Tương thích cũ; dùng knowledge_industries cho kết nối mới.
+
+**Dùng khi nào:** Khi cần dùng chức năng `kho_industries` trong quy trình CAD.
+
+**Tham số**
+
+| Tên | Kiểu | Bắt buộc | Mặc định | Ý nghĩa |
+|---|---|---:|---|---|
+| — | — | — | — | Tool không yêu cầu tham số. |
+
+**Ví dụ gọi**
+
+```json
+{}
+```
+
+**Lưu ý:** Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng.
+
+### `kho_rules_export`
+
+**Nhóm:** `cadtroly`
+**Làm gì:** Tương thích cũ; dùng knowledge_rules_export cho kết nối mới.
+
+**Dùng khi nào:** Khi cần dùng chức năng `kho_rules_export` trong quy trình CAD.
+
+**Tham số**
+
+| Tên | Kiểu | Bắt buộc | Mặc định | Ý nghĩa |
+|---|---|---:|---|---|
+| — | — | — | — | Tool không yêu cầu tham số. |
+
+**Ví dụ gọi**
+
+```json
+{}
+```
+
+**Lưu ý:** Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng.
+
+### `kho_rules_import`
+
+**Nhóm:** `cadtroly`
+**Làm gì:** Tương thích cũ; dùng knowledge_rules_import cho kết nối mới.
+
+**Dùng khi nào:** Khi cần dùng chức năng `kho_rules_import` trong quy trình CAD.
+
+**Tham số**
+
+| Tên | Kiểu | Bắt buộc | Mặc định | Ý nghĩa |
+|---|---|---:|---|---|
+| `rules` | `array<object>` | có | `—` | — |
+
+**Ví dụ gọi**
+
+```json
+{
+  "rules": []
+}
+```
+
+**Lưu ý:** Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng.
+
+### `kho_skill_add`
+
+**Nhóm:** `cadtroly`
+**Làm gì:** Tương thích cũ; dùng knowledge_skill_add cho kết nối mới.
+
+**Dùng khi nào:** Khi cần dùng chức năng `kho_skill_add` trong quy trình CAD.
+
+**Tham số**
+
+| Tên | Kiểu | Bắt buộc | Mặc định | Ý nghĩa |
+|---|---|---:|---|---|
+| `name` | `string` | có | `—` | Tên ASCII kebab-case, ví dụ qa-mep |
+| `content` | `string` | có | `—` | Nội dung SKILL.md có YAML frontmatter |
+| `overwrite` | `boolean` | không | `False` | Cho phép cập nhật skill do người dùng đã tạo |
+
+**Ví dụ gọi**
+
+```json
+{
+  "name": "example",
+  "content": "example",
+  "overwrite": false
+}
+```
+
+**Lưu ý:** Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng.
+
+### `kho_skill_toggle`
+
+**Nhóm:** `cadtroly`
+**Làm gì:** Tương thích cũ; dùng knowledge_skill_toggle cho kết nối mới.
+
+**Dùng khi nào:** Khi cần dùng chức năng `kho_skill_toggle` trong quy trình CAD.
+
+**Tham số**
+
+| Tên | Kiểu | Bắt buộc | Mặc định | Ý nghĩa |
+|---|---|---:|---|---|
+| `name` | `string` | có | `—` | — |
+| `enabled` | `boolean` | có | `—` | — |
+
+**Ví dụ gọi**
+
+```json
+{
+  "name": "example",
+  "enabled": true
+}
+```
+
+**Lưu ý:** Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng.
+
+### `kho_skills`
+
+**Nhóm:** `cadtroly`
+**Làm gì:** Tương thích cũ; dùng knowledge_skills cho kết nối mới.
+
+**Dùng khi nào:** Khi cần dùng chức năng `kho_skills` trong quy trình CAD.
+
+**Tham số**
+
+| Tên | Kiểu | Bắt buộc | Mặc định | Ý nghĩa |
+|---|---|---:|---|---|
+| — | — | — | — | Tool không yêu cầu tham số. |
+
+**Ví dụ gọi**
+
+```json
+{}
+```
+
+**Lưu ý:** Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng.
+
+### `kho_standard_add`
+
+**Nhóm:** `cadtroly`
+**Làm gì:** Tương thích cũ; dùng knowledge_standard_add cho kết nối mới.
+
+**Dùng khi nào:** Khi cần dùng chức năng `kho_standard_add` trong quy trình CAD.
+
+**Tham số**
+
+| Tên | Kiểu | Bắt buộc | Mặc định | Ý nghĩa |
+|---|---|---:|---|---|
+| `standard` | `object` | có | `—` | id, nganh, ten, phien_ban, nguon, hieu_luc và rules |
+| `overwrite` | `boolean` | không | `False` | Cho phép cập nhật tiêu chuẩn do người dùng đã thêm |
+
+**Ví dụ gọi**
+
+```json
+{
+  "standard": {},
+  "overwrite": false
+}
+```
+
+**Lưu ý:** Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng.
+
+### `kho_standard_delete`
+
+**Nhóm:** `cadtroly`
+**Làm gì:** Tương thích cũ; dùng knowledge_standard_delete cho kết nối mới.
+
+**Dùng khi nào:** Khi cần dùng chức năng `kho_standard_delete` trong quy trình CAD.
+
+**Tham số**
+
+| Tên | Kiểu | Bắt buộc | Mặc định | Ý nghĩa |
+|---|---|---:|---|---|
+| `standard_id` | `string` | có | `—` | — |
+| `confirm` | `boolean` | không | `False` | Bắt buộc True để xóa tiêu chuẩn người dùng |
+
+**Ví dụ gọi**
+
+```json
+{
+  "standard_id": "example",
+  "confirm": false
+}
+```
+
+**Lưu ý:** Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng.
+
+### `kho_standards`
+
+**Nhóm:** `cadtroly`
+**Làm gì:** Tương thích cũ; dùng knowledge_standards cho kết nối mới.
+
+**Dùng khi nào:** Khi cần dùng chức năng `kho_standards` trong quy trình CAD.
+
+**Tham số**
+
+| Tên | Kiểu | Bắt buộc | Mặc định | Ý nghĩa |
+|---|---|---:|---|---|
+| `industry` | `any` | không | `None` | building, structural, fire, mechanical, pid, architecture, civil hoặc bỏ trống |
+
+**Ví dụ gọi**
+
+```json
+{
+  "industry": null
+}
+```
+
+**Lưu ý:** Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng.
+
+### `kho_status`
+
+**Nhóm:** `cadtroly`
+**Làm gì:** Tương thích cũ; dùng knowledge_status cho kết nối mới.
+
+**Dùng khi nào:** Khi cần dùng chức năng `kho_status` trong quy trình CAD.
+
+**Tham số**
+
+| Tên | Kiểu | Bắt buộc | Mặc định | Ý nghĩa |
+|---|---|---:|---|---|
+| — | — | — | — | Tool không yêu cầu tham số. |
+
+**Ví dụ gọi**
+
+```json
+{}
+```
+
+**Lưu ý:** Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng.
+
 ### `knowledge_industries`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Liệt kê danh mục ngành với mã máy và tên tiếng Việt để chọn tiêu chuẩn.
 
 **Dùng khi nào:** Khi cần dùng chức năng `knowledge_industries` trong quy trình CAD.
@@ -5059,7 +5292,7 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 ### `knowledge_rules_export`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Xuất quy tắc ánh xạ của đơn vị (chỉ quy tắc, không bản vẽ) để chia sẻ.
 
 **Dùng khi nào:** Khi cần dùng chức năng `knowledge_rules_export` trong quy trình CAD.
@@ -5080,7 +5313,7 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 ### `knowledge_rules_import`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Nhập quy tắc ánh xạ từ nơi khác (ghi đè theo pattern).
 
 **Dùng khi nào:** Khi cần dùng chức năng `knowledge_rules_import` trong quy trình CAD.
@@ -5103,7 +5336,7 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 ### `knowledge_skill_add`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Thêm skill do LLM soạn vào kho người dùng; chỉ ghi SKILL.md, không chạy mã.
 
 **Dùng khi nào:** Khi cần dùng chức năng `knowledge_skill_add` trong quy trình CAD.
@@ -5130,7 +5363,7 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 ### `knowledge_skill_toggle`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Bật/tắt một skill.
 
 **Dùng khi nào:** Khi cần dùng chức năng `knowledge_skill_toggle` trong quy trình CAD.
@@ -5155,7 +5388,7 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 ### `knowledge_skills`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Skill chuyên ngành trong kho/skill (mỗi thư mục một SKILL.md), bật/tắt.
 
 **Dùng khi nào:** Khi cần dùng chức năng `knowledge_skills` trong quy trình CAD.
@@ -5176,7 +5409,7 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 ### `knowledge_standard_add`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Thêm tiêu chuẩn/rule JSON vào kho người dùng; không ghi vào bộ mặc định.
 
 **Dùng khi nào:** Khi cần dùng chức năng `knowledge_standard_add` trong quy trình CAD.
@@ -5205,7 +5438,7 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 ### `knowledge_standard_delete`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Xóa tiêu chuẩn do người dùng thêm; tiêu chuẩn mặc định không thể xóa.
 
 **Dùng khi nào:** Khi cần dùng chức năng `knowledge_standard_delete` trong quy trình CAD.
@@ -5230,7 +5463,7 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 ### `knowledge_standards`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Liệt kê tiêu chuẩn/rule theo ngành, phiên bản, nguồn và trạng thái duyệt.
 
 **Dùng khi nào:** Khi cần dùng chức năng `knowledge_standards` trong quy trình CAD.
@@ -5253,7 +5486,7 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 ### `knowledge_status`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Tình trạng kho tri thức, backend AutoCAD, nguồn AI.
 
 **Dùng khi nào:** Khi cần dùng chức năng `knowledge_status` trong quy trình CAD.
@@ -5274,7 +5507,7 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 ### `layer_create`
 
-**Nhóm:** `layers`  
+**Nhóm:** `layers`
 **Làm gì:** Create a new layer with specified properties.
 
 **Dùng khi nào:** Khi tạo, đổi tên, bật/tắt, đóng băng hoặc quản lý layer.
@@ -5303,7 +5536,7 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 ### `layer_delete`
 
-**Nhóm:** `layers`  
+**Nhóm:** `layers`
 **Làm gì:** Delete a layer. The layer must have no entities. Layer '0' cannot be deleted.
 
 **Dùng khi nào:** Khi tạo, đổi tên, bật/tắt, đóng băng hoặc quản lý layer.
@@ -5326,7 +5559,7 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 ### `layer_freeze`
 
-**Nhóm:** `layers`  
+**Nhóm:** `layers`
 **Làm gì:** Freeze a layer (makes it invisible and unselectable, faster regeneration).
 
 **Dùng khi nào:** Khi tạo, đổi tên, bật/tắt, đóng băng hoặc quản lý layer.
@@ -5349,7 +5582,7 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 ### `layer_hide`
 
-**Nhóm:** `layers`  
+**Nhóm:** `layers`
 **Làm gì:** Turn off a layer (entities invisible but still processed in regeneration).
 
 **Dùng khi nào:** Khi tạo, đổi tên, bật/tắt, đóng băng hoặc quản lý layer.
@@ -5372,7 +5605,7 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 ### `layer_isolate`
 
-**Nhóm:** `layers`  
+**Nhóm:** `layers`
 **Làm gì:** Hide all layers except the specified one (layer isolation).
 
 **Dùng khi nào:** Khi tạo, đổi tên, bật/tắt, đóng băng hoặc quản lý layer.
@@ -5395,7 +5628,7 @@ no image reader can open (named), a non-positive or non-finite scale.
 
 ### `layer_list`
 
-**Nhóm:** `layers`  
+**Nhóm:** `layers`
 **Làm gì:** List all layers with their properties (color, linetype, frozen, locked, visibility).
 
 Never truncated — a drawing's whole layer table is returned — so a compact
@@ -5423,7 +5656,7 @@ envelope here always reports truncated=false.
 
 ### `layer_lock`
 
-**Nhóm:** `layers`  
+**Nhóm:** `layers`
 **Làm gì:** Lock a layer (entities visible but cannot be selected or modified).
 
 **Dùng khi nào:** Khi tạo, đổi tên, bật/tắt, đóng băng hoặc quản lý layer.
@@ -5446,7 +5679,7 @@ envelope here always reports truncated=false.
 
 ### `layer_modify`
 
-**Nhóm:** `layers`  
+**Nhóm:** `layers`
 **Làm gì:** Modify an existing layer's color, linetype, and/or lineweight.
 
 **Dùng khi nào:** Khi tạo, đổi tên, bật/tắt, đóng băng hoặc quản lý layer.
@@ -5475,7 +5708,7 @@ envelope here always reports truncated=false.
 
 ### `layer_set_current`
 
-**Nhóm:** `layers`  
+**Nhóm:** `layers`
 **Làm gì:** Set the active/current layer for new entities.
 
 **Dùng khi nào:** Khi tạo, đổi tên, bật/tắt, đóng băng hoặc quản lý layer.
@@ -5498,7 +5731,7 @@ envelope here always reports truncated=false.
 
 ### `layer_show`
 
-**Nhóm:** `layers`  
+**Nhóm:** `layers`
 **Làm gì:** Turn on a layer that was previously turned off.
 
 **Dùng khi nào:** Khi tạo, đổi tên, bật/tắt, đóng băng hoặc quản lý layer.
@@ -5521,7 +5754,7 @@ envelope here always reports truncated=false.
 
 ### `layer_state_delete`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** Remove the named state's XRECORD. Layers themselves are untouched.
 Refusal: an unknown name (lists the saved ones). Pack: settings · lean: no.
 
@@ -5545,7 +5778,7 @@ Refusal: an unknown name (lists the saved ones). Pack: settings · lean: no.
 
 ### `layer_state_list`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** Every state under `ACADMCP_LAYERSTATES` with its description and layer
 count. These are the server's portable states, not AutoCAD Layer States
 Manager entries. No refusals. Pack: settings · lean: no.
@@ -5568,7 +5801,7 @@ Manager entries. No refusals. Pack: settings · lean: no.
 
 ### `layer_state_restore`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** Apply a saved state to the layers that still exist.
 
 `missing_layers` (in the state, not in the drawing) are skipped, never
@@ -5604,7 +5837,7 @@ Pack: settings · lean: no.
 
 ### `layer_state_save`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** Snapshot every layer's on/frozen/locked/color/linetype/lineweight/plot
 flags plus the current layer as a named state stored in the drawing.
 
@@ -5637,7 +5870,7 @@ Pack: settings · lean: no.
 
 ### `layer_thaw`
 
-**Nhóm:** `layers`  
+**Nhóm:** `layers`
 **Làm gì:** Thaw a frozen layer, making it visible and selectable again.
 
 **Dùng khi nào:** Khi tạo, đổi tên, bật/tắt, đóng băng hoặc quản lý layer.
@@ -5660,7 +5893,7 @@ Pack: settings · lean: no.
 
 ### `layer_unlock`
 
-**Nhóm:** `layers`  
+**Nhóm:** `layers`
 **Làm gì:** Unlock a layer to allow entity selection and modification.
 
 **Dùng khi nào:** Khi tạo, đổi tên, bật/tắt, đóng băng hoặc quản lý layer.
@@ -5683,7 +5916,7 @@ Pack: settings · lean: no.
 
 ### `layout_copy`
 
-**Nhóm:** `layouts`  
+**Nhóm:** `layouts`
 **Làm gì:** Copy a paper-space layout: page setup, plot settings and all geometry.
 
 `skipped` names any DXF types that could not be cloned — check it rather
@@ -5713,7 +5946,7 @@ something outside the source layout and had to be cleared.
 
 ### `layout_create`
 
-**Nhóm:** `layouts`  
+**Nhóm:** `layouts`
 **Làm gì:** Create a new paper-space layout tab.
 
 **Dùng khi nào:** Khi quản lý layout, viewport và không gian giấy.
@@ -5736,7 +5969,7 @@ something outside the source layout and had to be cleared.
 
 ### `layout_delete`
 
-**Nhóm:** `layouts`  
+**Nhóm:** `layouts`
 **Làm gì:** Delete a paper-space layout and every entity on it.
 
 Refuses model space, a blank name, and the last remaining sheet. If the
@@ -5763,7 +5996,7 @@ goes next — and handles from the deleted sheet stop resolving.
 
 ### `layout_list`
 
-**Nhóm:** `layouts`  
+**Nhóm:** `layouts`
 **Làm gì:** List all layout tabs (Model + paper-space layouts) and the current one.
 
 **Dùng khi nào:** Khi quản lý layout, viewport và không gian giấy.
@@ -5784,7 +6017,7 @@ goes next — and handles from the deleted sheet stop resolving.
 
 ### `layout_rename`
 
-**Nhóm:** `layouts`  
+**Nhóm:** `layouts`
 **Làm gì:** Rename a paper-space layout. Entity handles are unaffected.
 
 **Dùng khi nào:** Khi quản lý layout, viewport và không gian giấy.
@@ -5809,7 +6042,7 @@ goes next — and handles from the deleted sheet stop resolving.
 
 ### `layout_set_current`
 
-**Nhóm:** `layouts`  
+**Nhóm:** `layouts`
 **Làm gì:** Activate a layout tab.
 
 **Dùng khi nào:** Khi quản lý layout, viewport và không gian giấy.
@@ -5832,7 +6065,7 @@ goes next — and handles from the deleted sheet stop resolving.
 
 ### `leader_create_mleader`
 
-**Nhóm:** `entity_creation`  
+**Nhóm:** `entity_creation`
 **Làm gì:** Create a native COM MLeader or an explicitly-labelled ezdxf composite.
 
 **Dùng khi nào:** Khi cần vẽ thêm đối tượng hình học vào bản vẽ.
@@ -5865,7 +6098,7 @@ goes next — and handles from the deleted sheet stop resolving.
 
 ### `linetype_list`
 
-**Nhóm:** `layers`  
+**Nhóm:** `layers`
 **Làm gì:** Return the names of all linetypes currently loaded in the active drawing.
 
 **Dùng khi nào:** Khi tạo, đổi tên, bật/tắt, đóng băng hoặc quản lý layer.
@@ -5886,7 +6119,7 @@ goes next — and handles from the deleted sheet stop resolving.
 
 ### `linetype_load`
 
-**Nhóm:** `layers`  
+**Nhóm:** `layers`
 **Làm gì:** Load a single linetype safely.
 
 Use this instead of `system_run_command('_-LINETYPE _LOAD ...')` — that
@@ -5920,7 +6153,7 @@ or a file AutoCAD cannot find as an error naming both.
 
 ### `mech_dimension_part`
 
-**Nhóm:** `mechanical`  
+**Nhóm:** `mechanical`
 **Làm gì:** Every dimension the part and its features ask for, laid out without overlaps.
 
 Axial lengths are chained, stacked from a baseline or measured from an
@@ -5969,7 +6202,7 @@ vertex.
 
 ### `mech_hole_pattern`
 
-**Nhóm:** `mechanical`  
+**Nhóm:** `mechanical`
 **Làm gì:** A hole pattern on any drawing - the part model is not required.
 
 The same expansion `HolePattern` performs inside a part, exposed for a
@@ -6026,7 +6259,7 @@ diameter, and a non-finite or non-positive diameter.
 
 ### `mech_part_draw`
 
-**Nhóm:** `mechanical`  
+**Nhóm:** `mechanical`
 **Làm gì:** One part model - a turned profile or a plate outline plus typed features - drawn as views.
 
 The model is written onto the drawing as `ACADMCP_MECH` XDATA on an anchor
@@ -6080,7 +6313,7 @@ feature that cannot be projected into a requested view is listed in
 
 ### `mech_part_from_spec`
 
-**Nhóm:** `mechanical`  
+**Nhóm:** `mechanical`
 **Làm gì:** Several parts, their views and their dimensions, drawn inside one transaction.
 
 Every part is validated before the transaction opens, so a refusal leaves
@@ -6112,7 +6345,7 @@ Refused by name: an empty `parts` list, any part refusal from
 
 ### `mech_part_inspect`
 
-**Nhóm:** `mechanical`  
+**Nhóm:** `mechanical`
 **Làm gì:** The `ACADMCP_MECH` payload a drawn part carries, decoded.
 
 Never modifies the drawing. Returns the part model exactly as
@@ -6144,7 +6377,7 @@ handles).
 
 ### `mech_view_add`
 
-**Nhóm:** `mechanical`  
+**Nhóm:** `mechanical`
 **Làm gì:** Another view of a part already on the drawing, laid out on its projection axis.
 
 The part model comes back out of the drawing's `ACADMCP_MECH` XDATA, so the
@@ -6193,7 +6426,7 @@ drawing that holds more than one part.
 
 ### `mleaderstyle_create`
 
-**Nhóm:** `styles`  
+**Nhóm:** `styles`
 **Làm gì:** Create a multileader style: preset values first, then `overrides`.
 
 Headless it lands on `doc.mleader_styles`; live it is added through the
@@ -6229,7 +6462,7 @@ preset whose font file the seat lacks is refused, nothing written).
 
 ### `mleaderstyle_list`
 
-**Nhóm:** `styles`  
+**Nhóm:** `styles`
 **Làm gì:** Every MLEADERSTYLE with its four values on both engines
 (`values_available: true`). Headless they are read from the MLEADERSTYLE
 object; live from the `AcadMLeaderStyle` objects the `ACAD_MLEADERSTYLE`
@@ -6255,7 +6488,7 @@ override any of them per leader.
 
 ### `page_setup_apply`
 
-**Nhóm:** `page_setup`  
+**Nhóm:** `page_setup`
 **Làm gì:** AutoCAD's PAGESETUP as one call, on both engines.
 
 Paper sizes are ISO 216 / ANSI Y14.1; the media is written in AutoCAD's own
@@ -6308,7 +6541,7 @@ The proof is the PDF: `batch_plot` reads each sheet's `/MediaBox` back.
 
 ### `page_setup_list`
 
-**Nhóm:** `page_setup`  
+**Nhóm:** `page_setup`
 **Làm gì:** The page setup stored on each paper-space layout.
 
 `paper` is the catalogue name (ISO_A3, ANSI_B, …) when the stored size
@@ -6339,7 +6572,7 @@ no sheet; plot it with `drawing_export_pdf(layout=None)`).
 
 ### `pdf_to_dwg`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Create the final semantic DWG in one MCP call.
 
 The PDF is vectorized to a private temporary DXF, opened through the live
@@ -6374,7 +6607,7 @@ is saved, so callers do not have to manage intermediate artifacts.
 
 ### `pdf_vectorize`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Convert PDF vector artwork to editable DXF entities on semantic layers.
 
 Output is separated into technical layers such as ``PDF_COLUMNS``,
@@ -6409,7 +6642,7 @@ counts are a quick audit before opening the DXF and saving it as DWG.
 
 ### `pid_equipment_list`
 
-**Nhóm:** `pid`  
+**Nhóm:** `pid`
 **Làm gì:** Every equipment, valve and connector node with its ports and how many lines reach them.
 
 Rows come from `pid_graph`; the drawing is not modified and `csv_path` is
@@ -6439,7 +6672,7 @@ the only file this tool writes.
 
 ### `pid_from_spec`
 
-**Nhóm:** `pid`  
+**Nhóm:** `pid`
 **Làm gì:** Equipment, valves, instruments and connectors placed, then every line
 drawn port-to-port, inside one transaction: any bad item rolls the whole
 sheet back and the error names it (`lines[2].to`); so does an interruption
@@ -6476,7 +6709,7 @@ the planned vertices and crossings without touching the drawing.
 
 ### `pid_graph`
 
-**Nhóm:** `pid`  
+**Nhóm:** `pid`
 **Làm gì:** Connectivity of the drawing as it *is*, not as it was drawn.
 
 Nodes: symbol INSERTs classified by catalogue name (confidence 1.0),
@@ -6517,7 +6750,7 @@ is the number to read before trusting a foreign drawing.
 
 ### `pid_instrument_index`
 
-**Nhóm:** `pid`  
+**Nhóm:** `pid`
 **Làm gì:** Every instrument bubble with its ISA-5.1 reading and what it connects to.
 
 Rows come from `pid_graph`, never from typed-in lists; the drawing is not
@@ -6547,7 +6780,7 @@ modified. `csv_path` is the only file this tool writes.
 
 ### `pid_line_draw`
 
-**Nhóm:** `pid`  
+**Nhóm:** `pid`
 **Làm gì:** Connect two ports with one LWPOLYLINE on the class's layer.
 
 Ports come from `pid_symbol_insert`; a bubble's radial port is entered
@@ -6607,7 +6840,7 @@ last one); `crossings` follows existing arcs, not their chords.
 
 ### `pid_line_list`
 
-**Nhóm:** `pid`  
+**Nhóm:** `pid`
 **Làm gì:** Every P&ID line with its number, class, size/service/spec/insulation and endpoints.
 
 Rows come from `pid_graph`; untagged lines sort last with `line_number: null`.
@@ -6637,7 +6870,7 @@ The drawing is not modified; `csv_path` is the only file this tool writes.
 
 ### `pid_symbol_insert`
 
-**Nhóm:** `pid`  
+**Nhóm:** `pid`
 **Làm gì:** Insert a catalogue symbol as a real block with TAG attributes and named ports.
 
 Defines the block on first use (`defined`), creates a missing family layer
@@ -6696,7 +6929,7 @@ written and reported in `tag_warnings`; `drawing_critique` flags it.
 
 ### `pid_symbol_list`
 
-**Nhóm:** `pid`  
+**Nhóm:** `pid`
 **Làm gì:** The symbols `pid_symbol_insert` can place, with their ports and variant options.
 
 Authored from ISO 10628-2 (equipment, valves) and ISA-5.1 (instrumentation);
@@ -6723,7 +6956,7 @@ A3/A1 paper scale (bubble Ø10, valve 8×4); `scale` at insertion rescales.
 
 ### `pid_tag_parse`
 
-**Nhóm:** `pid`  
+**Nhóm:** `pid`
 **Làm gì:** ISA-5.1-2009 Table 4.1 as a grammar: first letter, modifier, readout and
 output functions, trailing high/low, loop number and suffix — with the
 standard's description ("Flow Indicating Controller") or the first
@@ -6754,7 +6987,7 @@ map (P pump, V vessel, E exchanger, ...) can be replaced per call.
 
 ### `pipe_takeoff`
 
-**Nhóm:** `plant`  
+**Nhóm:** `plant`
 **Làm gì:** A pipe takeoff: topology from the P&ID, lengths from the layout, rows by room x service x diameter.
 
 The P&ID gives the runs (junctions merged, tees split, a line drawn twice
@@ -6827,7 +7060,7 @@ written and `files.refused` carries `capability: "xlsx_write"` naming the
 
 ### `plot_style_list`
 
-**Nhóm:** `page_setup`  
+**Nhóm:** `page_setup`
 **Làm gì:** The ctb files AutoCAD ships (`monochrome.ctb`, `acad.ctb`, `Grayscale.ctb`,
 the Screening set, …) and, on the live engine, the files actually present
 in `Preferences.Files.PrinterStyleSheetPath` (`source: "installed"`,
@@ -6853,7 +7086,7 @@ Never refuses; an unreadable Preferences object degrades to the catalogue.
 
 ### `point_from_snap`
 
-**Nhóm:** `premium`  
+**Nhóm:** `premium`
 **Làm gì:** Compute a deterministic snap point on an entity. Use this INSTEAD OF
 guessing coordinates — eliminates the most common LLM drawing error.
 
@@ -6883,7 +7116,7 @@ guessing coordinates — eliminates the most common LLM drawing error.
 
 ### `point_intersection`
 
-**Nhóm:** `premium`  
+**Nhóm:** `premium`
 **Làm gì:** Compute the intersection of two geometry entities (LINE-LINE, LINE-CIRCLE,
 CIRCLE-CIRCLE). When two candidates exist, ref_x/ref_y selects the nearest.
 Returns {x, y}.
@@ -6914,7 +7147,7 @@ Returns {x, y}.
 
 ### `point_tangent`
 
-**Nhóm:** `premium`  
+**Nhóm:** `premium`
 **Làm gì:** Compute the tangent point on a circle from an external point.
 Returns {x, y}. Raises if the from-point is inside the circle.
 
@@ -6946,7 +7179,7 @@ Returns {x, y}. Raises if the from-point is inside the circle.
 
 ### `revision_add`
 
-**Nhóm:** `sheet`  
+**Nhóm:** `sheet`
 **Làm gì:** Append one row to the revision block, creating the block on first use.
 
 Idempotent per revision code: a code the drawing already carries returns
@@ -7001,7 +7234,7 @@ COM engine — REVCLOUD has no ActiveX member) — that one carries
 
 ### `section_line`
 
-**Nhóm:** `mechanical`  
+**Nhóm:** `mechanical`
 **Làm gì:** Draw the cutting-plane line and hand back the plane a section view consumes.
 
 Wide segments at the ends on GEOMETRY, the thin long-dash-dot middle on
@@ -7049,7 +7282,7 @@ full/half/offset/revolved, and a non-positive `height`.
 
 ### `selection_filter`
 
-**Nhóm:** `entity_query`  
+**Nhóm:** `entity_query`
 **Làm gì:** AutoCAD's QSELECT: filter the drawing by properties.
 
 Named parameters rather than a query string, deliberately — a mistyped
@@ -7085,7 +7318,7 @@ actually ran.
 
 ### `selection_get`
 
-**Nhóm:** `entity_query`  
+**Nhóm:** `entity_query`
 **Làm gì:** Read the entities the user pre-selected in the AutoCAD viewport (COM backend only).
 
 Returns the implied "pickfirst" selection — the entities highlighted with
@@ -7133,7 +7366,7 @@ wants handles can pass fields=["handle"] and still read `handles` directly.
 
 ### `selection_polygon`
 
-**Nhóm:** `entity_query`  
+**Nhóm:** `entity_query`
 **Làm gì:** Window or crossing selection against a polygon rather than a rectangle.
 
 **Dùng khi nào:** Khi cần tìm và đọc thuộc tính đối tượng theo handle hoặc điều kiện.
@@ -7162,7 +7395,7 @@ wants handles can pass fields=["handle"] and still read `handles` directly.
 
 ### `selection_window`
 
-**Nhóm:** `entity_query`  
+**Nhóm:** `entity_query`
 **Làm gì:** AutoCAD's ssget window/crossing selection.
 
 Corners may be given in any order. Selection is by *drawn* position, so an
@@ -7201,7 +7434,7 @@ zero-area box is refused rather than answered with an empty list.
 
 ### `sheet_frame`
 
-**Nhóm:** `sheet`  
+**Nhóm:** `sheet`
 **Làm gì:** ISO 5457 drawing frame for A4-A0: a 20 mm filing margin, 10 mm on the
 other three edges, the grid reference system and the centring/trimming marks.
 
@@ -7244,7 +7477,7 @@ implemented -- while the division counts are the standard's.
 
 ### `solid_boolean`
 
-**Nhóm:** `solids`  
+**Nhóm:** `solids`
 **Làm gì:** Boolean-combine two native 3D solids (COM backend, opt-in).
 
 The tool solid is consumed; the target holds the result.
@@ -7273,7 +7506,7 @@ The tool solid is consumed; the target holds the result.
 
 ### `solid_box`
 
-**Nhóm:** `solids`  
+**Nhóm:** `solids`
 **Làm gì:** Create a native 3D solid box (COM backend, opt-in).
 
 **Dùng khi nào:** Khi tạo hoặc kiểm tra solid/3D geometry.
@@ -7306,7 +7539,7 @@ The tool solid is consumed; the target holds the result.
 
 ### `solid_cylinder`
 
-**Nhóm:** `solids`  
+**Nhóm:** `solids`
 **Làm gì:** Create a native 3D solid cylinder (COM backend, opt-in).
 
 **Dùng khi nào:** Khi tạo hoặc kiểm tra solid/3D geometry.
@@ -7337,7 +7570,7 @@ The tool solid is consumed; the target holds the result.
 
 ### `solid_extrude`
 
-**Nhóm:** `solids`  
+**Nhóm:** `solids`
 **Làm gì:** Extrude a closed profile into a native 3D solid (COM backend, opt-in).
 
 **Dùng khi nào:** Khi tạo hoặc kiểm tra solid/3D geometry.
@@ -7364,7 +7597,7 @@ The tool solid is consumed; the target holds the result.
 
 ### `solid_revolve`
 
-**Nhóm:** `solids`  
+**Nhóm:** `solids`
 **Làm gì:** Revolve a closed profile around an axis into a native 3D solid (COM, opt-in).
 
 **Dùng khi nào:** Khi tạo hoặc kiểm tra solid/3D geometry.
@@ -7397,7 +7630,7 @@ The tool solid is consumed; the target holds the result.
 
 ### `standards_reference`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Read the built-in project reference catalogue.
 
 These entries guide layer naming and drafting setup; they do not certify
@@ -7424,7 +7657,7 @@ standards register before issuing construction documents.
 
 ### `std_feature_draw`
 
-**Nhóm:** `mechanical`  
+**Nhóm:** `mechanical`
 **Làm gì:** Add a standard feature to geometry that already exists - a foreign drawing being finished.
 
 Local frame: `(x, y)` is on the axis, +X runs along the axis in the
@@ -7467,7 +7700,7 @@ is reconstructed. DIN 332 form R is refused - only forms A and B are drawn.
 
 ### `std_part_insert`
 
-**Nhóm:** `mechanical`  
+**Nhóm:** `mechanical`
 **Làm gì:** Define the part's block once, insert it, and write its `std_part` XDATA.
 
 The block carries DESIG / STD / SIZE / MAT attributes and an ACADMCP_MECH
@@ -7510,7 +7743,7 @@ not carry, and a non-finite coordinate or rotation.
 
 ### `std_part_list`
 
-**Nhóm:** `mechanical`  
+**Nhóm:** `mechanical`
 **Làm gì:** Catalogue rows with the dimensions a drawing needs, and their provenance.
 
 Every row is transcribed from the named standard's own table and carries
@@ -7542,7 +7775,7 @@ only (M5-M36, M3-M24 for ISO 4762) and ISO 15 bore numbers 00-10 in the
 
 ### `structural_qa`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Check structural CAD quality and return error/warning findings.
 
 This is a drawing/layer/geometry check, not a strength or safety
@@ -7569,7 +7802,7 @@ required for engineering conclusions.
 
 ### `surface_texture`
 
-**Nhóm:** `mechanical`  
+**Nhóm:** `mechanical`
 **Làm gì:** Draw the 60° surface-texture vee with its annotation in the standard positions.
 
 Refusals, all before the first entity reaches the drawing: a text height
@@ -7624,7 +7857,7 @@ than ISO 21920-1 or ISO 1302.
 
 ### `system_about`
 
-**Nhóm:** `system`  
+**Nhóm:** `system`
 **Làm gì:** Get detailed information about AutoCAD MCP Pro capabilities and available tools.
 
 **Dùng khi nào:** Khi cần chẩn đoán server hoặc trạng thái kết nối.
@@ -7645,7 +7878,7 @@ than ISO 21920-1 or ISO 1302.
 
 ### `system_capabilities`
 
-**Nhóm:** `entity_query`  
+**Nhóm:** `entity_query`
 **Làm gì:** Return machine-readable support modes for the active backend.
 
 **Dùng khi nào:** Khi cần tìm và đọc thuộc tính đối tượng theo handle hoặc điều kiện.
@@ -7666,7 +7899,7 @@ than ISO 21920-1 or ISO 1302.
 
 ### `system_get_variable`
 
-**Nhóm:** `system`  
+**Nhóm:** `system`
 **Làm gì:** Get an AutoCAD system variable value.
 
 **Dùng khi nào:** Khi cần chẩn đoán server hoặc trạng thái kết nối.
@@ -7689,7 +7922,7 @@ than ISO 21920-1 or ISO 1302.
 
 ### `system_launch`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** Connect to the application named by `CAD_PROGID` (attach if running,
 launch otherwise) and report `launched`, `attached`, `version` and the
 active `document`. Refusals: headless, `capability: "live_application"`
@@ -7718,7 +7951,7 @@ validation. Pack: settings · lean: no.
 
 ### `system_preferences_get`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** The whitelisted `Preferences.*` values, enum values as names
 (`SaveAsType: "ac2018_dwg"`), with `read_only` naming the four `Files.*`
 paths. Refusals: headless, `capability: "preferences"` (they live in the
@@ -7745,7 +7978,7 @@ Pack: settings · lean: no.
 
 ### `system_preferences_set`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** Write one preference and report `old`, `new` and `changed`.
 
 Refusals, all before any write: a read-only key (`Files.*`), an unknown
@@ -7776,7 +8009,7 @@ Pack: settings · lean: no.
 
 ### `system_prompt_message`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** `Utility.Prompt`: tell the operator something where they are looking.
 Nothing in the drawing changes. Refusals: an empty message; headless,
 `capability: "interactive_prompt"`. Pack: settings · lean: no.
@@ -7801,7 +8034,7 @@ Nothing in the drawing changes. Refusals: an empty message; headless,
 
 ### `system_run_command`
 
-**Nhóm:** `system`  
+**Nhóm:** `system`
 **Làm gì:** Execute an AutoCAD command string directly (COM backend only).
 
 Append \n for Enter. Example: '_LINE 0,0 100,0 \n'.
@@ -7837,7 +8070,7 @@ they validate their arguments, which a free-text command string cannot.
 
 ### `system_run_lisp`
 
-**Nhóm:** `system`  
+**Nhóm:** `system`
 **Làm gì:** Execute an AutoLISP expression (COM backend only).
 
 Example: '(setvar "DIMSCALE" 1.0)'
@@ -7867,7 +8100,7 @@ more write channels than any denylist enumerates. Prefer the typed tools.
 
 ### `system_set_variable`
 
-**Nhóm:** `system`  
+**Nhóm:** `system`
 **Làm gì:** Set an AutoCAD system variable (e.g. DIMSCALE, LTSCALE, MEASUREMENT).
 
 Refusals, before anything is written: a value outside the catalogued
@@ -7901,7 +8134,7 @@ ezdxf has no header slot for (a `ValueError` naming the variable).
 
 ### `system_status`
 
-**Nhóm:** `system`  
+**Nhóm:** `system`
 **Làm gì:** Get full status of the AutoCAD MCP Pro server and backend connection.
 
 Returns backend name, connection status, capabilities, document info.
@@ -7924,7 +8157,7 @@ Returns backend name, connection status, capabilities, document info.
 
 ### `system_variable_describe`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** What an AutoCAD system variable means, from an authored catalogue of 90.
 
 With `name`: `{known, name, type, range|enum, default, meaning, saved_in
@@ -7961,7 +8194,7 @@ slot in ezdxf).
 
 ### `takeoff_compute`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Bước 3 luồng A: tính khối lượng. Mỗi dòng có nguồn truy vết và tin cậy; thiếu dữ liệu thì để trống.
 
 **Dùng khi nào:** Khi cần dùng chức năng `takeoff_compute` trong quy trình CAD.
@@ -7988,7 +8221,7 @@ slot in ezdxf).
 
 ### `takeoff_decide`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Kỹ sư xác nhận ánh xạ một nhóm. Mặc định lưu thành quy tắc đơn vị (không train, chỉ ghi file).
 
 **Dùng khi nào:** Khi cần dùng chức năng `takeoff_decide` trong quy trình CAD.
@@ -8025,7 +8258,7 @@ slot in ezdxf).
 
 ### `takeoff_export`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Bước 4 luồng A: xuất Excel 4 sheet (Khối lượng, Chi tiết từng handle + lệnh zoom, Ánh xạ, Kiểm soát).
 
 **Dùng khi nào:** Khi cần dùng chức năng `takeoff_export` trong quy trình CAD.
@@ -8052,7 +8285,7 @@ slot in ezdxf).
 
 ### `takeoff_propose`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Bước 2 luồng A: gom theo layer/block, đề xuất công tác với tin cậy A/B/C. B/C cần kỹ sư quyết.
 
 **Dùng khi nào:** Khi cần dùng chức năng `takeoff_propose` trong quy trình CAD.
@@ -8075,7 +8308,7 @@ slot in ezdxf).
 
 ### `takeoff_run`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Chạy trọn luồng A không hỏi (dùng quy tắc đã có). Thư mục → mỗi file một Excel. Nhóm B/C vẫn ghi rõ trong Excel.
 
 **Dùng khi nào:** Khi cần dùng chức năng `takeoff_run` trong quy trình CAD.
@@ -8100,7 +8333,7 @@ slot in ezdxf).
 
 ### `template_apply_layers`
 
-**Nhóm:** `templates`  
+**Nhóm:** `templates`
 **Làm gì:** Apply a standard layer set from a predefined template.
 
 Available templates: architectural, mechanical, electrical, piping.
@@ -8126,7 +8359,7 @@ Creates all layers defined in the template with standard colors and lineweights.
 
 ### `template_list`
 
-**Nhóm:** `templates`  
+**Nhóm:** `templates`
 **Làm gì:** List all available layer templates and their contents.
 
 **Dùng khi nào:** Khi tạo bản vẽ từ template hoặc mẫu có sẵn.
@@ -8147,7 +8380,7 @@ Creates all layers defined in the template with standard colors and lineweights.
 
 ### `text_find_replace`
 
-**Nhóm:** `entity_modification`  
+**Nhóm:** `entity_modification`
 **Làm gì:** Replace text in TEXT, MTEXT and block attributes (ATTRIB and ATTDEF).
 
 `searched_types` is on the response because "no matches" and "that type was
@@ -8186,7 +8419,7 @@ the same value `block_get_attributes` reports and `block_explode` bursts.
 
 ### `text_set_background`
 
-**Nhóm:** `entity_modification`  
+**Nhóm:** `entity_modification`
 **Làm gì:** Mask what is behind an MTEXT so it stays readable over hatch or geometry.
 
 MTEXT only: TEXT has no background-fill attribute, so setting one on it
@@ -8218,7 +8451,7 @@ would report success and change nothing.
 
 ### `textstyle_create`
 
-**Nhóm:** `styles`  
+**Nhóm:** `styles`
 **Làm gì:** Create a text style.
 
 Headlessly a font nobody can find is *written* and reported
@@ -8263,7 +8496,7 @@ engines: a name that exists, an empty font, `width_factor <= 0`,
 
 ### `textstyle_list`
 
-**Nhóm:** `styles`  
+**Nhóm:** `styles`
 **Làm gì:** Every STYLE table entry and the one new TEXT/MTEXT will use.
 
 **Dùng khi nào:** Khi quản lý text style, dimension style, linetype và kiểu hiển thị.
@@ -8284,7 +8517,7 @@ engines: a name that exists, an empty font, `width_factor <= 0`,
 
 ### `textstyle_set_current`
 
-**Nhóm:** `styles`  
+**Nhóm:** `styles`
 **Làm gì:** Set `$TEXTSTYLE`; `entity_create_text` / `entity_create_mtext` then
 carry the style on both engines. Refuses a style the drawing does not
 hold. Returns `previous` and `changed`.
@@ -8309,7 +8542,7 @@ hold. Returns `previous` and `changed`.
 
 ### `titleblock_apply`
 
-**Nhóm:** `sheet`  
+**Nhóm:** `sheet`
 **Làm gì:** ISO 7200 title block, 180 mm wide, in the lower-right corner of any
 A4-A0 sheet. The title text is used verbatim.
 
@@ -8380,7 +8613,7 @@ is this tool with size='A3' and no symbol, kept so no caller breaks.
 
 ### `titleblock_apply_iso_a3`
 
-**Nhóm:** `engineering`  
+**Nhóm:** `engineering`
 **Làm gì:** ISO 7200 / A3 (420x297 mm) title block. Title text is used verbatim.
 
 Pass `layout` to put the sheet on a paper-space layout, which is where a
@@ -8436,7 +8669,7 @@ move you onto the sheet.
 
 ### `transaction_begin`
 
-**Nhóm:** `transactions`  
+**Nhóm:** `transactions`
 **Làm gì:** Begin a transaction (undo mark).
 
 COM backend: Sets AutoCAD undo mark. All subsequent operations can be
@@ -8465,7 +8698,7 @@ Always pair with transaction_commit or transaction_rollback.
 
 ### `transaction_commit`
 
-**Nhóm:** `transactions`  
+**Nhóm:** `transactions`
 **Làm gì:** Commit the current transaction.
 
 COM: Ends the undo mark (changes are permanent but still undoable via drawing_undo).
@@ -8489,7 +8722,7 @@ ezdxf: Discards the rollback snapshot (changes are kept).
 
 ### `transaction_rollback`
 
-**Nhóm:** `transactions`  
+**Nhóm:** `transactions`
 **Làm gì:** Rollback the current transaction to the point of transaction_begin.
 
 COM: Undoes all operations back to the UNDO Mark transaction_begin set;
@@ -8516,7 +8749,7 @@ WARNING: This is destructive – all changes since transaction_begin are lost.
 
 ### `ucs_list`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** The `world` row first, then every UCS table entry with origin and unit
 axes, `current` on the active one. `world` is current only when the frame
 IS the WCS (WORLDUCS live, the `$UCS*` header headless) — an unnamed UCS
@@ -8543,7 +8776,7 @@ both engines whatever is current. No refusals. Pack: settings · lean: no.
 
 ### `ucs_restore`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** Live: `ActiveUCS` for a named entry; `world` runs `UCS World`, which is
 refused while AutoCAD has an active command (CMDACTIVE — press ESC).
 Headless: the `$UCSNAME/$UCSORG/$UCSXDIR/$UCSYDIR` header variables.
@@ -8570,7 +8803,7 @@ WCS. Pack: settings · lean: no.
 
 ### `ucs_set`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** Store a UCS table entry and make it current (AutoCAD's UCS command).
 
 Axes are normalised to unit vectors. **Every tool keeps taking and
@@ -8606,7 +8839,7 @@ axis, and non-perpendicular axes — the message carries the measured angle
 
 ### `user_pick_point`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** `Utility.GetPoint`: returns the WCS `x`, `y` (`z`) the operator clicks.
 
 ESC is an answer, not an error: `cancelled: true` with AutoCAD's reason.
@@ -8635,7 +8868,7 @@ Pack: settings · lean: no.
 
 ### `user_select`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** Returns `handles` the operator picked — one with `mode="single"` (plus
 the `picked` point `[x, y]` in **WCS** — AutoCAD reports it in the current
 UCS and the tool translates, so a UCS made current by `ucs_set` never
@@ -8667,7 +8900,7 @@ outside the two, an empty prompt; headless, `capability:
 
 ### `validation_check`
 
-**Nhóm:** `validation`  
+**Nhóm:** `validation`
 **Làm gì:** Run quality checks on the current drawing.
 
 Available checks:
@@ -8695,7 +8928,7 @@ Available checks:
 
 ### `view_named_list`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** Every VIEW table entry with centre, height and width. No refusals.
 Pack: settings · lean: no.
 
@@ -8717,7 +8950,7 @@ Pack: settings · lean: no.
 
 ### `view_named_restore`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** Live: zooms the active viewport to the saved window the way `-VIEW _R`
 does — VIEWCTR becomes the saved centre and VIEWSIZE the saved height
 (or width / display aspect when the window is wider than the display);
@@ -8751,7 +8984,7 @@ no.
 
 ### `view_named_save`
 
-**Nhóm:** `environment`  
+**Nhóm:** `environment`
 **Làm gì:** Store a VIEW table entry (AutoCAD's VIEW command). Same name replaces
 (`replaced: true`). Refusals: `height`/`width` ≤ 0 or non-finite, a
 malformed `center`, and headless an empty drawing with no `center`/`height`
@@ -8783,7 +9016,7 @@ malformed `center`, and headless an empty drawing with no `center`/`height`
 
 ### `view_render_report`
 
-**Nhóm:** `cadtroly`  
+**Nhóm:** `cadtroly`
 **Làm gì:** Return render coverage before relying on a preview for QA.
 
 The report is deliberately conservative: common 2D entities are marked as
@@ -8808,7 +9041,7 @@ It never claims that a PNG proves the full DWG was rendered.
 
 ### `view_screenshot`
 
-**Nhóm:** `view`  
+**Nhóm:** `view`
 **Làm gì:** Capture a screenshot of the current drawing view.
 
 COM backend: captures live AutoCAD window at current view.
@@ -8843,7 +9076,7 @@ Returns an Image content block with the PNG data.
 
 ### `view_zoom_and_screenshot`
 
-**Nhóm:** `view`  
+**Nhóm:** `view`
 **Làm gì:** Zoom to extents (or window if coordinates given), then capture a screenshot.
 
 The most useful tool for visually inspecting drawing state.
@@ -8874,7 +9107,7 @@ The most useful tool for visually inspecting drawing state.
 
 ### `view_zoom_extents`
 
-**Nhóm:** `view`  
+**Nhóm:** `view`
 **Làm gì:** Zoom to show all entities in the drawing (fit drawing in viewport).
 
 **Dùng khi nào:** Khi đổi góc nhìn, zoom, chụp ảnh hoặc render vùng bản vẽ.
@@ -8895,7 +9128,7 @@ The most useful tool for visually inspecting drawing state.
 
 ### `view_zoom_window`
 
-**Nhóm:** `view`  
+**Nhóm:** `view`
 **Làm gì:** Zoom to display the specified rectangular window region.
 
 **Dùng khi nào:** Khi đổi góc nhìn, zoom, chụp ảnh hoặc render vùng bản vẽ.
@@ -8924,7 +9157,7 @@ The most useful tool for visually inspecting drawing state.
 
 ### `viewport_create`
 
-**Nhóm:** `layouts`  
+**Nhóm:** `layouts`
 **Làm gì:** Place a scaled model-space viewport on a paper-space layout.
 
 The viewport window shows the model region centered at
@@ -8964,7 +9197,7 @@ The viewport window shows the model region centered at
 
 ### `viewport_delete`
 
-**Nhóm:** `layouts`  
+**Nhóm:** `layouts`
 **Làm gì:** Delete a viewport.
 
 The layout's main viewport needs `force=true`; deleting it removes the tab's
@@ -8993,7 +9226,7 @@ file does not carry a dangling reference that only CAD would notice.
 
 ### `viewport_list`
 
-**Nhóm:** `layouts`  
+**Nhóm:** `layouts`
 **Làm gì:** List paper-space viewports: handle, geometry, scale and lock state.
 
 The layout's own main viewport is included with `is_main: true` — it is the
@@ -9021,7 +9254,7 @@ documents that cannot store them (R12) rather than fabricated.
 
 ### `viewport_lock`
 
-**Nhóm:** `layouts`  
+**Nhóm:** `layouts`
 **Làm gì:** Lock or unlock a viewport's display scale.
 
 **Dùng khi nào:** Khi quản lý layout, viewport và không gian giấy.
@@ -9046,7 +9279,7 @@ documents that cannot store them (R12) rather than fabricated.
 
 ### `viewport_set_scale`
 
-**Nhóm:** `layouts`  
+**Nhóm:** `layouts`
 **Làm gì:** Rescale a viewport by adjusting its view height.
 
 Geometric scale only: annotative text and dimensions do not resize with it.
@@ -9075,7 +9308,7 @@ pan/zoom state rather than a drafting scale.
 
 ### `weld_symbol`
 
-**Nhóm:** `mechanical`  
+**Nhóm:** `mechanical`
 **Làm gì:** Draw an ISO 2553 weld annotation: reference line, identification line, symbol, dimensions.
 
 Refusals, all before the first entity reaches the drawing: a `kind` outside
@@ -9130,7 +9363,7 @@ and a `pitch` given without a `length`.
 
 ### `xref_attach`
 
-**Nhóm:** `sheet`  
+**Nhóm:** `sheet`
 **Làm gì:** Attach an external reference and insert it once. Both engines.
 
 The block takes the referenced file's stem as its name. Refusals, all
@@ -9169,7 +9402,7 @@ name the drawing already holds — detach it first with
 
 ### `xref_manage`
 
-**Nhóm:** `sheet`  
+**Nhóm:** `sheet`
 **Làm gì:** One operation on one external reference.
 
 `list`, `detach` and `path` work on both engines. `reload` and `bind` need

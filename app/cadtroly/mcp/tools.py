@@ -29,6 +29,8 @@ CADTROLY_TOOL_NAMES = frozenset({
     "check_rulesets", "check_run",
     "knowledge_industries", "knowledge_standards", "knowledge_standard_add", "knowledge_standard_delete",
     "knowledge_status", "knowledge_rules_export", "knowledge_rules_import", "knowledge_skills", "knowledge_skill_toggle", "knowledge_skill_add",
+    "kho_industries", "kho_standards", "kho_standard_add", "kho_standard_delete",
+    "kho_status", "kho_rules_export", "kho_rules_import", "kho_skills", "kho_skill_toggle", "kho_skill_add",
 })
 
 
@@ -268,6 +270,24 @@ def register(mcp: FastMCP) -> None:
             raise ToolError(str(exc)) from exc
         kho.log("skill", "add", name=name, path=str(path), overwrite=overwrite)
         return {"ok": True, "name": name, "path": str(path), "skills": kho.skills()}
+
+    # Backward-compatible aliases for clients that used the original kho_* names.
+    # The knowledge_* names remain canonical and are advertised in new documentation.
+    legacy_aliases = {
+        "kho_industries": knowledge_industries,
+        "kho_standards": knowledge_standards,
+        "kho_standard_add": knowledge_standard_add,
+        "kho_standard_delete": knowledge_standard_delete,
+        "kho_status": knowledge_status,
+        "kho_rules_export": knowledge_rules_export,
+        "kho_rules_import": knowledge_rules_import,
+        "kho_skills": knowledge_skills,
+        "kho_skill_toggle": knowledge_skill_toggle,
+        "kho_skill_add": knowledge_skill_add,
+    }
+    for legacy_name, canonical_tool in legacy_aliases.items():
+        canonical_name = legacy_name.replace("kho_", "knowledge_", 1)
+        mcp.tool(name=legacy_name, description=f"Tương thích cũ; dùng {canonical_name} cho kết nối mới.")(canonical_tool)
 
     @mcp.resource("cadtroly://skill/{name}")
     async def skill_text(name: str, ctx: Context = None) -> str:

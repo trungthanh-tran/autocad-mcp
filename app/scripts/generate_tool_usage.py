@@ -151,7 +151,7 @@ def generate() -> None:
     import server  # type: ignore  # noqa: PLC0415
 
     tools = asyncio.run(server._registered_tools())
-    asyncio.run(server._apply_tool_profile("full"))
+    profile_result = asyncio.run(server._apply_tool_profile("full"))
     live = {tool.name: tool for tool in tools}
 
     sections = []
@@ -170,7 +170,7 @@ def generate() -> None:
         safety = "Chỉ đọc; có thể dùng trước khi chỉnh sửa." if readonly else "Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng."
         sections.append(
             f"### `{name}`\n\n"
-            f"**Nhóm:** `{group}`  \n"
+            f"**Nhóm:** `{group}`\n"
             f"**Làm gì:** {description.strip()}\n\n"
             f"**Dùng khi nào:** {_when(group, name)}\n\n"
             f"**Tham số**\n\n| Tên | Kiểu | Bắt buộc | Mặc định | Ý nghĩa |\n|---|---|---:|---|---|\n{table}\n\n"
@@ -179,6 +179,9 @@ def generate() -> None:
         )
 
     registered = len(tools)
+    enabled = profile_result["enabled_count"]
+    hidden = profile_result["disabled_count"]
+    legacy_aliases = sum(tool.name.startswith("kho_") for tool in tools)
     body = """# MCP tool usage guide
 
 Tài liệu này mô tả **từng tool đang đăng ký trong project cadtroly**: tool làm gì, dùng khi nào, tham số, ví dụ và lưu ý an toàn. File được sinh từ registry FastMCP hiện tại; không sửa thủ công.
@@ -186,10 +189,11 @@ Tài liệu này mô tả **từng tool đang đăng ký trong project cadtroly*
 ## Tổng quan
 
 - Registered tools: **{registered}**
-- Enabled với `TOOL_PROFILE=full`, `TOOL_PACKS=all`: **267**
-- Hidden/giới hạn backend: **5**
+- Enabled với `TOOL_PROFILE=full`, `TOOL_PACKS=all`: **{enabled}**
+- Hidden/giới hạn backend: **{hidden}**
 - Resources: **9**; prompt templates: **5**
-- Tool upstream trong `tool-inventory.json`: **247**; phần còn lại là extension của project.
+- Tool upstream trong `tool-inventory.json`: **247**; phần còn lại là extension và alias tương thích của project.
+- Alias tương thích tên cũ `kho_*`: **{legacy_aliases}**; tên chuẩn mới dùng `knowledge_*`.
 
 ## Cách gọi chung
 
@@ -206,7 +210,7 @@ LLM gọi đúng tên tool và truyền một JSON object theo bảng tham số:
 
 ## Chi tiết từng tool
 
-""".format(registered=registered)
+""".format(registered=registered, enabled=enabled, hidden=hidden, legacy_aliases=legacy_aliases)
     OUTPUT.write_text(body + "\n".join(sections), encoding="utf-8")
     print(f"Wrote {OUTPUT} ({registered} tools)")
 

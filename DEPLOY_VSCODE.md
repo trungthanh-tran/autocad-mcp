@@ -362,7 +362,7 @@ thêm JSON rule vào `CAD-kho\\tieu-chuan`, và `knowledge_standard_delete` vớ
 Danh mục chi tiết tiêu chuẩn an toàn theo 18 ngành nằm tại
 `app\\docs\\STANDARDS-SAFETY-BY-INDUSTRY.md`.
 
-Catalog đúng của project cadtroly là **272 tool đăng ký, 267 tool đang bật,
+Catalog đúng của project cadtroly là **282 tên tool đăng ký, 277 tên đang bật,
 9 resources và 5 prompt templates**. Chi tiết nằm tại
 `app\\docs\\MCP-TOOL-CATALOG.md`. Hướng dẫn chi tiết từng tool nằm trong
 `app\\docs\\MCP-TOOL-USAGE.md`. Con số **247 tools · 8 resources** trong

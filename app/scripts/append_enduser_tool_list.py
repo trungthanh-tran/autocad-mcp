@@ -145,6 +145,8 @@ WORD_VI = {
 
 
 def vietnamese_name(name: str) -> str:
+    if name.startswith("kho_"):
+        return vietnamese_name(name.replace("kho_", "knowledge_", 1))
     special = {
         "knowledge_industries": "liệt kê các ngành trong kho",
         "knowledge_standards": "liệt kê tiêu chuẩn trong kho",
@@ -272,7 +274,7 @@ def main() -> None:
             detail_sections.extend(details_by_industry[industry][group_name])
     generated = (
         f"{MARKER}\n\n## 11. Mục lục chức năng theo ngành\n\n"
-        f"Có **{len(live)} chức năng**, gồm **247 chức năng nền tảng** và chức năng mở rộng của cadtroly. Các chức năng được xếp theo ngành; chức năng dùng chung nằm ở nhóm đầu. Bấm vào tên để đi đến phần hướng dẫn tương ứng.\n\n"
+        f"Có **{len(live)} tên gọi chức năng**, gồm **247 chức năng nền tảng**, chức năng mở rộng và alias tương thích tên cũ. Tên chuẩn mới dùng tiếng Anh; các tên `kho_*` cũ vẫn được hỗ trợ. Các chức năng được xếp theo ngành; chức năng dùng chung nằm ở nhóm đầu. Bấm vào tên để đi đến phần hướng dẫn tương ứng.\n\n"
         + "\n".join(index_rows)
         + "\n\n## 12. Hướng dẫn chi tiết từng chức năng\n\n"
         + "\n".join(detail_sections)

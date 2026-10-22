@@ -12,8 +12,8 @@ TOOL_PACKS=all
 
 | Thành phần | Số lượng | Ý nghĩa |
 |---|---:|---|
-| Tool đã đăng ký | **272** | Toàn bộ tool server biết đến |
-| Tool đang bật | **267** | Tool client có thể gọi ở `full/all` |
+| Tool đã đăng ký | **282** | 272 tool chính và 10 alias tương thích cũ |
+| Tool đang bật | **277** | Tool client có thể gọi ở `full/all` |
 | Tool bị ẩn/giới hạn | **5** | Cần điều kiện 3D hoặc capability tương ứng |
 | Resource | **9** | 8 upstream + resource skill của cadtroly |
 | Prompt template | **5** | Prompt dựng sơ đồ/mặt bằng/cơ khí/P&ID |
@@ -65,6 +65,10 @@ ví dụ JSON và lưu ý an toàn), mở
 
 Các tool này không nằm trong inventory 247 upstream:
 
+Mười alias cũ `kho_*` vẫn được đăng ký để tương thích với client hiện hữu;
+tên chuẩn mới tương ứng là `knowledge_*`. Vì vậy runtime có 10 tên gọi bổ sung,
+nhưng không có thêm logic xử lý.
+
 1. `pdf_to_dwg` — chuyển PDF bản vẽ thành DWG/DXF có phân lớp.
 2. `pdf_vectorize` — bóc vector, text và dimension từ PDF.
 3. `drawing_apply_discipline_standard` — áp dụng chuẩn layer theo bộ môn.
@@ -72,7 +76,7 @@ Các tool này không nằm trong inventory 247 upstream:
 5. `structural_qa` — kiểm tra layer/hình học kết cấu và trả error/warning.
 6. `view_render_report` — báo cáo loại đối tượng có thể thiếu trong preview.
 
-## 19 tool riêng của cadtroly
+## 19 tool logic riêng của cadtroly
 
 ### Đọc và bóc khối lượng
 
