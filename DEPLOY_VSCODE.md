@@ -367,6 +367,7 @@ Catalog đúng của project cadtroly là **272 tool đăng ký, 267 tool đang 
 `app\\docs\\MCP-TOOL-CATALOG.md`. Hướng dẫn chi tiết từng tool nằm trong
 `app\\docs\\MCP-TOOL-USAGE.md`. Con số **247 tools · 8 resources** trong
 `app\\docs\\tool-inventory.json` chỉ là phần upstream U-C4N.
+Người dùng cuối nên đọc trước `app\\docs\\HUONG-DAN-ENDUSER.md`.
 
 Các câu lệnh chuyên môn có thể dùng trực tiếp:
 
