@@ -1,10 +1,28 @@
-# Danh mục MCP
+# Catalog MCP của project cadtroly
 
-## Phạm vi upstream U-C4N
+Đây là số liệu của project hiện tại, không phải chỉ catalog upstream U-C4N.
+Số liệu được kiểm tra từ registry của `app/server.py` với cấu hình:
 
-Bản v1.6 upstream có **247 tools · 8 resources · 5 prompt templates** trong
-**28 nhóm**. Danh sách tên đầy đủ, mô tả, tag, cost và tham số được lưu trong
-[`tool-inventory.json`](tool-inventory.json), là file sinh tự động từ registry.
+```text
+TOOL_PROFILE=full
+TOOL_PACKS=all
+```
+
+## Tổng số runtime
+
+| Thành phần | Số lượng | Ý nghĩa |
+|---|---:|---|
+| Tool đã đăng ký | **272** | Toàn bộ tool server biết đến |
+| Tool đang bật | **267** | Tool client có thể gọi ở `full/all` |
+| Tool bị ẩn/giới hạn | **5** | Cần điều kiện 3D hoặc capability tương ứng |
+| Resource | **9** | 8 upstream + resource skill của cadtroly |
+| Prompt template | **5** | Prompt dựng sơ đồ/mặt bằng/cơ khí/P&ID |
+
+## 247 tool upstream
+
+247 tool nền của U-C4N được chia thành 28 nhóm. File
+[`tool-inventory.json`](tool-inventory.json) chứa đầy đủ tên, mô tả, tag, cost
+và tham số của 247 tool này.
 
 | Nhóm | Số tool |
 |---|---:|
@@ -36,9 +54,39 @@ Bản v1.6 upstream có **247 tools · 8 resources · 5 prompt templates** trong
 | understanding | 4 |
 | validation | 1 |
 | view | 4 |
-| **Tổng cộng** | **247** |
+| **Tổng upstream** | **247** |
 
-## 8 resources
+## 6 tool mở rộng trong `server.py`
+
+Các tool này không nằm trong inventory 247 upstream:
+
+1. `pdf_to_dwg` — chuyển PDF bản vẽ thành DWG/DXF có phân lớp.
+2. `pdf_vectorize` — bóc vector, text và dimension từ PDF.
+3. `drawing_apply_discipline_standard` — áp dụng chuẩn layer theo bộ môn.
+4. `standards_reference` — tra cứu chuẩn CAD xây dựng, đường và cầu.
+5. `structural_qa` — kiểm tra layer/hình học kết cấu và trả error/warning.
+6. `view_render_report` — báo cáo loại đối tượng có thể thiếu trong preview.
+
+## 19 tool riêng của cadtroly
+
+### Đọc và bóc khối lượng
+
+`drawing_read`, `drawing_entities`, `takeoff_propose`, `takeoff_decide`,
+`takeoff_compute`, `takeoff_export`, `takeoff_run`.
+
+### Kiểm tra và quản lý tiêu chuẩn
+
+`check_rulesets`, `check_run`, `kho_industries`, `kho_standards`,
+`kho_standard_add`, `kho_standard_delete`.
+
+### Kho skill và trạng thái
+
+`kho_status`, `kho_rules_export`, `kho_rules_import`, `kho_skills`,
+`kho_skill_toggle`, `kho_skill_add`.
+
+## 9 resources
+
+### 8 resource upstream
 
 1. `autocad://blocks`
 2. `autocad://drawing/info`
@@ -49,6 +97,10 @@ Bản v1.6 upstream có **247 tools · 8 resources · 5 prompt templates** trong
 7. `autocad://standards/isa51`
 8. `autocad://system/status`
 
+### Resource riêng cadtroly
+
+9. `cadtroly://skill/{name}` — đọc nội dung `SKILL.md` theo tên skill.
+
 ## 5 prompt templates
 
 1. `prompt_electrical_schematic` — tạo sơ đồ điện.
@@ -57,13 +109,15 @@ Bản v1.6 upstream có **247 tools · 8 resources · 5 prompt templates** trong
 4. `prompt_pid_diagram` — tạo P&ID.
 5. `prompt_quick_drawing` — tạo hướng dẫn vẽ từ mô tả.
 
-## Phần mở rộng cadtroly
+## Kiểm tra trên máy
 
-Ngoài 247 tool upstream, cadtroly có các tool riêng cho kho tiêu chuẩn, skill,
-bóc khối lượng, PDF→DWG và QA tiếng Việt. Vì vậy số tool MCP thực tế khi chạy
-`TOOL_PROFILE=full`, `TOOL_PACKS=all` lớn hơn con số upstream; hãy gọi
-`system_about` hoặc `tools/list` để lấy số lượng runtime chính xác.
+Yêu cầu LLM:
 
-Không dùng con số 247 để mô tả riêng phần mở rộng cadtroly. 247 là mốc catalog
-upstream; `tool-inventory.json` là nguồn kiểm tra tên và nhóm, còn runtime là
-nguồn kiểm tra tool đang bật trên máy.
+```text
+Cho biết số tool đã đăng ký, số tool đang bật, resources và prompt templates
+của project cadtroly hiện tại.
+```
+
+Hoặc gọi `system_about`/`tools/list`. `tool-inventory.json` là inventory
+upstream 247; runtime của project mới là số liệu cuối cùng khi có tool mở rộng,
+profile, pack hoặc capability phần cứng khác nhau.
