@@ -7502,21 +7502,34 @@ async def drawing_apply_discipline_standard(
     discipline: Annotated[str, "building | road | bridge (aliases: nha | duong | cau)"],
     layers: Annotated[bool, "Create the discipline layer set"] = True,
     units: Annotated[bool, "Apply ISO-25/ISOCP and millimetre drafting units"] = True,
-    naming: Annotated[str, "ncs (international) | vn (Vietnamese project convention)"] = "ncs",
+    naming: Annotated[str, "auto | ncs (international) | vn (Vietnamese project convention)"] = "auto",
     ctx: Context = None,
 ) -> dict:
     """Set up a drawing for a civil/architectural discipline in one call."""
     from engineering.layers import apply_layer_set
     from engineering.standards.apply import apply_standard
-    from engineering.standards.civil_arch import resolve_reference_set
+    from engineering.standards.civil_arch import detect_naming_scheme, resolve_reference_set
 
     try:
         key, reference = resolve_reference_set(discipline)
     except ValueError as exc:
         raise ToolError(str(exc)) from exc
     naming_key = str(naming).strip().lower()
-    if naming_key not in {"ncs", "vn"}:
-        raise ToolError("naming must be 'ncs' or 'vn'")
+    detection = None
+    if naming_key == "auto":
+        try:
+            existing_layers = await _backend(ctx).layer_list()
+            layer_names = [
+                getattr(row, "name", None)
+                or (row.get("name", "") if isinstance(row, dict) else "")
+                for row in existing_layers
+            ]
+        except Exception:
+            layer_names = []
+        detection = detect_naming_scheme(layer_names)
+        naming_key = detection["scheme"]
+    elif naming_key not in {"ncs", "vn"}:
+        raise ToolError("naming must be 'auto', 'ncs' or 'vn'")
     layer_set = reference["layer_set"] if naming_key == "ncs" else reference["vn_layer_set"]
     result = await apply_standard(_backend(ctx), "iso", layers=False, units=units)
     if layers:
@@ -7526,6 +7539,8 @@ async def drawing_apply_discipline_standard(
         }
     result["discipline"] = key
     result["naming"] = naming_key
+    if detection is not None:
+        result["naming_detection"] = detection
     result["references"] = reference["references"]
     return result
 

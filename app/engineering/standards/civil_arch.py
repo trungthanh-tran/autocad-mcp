@@ -222,6 +222,31 @@ REFERENCE_ALIASES = {
 }
 
 
+def detect_naming_scheme(layer_names: list[str] | set[str]) -> dict[str, Any]:
+    """Infer the layer convention from existing layer prefixes.
+
+    A blank/new drawing has no evidence, so the safe default is NCS.  The
+    result includes evidence and a confidence label for auditability.
+    """
+    names = {str(name).strip().upper() for name in layer_names}
+    vn_prefixes = ("KT-", "KC-", "HT-", "CAU-")
+    ncs_prefixes = ("A-", "C-", "S-")
+    vn_hits = sorted(name for name in names if name.startswith(vn_prefixes))
+    ncs_hits = sorted(name for name in names if name.startswith(ncs_prefixes))
+    if len(vn_hits) > len(ncs_hits) and vn_hits:
+        scheme, confidence = "vn", "high" if len(vn_hits) >= 2 else "medium"
+    elif len(ncs_hits) > len(vn_hits) and ncs_hits:
+        scheme, confidence = "ncs", "high" if len(ncs_hits) >= 2 else "medium"
+    else:
+        scheme, confidence = "ncs", "low"
+    return {
+        "scheme": scheme,
+        "confidence": confidence,
+        "evidence": {"vn": vn_hits[:20], "ncs": ncs_hits[:20]},
+        "reason": "existing layer prefixes" if (vn_hits or ncs_hits) else "no recognizable prefixes; defaulted to ncs",
+    }
+
+
 def resolve_reference_set(name: str) -> tuple[str, dict[str, Any]]:
     key = REFERENCE_ALIASES.get(str(name).strip().lower(), str(name).strip().lower())
     if key not in REFERENCE_SETS:
@@ -233,5 +258,5 @@ __all__ = [
     "BUILDING_LAYERS", "ROAD_LAYERS", "BRIDGE_LAYERS",
     "NCS_BUILDING_LAYERS", "NCS_ROAD_LAYERS", "NCS_BRIDGE_LAYERS",
     "VN_BUILDING_LAYERS", "VN_ROAD_LAYERS", "VN_BRIDGE_LAYERS",
-    "REFERENCE_SETS", "resolve_reference_set",
+    "REFERENCE_SETS", "resolve_reference_set", "detect_naming_scheme",
 ]
