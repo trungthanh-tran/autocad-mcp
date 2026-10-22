@@ -7,6 +7,7 @@ __pycache__/
 
 # Đóng gói (PyInstaller) và nhị phân tải về
 app/dist/
+dist/
 app/build/_work/
 app/build/bin/
 
