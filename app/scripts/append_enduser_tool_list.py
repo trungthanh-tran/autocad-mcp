@@ -53,6 +53,37 @@ GROUP_VI = {
     "validation": "xác nhận", "view": "góc nhìn", "cadtroly": "mở rộng cadtroly",
 }
 
+
+def example_value(name: str, schema: dict) -> object:
+    if "default" in schema:
+        return schema["default"]
+    if schema.get("enum"):
+        return schema["enum"][0]
+    kind = schema.get("type")
+    lower = name.lower()
+    if kind == "boolean":
+        return True
+    if kind in ("integer", "number"):
+        return 1
+    if kind == "array":
+        return []
+    if kind == "object":
+        return {}
+    if any(word in lower for word in ("path", "file", "source", "target")):
+        return r"D:\DuAn\ban-ve.dwg"
+    if "handle" in lower:
+        return "A1B2"
+    if "point" in lower:
+        return [0, 0, 0]
+    return "vi-du"
+
+
+def tool_example(tool: object) -> str:
+    schema = getattr(tool, "parameters", {}) or {}
+    properties = schema.get("properties", {}) if isinstance(schema, dict) else {}
+    values = {name: example_value(name, item if isinstance(item, dict) else {}) for name, item in properties.items()}
+    return json.dumps(values, ensure_ascii=False, separators=(", ", ": ")).replace("|", "\\|")
+
 WORD_VI = {
     "analysis": "phân tích", "bounding": "giới hạn", "box": "khung", "entity": "đối tượng",
     "stats": "thống kê", "find": "tìm", "region": "vùng", "layer": "lớp", "list": "liệt kê",
@@ -112,11 +143,12 @@ def main() -> None:
         group = meta.get("group", "cadtroly")
         text = f"Thực hiện thao tác {vietnamese_name(name)} trong bản vẽ CAD."
         when = GROUP_WHEN.get(group, "chức năng mở rộng của cadtroly")
-        rows.append(f"| `{name}` | {GROUP_VI.get(group, group)} | {text} | Khi cần {when}. |")
+        example = tool_example(tool)
+        rows.append(f"| `{name}` | {GROUP_VI.get(group, group)} | {text} | Khi cần {when}. | `{example}` |")
     generated = (
         f"{MARKER}\n\n## Danh sách đầy đủ tất cả tool\n\n"
         f"Bảng này gồm **{len(rows)} tool** đang đăng ký, bao gồm cả **247 tool nền tảng** và tool mở rộng của cadtroly. Bạn có thể nói tên tool trong yêu cầu nếu muốn gọi trực tiếp.\n\n"
-        "| Tên tool | Nhóm | Làm gì | Dùng khi nào |\n|---|---|---|---|\n"
+        "| Tên tool | Nhóm | Làm gì | Dùng khi nào | Ví dụ tham số |\n|---|---|---|---|---|\n"
         + "\n".join(rows)
         + "\n"
     )
