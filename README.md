@@ -11,5 +11,6 @@ bản vẽ, kho tiêu chuẩn và skill chuyên ngành.
 | `DEPLOY_VSCODE.md` | Hướng dẫn triển khai cho người dùng cuối trong VSCode. |
 | `dist/` | Các gói ZIP triển khai; không chứa bản vẽ người dùng. |
 
-Chạy nhanh: `cd app && pip install -e ".[dev,web,llm]"`. Test: `py -3.14 -m pytest -q app\tests`.
+Chạy nhanh: `cd app && pip install -e .`. Test và MCP dùng cùng một bộ phụ thuộc;
+không cần chọn thêm `dev`, `web` hay `llm`.
 Gói mới nhất cho người dùng: `dist\cadtroly-0.2.0-vscode-qa.zip`.

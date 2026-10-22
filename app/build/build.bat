@@ -1,5 +1,5 @@
 @echo off
-rem Dong goi ban giao doi tac (Windows). Can: pip install -e ".[web,llm]" pyinstaller
+rem Dong goi goi UI legacy (Windows). Can: pip install -e . pyinstaller
 cd /d "%~dp0\.."
 python -m PyInstaller build\cadtroly.spec --noconfirm --clean --workpath build\_work --distpath dist || exit /b 1
 set OUT=dist\AI-Tro-ly-AutoCAD

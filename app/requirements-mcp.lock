@@ -11,3 +11,5 @@ PyYAML==6.0.3
 fastapi==0.159.1
 uvicorn==0.54.0
 python-multipart==0.0.32
+pytest==8.4.2
+pytest-asyncio==1.2.0

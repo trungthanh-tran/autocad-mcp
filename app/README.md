@@ -11,14 +11,15 @@ tự chuyển sang COM để sửa vẽ live.
 ## Cài
 
 ```bash
-pip install -e ".[dev,llm]"
+pip install -e .
 cadtroly init --kho D:\CAD-kho   # tạo kho + config.json
 cadtroly sample                  # sinh samples/mat-bang-tang-3.dxf để thử
 ```
 
 ## Người dùng cuối: giao diện, không gõ lệnh
 
-Windows: bấm đúp `run.bat`. Linux/macOS: `./run.sh`. Lần đầu cài `pip install -e ".[web,llm]"`.
+Windows: dùng `CAI_DAT.bat` ở thư mục gốc để cài MCP và bộ test. Quy trình chính
+không yêu cầu cài thêm nhóm phụ thuộc tùy chọn.
 Mở cửa sổ "AI Trợ lý AutoCAD" (pywebview; không có thì mở trình duyệt tại http://127.0.0.1:8765):
 
 1. **Chọn bản vẽ…** (hộp thoại) hoặc kéo thả file .dxf.
@@ -36,7 +37,7 @@ Mở thẳng một bản vẽ: `http://127.0.0.1:8765/?path=D:/x.dxf&auto=kl` (d
 ## Bàn giao đối tác: bản chạy ngay, không cần Python
 
 ```bat
-pip install -e ".[web,llm]" pyinstaller
+pip install -e . pyinstaller
 build\build.bat            :: Windows → dist\AI-Tro-ly-AutoCAD\ (≈240 MB, onedir) ; Linux: build/build.sh trên máy Linux
 ```
 
