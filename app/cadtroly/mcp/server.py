@@ -8,8 +8,8 @@ from __future__ import annotations
 import logging
 import os
 
-os.environ.setdefault("TOOL_PROFILE", "lean")
-os.environ.setdefault("TOOL_PACKS", "core,arch")
+os.environ.setdefault("TOOL_PROFILE", "full")
+os.environ.setdefault("TOOL_PACKS", "all")
 os.environ.setdefault("AUTOCAD_MCP_BACKEND", "auto")
 
 from server import mcp  # noqa: E402  (server.py ở gốc app: fork U-C4N + register cadtroly)

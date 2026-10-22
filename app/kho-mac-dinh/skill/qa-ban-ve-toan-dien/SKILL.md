@@ -18,6 +18,10 @@ Skill này gọi các skill chuyên môn theo bằng chứng của bản vẽ, k
 - `tinh-toan-chiu-luc`: chuẩn bị dữ liệu, kiểm tra đầu vào và lập tính sơ bộ có giả định.
 - `an-toan-ket-cau`: rà soát liên tục cấu kiện và dấu hiệu mất an toàn trên hồ sơ.
 - `kiem-tra-pccc`: rà soát sơ bộ thoát nạn, khoang cháy, tiếp cận và ký hiệu PCCC.
+- `an-toan-cad-chuyen-sau`: kiểm tra an toàn dữ liệu CAD, plot, giao nhận và thay đổi.
+- `thiet-ke-co-khi`: bản vẽ cơ khí, GD&T, dung sai, mối hàn và bảng kê.
+- `thiet-ke-pid`: P&ID, tag, port, topology, line list và instrument index.
+- `thiet-ke-kien-truc`: tường, cửa, phòng, cầu thang, schedule và kiểm tra mặt bằng.
 - `kiem-tra-ban-ve-civil-bridge`: kiểm tra bản vẽ đường, cầu, thoát nước và hạ tầng.
 - `bo-tri-ho-so-thiet-ke`: kiểm tra sheet, mã hồ sơ, revision và trạng thái phát hành.
 

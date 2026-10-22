@@ -6,8 +6,8 @@
       "env": {
         "CADTROLY_KHO": "D:\\CAD-kho",
         "AUTOCAD_MCP_BACKEND": "auto",
-        "TOOL_PROFILE": "lean",
-        "TOOL_PACKS": "core,arch",
+        "TOOL_PROFILE": "full",
+        "TOOL_PACKS": "all",
         "PYTHONIOENCODING": "utf-8"
       }
     }

@@ -13,7 +13,8 @@ giữ nguyên `LICENSE`), lấy tại commit `cdb10638963898b3ea9b10cdd96a2c9bc4
   `state` (từ `cadtroly/mcp/state.py`); cuối file gọi `cadtroly.mcp.tools.register(mcp)` để đăng ký tool cadtroly
   vào **cùng một server** (không mount, không tiền tố).
 - `pyproject.toml`: gộp phụ thuộc, tên gói `cadtroly`, không còn kéo upstream từ GitHub.
-- Mặc định `TOOL_PROFILE=lean`, `TOOL_PACKS=core,arch` khi chạy qua `python -m cadtroly.mcp`.
+- Mặc định triển khai `TOOL_PROFILE=full`, `TOOL_PACKS=all` khi chạy qua
+  `python -m cadtroly.mcp`; test nội bộ có thể dùng profile hẹp riêng.
 
 ## Phần riêng (thư mục `cadtroly/`)
 reader (ezdxf, đo flatten), kho (quy tắc ánh xạ, tiêu chuẩn, skill), takeoff (A/B/C, Excel truy vết), check (bộ quy

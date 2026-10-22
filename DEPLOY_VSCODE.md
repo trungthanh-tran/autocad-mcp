@@ -66,8 +66,8 @@ Trong VSCode:
         "CADTROLY_KHO": "D:\\CAD-kho",
           "DWG_MCP_ALLOWED_ROOTS": "D:\\CAD-kho",
         "AUTOCAD_MCP_BACKEND": "auto",
-        "TOOL_PROFILE": "lean",
-        "TOOL_PACKS": "core,arch",
+        "TOOL_PROFILE": "full",
+        "TOOL_PACKS": "all",
         "PYTHONIOENCODING": "utf-8"
       }
     }
@@ -89,8 +89,8 @@ Trong VSCode:
 | `CADTROLY_KHO` | Thư mục dữ liệu cá nhân: log, Excel, cấu hình và phần bổ sung. Bộ mặc định vẫn nằm trong MCP. | Có thể đổi, nhưng nên giữ `D:\CAD-kho`. |
 | `DWG_MCP_ALLOWED_ROOTS` | Giới hạn thư mục DWG/PDF được MCP phép đọc/ghi; nhiều thư mục ngăn cách bằng dấu `;`. | Nên đặt thư mục dự án. |
 | `AUTOCAD_MCP_BACKEND` | Cách MCP kết nối bản vẽ: `auto` tự chọn, `com` dùng AutoCAD đang mở, `ezdxf` chạy không cần AutoCAD. | Nên giữ `auto`. |
-| `TOOL_PROFILE` | Số lượng chức năng được hiện ra. `lean` gọn hơn; `full` hiện đầy đủ. | Người mới nên giữ `lean`. |
-| `TOOL_PACKS` | Nhóm chức năng được bật. `core,arch` gồm chức năng cơ bản và kiến trúc. | Giữ nguyên; đổi thành `all` khi cần toàn bộ. |
+| `TOOL_PROFILE` | Số lượng chức năng được hiện ra. Bản triển khai dùng `full`. | Giữ `full` để có đầy đủ CAD, cơ khí, P&ID, kiến trúc và QA. |
+| `TOOL_PACKS` | Nhóm chức năng được bật. Bản triển khai dùng `all`. | Giữ `all` để bật toàn bộ nhóm chuyên môn. |
 | `PYTHONIOENCODING` | Mã chữ giúp tiếng Việt hiển thị đúng trong giao tiếp MCP. | Giữ nguyên `utf-8`. |
 
 ### Chỉ cần sửa hai chỗ khi đổi thư mục
