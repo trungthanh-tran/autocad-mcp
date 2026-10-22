@@ -90,6 +90,29 @@ Lệnh chỉ update khi code local sạch; nếu có sửa local chưa commit, l
 Rồi hỏi tự nhiên: *"bóc khối lượng file samples/mat-bang-tang-3.dxf"*, *"kiểm tra bản vẽ theo chuan-cong-ty"*,
 hoặc *"tìm các đối tượng hình học trùng nhau"*.
 
+## Dùng LLM để sửa AutoCAD an toàn
+
+LLM nhận yêu cầu tiếng Việt và gọi MCP; MCP mới là thành phần đọc/sửa bản vẽ.
+Quy trình khuyến nghị:
+
+1. Đọc units, layout, layer, extents và entity trước.
+2. Chụp ảnh trước, toàn bản vẽ hoặc vùng bằng tọa độ/handle.
+3. Sửa trong phạm vi đã nói; việc xóa hàng loạt phải trả về danh sách handle để xác nhận.
+4. Chụp ảnh sau, chạy `drawing_diff`, `validation_check` và `view_render_report`.
+5. Lưu thành file mới, không ghi đè bản gốc nếu chưa được yêu cầu.
+
+Ví dụ:
+
+```text
+Mở file D:\DuAn\mat-bang.dwg, đọc trước và chụp vùng trục A-B/1-2.
+Tách tường, cửa và dimension thành layer riêng. Không đoán đối tượng mờ.
+Tạo checkpoint, sửa, chụp lại, báo handle đã đổi và lưu thành bản mới.
+```
+
+Muốn sửa từng phần, dùng tên vùng, tọa độ hoặc yêu cầu ảnh có handle:
+`view_screenshot(overlay_handles=true)`. Nếu MCP báo type không được render,
+phải kiểm tra lại trong AutoCAD trước khi phát hành.
+
 ## Tool
 
 | Nhóm | Tool | Việc |

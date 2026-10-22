@@ -117,6 +117,78 @@ Mở một cuộc trò chuyện trong VSCode và nói:
 Khi cần chọn bộ layer, dùng `vn` cho quy ước Việt Nam hoặc `ncs` cho quy ước
 quốc tế. Nếu không xác định được, MCP sẽ hỏi lại, không tự chọn bừa.
 
+## E.1. Cách dùng LLM với MCP
+
+LLM là người hiểu yêu cầu và gọi các tool MCP; MCP là lớp thực hiện trong+AutoCAD/DXF. Người dùng không cần nói tên tool, chỉ cần mô tả rõ việc muốn làm.
+
+### Quy trình nên dùng cho mọi lần sửa bản vẽ+
+1. **Khoanh phạm vi**: nói tên file, layout, khu vực, trục hoặc handle.
+2. **Đọc trước**: yêu cầu LLM đọc units, extents, layer, entity và bản vẽ hiện tại.
+3. **Chụp trước**: yêu cầu chụp toàn bản vẽ hoặc một vùng cụ thể.
+4. **Nêu thay đổi**: nói rõ đối tượng nào, đổi gì, layer nào, kích thước nào.
+5. **Xác nhận trước khi ghi**: với xóa, đổi hàng loạt hoặc ghi đè file, yêu cầu
+   LLM liệt kê đối tượng và hỏi lại trước khi thực hiện.
+6. **Sửa trong transaction**: nếu có nhiều bước, yêu cầu tạo checkpoint để có
+   thể rollback khi kết quả không đúng.
+7. **Chụp sau và kiểm tra**: yêu cầu chụp lại đúng vùng, chạy `drawing_diff`,
+   `validation_check` hoặc `view_render_report`.
+8. **Lưu bản mới**: luôn nói rõ đường dẫn và không ghi đè bản gốc nếu chưa yêu cầu.
+
+### Mẫu câu dùng ngay
+
+```text
+Mở file D:\DuAn\mat-bang.dwg. Đọc units, layout, layer và extents trước.
+Chụp ảnh toàn bản vẽ trước khi sửa.
+```
+
+```text
+Trong vùng trục A-B/1-2, tách tường, cửa, nội thất và dimension thành layer
+riêng. Không tự đoán các đối tượng không rõ; đưa chúng vào danh sách REVIEW.
+Chụp vùng này trước và sau khi sửa, rồi liệt kê handle đã thay đổi.
+```
+
+```text
+Chỉ sửa khu vực phòng vệ sinh tại tọa độ (x1,y1)-(x2,y2). Đổi tường sang
+KT-TUONG, cửa sang KT-CUA, giữ nguyên kích thước. Chụp trước, tạo checkpoint,
+sửa, chụp sau, chạy kiểm tra trùng hình học và lưu thành bản mới.
+```
+
+```text
+Tìm tất cả đối tượng hình học trùng nhau. Chưa xóa gì cả; trả về layer, handle,
+tọa độ và đề xuất nhóm nào có thể xóa để tôi xác nhận.
+```
+
+```text
+Chụp riêng layout A1, vùng mặt bằng tầng 1 và vùng chi tiết vệ sinh. Kiểm tra
+preview có type đối tượng nào không được render hoặc cần xem lại thủ công.
+```
+
+### Khi muốn sửa từng phần bằng ảnh
+
+- Nói **tên vùng**: “phòng vệ sinh góc Đông Bắc”, “khu trục A-B/1-2”.
+- Nếu tên vùng chưa đủ, nói **tọa độ góc** hoặc yêu cầu LLM dùng `view_zoom_window`.
+- Nếu cần sửa chính xác, yêu cầu `view_screenshot(overlay_handles=true)` để ảnh
+  có handle; sau đó nói “sửa handle `AB12`”.
+- Với nhiều khu vực, xử lý từng vùng một và chụp ảnh sau mỗi vùng; không yêu cầu
+  sửa cả bản vẽ nếu chưa có bản đồ layer và phạm vi rõ.
+
+### Chọn chế độ kết nối
+
+| Tình huống | Cách dùng |
+|---|---|
+| Sửa trực tiếp AutoCAD | Mở AutoCAD, dùng `AUTOCAD_MCP_BACKEND=auto` hoặc `com`. |
+| Đọc/vẽ DXF không cần AutoCAD | Dùng `AUTOCAD_MCP_BACKEND=ezdxf`. |
+| Cần ảnh trước/sau live | Phải dùng backend COM và AutoCAD đang mở. |
+| PDF raster hoặc kích thước mờ | Yêu cầu LLM đánh dấu `REVIEW`, không tự suy luận. |
+
+### Quy tắc an toàn khi ra lệnh cho LLM
+
+- Không nói “sửa hết cho đúng” nếu chưa chỉ rõ chuẩn, phạm vi và file đầu ra.
+- Không cho phép xóa hàng loạt khi chưa có danh sách handle và ảnh trước.
+- Kích thước mâu thuẫn phải được báo lại, không tự chọn số lớn/nhỏ hơn.
+- Không coi ảnh preview là bằng chứng đầy đủ nếu `view_render_report` báo thiếu type.
+- Sau khi sửa phải yêu cầu báo cáo: file nào, layer nào, handle nào, trước/sau ra sao.
+
 ## F. Các chức năng chính
 
 ### 1. Đọc PDF và dựng DWG
