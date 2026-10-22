@@ -23,7 +23,7 @@ Converter.
 2. Nhấp chuột phải → **Extract All…**.
 3. Chọn nơi dễ nhớ, ví dụ `D:\cadtroly`.
 4. Mở thư mục đã giải nén, vào thư mục `app`.
-5. Nhấp đúp file `Cài đặt.bat`.
+5. Nhấp đúp file `CAI_DAT.bat`.
 
 Chờ đến khi cửa sổ hiện dòng **CÀI ĐẶT HOÀN TẤT**. Nếu Windows hỏi quyền,
 chọn **Yes**.
@@ -229,7 +229,7 @@ Khi có ZIP phiên bản mới:
 1. Đóng VSCode.
 2. Đổi tên thư mục cũ thành `app-cu` để dự phòng.
 3. Giải nén ZIP mới thành thư mục `app`.
-4. Nhấp đúp `Cài đặt.bat`.
+4. Nhấp đúp `CAI_DAT.bat`.
 5. Mở lại VSCode và khởi động lại MCP.
 
 Không xóa thư mục `D:\CAD-kho`; đó là nơi lưu cấu hình, log, Excel và dữ liệu
