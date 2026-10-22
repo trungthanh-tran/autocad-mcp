@@ -127,10 +127,53 @@ WORD_VI = {
     "property": "thuộc tính", "properties": "thuộc tính", "data": "dữ liệu", "table": "bảng",
     "about": "thông tin", "system": "hệ thống", "capability": "khả năng", "available": "khả dụng",
     "circle": "đường tròn", "polygon": "đa giác", "region": "vùng", "leader": "đường dẫn",
+    "kho": "kho", "standard": "tiêu chuẩn", "standards": "tiêu chuẩn", "add": "thêm",
+    "toggle": "bật tắt", "skill": "kỹ năng", "skills": "kỹ năng", "industry": "ngành",
+    "industries": "ngành", "ruleset": "bộ quy tắc", "rulesets": "bộ quy tắc", "rule": "quy tắc",
+    "run": "chạy", "export": "xuất", "import": "nhập", "delete": "xóa", "check": "kiểm tra",
+    "takeoff": "bóc tách khối lượng", "compute": "tính toán", "decide": "quyết định", "propose": "đề xuất",
+    "execute": "thực thi", "report": "báo cáo", "render": "kết xuất", "semantic": "ngữ nghĩa",
+    "vectorize": "chuyển thành véc-tơ", "discipline": "bộ môn", "structural": "kết cấu",
+    "qa": "kiểm tra chất lượng", "pdf": "PDF", "dwg": "DWG", "dxf": "DXF", "screenshot": "ảnh chụp",
+    "extents": "phạm vi", "window": "cửa sổ", "audit": "kiểm tra tổng thể", "redo": "làm lại",
+    "undo": "hoàn tác", "new": "mới", "as": "thành", "plot": "in bản vẽ", "lisp": "LISP",
+    "variable": "biến", "variables": "biến", "command": "lệnh", "opening": "ô cửa", "arch": "kiến trúc",
+    "spec": "đặc tả", "room": "phòng", "rooms": "phòng", "wall": "tường", "stair": "cầu thang",
+    "catalogue": "danh mục", "schedule": "bảng thống kê", "attributes": "thuộc tính", "attribute": "thuộc tính",
+    "settings": "thiết lập", "property": "thuộc tính", "properties": "thuộc tính", "table": "bảng",
 }
 
 
 def vietnamese_name(name: str) -> str:
+    special = {
+        "kho_industries": "liệt kê các ngành trong kho",
+        "kho_standards": "liệt kê tiêu chuẩn trong kho",
+        "kho_standard_add": "thêm tiêu chuẩn vào kho",
+        "kho_standard_delete": "xóa tiêu chuẩn khỏi kho",
+        "kho_skills": "liệt kê kỹ năng trong kho",
+        "kho_skill_add": "thêm kỹ năng vào kho",
+        "kho_skill_toggle": "bật hoặc tắt kỹ năng trong kho",
+        "kho_rules_export": "xuất bộ quy tắc trong kho",
+        "kho_rules_import": "nhập bộ quy tắc vào kho",
+        "kho_status": "kiểm tra trạng thái kho",
+        "check_rulesets": "kiểm tra các bộ quy tắc",
+        "check_run": "chạy kiểm tra bản vẽ",
+        "drawing_entities": "đọc các đối tượng trong bản vẽ",
+        "drawing_read": "đọc bản vẽ",
+        "takeoff_compute": "tính toán khối lượng",
+        "takeoff_decide": "xác nhận quyết định bóc tách",
+        "takeoff_export": "xuất bảng khối lượng",
+        "takeoff_propose": "đề xuất phương án bóc tách",
+        "takeoff_run": "chạy bóc tách khối lượng",
+        "pdf_to_dwg": "chuyển PDF sang DWG",
+        "pdf_vectorize": "chuyển PDF thành hình học véc-tơ",
+        "drawing_apply_discipline_standard": "áp dụng tiêu chuẩn bộ môn cho bản vẽ",
+        "standards_reference": "tra cứu tiêu chuẩn",
+        "structural_qa": "kiểm tra chất lượng kết cấu",
+        "view_render_report": "kết xuất báo cáo hình ảnh",
+    }
+    if name in special:
+        return special[name]
     words = []
     for token in name.split("_"):
         words.append(WORD_VI.get(token, token))
