@@ -24,6 +24,11 @@ TOOL_PACKS=all
 [`tool-inventory.json`](tool-inventory.json) chứa đầy đủ tên, mô tả, tag, cost
 và tham số của 247 tool này.
 
+Để xem hướng dẫn thực hành cho **từng tool** (làm gì, dùng khi nào, tham số,
+ví dụ JSON và lưu ý an toàn), mở
+[`MCP-TOOL-USAGE.md`](MCP-TOOL-USAGE.md). Đây là tài liệu sinh từ registry
+đang chạy và bao gồm cả tool mở rộng của cadtroly.
+
 | Nhóm | Số tool |
 |---|---:|
 | analysis | 12 |

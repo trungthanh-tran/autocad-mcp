@@ -364,7 +364,8 @@ Danh mục chi tiết tiêu chuẩn an toàn theo 18 ngành nằm tại
 
 Catalog đúng của project cadtroly là **272 tool đăng ký, 267 tool đang bật,
 9 resources và 5 prompt templates**. Chi tiết nằm tại
-`app\\docs\\MCP-TOOL-CATALOG.md`. Con số **247 tools · 8 resources** trong
+`app\\docs\\MCP-TOOL-CATALOG.md`. Hướng dẫn chi tiết từng tool nằm trong
+`app\\docs\\MCP-TOOL-USAGE.md`. Con số **247 tools · 8 resources** trong
 `app\\docs\\tool-inventory.json` chỉ là phần upstream U-C4N.
 
 Các câu lệnh chuyên môn có thể dùng trực tiếp:
