@@ -6,6 +6,10 @@ version: 0.1
 
 # Kiểm tra kết cấu và tối ưu bản vẽ
 
+Skill này là một nhánh của `qa-ban-ve-toan-dien`; khi kiểm tra kết cấu cần
+kết hợp thêm `quan-tri-layer-cad` và `annotation-dim-qa` để không bỏ sót layer,
+dim, text và khả năng in.
+
 ## Kiểm tra tự động
 
 - `error`: nét kết cấu zero-length hoặc lỗi hình học chắc chắn cần sửa.

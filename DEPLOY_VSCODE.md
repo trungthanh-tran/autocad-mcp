@@ -266,6 +266,12 @@ Skill nằm trong `code\\kho-mac-dinh\\skill` và được MCP đọc trực ti�
 - `bo-tri-ho-so-thiet-ke`: quản lý tên file, sheet và revision.
 - `kiem-tra-ban-ve-civil-bridge`: kiểm tra bản vẽ đường và cầu.
 - `kiem-tra-ket-cau`: kiểm tra layer/hình học kết cấu và đề xuất tối ưu.
+- `qa-ban-ve-toan-dien`: điều phối QA PDF/DWG/DXF, layer, annotation, kết cấu,
+  đường-cầu, hồ sơ và quy trình sửa trước/sau.
+- `tinh-toan-chiu-luc`: chuẩn bị dữ liệu và tính sơ bộ có giả định, không thay thế
+  hồ sơ tính kết cấu được phê duyệt.
+- `an-toan-ket-cau`: rà soát liên tục cấu kiện và dấu hiệu mất an toàn.
+- `kiem-tra-pccc`: rà soát sơ bộ lối thoát, khoang cháy, tiếp cận và ký hiệu PCCC.
 - `bien-phap-thi-cong-vn`: biện pháp thi công Việt Nam.
 
 Tên thư mục kỹ thuật dùng ASCII; nội dung hướng dẫn và trao đổi với người dùng
@@ -293,6 +299,19 @@ vẫn bằng tiếng Việt.
 | Hệ thống | Trạng thái | “MCP đang chạy bằng AutoCAD hay DXF?” | Backend, version, kho dữ liệu và tình trạng kết nối. |
 | Hệ thống | Cập nhật | “Cập nhật MCP.” | Kéo bản mới và cài package theo file lock. |
 | Hệ thống | Báo cáo render | “Kiểm tra preview có thiếu đối tượng không.” | Thống kê type đã render và type cần kiểm tra thủ công. |
+
+### Các use case chính
+
+| Use case | Ví dụ yêu cầu | Kết quả |
+|---|---|---|
+| Kiểm tra trước phát hành | “Kiểm tra toàn bộ bản vẽ theo QA.” | error, warning, review, đề xuất và handle nguồn. |
+| PDF → DWG | “Đọc PDF, dựng DWG A1 và giữ toàn bộ kích thước.” | DWG có thể sửa, layout, layer, source map và báo cáo QA. |
+| Tách layer | “Tách tường, cột, nội thất, dim, text và hatch.” | Bảng ánh xạ layer, các layer mới và đối tượng chưa chắc chắn. |
+| Sửa DWG | “Đổi layer khu vực này, chụp trước/sau và kiểm tra diff.” | Bản sao đã sửa, ảnh trước/sau và báo cáo thay đổi. |
+| Tư vấn thiết kế | “Gợi ý bố trí mặt bằng 8x15 m.” | Phương án sơ bộ, giả định và phần cần kỹ sư xác nhận. |
+| Tự vẽ | “Vẽ mặt bằng theo kích thước và yêu cầu này.” | Hình học, layer, dim, text và layout; thiếu dữ liệu được đánh dấu review. |
+| Bóc khối lượng | “Đếm cửa, thiết bị và chiều dài tường, xuất Excel.” | Số lượng có layer, handle, nguồn đo và độ tin cậy. |
+| Tối ưu CAD | “Tìm đối tượng trùng, layer rỗng và lỗi ByLayer.” | Danh sách lỗi/cảnh báo và đề xuất dọn dẹp không phá hủy. |
 
 ### Các cột trong bảng Excel khối lượng
 
