@@ -1,4 +1,4 @@
-"""Append the complete live tool list to the Vietnamese end-user guide."""
+"""Append the complete live tool list to docs/6-danh-muc-chuc-nang.md (Vietnamese end-user catalog)."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DOC = ROOT.parent / "HUONG-DAN-ENDUSER.md"
+DOC = ROOT.parent / "docs" / "6-danh-muc-chuc-nang.md"
 INVENTORY = ROOT / "docs" / "tool-inventory.json"
 MARKER = "<!-- GENERATED-ALL-TOOLS -->"
 
@@ -275,10 +275,10 @@ def main() -> None:
             detail_sections.append(f"### {group_name}")
             detail_sections.extend(details_by_industry[industry][group_name])
     generated = (
-        f"{MARKER}\n\n## 11. Mục lục chức năng theo ngành\n\n"
+        f"{MARKER}\n\n## Mục lục theo ngành\n\n"
         f"Có **{len(live)} chức năng chính**, gồm **247 chức năng nền tảng** và chức năng mở rộng. Tên chuẩn mới dùng tiếng Anh; các tên cũ vẫn được MCP hỗ trợ tương thích nhưng không liệt kê trong tài liệu enduser. Các chức năng được xếp theo ngành; chức năng dùng chung nằm ở nhóm đầu. Bấm vào tên để đi đến phần hướng dẫn tương ứng.\n\n"
         + "\n".join(index_rows)
-        + "\n\n## 12. Hướng dẫn chi tiết từng chức năng\n\n"
+        + "\n\n## Chi tiết từng chức năng\n\n"
         + "\n".join(detail_sections)
         + "\n"
     )

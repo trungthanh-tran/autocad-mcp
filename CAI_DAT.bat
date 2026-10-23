@@ -54,5 +54,5 @@ if errorlevel 1 (
 .venv\Scripts\python.exe -m cadtroly.cli init
 echo.
 echo CAI DAT HOAN TAT - cadtroly 0.2.0
-echo Bay gio mo VSCode va lam theo DEPLOY_VSCODE.md.
+echo Bay gio mo VSCode va lam theo docs\2-ket-noi-client.md.
 pause
