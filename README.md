@@ -23,7 +23,8 @@ pip install -e .
 python -m cadtroly.mcp        # client MCP sẽ tự gọi lệnh này
 ```
 
-Khai báo với client (Claude Desktop, Gemini CLI, Cursor):
+In sẵn cấu hình cho client với đường dẫn máy bạn: `python -m cadtroly.cli connect` (thêm `--prompt` để lấy đoạn dán
+cho LLM nhờ tự cấu hình). Hoặc khai báo tay (Claude Desktop, Gemini CLI, Cursor):
 
 ```json
 {"mcpServers": {"cadtroly": {"command": "python", "args": ["-m", "cadtroly.mcp"], "cwd": "D:\\autocad-mcp\\app",

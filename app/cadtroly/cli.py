@@ -7,6 +7,7 @@
   cadtroly sample [<out.dxf>]               sinh bản vẽ mẫu
   cadtroly mcp                              chạy MCP server (stdio)
   cadtroly update                           cập nhật code và package từ GitHub
+  cadtroly connect [--client X] [--prompt]  in lệnh/cấu hình nối MCP cho client, hoặc prompt dán cho LLM
   cadtroly ui [--port 8765] [--browser]      giao diện người dùng (cửa sổ, hoặc trình duyệt)
 """
 from __future__ import annotations
@@ -18,6 +19,7 @@ import sys
 from pathlib import Path
 
 from .config import Config
+from .connect import CLIENTS, connect_text
 from .kho.store import Kho
 
 
@@ -40,6 +42,9 @@ def main(argv=None) -> int:
     p = sub.add_parser("sample"); p.add_argument("out", nargs="?", default="samples/mat-bang-tang-3.dxf")
     sub.add_parser("mcp")
     sub.add_parser("update")
+    p = sub.add_parser("connect")
+    p.add_argument("--client", default="all", choices=CLIENTS)
+    p.add_argument("--prompt", action="store_true", help="in một prompt hoàn chỉnh để dán cho LLM/agent nhờ tự cấu hình")
     p = sub.add_parser("ui"); p.add_argument("--port", type=int, default=8765); p.add_argument("--browser", action="store_true")
     a = ap.parse_args(argv)
 
@@ -55,6 +60,9 @@ def main(argv=None) -> int:
     if a.cmd == "ui":
         from .web.app import serve
         serve(port=a.port, window=not a.browser)
+        return 0
+    if a.cmd == "connect":
+        print(connect_text(cfg, a.client, a.prompt))
         return 0
     if a.cmd == "mcp":
         from .mcp.bootstrap import ensure_runtime_dependencies

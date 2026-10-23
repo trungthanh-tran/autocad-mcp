@@ -5,8 +5,22 @@
 MCP `cadtroly` chạy qua **stdio**: client tự khởi động lệnh `python -m cadtroly.mcp` và nói chuyện với nó. Bạn chỉ cần
 khai báo lệnh này trong cấu hình của client.
 
-Trong mọi ví dụ dưới đây, đổi `D:\cadtroly\code` thành nơi bạn cài (thư mục chứa `pyproject.toml`). Trong JSON, mỗi dấu
-`\` phải viết thành `\\`.
+## Cách nhanh: sinh sẵn cấu hình
+
+Trong thư mục `code` (bản ZIP thì dùng `.venv\Scripts\python.exe`):
+
+```bash
+python -m cadtroly.cli connect                       # mọi client, đường dẫn thật của máy này
+python -m cadtroly.cli connect --client vscode       # vscode | claude-code | claude-desktop | gemini | json
+python -m cadtroly.cli connect --prompt | clip       # copy một đoạn nhờ LLM tự cấu hình
+```
+
+Lệnh tự điền python, thư mục `code`, kho và gấp đôi `\` trong JSON. `--prompt` in một đoạn để dán vào Claude, Gemini,
+Copilot… — nó nhờ LLM đăng ký server vào công cụ của chính nó rồi gọi `knowledge_status` để kiểm tra. Lệnh
+`gemini mcp add` chưa thử trên máy thật; báo lỗi cú pháp thì dùng `--client json`.
+
+Muốn tự viết tay thì làm theo các mục dưới. Đổi `D:\cadtroly\code` thành nơi bạn cài (thư mục chứa `pyproject.toml`).
+Trong JSON, mỗi dấu `\` phải viết thành `\\`.
 
 ## VS Code (GitHub Copilot)
 

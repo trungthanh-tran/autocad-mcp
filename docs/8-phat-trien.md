@@ -33,6 +33,7 @@ Tuỳ chọn chung: `--kho <thư mục>` (mặc định `CADTROLY_KHO`).
 | `cadtroly check <dxf> <ruleset>` | Kiểm tra theo bộ quy tắc (`.rules.json` hoặc id trong kho) |
 | `cadtroly mcp` | Chạy MCP server (stdio), giống `python -m cadtroly.mcp` |
 | `cadtroly update` | Cập nhật code và gói từ GitHub; dừng nếu có sửa chưa commit |
+| `cadtroly connect [--client X] [--prompt]` | In cấu hình nối MCP cho VS Code/Claude/Gemini/Cursor với đường dẫn máy này, hoặc prompt dán cho LLM |
 | `cadtroly ui [--port 8765] [--browser]` | Giao diện web cũ, xem dưới |
 
 ## Test
