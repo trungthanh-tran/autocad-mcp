@@ -4,8 +4,8 @@ Tài liệu này mô tả **từng tool đang đăng ký trong project cadtroly*
 
 ## Tổng quan
 
-- Registered tools: **282**
-- Enabled với `TOOL_PROFILE=full`, `TOOL_PACKS=all`: **277**
+- Registered tools: **285**
+- Enabled với `TOOL_PROFILE=full`, `TOOL_PACKS=all`: **280**
 - Hidden/giới hạn backend: **5**
 - Resources: **9**; prompt templates: **5**
 - Tool upstream trong `tool-inventory.json`: **247**; phần còn lại là extension và alias tương thích của project.
@@ -317,6 +317,29 @@ Capped at MAX_LIST_LIMIT (default 5000); as with analysis_select_by_layer,
 ```
 
 **Lưu ý:** Chỉ đọc; có thể dùng trước khi chỉnh sửa.
+
+### `approval_execute`
+
+**Nhóm:** `cadtroly`
+**Làm gì:** Chạy thao tác phá huỷ đã được người dùng đồng ý, đúng tham số đã xem trước. Token dùng một lần.
+
+**Dùng khi nào:** Khi cần dùng chức năng `approval_execute` trong quy trình CAD.
+
+**Tham số**
+
+| Tên | Kiểu | Bắt buộc | Mặc định | Ý nghĩa |
+|---|---|---:|---|---|
+| `token` | `string` | có | `—` | Token từ kết quả approval_required, chỉ dùng sau khi người dùng đồng ý |
+
+**Ví dụ gọi**
+
+```json
+{
+  "token": "example"
+}
+```
+
+**Lưu ý:** Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng.
 
 ### `arch_catalogue_insert`
 
@@ -8238,6 +8261,7 @@ slot in ezdxf).
 | `cach_tinh` | `string` | có | `—` | — |
 | `tham_so` | `any` | không | `None` | — |
 | `save_rule` | `boolean` | không | `True` | Lưu thành quy tắc đơn vị để lần sau tự áp |
+| `ma_dinh_muc` | `string` | không | `` | Mã hiệu định mức TT 38/2026/TT-BXD, ví dụ do kỹ sư đọc từ bảng định mức; không tự bịa |
 
 **Ví dụ gọi**
 
@@ -8250,7 +8274,36 @@ slot in ezdxf).
   "don_vi": "example",
   "cach_tinh": "example",
   "tham_so": null,
-  "save_rule": true
+  "save_rule": true,
+  "ma_dinh_muc": ""
+}
+```
+
+**Lưu ý:** Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng.
+
+### `takeoff_earthwork`
+
+**Nhóm:** `cadtroly`
+**Làm gì:** Đào đắp từ trắc ngang: đọc text lý trình (Km0+100) và diện tích (F đào = …, ô 'Diện tích đắp'),
+tính V = (F1+F2)/2 × L giữa hai trắc ngang liền kề. Mỗi số có handle nguồn và tin cậy A/B/C.
+
+**Dùng khi nào:** Khi cần dùng chức năng `takeoff_earthwork` trong quy trình CAD.
+
+**Tham số**
+
+| Tên | Kiểu | Bắt buộc | Mặc định | Ý nghĩa |
+|---|---|---:|---|---|
+| `path` | `string` | có | `—` | Bản vẽ trắc ngang DXF/DWG (Nova-TDN, bản vẽ tay…) |
+| `out` | `any` | không | `None` | File .xlsx; bỏ trống = không xuất, chỉ trả số liệu |
+| `ma_dinh_muc` | `any` | không | `None` | Mã định mức theo loại: {'dao': '...', 'dap_k95': '...'} |
+
+**Ví dụ gọi**
+
+```json
+{
+  "path": "D:\\DuAn\\drawing.dwg",
+  "out": null,
+  "ma_dinh_muc": null
 }
 ```
 
@@ -8301,6 +8354,34 @@ slot in ezdxf).
 ```json
 {
   "path": "D:\\DuAn\\drawing.dwg"
+}
+```
+
+**Lưu ý:** Có thể thay đổi bản vẽ hoặc trạng thái; nên chụp/đọc bản vẽ trước và lưu ra file đích riêng.
+
+### `takeoff_rebar`
+
+**Nhóm:** `cadtroly`
+**Làm gì:** Thống kê thép từ ghi chú 'N1 12Ø16 L=5200' / '6%%c22 L=12.5': số thanh × dài × 0.0061654·d².
+Ghi chú trùng ở nhiều hình chiếu chỉ tính một lần (B); thiếu số thanh hoặc L → C, để trống.
+
+**Dùng khi nào:** Khi cần dùng chức năng `takeoff_rebar` trong quy trình CAD.
+
+**Tham số**
+
+| Tên | Kiểu | Bắt buộc | Mặc định | Ý nghĩa |
+|---|---|---:|---|---|
+| `path` | `string` | có | `—` | Bản vẽ cốt thép DXF/DWG |
+| `out` | `any` | không | `None` | File .xlsx; bỏ trống = không xuất |
+| `ma_dinh_muc` | `any` | không | `None` | Mã định mức theo đường kính: {'16': '...'} |
+
+**Ví dụ gọi**
+
+```json
+{
+  "path": "D:\\DuAn\\drawing.dwg",
+  "out": null,
+  "ma_dinh_muc": null
 }
 ```
 

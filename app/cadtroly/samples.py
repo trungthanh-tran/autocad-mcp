@@ -77,3 +77,50 @@ if __name__ == "__main__":
     import sys
     p = make_sample(sys.argv[1] if len(sys.argv) > 1 else "samples/mat-bang-tang-3.dxf")
     print(p)
+
+
+def make_cross_sections(out: str | Path) -> Path:
+    """Bốn trắc ngang Km0+000/020/050/100, diện tích ghi đủ kiểu: inline, ô nhãn + ô số, thiếu một loại."""
+    out = Path(out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    doc = ezdxf.new("R2018", setup=True)
+    doc.header["$INSUNITS"] = 6  # m
+    msp = doc.modelspace()
+    t = {"height": 2.5, "layer": "TEXT"}
+
+    def txt(s, x, y):
+        msp.add_text(s, dxfattribs=t).set_placement((x, y))
+
+    for i, (km, items) in enumerate([
+        ("Km0+000", ["F đào = 10.00 m2", "F đắp = 2.00"]),
+        ("KM0+020", ["FĐào=14", "FĐắp = 4,0"]),
+        ("Km0+050", None),
+        ("Km0+100", ["F đào = 0"]),
+    ]):
+        x = i * 200
+        msp.add_lwpolyline([(x - 40, 0), (x - 10, 5), (x + 10, 5), (x + 40, 0)], dxfattribs={"layer": "MAT-CAT"})
+        txt(km, x - 10, 40)
+        if items:
+            for j, s in enumerate(items):
+                txt(s, x - 20, -20 - 6 * j)
+        else:   # kiểu bảng: ô nhãn và ô số tách rời
+            txt("Diện tích đào (m2)", x - 40, -20)
+            txt("6.00", x + 20, -20)
+            txt("Diện tích đắp", x - 40, -26)
+            txt("8.00", x + 20, -26)
+    doc.saveas(out)
+    return out
+
+
+def make_rebar_notes(out: str | Path) -> Path:
+    """Ghi chú cốt thép: đủ số thanh + L, %%c, nhân x2, trùng ở hai hình chiếu, chỉ có bước, thiếu L."""
+    out = Path(out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    doc = ezdxf.new("R2018", setup=True)
+    doc.header["$INSUNITS"] = 4  # mm
+    msp = doc.modelspace()
+    for i, s in enumerate(["N1 12Ø16 L=5200", "N1 12Ø16 L=5200", "N2 6%%c22 L=12.5",
+                           "(3) 2x10Φ12 L=3000", "N4 Ø10 a200", "N5 8Ø25", "MẶT CẮT 1-1"]):
+        msp.add_text(s, dxfattribs={"height": 250}).set_placement((0, -i * 600))
+    doc.saveas(out)
+    return out

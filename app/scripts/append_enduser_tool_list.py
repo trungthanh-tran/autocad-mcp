@@ -167,6 +167,9 @@ def vietnamese_name(name: str) -> str:
         "takeoff_export": "xuất bảng khối lượng",
         "takeoff_propose": "đề xuất phương án bóc tách",
         "takeoff_run": "chạy bóc tách khối lượng",
+        "takeoff_earthwork": "bóc khối lượng đào đắp từ trắc ngang",
+        "takeoff_rebar": "thống kê cốt thép từ ghi chú",
+        "approval_execute": "thực hiện thao tác đã được đồng ý",
         "pdf_to_dwg": "chuyển PDF sang DWG",
         "pdf_vectorize": "chuyển PDF thành hình học véc-tơ",
         "drawing_apply_discipline_standard": "áp dụng tiêu chuẩn bộ môn cho bản vẽ",
@@ -192,6 +195,13 @@ def request_example(name: str, group: str) -> str:
         return "Phóng to riêng vùng mặt bằng tầng 1 để nhìn rõ cửa, thiết bị và kích thước."
     if name == "view_zoom_extents":
         return "Thu phóng để toàn bộ đối tượng của bản vẽ nằm vừa trên màn hình."
+    if name == "takeoff_earthwork":
+        return ("Bóc đào đắp file trắc ngang D:\\DuAn\\tn.dwg ra Excel; liệt kê trắc ngang không có diện tích "
+                "và các đoạn tin cậy B.")
+    if name == "takeoff_rebar":
+        return "Thống kê thép bản vẽ trụ T1 theo đường kính, chỉ ra ghi chú thiếu số thanh hoặc chiều dài."
+    if name == "approval_execute":
+        return "Tôi đồng ý xoá các đối tượng vừa liệt kê, thực hiện đi."
     action = vietnamese_name(name)
     templates = {
         "analysis": f"Đọc bản vẽ và báo cáo {action}; không sửa file gốc.",

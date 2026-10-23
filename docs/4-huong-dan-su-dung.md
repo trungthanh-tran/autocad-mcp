@@ -71,6 +71,9 @@ Tạo checkpoint, sửa, chụp lại, báo handle đã đổi và lưu thành b
 | Cơ khí, P&ID | Tạo bản vẽ cơ khí/P&ID theo mô tả, dùng layer và ký hiệu đúng ngành. Chưa có tiêu chuẩn thì hỏi trước. |
 | Dọn dẹp | Tìm đối tượng hình học trùng nhau. Chưa xoá; trả layer, handle, toạ độ và đề xuất nhóm nên xoá để tôi xác nhận. |
 | Lưu, dọn file tạm | Chuyển PDF thành DWG, lưu kết quả, xoá DXF và file tạm nhưng giữ PDF nguồn. |
+| Đào đắp (cầu đường) | Bóc đào đắp file trắc ngang `D:\DuAn\tn.dwg` ra Excel. Liệt kê trắc ngang không có diện tích và đoạn tin cậy B. |
+| Thống kê thép | Thống kê thép bản vẽ trụ T1 theo đường kính, đối chiếu với bảng thống kê trên bản vẽ nếu có. |
+| Kiểm tra trước | Kiểm tra sức khoẻ bản vẽ này trước khi bóc: xref, đơn vị, layer, đối tượng lỗi. Không sửa gì. |
 | Kết cấu, PCCC | Kiểm tra sơ bộ lối thoát nạn, cửa thoát, hành lang, cầu thang, ký hiệu PCCC. Thiếu tiêu chuẩn hoặc số người thì hỏi, không tự điền. |
 
 Chuẩn layer: `KT-`, `KC-`, `HT-`, `CAU-` là quy ước Việt Nam (`vn`); `A-`, `C-`, `S-` là NCS quốc tế (`ncs`). Không đủ bằng
@@ -93,6 +96,11 @@ dữ liệu CAD. Nếu `view_render_report` báo có loại đối tượng khô
 Ảnh live trước/sau cần backend COM và AutoCAD đang mở.
 
 ## An toàn
+
+Thao tác phá huỷ (xoá, purge, ghi đè file, lệnh/LISP thô…) luôn dừng lại chờ bạn đồng ý: client hiện hộp
+**Đồng ý / Huỷ**, hoặc LLM đưa nội dung sẽ làm và hỏi bạn. Đọc kỹ rồi mới đồng ý — xem
+[Cấu hình](3-cau-hinh.md#duyệt-thao-tác-phá-huỷ).
+
 
 - Luôn lưu sang file mới khi chưa kiểm tra kết quả.
 - Không nói "sửa hết cho đúng" khi chưa chỉ rõ chuẩn, phạm vi và file đầu ra.

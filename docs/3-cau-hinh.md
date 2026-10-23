@@ -34,9 +34,24 @@ Ngoài ra chỉ có `CAD-kho/config.json` cho vài tuỳ chọn AutoCAD.
 | `CADTROLY_KHO` | `~/CAD-kho` | Kho người dùng: log, Excel xuất ra, tiêu chuẩn/quy tắc/skill bổ sung |
 | `DWG_MCP_ALLOWED_ROOTS` | không giới hạn | Thư mục DWG/PDF được phép đọc/ghi, ngăn cách bằng `;`. Nên đặt |
 | `ALLOWED_PATHS` | không giới hạn | Giới hạn đường dẫn mở/lưu của tool upstream, ngăn cách bằng `,` |
+| `CADTROLY_APPROVAL` | `auto` | Duyệt thao tác phá huỷ, xem [dưới](#duyệt-thao-tác-phá-huỷ) |
 | `DANGEROUS_COMMANDS_ENABLED` | `false` | `true` tắt bộ lọc an toàn cho lệnh/LISP thô. **Không nên bật** |
 | `CADTROLY_AUTO_INSTALL` | `true` | Tự cài gói còn thiếu khi khởi động |
 | `PYTHONIOENCODING` | — | Đặt `utf-8` để tiếng Việt hiển thị đúng |
+
+## Duyệt thao tác phá huỷ
+
+Xoá đối tượng/layer/layout, phá block, purge, lệnh AutoCAD/LISP thô, đóng bản vẽ, ghi đè file đã có, thay text
+hàng loạt, xref (trừ `list`) và `cad_batch` có bước như trên **không chạy** cho tới khi người dùng đồng ý.
+
+| `CADTROLY_APPROVAL` | Cách duyệt |
+|---|---|
+| `auto` (mặc định) | Client hỗ trợ elicitation → hộp **Đồng ý / Huỷ** hiện thẳng cho người dùng. Không hỗ trợ → như `token` |
+| `token` | Tool trả về nội dung sẽ làm + token. LLM phải cho người dùng xem; người dùng đồng ý thì LLM gọi `approval_execute(token)`. Token dùng một lần, hết hạn sau 5 phút, chạy đúng tham số đã xem (LLM không đổi được) |
+| `off` | Tắt. Chỉ dùng cho script tự động có kiểm soát |
+
+Lưu file sang đường dẫn mới, tạo/vẽ/sửa thông thường và mọi tool chỉ đọc không cần duyệt. Mọi lần yêu cầu, đồng ý,
+từ chối đều ghi vào `CAD-kho/log`.
 
 ## Giới hạn, timeout, log
 

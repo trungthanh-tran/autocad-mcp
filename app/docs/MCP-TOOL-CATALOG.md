@@ -12,8 +12,8 @@ TOOL_PACKS=all
 
 | Thành phần | Số lượng | Ý nghĩa |
 |---|---:|---|
-| Tool đã đăng ký | **282** | 272 tool chính và 10 alias tương thích cũ |
-| Tool đang bật | **277** | Tool client có thể gọi ở `full/all` |
+| Tool đã đăng ký | **285** | 275 tool chính và 10 alias tương thích cũ |
+| Tool đang bật | **280** | Tool client có thể gọi ở `full/all` |
 | Tool bị ẩn/giới hạn | **5** | Cần điều kiện 3D hoặc capability tương ứng |
 | Resource | **9** | 8 upstream + resource skill của cadtroly |
 | Prompt template | **5** | Prompt dựng sơ đồ/mặt bằng/cơ khí/P&ID |
@@ -76,12 +76,20 @@ nhưng không có thêm logic xử lý.
 5. `structural_qa` — kiểm tra layer/hình học kết cấu và trả error/warning.
 6. `view_render_report` — báo cáo loại đối tượng có thể thiếu trong preview.
 
-## 19 tool logic riêng của cadtroly
+## 22 tool logic riêng của cadtroly
 
 ### Đọc và bóc khối lượng
 
 `drawing_read`, `drawing_entities`, `takeoff_propose`, `takeoff_decide`,
 `takeoff_compute`, `takeoff_export`, `takeoff_run`.
+
+### Cầu đường
+
+`takeoff_earthwork` (đào đắp từ trắc ngang), `takeoff_rebar` (thống kê thép từ ghi chú).
+
+### Duyệt thao tác phá huỷ
+
+`approval_execute` — chạy thao tác đã được người dùng đồng ý (xem `docs/3-cau-hinh.md`, mục duyệt).
 
 ### Kiểm tra và quản lý tiêu chuẩn
 

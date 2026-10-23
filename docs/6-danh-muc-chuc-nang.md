@@ -15,7 +15,7 @@ Phần dưới được sinh tự động từ registry đang chạy bằng `pyt
 
 ## Mục lục theo ngành
 
-Có **272 chức năng chính**, gồm **247 chức năng nền tảng** và chức năng mở rộng. Tên chuẩn mới dùng tiếng Anh; các tên cũ vẫn được MCP hỗ trợ tương thích nhưng không liệt kê trong tài liệu enduser. Các chức năng được xếp theo ngành; chức năng dùng chung nằm ở nhóm đầu. Bấm vào tên để đi đến phần hướng dẫn tương ứng.
+Có **275 chức năng chính**, gồm **247 chức năng nền tảng** và chức năng mở rộng. Tên chuẩn mới dùng tiếng Anh; các tên cũ vẫn được MCP hỗ trợ tương thích nhưng không liệt kê trong tài liệu enduser. Các chức năng được xếp theo ngành; chức năng dùng chung nằm ở nhóm đầu. Bấm vào tên để đi đến phần hướng dẫn tương ứng.
 
 ### Dùng chung
 _Các chức năng có thể dùng cho hầu hết bản vẽ và ngành kỹ thuật._
@@ -309,6 +309,7 @@ _Các chức năng nâng cao cần kiểm tra khả năng backend trước khi d
 ### Mở rộng cadtroly
 _Các chức năng riêng của project cadtroly như tiêu chuẩn, QA và khối lượng._
 #### mở rộng cadtroly
+- [`approval_execute`](#approval_execute) — mở rộng cadtroly: dùng để thực hiện thao tác đã được đồng ý trong bản vẽ CAD.
 - [`check_rulesets`](#check_rulesets) — mở rộng cadtroly: dùng để kiểm tra các bộ quy tắc trong bản vẽ CAD.
 - [`check_run`](#check_run) — mở rộng cadtroly: dùng để chạy kiểm tra bản vẽ trong bản vẽ CAD.
 - [`drawing_apply_discipline_standard`](#drawing_apply_discipline_standard) — mở rộng cadtroly: dùng để áp dụng tiêu chuẩn bộ môn cho bản vẽ trong bản vẽ CAD.
@@ -330,8 +331,10 @@ _Các chức năng riêng của project cadtroly như tiêu chuẩn, QA và kh�
 - [`structural_qa`](#structural_qa) — mở rộng cadtroly: dùng để kiểm tra chất lượng kết cấu trong bản vẽ CAD.
 - [`takeoff_compute`](#takeoff_compute) — mở rộng cadtroly: dùng để tính toán khối lượng trong bản vẽ CAD.
 - [`takeoff_decide`](#takeoff_decide) — mở rộng cadtroly: dùng để xác nhận quyết định bóc tách trong bản vẽ CAD.
+- [`takeoff_earthwork`](#takeoff_earthwork) — mở rộng cadtroly: dùng để bóc khối lượng đào đắp từ trắc ngang trong bản vẽ CAD.
 - [`takeoff_export`](#takeoff_export) — mở rộng cadtroly: dùng để xuất bảng khối lượng trong bản vẽ CAD.
 - [`takeoff_propose`](#takeoff_propose) — mở rộng cadtroly: dùng để đề xuất phương án bóc tách trong bản vẽ CAD.
+- [`takeoff_rebar`](#takeoff_rebar) — mở rộng cadtroly: dùng để thống kê cốt thép từ ghi chú trong bản vẽ CAD.
 - [`takeoff_run`](#takeoff_run) — mở rộng cadtroly: dùng để chạy bóc tách khối lượng trong bản vẽ CAD.
 - [`view_render_report`](#view_render_report) — mở rộng cadtroly: dùng để kết xuất báo cáo hình ảnh trong bản vẽ CAD.
 
@@ -2605,6 +2608,15 @@ Các chức năng nâng cao cần kiểm tra khả năng backend trước khi d�
 ## Mở rộng cadtroly
 Các chức năng riêng của project cadtroly như tiêu chuẩn, QA và khối lượng.
 ### mở rộng cadtroly
+#### approval_execute
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác thực hiện thao tác đã được đồng ý trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Tôi đồng ý xoá các đối tượng vừa liệt kê, thực hiện đi.
+
 #### check_rulesets
 
 - **Nhóm:** mở rộng cadtroly
@@ -2794,6 +2806,15 @@ Các chức năng riêng của project cadtroly như tiêu chuẩn, QA và khố
 
   > Thực hiện xác nhận quyết định bóc tách trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
 
+#### takeoff_earthwork
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác bóc khối lượng đào đắp từ trắc ngang trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Bóc đào đắp file trắc ngang D:\DuAn\tn.dwg ra Excel; liệt kê trắc ngang không có diện tích và các đoạn tin cậy B.
+
 #### takeoff_export
 
 - **Nhóm:** mở rộng cadtroly
@@ -2811,6 +2832,15 @@ Các chức năng riêng của project cadtroly như tiêu chuẩn, QA và khố
 - **Ví dụ gõ vào LLM:**
 
   > Thực hiện đề xuất phương án bóc tách trên bản vẽ, báo cáo kết quả và không ghi đè file gốc.
+
+#### takeoff_rebar
+
+- **Nhóm:** mở rộng cadtroly
+- **Làm gì:** Thực hiện thao tác thống kê cốt thép từ ghi chú trong bản vẽ CAD.
+- **Dùng khi nào:** Khi cần chức năng mở rộng của cadtroly.
+- **Ví dụ gõ vào LLM:**
+
+  > Thống kê thép bản vẽ trụ T1 theo đường kính, chỉ ra ghi chú thiếu số thanh hoặc chiều dài.
 
 #### takeoff_run
 

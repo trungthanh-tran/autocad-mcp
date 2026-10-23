@@ -20,6 +20,8 @@ def pin_headless_backend(request, monkeypatch):
     Opt out with ``@pytest.mark.live_backend`` for a test that deliberately
     exercises backend selection.
     """
+    # cadtroly: bước duyệt thao tác phá huỷ (cadtroly/mcp/approval.py) có test riêng; suite upstream gọi thẳng.
+    monkeypatch.setenv("CADTROLY_APPROVAL", "off")
     if request.node.get_closest_marker("live_backend"):
         return
     monkeypatch.setenv("AUTOCAD_MCP_BACKEND", "ezdxf")

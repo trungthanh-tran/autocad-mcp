@@ -6,9 +6,11 @@ AutoCAD DWG/DXF/PDF bằng tiếng Việt. Mô hình AI nằm ở phía client; 
 Fork của [U-C4N/Autocad-MCP](https://github.com/U-C4N/Autocad-MCP) (MIT) cộng lớp riêng `cadtroly`:
 
 - **PDF → DWG** có phân lớp theo bộ môn, chuẩn layer Việt Nam (`KT-`, `KC-`…) hoặc NCS quốc tế.
-- **Bóc khối lượng** ra Excel có truy vết handle và độ tin cậy A/B/C.
+- **Bóc khối lượng** ra Excel có truy vết handle, độ tin cậy A/B/C và cột mã định mức (TT 38/2026/TT-BXD).
+- **Cầu đường không cần Civil 3D**: đào đắp từ trắc ngang (Nova-TDN, vẽ tay), thống kê thép từ ghi chú.
+- **Duyệt thao tác phá huỷ** trong server: xoá, ghi đè, lệnh thô chỉ chạy khi người dùng đồng ý.
 - **Kiểm tra bản vẽ** theo bộ quy tắc, tiêu chuẩn 18 ngành, QA kết cấu/PCCC sơ bộ.
-- **Kho tri thức** dạng thư mục: tiêu chuẩn, quy tắc, 15 skill chuyên ngành, mở rộng được bằng LLM.
+- **Kho tri thức** dạng thư mục: tiêu chuẩn, quy tắc, 16 skill chuyên ngành, mở rộng được bằng LLM.
 - Toàn bộ ~270 tool upstream: vẽ/sửa entity, layer, block, dimension, layout, transaction/undo, screenshot, kiến trúc, cơ khí, P&ID.
 
 Chạy được **không cần AutoCAD** (engine ezdxf, DXF). Có AutoCAD mở sẵn thì tự dùng COM để sửa bản vẽ đang mở.

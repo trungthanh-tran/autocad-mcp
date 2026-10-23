@@ -30,6 +30,7 @@ class TakeoffRow:
     handles: list[str] = field(default_factory=list)
     chi_tiet: list[dict] = field(default_factory=list)   # từng đối tượng: handle, giá trị
     ghi_chu: str = ""
+    ma_dinh_muc: str = ""
 
 
 def find_height(dwg: Drawing) -> tuple[float | None, str]:
@@ -124,7 +125,7 @@ def compute(dwg: Drawing, groups: list[Group], *, height_m: float | None = None,
                 tc = "B" if tc == "A" else tc   # cao suy từ text → B
         nguon = f"{len(det)} handle · {g.kind} {g.name}" + (f" · {note}" if note else "")
         rows.append(TakeoffRow(g.cong_tac, g.don_vi, round(total, 3), ct, nguon, tc, g.name,
-                               [d["handle"] for d in det], det, ghi_chu=g.ly_do))
+                               [d["handle"] for d in det], det, ghi_chu=g.ly_do, ma_dinh_muc=g.ma_dinh_muc))
     return rows
 
 

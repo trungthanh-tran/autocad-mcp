@@ -6,7 +6,7 @@
 
 | Lớp | Nơi | Nội dung | Sửa được? |
 |---|---|---|---|
-| Mặc định | `app/kho-mac-dinh/` (bản ZIP: `code\kho-mac-dinh`) | Tiêu chuẩn, quy tắc chuẩn công ty, 15 skill | Không — đi kèm mã, thay khi cập nhật |
+| Mặc định | `app/kho-mac-dinh/` (bản ZIP: `code\kho-mac-dinh`) | Tiêu chuẩn, quy tắc chuẩn công ty, 16 skill | Không — đi kèm mã, thay khi cập nhật |
 | Người dùng | `CADTROLY_KHO` (mặc định `~/CAD-kho`) | Log, Excel xuất ra, tiêu chuẩn/quy tắc/skill bổ sung | Có — không bị cập nhật đụng tới |
 
 ```
@@ -49,12 +49,13 @@ Skill là hướng dẫn chuyên ngành dạng `SKILL.md` mà LLM đọc trướ
 
 | Skill mặc định | Việc |
 |---|---|
+| `suc-khoe-ban-ve` | Kiểm tra trước khi sửa/bóc/phát hành: xref, đơn vị, layer, đối tượng lỗi, độ phủ ảnh — chỉ đọc |
 | `qa-ban-ve-toan-dien` | Điều phối QA PDF/DWG/DXF, layer, annotation, kết cấu, đường-cầu, hồ sơ, sửa trước/sau |
 | `quan-tri-layer-cad` | Tách và quản trị layer |
 | `tai-tao-pdf-sang-cad` | Dựng PDF thành CAD sửa được |
 | `annotation-dim-qa` | Kiểm tra text, dim, hatch, tỷ lệ |
 | `bo-tri-ho-so-thiet-ke` | Tên file, sheet, revision |
-| `kiem-tra-ban-ve-civil-bridge` | Kiểm tra bản vẽ đường và cầu |
+| `kiem-tra-ban-ve-civil-bridge` | Kiểm tra bản vẽ đường và cầu, bóc đào đắp và thép |
 | `kiem-tra-ket-cau` | Kiểm tra layer/hình học kết cấu, đề xuất tối ưu |
 | `tinh-toan-chiu-luc` | Chuẩn bị dữ liệu và tính sơ bộ có giả định; không thay hồ sơ tính được phê duyệt |
 | `an-toan-ket-cau` | Rà soát liên tục cấu kiện, dấu hiệu mất an toàn |
@@ -103,6 +104,30 @@ Luồng: `takeoff_propose` (đề xuất ánh xạ) → `takeoff_decide` (kỹ s
 | `Tin cậy` | A / B / C như trên |
 | `Handle` | Mã đối tượng CAD để tìm lại đúng vị trí |
 | `Ghi chú` | Điều kiện thiếu, giả định, việc cần kỹ sư xác nhận |
+
+### Cầu đường: đào đắp và thép
+
+Không cần Civil 3D — đọc text trên bản vẽ AutoCAD thường (Nova-TDN, vẽ tay).
+
+| Tool | Đọc | Tính | Excel |
+|---|---|---|---|
+| `takeoff_earthwork` | Text lý trình `Km0+100` / `Lý trình: 0+100`; diện tích `F đào = 12.35`, `FĐắp=4,0`, hoặc ô "Diện tích đào" + ô số cùng hàng; tách `đắp K95/K98`, vét hữu cơ, đánh cấp | V = (F1 + F2) / 2 × L giữa hai trắc ngang liền kề | Tổng hợp · Khối lượng đoạn · Trắc ngang (F, handle, lệnh zoom) · Kiểm soát |
+| `takeoff_rebar` | Ghi chú `N1 12Ø16 L=5200`, `6%%c22 L=12.5`, `2x10Φ12` | Số thanh × dài × 0.0061654·d² kg/m | Thống kê thép · Tổng hợp theo Ø · Kiểm soát |
+
+Tin cậy: **A** đọc thẳng một text · **B** phải ghép (nhãn với ô số; diện tích giữa hai lý trình; một đầu đoạn thiếu
+diện tích coi = 0; ghi chú thép trùng ở nhiều hình chiếu chỉ tính một lần) · **C** thiếu số thanh hoặc `L=`, để trống.
+
+```text
+Bóc đào đắp file D:\DuAn\trac-ngang.dwg ra Excel. Liệt kê trắc ngang không có diện tích và các đoạn tin cậy B.
+Thống kê thép bản vẽ D:\DuAn\tru-T1.dwg theo đường kính, đối chiếu với bảng thống kê trên bản vẽ nếu có.
+```
+
+### Mã định mức
+
+Bảng Excel có cột **Mã định mức**; sheet Kiểm soát ghi căn cứ NĐ 206/2026/NĐ-CP và TT 38/2026/TT-BXD (hiệu lực
+01/7/2026, thay TT 12/2021/TT-BXD) và đếm số dòng chưa gán mã. MCP **không tự điền mã** — kỹ sư đưa mã qua
+`takeoff_decide(..., ma_dinh_muc="…")` (lưu luôn vào quy tắc ánh xạ, lần sau tự áp) hoặc tham số `ma_dinh_muc` của
+`takeoff_earthwork` / `takeoff_rebar`.
 
 ## Mức kết quả kiểm tra
 

@@ -14,6 +14,7 @@
 | Từ chối mở file | File nằm ngoài `DWG_MCP_ALLOWED_ROOTS`/`ALLOWED_PATHS`, hoặc DXF vượt `MAX_DXF_BYTES` |
 | Lệnh treo rồi báo timeout | AutoCAD đang mở hộp thoại hoặc regen lâu. Đóng hộp thoại; tăng `COM_CALL_TIMEOUT` nếu cần |
 | Tiếng Việt lỗi font trong kết quả | Đặt `PYTHONIOENCODING=utf-8` |
+| Tool trả "Cần đồng ý" / `approval_required` | Bình thường: thao tác phá huỷ đang chờ bạn. Đồng ý thì LLM gọi `approval_execute`. Token hết hạn (5 phút) hoặc đã dùng → gọi lại thao tác |
 | Client báo quá nhiều tool | `TOOL_PROFILE=lean` hoặc `DISCOVERY_MODE=search` |
 | `CAI_DAT.bat` thất bại | Chụp màn hình cửa sổ lỗi, ghi phiên bản Python, gửi người quản trị |
 

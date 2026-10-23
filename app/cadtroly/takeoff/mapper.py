@@ -28,6 +28,7 @@ class Group:
     tham_so: dict = field(default_factory=dict)
     tin_cay: str = "C"
     ly_do: str = ""
+    ma_dinh_muc: str = ""
     rule: MappingRule | None = None
     skip: bool = False
 
@@ -46,6 +47,7 @@ class Group:
             "kind": self.kind, "name": self.name, "count": self.count, "mo_ta": self.describe(),
             "cong_tac": self.cong_tac, "don_vi": self.don_vi, "cach_tinh": self.cach_tinh,
             "tham_so": self.tham_so, "tin_cay": self.tin_cay, "ly_do": self.ly_do, "skip": self.skip,
+            "ma_dinh_muc": self.ma_dinh_muc,
             "handles": [e.handle for e in self.entities[:50]],
         }
 
@@ -69,7 +71,7 @@ def propose_mapping(dwg: Drawing, rules: RuleStore) -> list[Group]:
         size = _block_size_from_attribs(ents)
         if rule:
             g.rule, g.cong_tac, g.don_vi, g.cach_tinh, g.tham_so = rule, rule.cong_tac, rule.don_vi, rule.cach_tinh, dict(rule.tham_so)
-            g.tin_cay, g.ly_do = "A", f"quy tắc {rule.nguon}"
+            g.tin_cay, g.ly_do, g.ma_dinh_muc = "A", f"quy tắc {rule.nguon}", rule.ma_dinh_muc
         else:
             h = heuristic("block", name)
             if h and h[2] == "skip":
@@ -112,7 +114,7 @@ def propose_mapping(dwg: Drawing, rules: RuleStore) -> list[Group]:
         rule = rules.find("layer", layer)
         if rule:
             g.rule, g.cong_tac, g.don_vi, g.cach_tinh, g.tham_so = rule, rule.cong_tac, rule.don_vi, rule.cach_tinh, dict(rule.tham_so)
-            g.tin_cay, g.ly_do = "A", f"quy tắc {rule.nguon}"
+            g.tin_cay, g.ly_do, g.ma_dinh_muc = "A", f"quy tắc {rule.nguon}", rule.ma_dinh_muc
         elif layer == "0":
             g.tin_cay, g.ly_do = "C", "layer 0: không xác định, khoanh để người đếm"
         else:
@@ -136,12 +138,13 @@ def propose_mapping(dwg: Drawing, rules: RuleStore) -> list[Group]:
 
 
 def apply_decision(g: Group, rules: RuleStore, *, cong_tac: str, don_vi: str, cach_tinh: str,
-                   tham_so: dict | None = None, save: bool = True) -> Group:
+                   tham_so: dict | None = None, ma_dinh_muc: str = "", save: bool = True) -> Group:
     """Kỹ sư xác nhận một nhóm. save=True → lưu thành quy tắc đơn vị."""
-    g.cong_tac, g.don_vi, g.cach_tinh = cong_tac, don_vi, cach_tinh
+    g.cong_tac, g.don_vi, g.cach_tinh, g.ma_dinh_muc = cong_tac, don_vi, cach_tinh, ma_dinh_muc.strip()
     g.tham_so = dict(tham_so or {})
     g.tin_cay, g.ly_do, g.skip = "A", "kỹ sư xác nhận", cach_tinh == "skip"
     if save:
         g.rule = rules.upsert(MappingRule(kind=g.kind, pattern=g.name, cong_tac=cong_tac, don_vi=don_vi,
-                                          cach_tinh=cach_tinh, tham_so=g.tham_so, nguon="don-vi"))
+                                          cach_tinh=cach_tinh, tham_so=g.tham_so,
+                                          ma_dinh_muc=g.ma_dinh_muc, nguon="don-vi"))
     return g

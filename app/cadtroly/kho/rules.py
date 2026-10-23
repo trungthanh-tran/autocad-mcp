@@ -30,6 +30,7 @@ class MappingRule:
     cach_tinh: str = "count"      # count | length | area | volume_by_height | area_by_height
     tham_so: dict = field(default_factory=dict)   # ví dụ {"day": 0.22, "cao": "H"} ("H" = lấy từ text H=)
     is_regex: bool = False
+    ma_dinh_muc: str = ""         # mã hiệu định mức (TT 38/2026/TT-BXD), do kỹ sư gán; trống = chưa gán
     nguon: str = "don-vi"         # don-vi | mac-dinh | ai
     ghi_chu: str = ""
     dung: int = 0

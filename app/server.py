@@ -12302,9 +12302,12 @@ def main() -> None:
 
 
 # --- tool riêng của cadtroly (bóc khối lượng, kiểm tra chuẩn, kho) --------
+from cadtroly.mcp.approval import ApprovalMiddleware  # noqa: E402
 from cadtroly.mcp.tools import CADTROLY_TOOL_NAMES, register as _register_cadtroly  # noqa: E402
 
 _register_cadtroly(mcp)
+# Innermost: duyệt thao tác phá huỷ ngay trước khi tool chạy (CADTROLY_APPROVAL=auto|token|off).
+mcp.add_middleware(ApprovalMiddleware())
 
 
 if __name__ == "__main__":

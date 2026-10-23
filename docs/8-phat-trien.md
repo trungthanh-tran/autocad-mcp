@@ -11,7 +11,8 @@ ngay trong repo, không cài từ GitHub. Tất cả chạy trong **một server
 |---|---|
 | `app/server.py`, `backends/`, `engineering/`, `discovery/`, `templates/` | Upstream: registry tool, backend COM/ezdxf, tính toán kỹ thuật |
 | `app/cadtroly/mcp/` | Entry MCP (`python -m cadtroly.mcp`), bootstrap tự cài gói, đăng ký tool cadtroly |
-| `app/cadtroly/reader/`, `takeoff/`, `check/`, `kho/` | Đọc bản vẽ, bóc khối lượng, kiểm tra theo quy tắc, kho tri thức |
+| `app/cadtroly/mcp/approval.py` | Middleware duyệt thao tác phá huỷ (elicitation hoặc token dùng một lần); bảng `RULES` quyết định tool nào cần duyệt |
+| `app/cadtroly/reader/`, `takeoff/`, `check/`, `kho/` | Đọc bản vẽ, bóc khối lượng (`takeoff/civil.py`: đào đắp, thép), kiểm tra theo quy tắc, kho tri thức |
 | `app/cadtroly/pdf_vectorize.py` | Bóc vector/text/dimension từ PDF |
 | `app/kho-mac-dinh/` | Tiêu chuẩn, quy tắc, skill đi kèm |
 | `app/tests/`, `app/upstream_tests/` | Test cadtroly / test upstream |

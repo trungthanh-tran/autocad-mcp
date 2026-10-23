@@ -2,6 +2,8 @@
 
   drawing_read / drawing_entities      đọc bản vẽ thành số liệu (reader riêng, ezdxf)
   takeoff_propose/decide/compute/export/run   luồng A bóc khối lượng ra Excel có truy vết
+  takeoff_earthwork / takeoff_rebar    cầu đường: đào đắp từ trắc ngang, thống kê thép từ ghi chú
+  approval_execute                     chạy thao tác phá huỷ đã được người dùng đồng ý (approval.py)
   check_rulesets / check_run           luồng D kiểm tra theo bộ quy tắc
   knowledge_*                          kho tri thức, skill
 Các tool AutoCAD (drawing_open, entity_*, layer_*, system_run_lisp, view_screenshot, transaction_*…)
@@ -18,7 +20,8 @@ from fastmcp.exceptions import ToolError
 
 from ..check.engine import check_drawing, load_ruleset, summarize
 from ..takeoff.calc import compute, stats
-from ..takeoff.excel import export_excel
+from ..takeoff.civil import earthwork, rebar, rebar_by_diameter
+from ..takeoff.excel import export_earthwork, export_excel, export_rebar
 from ..takeoff.mapper import apply_decision, propose_mapping
 
 log = logging.getLogger("cadtroly")
@@ -26,11 +29,13 @@ log = logging.getLogger("cadtroly")
 CADTROLY_TOOL_NAMES = frozenset({
     "drawing_read", "drawing_entities",
     "takeoff_propose", "takeoff_decide", "takeoff_compute", "takeoff_export", "takeoff_run",
+    "takeoff_earthwork", "takeoff_rebar",
     "check_rulesets", "check_run",
     "knowledge_industries", "knowledge_standards", "knowledge_standard_add", "knowledge_standard_delete",
     "knowledge_status", "knowledge_rules_export", "knowledge_rules_import", "knowledge_skills", "knowledge_skill_toggle", "knowledge_skill_add",
     "kho_industries", "kho_standards", "kho_standard_add", "kho_standard_delete",
     "kho_status", "kho_rules_export", "kho_rules_import", "kho_skills", "kho_skill_toggle", "kho_skill_add",
+    "approval_execute",
 })
 
 
@@ -90,6 +95,8 @@ def register(mcp: FastMCP) -> None:
     async def takeoff_decide(path: str, kind: Annotated[str, "layer | block"], name: str, cong_tac: str,
                              don_vi: str, cach_tinh: str, tham_so: dict | None = None,
                              save_rule: Annotated[bool, "Lưu thành quy tắc đơn vị để lần sau tự áp"] = True,
+                             ma_dinh_muc: Annotated[str, "Mã hiệu định mức TT 38/2026/TT-BXD, ví dụ do kỹ sư "
+                                                         "đọc từ bảng định mức; không tự bịa"] = "",
                              ctx: Context = None) -> dict:
         """Kỹ sư xác nhận ánh xạ một nhóm. Mặc định lưu thành quy tắc đơn vị (không train, chỉ ghi file)."""
         lc = _ctx(ctx)
@@ -98,7 +105,7 @@ def register(mcp: FastMCP) -> None:
         for g in groups:
             if g.kind == kind and g.name == name:
                 apply_decision(g, kho.rules, cong_tac=cong_tac, don_vi=don_vi, cach_tinh=cach_tinh,
-                               tham_so=tham_so, save=save_rule)
+                               tham_so=tham_so, ma_dinh_muc=ma_dinh_muc, save=save_rule)
                 st.groups[st.key(path)] = groups
                 kho.log("takeoff", "decide", kind=kind, name=name, cong_tac=cong_tac, saved=save_rule)
                 return {"ok": True, "group": g.to_dict(), "rules_total": len(kho.rules.rules)}
@@ -113,7 +120,8 @@ def register(mcp: FastMCP) -> None:
         d = st.drawing(path)
         groups = st.groups.get(st.key(path)) or propose_mapping(d, kho.rules)
         rows = compute(d, groups, height_m=height_m, overrides={"tru_lo_cua": tru_lo_cua_m3})
-        return {"rows": [{"cong_tac": r.cong_tac, "don_vi": r.don_vi, "khoi_luong": r.khoi_luong,
+        return {"rows": [{"ma_dinh_muc": r.ma_dinh_muc, "cong_tac": r.cong_tac, "don_vi": r.don_vi,
+                          "khoi_luong": r.khoi_luong,
                           "cach_tinh": r.cach_tinh, "nguon": r.nguon, "tin_cay": r.tin_cay,
                           "ghi_chu": r.ghi_chu, "so_handle": len(r.handles)} for r in rows]}
 
@@ -154,6 +162,54 @@ def register(mcp: FastMCP) -> None:
             except Exception as exc:
                 results.append({"file": str(f), "error": str(exc)})
         return {"count": len(results), "results": results}
+
+    # ------------------------------------------------------------ cầu đường
+    @mcp.tool(tags={"takeoff"})
+    async def takeoff_earthwork(
+        path: Annotated[str, "Bản vẽ trắc ngang DXF/DWG (Nova-TDN, bản vẽ tay…)"],
+        out: Annotated[str | None, "File .xlsx; bỏ trống = không xuất, chỉ trả số liệu"] = None,
+        ma_dinh_muc: Annotated[dict | None, "Mã định mức theo loại: {'dao': '...', 'dap_k95': '...'}"] = None,
+        ctx: Context = None,
+    ) -> dict:
+        """Đào đắp từ trắc ngang: đọc text lý trình (Km0+100) và diện tích (F đào = …, ô 'Diện tích đắp'),
+        tính V = (F1+F2)/2 × L giữa hai trắc ngang liền kề. Mỗi số có handle nguồn và tin cậy A/B/C."""
+        lc = _ctx(ctx)
+        st, kho = lc["state"], lc["kho"]
+        d = st.drawing(path)
+        res = earthwork(d)
+        xl = str(export_earthwork(d, res, out, ma_dinh_muc=ma_dinh_muc)) if out else None
+        kho.log("takeoff", "earthwork", path=path, sections=len(res["sections"]), totals=res["totals"], out=xl)
+        return {
+            "totals_m3": {res["names"].get(k, k): v for k, v in res["totals"].items()},
+            "sections": [{"ly_trinh": s.label, "m": s.station_m, "handle": s.handle, "F_m2": s.areas,
+                          "tin_cay": s.tin_cay, "ghi_chu": s.ghi_chu} for s in res["sections"]],
+            "segments": res["segments"], "warnings": res["warnings"], "excel": xl,
+        }
+
+    @mcp.tool(tags={"takeoff"})
+    async def takeoff_rebar(
+        path: Annotated[str, "Bản vẽ cốt thép DXF/DWG"],
+        out: Annotated[str | None, "File .xlsx; bỏ trống = không xuất"] = None,
+        ma_dinh_muc: Annotated[dict | None, "Mã định mức theo đường kính: {'16': '...'}"] = None,
+        ctx: Context = None,
+    ) -> dict:
+        """Thống kê thép từ ghi chú 'N1 12Ø16 L=5200' / '6%%c22 L=12.5': số thanh × dài × 0.0061654·d².
+        Ghi chú trùng ở nhiều hình chiếu chỉ tính một lần (B); thiếu số thanh hoặc L → C, để trống."""
+        lc = _ctx(ctx)
+        st, kho = lc["state"], lc["kho"]
+        d = st.drawing(path)
+        items = rebar(d)
+        by_d = rebar_by_diameter(items)
+        xl = str(export_rebar(d, items, by_d, out, ma_dinh_muc=ma_dinh_muc)) if out else None
+        kho.log("takeoff", "rebar", path=path, items=len(items), out=xl)
+        return {
+            "tong_kg": round(sum(g["tong_kg"] for g in by_d.values()), 2),
+            "theo_duong_kinh": {f"Ø{k}": v for k, v in by_d.items()},
+            "items": [{"so_hieu": i.so_hieu, "d_mm": i.d_mm, "so_thanh": i.so_thanh, "dai_m": i.dai_m,
+                       "tong_kg": i.tong_kg, "tin_cay": i.tin_cay, "ghi_chu": i.ghi_chu, "text": i.text,
+                       "handles": i.handles} for i in items],
+            "excel": xl,
+        }
 
     # ----------------------------------------------------------------- check
     @mcp.tool(tags={"check"}, annotations={"readOnlyHint": True})
@@ -288,6 +344,16 @@ def register(mcp: FastMCP) -> None:
     for legacy_name, canonical_tool in legacy_aliases.items():
         canonical_name = legacy_name.replace("kho_", "knowledge_", 1)
         mcp.tool(name=legacy_name, description=f"Tương thích cũ; dùng {canonical_name} cho kết nối mới.")(canonical_tool)
+
+    # -------------------------------------------------------------- duyệt
+    @mcp.tool(name="approval_execute", tags={"approval"})
+    async def approval_execute(
+        token: Annotated[str, "Token từ kết quả approval_required, chỉ dùng sau khi người dùng đồng ý"],
+        ctx: Context = None,
+    ) -> dict:
+        """Chạy thao tác phá huỷ đã được người dùng đồng ý, đúng tham số đã xem trước. Token dùng một lần."""
+        # ApprovalMiddleware chặn lời gọi này và chạy tool gốc; tới được đây nghĩa là middleware chưa cài.
+        raise ToolError("Bước duyệt chưa được cài trên server (ApprovalMiddleware).")
 
     @mcp.resource("cadtroly://skill/{name}")
     async def skill_text(name: str, ctx: Context = None) -> str:
