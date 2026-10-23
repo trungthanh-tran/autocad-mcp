@@ -34,7 +34,6 @@ Tuỳ chọn chung: `--kho <thư mục>` (mặc định `CADTROLY_KHO`).
 | `cadtroly mcp` | Chạy MCP server (stdio), giống `python -m cadtroly.mcp` |
 | `cadtroly update` | Cập nhật code và gói từ GitHub; dừng nếu có sửa chưa commit |
 | `cadtroly connect [--client X] [--prompt]` | In cấu hình nối MCP cho VS Code/Claude/Gemini/Cursor với đường dẫn máy này, hoặc prompt dán cho LLM |
-| `cadtroly ui [--port 8765] [--browser]` | Giao diện web cũ, xem dưới |
 
 ## Test
 
@@ -71,9 +70,3 @@ Quy trình phát hành upstream (PyPI, MCP registry) giữ trong [RELEASE-DISTRI
   `backends/com_backend.py` nhưng **chưa test đầy đủ trên AutoCAD thật**.
 - `tieu-chuan/qcvn-18-2021.rules.json` là mẫu, mọi dòng `duyet=false`.
 - Không đọc được DWG nếu thiếu cả AutoCAD lẫn ODA File Converter.
-
-## Giao diện web cũ (không cần cho MCP)
-
-Repo còn giữ giao diện web từ trước khi chuyển sang hướng MCP: `cadtroly ui`, `app/cadtroly/web/`, `app/cadtroly/llm/`,
-`app/build/`, `run.bat`/`run.sh`. Nó có chat Claude riêng, đăng nhập Anthropic và bản đóng gói exe. MCP server không import
-phần này; Claude/Gemini nối thẳng vào MCP mà không cần mở giao diện. Hướng dẫn riêng: `app/build/HUONG-DAN.txt`.

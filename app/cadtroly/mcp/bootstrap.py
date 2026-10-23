@@ -24,9 +24,6 @@ REQUIRED_MODULES = {
     "PIL": "Pillow",
     "pymupdf": "PyMuPDF",
     "yaml": "PyYAML",
-    "fastapi": "fastapi",
-    "uvicorn": "uvicorn",
-    "multipart": "python-multipart",
 }
 
 

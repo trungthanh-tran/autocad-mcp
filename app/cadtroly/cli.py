@@ -8,7 +8,6 @@
   cadtroly mcp                              chạy MCP server (stdio)
   cadtroly update                           cập nhật code và package từ GitHub
   cadtroly connect [--client X] [--prompt]  in lệnh/cấu hình nối MCP cho client, hoặc prompt dán cho LLM
-  cadtroly ui [--port 8765] [--browser]      giao diện người dùng (cửa sổ, hoặc trình duyệt)
 """
 from __future__ import annotations
 
@@ -45,7 +44,6 @@ def main(argv=None) -> int:
     p = sub.add_parser("connect")
     p.add_argument("--client", default="all", choices=CLIENTS)
     p.add_argument("--prompt", action="store_true", help="in một prompt hoàn chỉnh để dán cho LLM/agent nhờ tự cấu hình")
-    p = sub.add_parser("ui"); p.add_argument("--port", type=int, default=8765); p.add_argument("--browser", action="store_true")
     a = ap.parse_args(argv)
 
     cfg = Config.load(Path(a.kho) if a.kho else None)
@@ -56,10 +54,6 @@ def main(argv=None) -> int:
     if a.cmd == "sample":
         from .samples import make_sample
         print(make_sample(a.out))
-        return 0
-    if a.cmd == "ui":
-        from .web.app import serve
-        serve(port=a.port, window=not a.browser)
         return 0
     if a.cmd == "connect":
         print(connect_text(cfg, a.client, a.prompt))

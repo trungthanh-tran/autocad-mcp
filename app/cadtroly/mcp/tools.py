@@ -283,11 +283,11 @@ def register(mcp: FastMCP) -> None:
     # ------------------------------------------------------------------- kho
     @mcp.tool(name="knowledge_status", tags={"kho"}, annotations={"readOnlyHint": True})
     async def knowledge_status(ctx: Context = None) -> dict:
-        """Tình trạng kho tri thức, backend AutoCAD, nguồn AI."""
+        """Tình trạng kho tri thức và backend AutoCAD."""
         lc = _ctx(ctx)
         b = lc["backend"]
         return lc["kho"].status() | {"backend": getattr(b, "name", None), "backend_error": lc.get("init_error"),
-                                     "llm": lc["cfg"].llm.provider, "version": lc["cfg"].version}
+                                     "version": lc["cfg"].version}
 
     @mcp.tool(name="knowledge_rules_export", tags={"kho"}, annotations={"readOnlyHint": True})
     async def knowledge_rules_export(ctx: Context = None) -> dict:

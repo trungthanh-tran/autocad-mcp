@@ -57,21 +57,3 @@ async def test_mcp_flow(sample_dxf, kho_dir):
         r = _data(await c.call_tool("knowledge_rules_export", {}))
         assert r["rules"][0]["pattern"] == "WD_2"
     assert (kho_dir / "log").glob("*.log")
-
-
-def test_llm_json_and_mask():
-    from cadtroly.config import LLMConfig
-    from cadtroly.llm.client import LLM
-    llm = LLM(LLMConfig())
-    assert llm.json_block('xin chào {"a": 1} xong') == {"a": 1}
-    assert llm.mask("Dự án CC Hoàng Mai của CĐT ABC", ["CC Hoàng Mai", "ABC"]) == "Dự án [DU-AN-1] của CĐT [DU-AN-2]"
-
-
-def test_llm_suggest_mapping_mocked(monkeypatch):
-    from cadtroly.config import LLMConfig
-    from cadtroly.llm.client import LLM
-    llm = LLM(LLMConfig())
-    monkeypatch.setattr(LLM, "ask", lambda self, tier, s, u, effort="medium":
-                        '[{"kind":"block","name":"WD_2","cong_tac":"Cửa sổ","don_vi":"bộ","cach_tinh":"count","tham_so":{},"do_tin":0.7,"ly_do":"WD = window"}]')
-    out = llm.suggest_mapping([{"kind": "block", "name": "WD_2", "count": 6}])
-    assert out[0]["cong_tac"] == "Cửa sổ" and out[0]["do_tin"] == 0.7

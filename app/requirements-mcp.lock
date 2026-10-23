@@ -8,7 +8,7 @@ matplotlib==3.11.2
 Pillow==13.0.0
 PyMuPDF==2.0
 PyYAML==6.0.3
-fastapi==0.159.1
+# phụ thuộc gián tiếp của mcp, ghim để cài lại giống nhau
 uvicorn==0.54.0
 python-multipart==0.0.32
 pytest==8.4.2
