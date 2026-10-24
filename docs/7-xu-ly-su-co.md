@@ -11,6 +11,9 @@
 | Lần đầu khởi động lâu | Server đang tự cài gói còn thiếu. Máy bị chặn mạng: đặt `CADTROLY_AUTO_INSTALL=false` và cài trước bằng `pip install -r requirements-mcp.lock` |
 | Không thấy AutoCAD (backend báo `ezdxf`) | Mở AutoCAD **trước** khi khởi động MCP; dùng `AUTOCAD_MCP_BACKEND=auto` hoặc `com`; khởi động lại server |
 | Không đọc được DWG | Cần AutoCAD (COM) hoặc ODA File Converter; hoặc chuyển sang DXF |
+| PDF → DWG ra rỗng, cảnh báo "ảnh quét/raster" | PDF là bản scan/chụp, không có nét vector. Xin bản Plot to PDF từ file CAD gốc |
+| PDF → DWG: một hình sai kích thước thật | Xem `views` trong kết quả: hình lấy tỷ lệ từ "nhãn" có thể gán nhầm nhãn hình bên cạnh. Chạy lại với `real_scale=false` (giữ khổ giấy) hoặc sửa tỷ lệ viewport |
+| DWG mở ra mất dấu/chữ ký | Thiếu thư mục `<tên-file>_anh` cạnh DWG (ảnh là file ngoài). Chép kèm thư mục khi gửi |
 | Từ chối mở file | File nằm ngoài `DWG_MCP_ALLOWED_ROOTS`/`ALLOWED_PATHS`, hoặc DXF vượt `MAX_DXF_BYTES` |
 | Lệnh treo rồi báo timeout | AutoCAD đang mở hộp thoại hoặc regen lâu. Đóng hộp thoại; tăng `COM_CALL_TIMEOUT` nếu cần |
 | Tiếng Việt lỗi font trong kết quả | Đặt `PYTHONIOENCODING=utf-8` |

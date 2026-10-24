@@ -10118,6 +10118,14 @@ async def image_attach(
 async def pdf_vectorize(
     source: Annotated[str, Field(description="Full path to a single-page PDF sheet.")],
     target: Annotated[str, Field(description="Full output path ending in .dxf.")],
+    real_scale: Annotated[
+        bool,
+        Field(description="True: model space at 1:1 real size per view (scale from dimensions or a '(1:N)' "
+                          "label), sheet/title/stamps on an A1 layout with one scaled viewport per view. "
+                          "False: everything in model space on A1 paper coordinates."),
+    ] = False,
+    leaders: Annotated[bool, Field(description="Rebuild label + leader line as MLEADER.")] = True,
+    images: Annotated[bool, Field(description="Extract stamps/signatures/raster parts as PNG + IMAGE.")] = True,
     ctx: Context = None,
 ) -> dict:
     """Convert PDF vector artwork to editable DXF entities on semantic layers.
@@ -10131,6 +10139,18 @@ async def pdf_vectorize(
     Outlined PDF text remains geometry by design, so dimensions and symbols
     are not lost when the source font prevents text extraction. The returned
     counts are a quick audit before opening the DXF and saving it as DWG.
+
+    Fidelity: each PDF path becomes one continuous polyline (closed when the
+    path closes; rectangles kept), with the PDF stroke width as lineweight and
+    its dash pattern as a linetype. Text sits on its baseline at its angle,
+    spans of one line joined. Dimension text next to a parallel line with
+    ticks/arrows or extension lines at both ends is rebuilt as a real
+    DIMENSION; DIMLFAC is derived from the written value / measured length so
+    it displays the PDF number, and non-numeric texts (25x250=6250) stay as
+    overrides. A scanned/raster-only PDF yields a warning, not geometry.
+    A label with a short leader line (S2-D25-250) becomes one MLEADER; images
+    (stamps, signatures) are saved as PNG with transparency next to the
+    target and placed as IMAGE entities.
     """
     source_path = validate_path(source)
     target_path = validate_path(target)
@@ -10141,7 +10161,8 @@ async def pdf_vectorize(
     await ctx.info(f"Vectorizing PDF: {source_path}")
     from cadtroly.pdf_vectorize import convert
 
-    stats = await asyncio.to_thread(convert, source_path, target_path)
+    stats = await asyncio.to_thread(convert, source_path, target_path, real_scale=real_scale,
+                                    leaders=leaders, images=images)
     return {"ok": True, "source": str(source_path), "target": str(target_path), **stats}
 
 
@@ -10156,6 +10177,11 @@ async def pdf_to_dwg(
     paper: Annotated[str, Field(description="Paper size for the sheet layout, default A1.")] = "A1",
     orientation: Annotated[str, Field(description="landscape or portrait.")] = "landscape",
     layout: Annotated[str, Field(description="Paper-space layout name.")] = "A1-SEMANTIC",
+    real_scale: Annotated[
+        bool,
+        Field(description="Model space at 1:1 real size, one scaled viewport per view on the layout "
+                          "(default). False: model space on A1 paper coordinates, one fit viewport."),
+    ] = True,
     ctx: Context = None,
 ) -> dict:
     """Create the final semantic DWG in one MCP call.
@@ -10189,10 +10215,13 @@ async def pdf_to_dwg(
     result: dict | None = None
     try:
         await ctx.info(f"PDF to semantic DWG: {source_path}")
-        stats = await asyncio.to_thread(convert, source_path, temp_dxf)
+        # ảnh (dấu, chữ ký) phải nằm cạnh DWG cuối cùng, không trong thư mục tạm bị xoá
+        stats = await asyncio.to_thread(convert, source_path, temp_dxf, real_scale=real_scale,
+                                        assets_dir=target_path.parent / f"{target_path.stem}_anh",
+                                        layout=layout)
         await backend.drawing_open(str(temp_dxf))
         opened = True
-        await backend.layout_create(layout)
+        await backend.layout_create(layout)         # đã có sẵn (real_scale) → backend báo tồn tại, không lỗi
         setup = resolve_page_setup(
             paper=paper,
             orientation=orientation,
@@ -10204,16 +10233,17 @@ async def pdf_to_dwg(
         )
         await backend.page_setup_apply(layout, setup)
         sheet_width, sheet_height = (float(v) for v in setup["size_mm"])
-        await backend.viewport_create(
-            layout,
-            sheet_width / 2,
-            sheet_height / 2,
-            max(1.0, sheet_width - 20.0),
-            max(1.0, sheet_height - 20.0),
-            420.5,
-            297.0,
-            1.0,
-        )
+        if not stats.get("paper_layout"):           # real_scale đã dựng viewport đúng tỷ lệ cho từng hình
+            await backend.viewport_create(
+                layout,
+                sheet_width / 2,
+                sheet_height / 2,
+                max(1.0, sheet_width - 20.0),
+                max(1.0, sheet_height - 20.0),
+                420.5,
+                297.0,
+                1.0,
+            )
         saved = await backend.drawing_save_as(str(target_path), "dwg")
         result = {
             "ok": True,
@@ -10221,8 +10251,9 @@ async def pdf_to_dwg(
             "target": str(target_path),
             "temporary": str(temp_dxf),
             "cleaned": cleaned,
-            "paper_layout": {"layout": layout, "paper": paper, "orientation": orientation},
             **stats,
+            "paper_layout": {"layout": layout, "paper": paper, "orientation": orientation,
+                             **(stats.get("paper_layout") or {})},
             "save": saved,
         }
     finally:

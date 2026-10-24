@@ -84,6 +84,27 @@ Việt Nam: KT-TUONG, KC-COT, HT-MATDUONG, CAU-TRU
 NCS:      A-WALL,   S-DECK, C-ROAD,      S-PIER
 ```
 
+## PDF → DWG: kết quả nhận được
+
+Dùng PDF xuất trực tiếp từ CAD (Plot to PDF). Bản scan hoặc ảnh chụp không có nét vector — MCP sẽ báo, không dựng
+được hình.
+
+| Trên PDF | Trong DWG |
+|---|---|
+| Một nét gấp khúc, khung, hình chữ nhật | Một polyline liền (kín nếu PDF kín), giữ độ dày nét, nét đứt đúng mẫu, màu |
+| Chữ, kể cả chữ xoay đứng | TEXT đúng chân chữ và góc; một dòng bị PDF chia mảnh được gộp lại |
+| Kích thước (số + đường dim + vạch/mũi tên/đường gióng) | DIMENSION thật, hiện đúng số trên PDF; chữ dạng `25x250=6250` giữ nguyên |
+| Nhãn thép có đường dẫn (`S2-D25-250`) | MLEADER (chữ + đường dẫn + chấm/mũi tên là một đối tượng) |
+| Dấu, chữ ký, phần ảnh | IMAGE nền trong suốt; file PNG trong thư mục `<tên-file>_anh` cạnh DWG — gửi DWG thì gửi kèm thư mục này |
+| Từng hình có tỷ lệ (1:60, 1:100…) | `pdf_to_dwg` mặc định: model space vẽ **1:1 kích thước thật**; layout A1 có khung tên, ghi chú, dấu và một viewport đúng tỷ lệ cho mỗi hình |
+
+Tỷ lệ mỗi hình lấy từ các kích thước trong hình; hình không có kích thước thì lấy từ nhãn `(1:N)` ngay dưới tên
+hình. Hình không xác định được tỷ lệ để nguyên ở layout theo khổ giấy. Kết quả trả về có danh sách `views`
+(tỷ lệ, nguồn) — kiểm tra lại các hình ghi "nhãn" vì không có kích thước để đối chiếu.
+
+> Chuyển `D:\DuAn\HCDS-cot-thep.pdf` sang DWG, vẽ 1:1. Báo tỷ lệ từng hình, số kích thước dựng được và các hình chưa
+> xác định tỷ lệ.
+
 ## Chụp ảnh
 
 > Chụp ảnh toàn bản vẽ trước và sau khi sửa.
