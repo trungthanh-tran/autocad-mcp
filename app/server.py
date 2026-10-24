@@ -271,6 +271,16 @@ Sửa vẽ live dùng các tool AutoCAD bên dưới: preview trước, mỗi c�
 
 AutoCAD MCP Pro provides complete AutoCAD automation through a large tool surface.
 
+ĐỘ CHÍNH XÁC (bắt buộc — hồ sơ thiết kế công trình):
+  - Chỉ báo những gì đọc được trên bản vẽ / văn bản tiêu chuẩn; không suy diễn, không điền số theo kinh nghiệm,
+    không lấy từ bản vẽ hay dự án khác.
+  - Kết quả tool có "can_hoi" → hỏi người dùng đúng nội dung từng câu, chờ trả lời, rồi gọi lại tool với tham số
+    tương ứng (ty_le, xac_nhan_ty_le, don_vi_L, trung_lap, thieu_dien_tich, gan, cong_trung, height_m,
+    chap_nhan_B, takeoff_decide…). Không tự chọn đáp án thay người dùng.
+  - Yêu cầu của người dùng chưa rõ (file, phạm vi, tiêu chuẩn, tỷ lệ, đơn vị, ghi đè hay không) → hỏi lại trước.
+  - Kiểm tra theo tiêu chuẩn: báo đúng điều khoản và nguyên văn ("trich") của bộ quy tắc; mục "xac_nhan" để kỹ sư
+    quyết. Bộ quy tắc chưa có nội dung nào thì nói là chưa có, không tự đưa ra giá trị.
+
 LANGUAGE:
   Tool names and schema keys remain English for stable MCP calls. Understand
   Vietnamese user requests and choose the matching English tool automatically;
@@ -10126,6 +10136,15 @@ async def pdf_vectorize(
     ] = False,
     leaders: Annotated[bool, Field(description="Rebuild label + leader line as MLEADER.")] = True,
     images: Annotated[bool, Field(description="Extract stamps/signatures/raster parts as PNG + IMAGE.")] = True,
+    ty_le: Annotated[
+        dict | None,
+        Field(description="Answer to can_hoi: scale per view code, e.g. {'H2': 100} for 1:100. Only from the user."),
+    ] = None,
+    xac_nhan_ty_le: Annotated[
+        bool,
+        Field(description="Answer to can_hoi: the user accepts the scales as read (unread views stay at paper "
+                          "size). Only set when the user said so."),
+    ] = False,
     ctx: Context = None,
 ) -> dict:
     """Convert PDF vector artwork to editable DXF entities on semantic layers.
@@ -10151,6 +10170,11 @@ async def pdf_vectorize(
     A label with a short leader line (S2-D25-250) becomes one MLEADER; images
     (stamps, signatures) are saved as PNG with transparency next to the
     target and placed as IMAGE entities.
+
+    No guessing: with real_scale, a view whose scale comes only from a label,
+    whose sources disagree, or that has no readable scale returns ``can_hoi``
+    and writes nothing. Ask the user each question verbatim and call again
+    with ``ty_le`` / ``xac_nhan_ty_le`` exactly as answered.
     """
     source_path = validate_path(source)
     target_path = validate_path(target)
@@ -10162,8 +10186,8 @@ async def pdf_vectorize(
     from cadtroly.pdf_vectorize import convert
 
     stats = await asyncio.to_thread(convert, source_path, target_path, real_scale=real_scale,
-                                    leaders=leaders, images=images)
-    return {"ok": True, "source": str(source_path), "target": str(target_path), **stats}
+                                    leaders=leaders, images=images, ty_le=ty_le, xac_nhan_ty_le=xac_nhan_ty_le)
+    return {"source": str(source_path), "target": str(target_path), **stats}
 
 
 @cad_tool(summary="Convert a PDF sheet directly to a semantic A1 DWG and remove intermediates.", cost="mutate")
@@ -10182,12 +10206,23 @@ async def pdf_to_dwg(
         Field(description="Model space at 1:1 real size, one scaled viewport per view on the layout "
                           "(default). False: model space on A1 paper coordinates, one fit viewport."),
     ] = True,
+    ty_le: Annotated[
+        dict | None,
+        Field(description="Answer to can_hoi: scale per view code, e.g. {'H2': 100} for 1:100. Only from the user."),
+    ] = None,
+    xac_nhan_ty_le: Annotated[
+        bool,
+        Field(description="Answer to can_hoi: the user accepts the scales as read (unread views stay at paper "
+                          "size). Only set when the user said so."),
+    ] = False,
     ctx: Context = None,
 ) -> dict:
     """Create the final semantic DWG in one MCP call.
 
     The PDF is vectorized to a private temporary DXF, opened through the live
-    AutoCAD backend, placed on an A-series layout and saved as DWG. The
+    AutoCAD backend, placed on an A-series layout and saved as DWG. When the
+    conversion returns ``can_hoi`` (unclear view scale) nothing is written and
+    AutoCAD is not touched; ask the user and call again with the answers. The
     temporary DXF and its lock files are removed in ``finally`` after the DWG
     is saved, so callers do not have to manage intermediate artifacts.
     """
@@ -10218,7 +10253,10 @@ async def pdf_to_dwg(
         # ảnh (dấu, chữ ký) phải nằm cạnh DWG cuối cùng, không trong thư mục tạm bị xoá
         stats = await asyncio.to_thread(convert, source_path, temp_dxf, real_scale=real_scale,
                                         assets_dir=target_path.parent / f"{target_path.stem}_anh",
-                                        layout=layout)
+                                        layout=layout, ty_le=ty_le, xac_nhan_ty_le=xac_nhan_ty_le)
+        if not stats.get("written", True):
+            # còn câu hỏi về tỷ lệ: không mở AutoCAD, không tạo DWG — trả câu hỏi cho người dùng
+            return {"source": str(source_path), "target": str(target_path), **stats}
         await backend.drawing_open(str(temp_dxf))
         opened = True
         await backend.layout_create(layout)         # đã có sẵn (real_scale) → backend báo tồn tại, không lỗi

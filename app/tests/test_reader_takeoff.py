@@ -59,7 +59,13 @@ def test_compute_quantities(sample_dxf, tmp_path):
     H, src = find_height(d)
     assert math.isclose(H, 3.3) and "H=3300" in src
     groups = propose_mapping(d, RuleStore(tmp_path / "q"))
-    rows = {r.cong_tac: r for r in compute(d, groups)}
+    pending = {r.cong_tac: r for r in compute(d, groups)}
+    # không suy diễn: nhóm B chưa được xác nhận → để trống, ghi lý do
+    assert pending["Xây tường 220"].khoi_luong is None and pending["Xây tường 220"].cho_xac_nhan
+    assert any("chiều cao 3.3 m lấy từ text" in x for x in pending["Xây tường 220"].cho_xac_nhan)
+    from cadtroly.takeoff.calc import takeoff_questions
+    assert {q["ma"] for q in takeoff_questions(list(pending.values()))} == {"anh_xa", "chieu_cao"}
+    rows = {r.cong_tac: r for r in compute(d, groups, chap_nhan_B=True)}
     assert math.isclose(rows["Xây tường 220"].khoi_luong, 40 * 3.3 * 0.22, rel_tol=1e-3)
     assert rows["Xây tường 220"].tin_cay == "B"          # cao suy từ text → B
     assert math.isclose(rows["Xây tường 100"].khoi_luong, (5 + 5 + 12) * 3.3 * 0.1, rel_tol=1e-3)
@@ -67,7 +73,7 @@ def test_compute_quantities(sample_dxf, tmp_path):
     assert rows["Cửa sổ"].khoi_luong == 6 and rows["Cột BTCT"].khoi_luong == 4
     c = [r for r in rows.values() if r.tin_cay == "C"]
     assert c and c[0].khoi_luong is None                 # không bịa số
-    rows_h = {r.cong_tac: r for r in compute(d, groups, height_m=3.6)}
+    rows_h = {r.cong_tac: r for r in compute(d, groups, height_m=3.6, chap_nhan_B=True)}
     assert math.isclose(rows_h["Xây tường 220"].khoi_luong, 40 * 3.6 * 0.22, rel_tol=1e-3)
     assert rows_h["Xây tường 220"].tin_cay == "B"        # vẫn B vì ánh xạ là đoán
 

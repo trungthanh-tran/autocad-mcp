@@ -106,6 +106,9 @@ def main(argv=None) -> int:
             print(f"{f.name}: A {s['A']}% B {s['B']}% C {s['C']}% → {out}")
             for r in rows:
                 print(f"  [{r.tin_cay}] {r.cong_tac}: {r.khoi_luong} {r.don_vi}  ({r.nguon})")
+            from .takeoff.calc import takeoff_questions
+            for q in takeoff_questions(rows):
+                print(f"  ? {q['cau_hoi']}  → {q['tham_so']}")
         return 0
     if a.cmd == "check":
         from .check.engine import check_drawing, load_ruleset, summarize

@@ -209,7 +209,8 @@ def _rebar_rule(r: dict, bars: list[RebarItem]) -> Finding | None:
         bad = [b for b in bars if b.d_mm not in allowed]
         goi_y = "đổi sang đường kính trong dãy: " + ", ".join(str(v) for v in sorted(allowed))
     elif loai == "rebar_note_complete":
-        bad = [b for b in bars if (b.so_thanh is None and b.buoc_mm is None) or (b.so_thanh and b.dai_m is None)]
+        bad = [b for b in bars if (b.so_thanh is None and b.buoc_mm is None)
+               or (b.so_thanh and b.dai_m is None and b.L_raw is None)]
         goi_y = "ghi đủ số thanh + L=, hoặc bước a…"
     elif loai == "rebar_clear_spacing_min":
         v = float(r["gia_tri"])

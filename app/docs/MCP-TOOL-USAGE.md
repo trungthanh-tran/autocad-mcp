@@ -6599,7 +6599,9 @@ no sheet; plot it with `drawing_export_pdf(layout=None)`).
 **Làm gì:** Create the final semantic DWG in one MCP call.
 
 The PDF is vectorized to a private temporary DXF, opened through the live
-AutoCAD backend, placed on an A-series layout and saved as DWG. The
+AutoCAD backend, placed on an A-series layout and saved as DWG. When the
+conversion returns ``can_hoi`` (unclear view scale) nothing is written and
+AutoCAD is not touched; ask the user and call again with the answers. The
 temporary DXF and its lock files are removed in ``finally`` after the DWG
 is saved, so callers do not have to manage intermediate artifacts.
 
@@ -6615,6 +6617,8 @@ is saved, so callers do not have to manage intermediate artifacts.
 | `orientation` | `string` | không | `landscape` | landscape or portrait. |
 | `layout` | `string` | không | `A1-SEMANTIC` | Paper-space layout name. |
 | `real_scale` | `boolean` | không | `True` | Model space at 1:1 real size, one scaled viewport per view on the layout (default). False: model space on A1 paper coordinates, one fit viewport. |
+| `ty_le` | `any` | không | `None` | Answer to can_hoi: scale per view code, e.g. {'H2': 100} for 1:100. Only from the user. |
+| `xac_nhan_ty_le` | `boolean` | không | `False` | Answer to can_hoi: the user accepts the scales as read (unread views stay at paper size). Only set when the user said so. |
 
 **Ví dụ gọi**
 
@@ -6656,6 +6660,11 @@ A label with a short leader line (S2-D25-250) becomes one MLEADER; images
 (stamps, signatures) are saved as PNG with transparency next to the
 target and placed as IMAGE entities.
 
+No guessing: with real_scale, a view whose scale comes only from a label,
+whose sources disagree, or that has no readable scale returns ``can_hoi``
+and writes nothing. Ask the user each question verbatim and call again
+with ``ty_le`` / ``xac_nhan_ty_le`` exactly as answered.
+
 **Dùng khi nào:** Khi cần dùng chức năng `pdf_vectorize` trong quy trình CAD.
 
 **Tham số**
@@ -6667,6 +6676,8 @@ target and placed as IMAGE entities.
 | `real_scale` | `boolean` | không | `False` | True: model space at 1:1 real size per view (scale from dimensions or a '(1:N)' label), sheet/title/stamps on an A1 layout with one scaled viewport per view. False: everything in model space on A1 paper coordinates. |
 | `leaders` | `boolean` | không | `True` | Rebuild label + leader line as MLEADER. |
 | `images` | `boolean` | không | `True` | Extract stamps/signatures/raster parts as PNG + IMAGE. |
+| `ty_le` | `any` | không | `None` | Answer to can_hoi: scale per view code, e.g. {'H2': 100} for 1:100. Only from the user. |
+| `xac_nhan_ty_le` | `boolean` | không | `False` | Answer to can_hoi: the user accepts the scales as read (unread views stay at paper size). Only set when the user said so. |
 
 **Ví dụ gọi**
 
@@ -6676,7 +6687,9 @@ target and placed as IMAGE entities.
   "target": "D:\\DuAn\\drawing.dwg",
   "real_scale": false,
   "leaders": true,
-  "images": true
+  "images": true,
+  "ty_le": null,
+  "xac_nhan_ty_le": false
 }
 ```
 
@@ -8248,6 +8261,7 @@ slot in ezdxf).
 | `path` | `string` | có | `—` | — |
 | `height_m` | `any` | không | `None` | Chiều cao tầng (m); bỏ trống = tìm text H= |
 | `tru_lo_cua_m3` | `number` | không | `0.0` | — |
+| `chap_nhan_B` | `boolean` | không | `False` | Chỉ khi người dùng nói rõ chấp nhận mọi đề xuất B |
 
 **Ví dụ gọi**
 
@@ -8255,7 +8269,8 @@ slot in ezdxf).
 {
   "path": "D:\\DuAn\\drawing.dwg",
   "height_m": null,
-  "tru_lo_cua_m3": 0.0
+  "tru_lo_cua_m3": 0.0,
+  "chap_nhan_B": false
 }
 ```
 
@@ -8305,6 +8320,7 @@ slot in ezdxf).
 **Nhóm:** `cadtroly`
 **Làm gì:** Đào đắp từ trắc ngang: đọc text lý trình (Km0+100) và diện tích (F đào = …, ô 'Diện tích đắp'),
 tính V = (F1+F2)/2 × L giữa hai trắc ngang liền kề. Mỗi số có handle nguồn và tin cậy A/B/C.
+Không suy diễn: chỗ không rõ trả về can_hoi — hỏi người dùng nguyên văn, gọi lại với câu trả lời.
 
 **Dùng khi nào:** Khi cần dùng chức năng `takeoff_earthwork` trong quy trình CAD.
 
@@ -8315,6 +8331,11 @@ tính V = (F1+F2)/2 × L giữa hai trắc ngang liền kề. Mỗi số có han
 | `path` | `string` | có | `—` | Bản vẽ trắc ngang DXF/DWG (Nova-TDN, bản vẽ tay…) |
 | `out` | `any` | không | `None` | File .xlsx; bỏ trống = không xuất, chỉ trả số liệu |
 | `ma_dinh_muc` | `any` | không | `None` | Mã định mức theo loại: {'dao': '...', 'dap_k95': '...'} |
+| `thieu_dien_tich` | `any` | không | `None` | Trả lời câu hỏi: 'bang_0' | 'bo_doan'. Chỉ điền theo người dùng |
+| `cong_trung` | `any` | không | `None` | Trả lời câu hỏi: cộng hai giá trị cùng loại ở một trắc ngang |
+| `gan` | `any` | không | `None` | Trả lời câu hỏi: {handle diện tích: 'Km0+020'} |
+| `gan_o_so` | `any` | không | `None` | Trả lời câu hỏi: {handle ô nhãn: handle ô số} |
+| `xuat_khi_con_hoi` | `boolean` | không | `False` | Xuất Excel nháp dù còn câu hỏi (ô chờ trả lời để trống) |
 
 **Ví dụ gọi**
 
@@ -8322,7 +8343,12 @@ tính V = (F1+F2)/2 × L giữa hai trắc ngang liền kề. Mỗi số có han
 {
   "path": "D:\\DuAn\\drawing.dwg",
   "out": null,
-  "ma_dinh_muc": null
+  "ma_dinh_muc": null,
+  "thieu_dien_tich": null,
+  "cong_trung": null,
+  "gan": null,
+  "gan_o_so": null,
+  "xuat_khi_con_hoi": false
 }
 ```
 
@@ -8342,6 +8368,8 @@ tính V = (F1+F2)/2 × L giữa hai trắc ngang liền kề. Mỗi số có han
 | `path` | `string` | có | `—` | — |
 | `out` | `any` | không | `None` | File .xlsx; bỏ trống = kho/out/<ten>.xlsx |
 | `height_m` | `any` | không | `None` | — |
+| `chap_nhan_B` | `boolean` | không | `False` | Chỉ khi người dùng nói rõ chấp nhận mọi đề xuất B |
+| `xuat_khi_con_hoi` | `boolean` | không | `False` | Xuất nháp dù còn câu hỏi (dòng chờ để trống) |
 
 **Ví dụ gọi**
 
@@ -8349,7 +8377,9 @@ tính V = (F1+F2)/2 × L giữa hai trắc ngang liền kề. Mỗi số có han
 {
   "path": "D:\\DuAn\\drawing.dwg",
   "out": null,
-  "height_m": null
+  "height_m": null,
+  "chap_nhan_B": false,
+  "xuat_khi_con_hoi": false
 }
 ```
 
@@ -8381,9 +8411,9 @@ tính V = (F1+F2)/2 × L giữa hai trắc ngang liền kề. Mỗi số có han
 ### `takeoff_rebar`
 
 **Nhóm:** `cadtroly`
-**Làm gì:** Thống kê thép từ ghi chú 'N1 12Ø16 L=5200' / '6%%c22 L=12.5' / 'F1-D25-125': số thanh × dài ×
+**Làm gì:** Thống kê thép từ ghi chú 'N1 12Ø16 L=5200' / '6%%c22 L=12.5m' / 'F1-D25-125': số thanh × dài ×
 khối lượng 1 m dài theo Bảng 2 TCVN 1651-2:2018 (thép trơn: TCVN 1651-1:2018, cùng giá trị).
-Ghi chú trùng ở nhiều hình chiếu chỉ tính một lần (B); thiếu số thanh hoặc L → C, để trống.
+Không suy diễn: L= không ghi đơn vị, ghi chú lặp ở nhiều chỗ → can_hoi, khối lượng để trống tới khi trả lời.
 
 **Dùng khi nào:** Khi cần dùng chức năng `takeoff_rebar` trong quy trình CAD.
 
@@ -8394,6 +8424,9 @@ Ghi chú trùng ở nhiều hình chiếu chỉ tính một lần (B); thiếu s
 | `path` | `string` | có | `—` | Bản vẽ cốt thép DXF/DWG |
 | `out` | `any` | không | `None` | File .xlsx; bỏ trống = không xuất |
 | `ma_dinh_muc` | `any` | không | `None` | Mã định mức theo đường kính: {'16': '...'} |
+| `don_vi_L` | `any` | không | `None` | Trả lời câu hỏi: 'mm' | 'm' cho L= không ghi đơn vị |
+| `trung_lap` | `any` | không | `None` | Trả lời câu hỏi: 'mot_lan' | 'tung_cho' cho ghi chú lặp |
+| `xuat_khi_con_hoi` | `boolean` | không | `False` | Xuất Excel nháp dù còn câu hỏi (dòng chờ trả lời để trống) |
 
 **Ví dụ gọi**
 
@@ -8401,7 +8434,10 @@ Ghi chú trùng ở nhiều hình chiếu chỉ tính một lần (B); thiếu s
 {
   "path": "D:\\DuAn\\drawing.dwg",
   "out": null,
-  "ma_dinh_muc": null
+  "ma_dinh_muc": null,
+  "don_vi_L": null,
+  "trung_lap": null,
+  "xuat_khi_con_hoi": false
 }
 ```
 
@@ -8410,7 +8446,8 @@ Ghi chú trùng ở nhiều hình chiếu chỉ tính một lần (B); thiếu s
 ### `takeoff_run`
 
 **Nhóm:** `cadtroly`
-**Làm gì:** Chạy trọn luồng A không hỏi (dùng quy tắc đã có). Thư mục → mỗi file một Excel. Nhóm B/C vẫn ghi rõ trong Excel.
+**Làm gì:** Chạy trọn luồng A theo quy tắc đã có. Thư mục → mỗi file một Excel nháp: nhóm B (đề xuất) và C để trống,
+ghi lý do chờ xác nhận; câu hỏi từng file trả về trong can_hoi.
 
 **Dùng khi nào:** Khi cần dùng chức năng `takeoff_run` trong quy trình CAD.
 

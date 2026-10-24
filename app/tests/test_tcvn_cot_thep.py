@@ -57,7 +57,7 @@ def test_rules_fire(tmp_path):
     assert "N5" in fs["H-01"].mo_ta and "F1" not in fs["H-01"].mo_ta       # F1 có bước → đủ
     assert "H-02" not in fs                                                 # đã có mác CB…
     assert "H-03" in fs                                                     # chưa ghi lớp bảo vệ
-    items = {i.so_hieu: i for i in rebar(read_dxf(p))}
+    items = {i.so_hieu: i for i in rebar(read_dxf(p), don_vi_L="mm")}
     assert items["F1"].buoc_mm == 125 and items["F1"].d_mm == 25
     assert items["N1"].mac == "CB400-V" and items["N1"].tong_kg == round(12 * 5.2 * 1.58, 2)
 

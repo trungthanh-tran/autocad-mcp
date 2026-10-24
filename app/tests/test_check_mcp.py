@@ -44,6 +44,8 @@ async def test_mcp_flow(sample_dxf, kho_dir):
                                                        "cong_tac": "Cửa sổ nhôm", "don_vi": "bộ", "cach_tinh": "count"}))
         assert r["ok"] and r["rules_total"] == 1
         r = _data(await c.call_tool("takeoff_export", {"path": P}))
+        assert r["excel"] is None and {q["ma"] for q in r["can_hoi"]} == {"anh_xa", "chieu_cao"}   # còn đề xuất B
+        r = _data(await c.call_tool("takeoff_export", {"path": P, "chap_nhan_B": True}))
         assert Path(r["excel"]).exists() and r["stats"]["A"] > 0
         r = _data(await c.call_tool("check_run", {"path": P, "ruleset": "chuan-cong-ty"}))
         assert r["summary"]["loi"] == 2

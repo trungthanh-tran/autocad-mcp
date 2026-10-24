@@ -79,7 +79,13 @@ def sheet(tmp_path):
     pdf = tmp_path / "hcds.pdf"
     make_sheet(pdf, stamp)
     out = tmp_path / "hcds.dxf"
-    stats = convert(pdf, out, real_scale=True, assets_dir=tmp_path / "anh")
+    first = convert(pdf, out, real_scale=True, assets_dir=tmp_path / "anh")
+    # hình 2 chỉ có nhãn (1:100), không có kích thước để đối chiếu → hỏi, chưa ghi file
+    assert first["written"] is False and not out.exists() and not (tmp_path / "anh").exists()
+    q = [x for x in first["can_hoi"] if x["ma"] == "ty_le"]
+    assert len(q) == 1 and "1:100" in q[0]["cau_hoi"] and "SO HOA" in q[0]["cau_hoi"]
+    stats = convert(pdf, out, real_scale=True, assets_dir=tmp_path / "anh", ty_le={q[0]["hinh"]: 100})
+    assert stats["written"] is True and stats["can_hoi"] == []
     return stats, ezdxf.readfile(str(out)), tmp_path
 
 
@@ -96,6 +102,8 @@ def _rect_sizes(space):
 def test_views_real_size(sheet):
     stats, doc, _ = sheet
     assert {v["ty_le"] for v in stats["views"]} >= {"1:60", "1:100"}
+    assert any(v["nguon"].startswith("người dùng chỉ định") for v in stats["views"])
+    assert any("kích thước" in v["nguon"] and "khớp nhãn 1:60" in v["nguon"] for v in stats["views"])
     msp = doc.modelspace()
     sizes = _rect_sizes(msp)
     assert any(math.isclose(w, 7620, rel_tol=1e-4) and math.isclose(h, 5080, rel_tol=1e-4) for w, h in sizes)
@@ -138,3 +146,21 @@ def test_paper_mode_unchanged(tmp_path):
     make_sheet(tmp_path / "a.pdf", stamp)
     stats = convert(tmp_path / "a.pdf", tmp_path / "a.dxf")
     assert stats["real_scale"] is False and stats["paper_layout"] is None and stats["dimensions"] == 1
+
+
+def test_conflicting_label_and_dims_asks(tmp_path):
+    """Nhãn ghi 1:50 nhưng kích thước cho 1:60 → không tự chọn bên nào."""
+    stamp = tmp_path / "dau.png"
+    _stamp_png(stamp)
+    pdf = tmp_path / "x.pdf"
+    make_sheet(pdf, stamp)
+    doc = pymupdf.open(str(pdf))
+    page = doc[0]
+    hits = page.search_for("(1:60)")
+    page.add_redact_annot(hits[0])
+    page.apply_redactions()
+    page.insert_text((205, 104), "(1:50)", fontsize=7)
+    doc.save(str(tmp_path / "y.pdf"))
+    r = convert(tmp_path / "y.pdf", tmp_path / "y.dxf", real_scale=True, assets_dir=tmp_path / "anh")
+    assert r["written"] is False
+    assert any("nhãn ghi 1:50 nhưng kích thước cho 1:60" in q["cau_hoi"] for q in r["can_hoi"])

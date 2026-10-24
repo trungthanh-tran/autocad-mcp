@@ -8,6 +8,9 @@ Cách tính:
   area_by_height     Σ dài × cao (m2)         — trát, ván khuôn
 Chiều cao "H": lấy từ text dạng H=3300 / H 3.3 trong bản vẽ, hoặc do người nhập.
 Thiếu dữ liệu thì để trống và hạ tin cậy, không bịa.
+Không suy diễn: nhóm B (ánh xạ đoán từ tên, hoặc chiều cao lấy từ text H=) để trống khối lượng và ghi lý do chờ xác
+nhận, tới khi kỹ sư trả lời (takeoff_decide cho nhóm, height_m cho chiều cao) hoặc nói rõ chấp nhận đề xuất
+(chap_nhan_B=True). takeoff_questions(rows) dựng câu hỏi.
 """
 from __future__ import annotations
 
@@ -31,6 +34,7 @@ class TakeoffRow:
     chi_tiet: list[dict] = field(default_factory=list)   # từng đối tượng: handle, giá trị
     ghi_chu: str = ""
     ma_dinh_muc: str = ""
+    cho_xac_nhan: list[str] = field(default_factory=list)   # lý do còn chờ người dùng trả lời
 
 
 def find_height(dwg: Drawing) -> tuple[float | None, str]:
@@ -56,7 +60,7 @@ def _len_m(e: Entity, k: float) -> float | None:
 
 
 def compute(dwg: Drawing, groups: list[Group], *, height_m: float | None = None,
-            overrides: dict | None = None) -> list[TakeoffRow]:
+            overrides: dict | None = None, chap_nhan_B: bool = False) -> list[TakeoffRow]:
     k = dwg.to_m
     overrides = overrides or {}
     auto_h, h_src = find_height(dwg)
@@ -124,9 +128,40 @@ def compute(dwg: Drawing, groups: list[Group], *, height_m: float | None = None,
             if h_src and height_m is None:
                 tc = "B" if tc == "A" else tc   # cao suy từ text → B
         nguon = f"{len(det)} handle · {g.kind} {g.name}" + (f" · {note}" if note else "")
-        rows.append(TakeoffRow(g.cong_tac, g.don_vi, round(total, 3), ct, nguon, tc, g.name,
-                               [d["handle"] for d in det], det, ghi_chu=g.ly_do, ma_dinh_muc=g.ma_dinh_muc))
+        reasons = []
+        if g.tin_cay == "B":
+            reasons.append(f"ánh xạ {g.kind} '{g.name}' → '{g.cong_tac}' ({g.cach_tinh}) là đề xuất: {g.ly_do}")
+        if ct in ("volume_by_height", "area_by_height") and h_src and height_m is None:
+            reasons.append(f"chiều cao {round(H, 3)} m lấy từ {h_src}")
+        kl = round(total, 3)
+        ghi_chu = g.ly_do
+        if tc == "B" and reasons and not chap_nhan_B:
+            kl = None
+            det = [dict(d, gia_tri=None) for d in det]
+            ghi_chu = (g.ly_do + " — " if g.ly_do else "") + "chờ xác nhận: " + "; ".join(reasons)
+        elif tc == "B" and chap_nhan_B:
+            ghi_chu = (g.ly_do + " — " if g.ly_do else "") + "người dùng chấp nhận đề xuất"
+        rows.append(TakeoffRow(g.cong_tac, g.don_vi, kl, ct, nguon, tc, g.name,
+                               [d["handle"] for d in det], det, ghi_chu=ghi_chu, ma_dinh_muc=g.ma_dinh_muc,
+                               cho_xac_nhan=reasons if kl is None else []))
     return rows
+
+
+def takeoff_questions(rows: list[TakeoffRow]) -> list[dict]:
+    hoi = []
+    groups = [r for r in rows if r.cho_xac_nhan and any(x.startswith("ánh xạ") for x in r.cho_xac_nhan)]
+    if groups:
+        hoi.append({"ma": "anh_xa", "cau_hoi": f"{len(groups)} nhóm có ánh xạ là đề xuất từ tên layer/block: "
+                                               + "; ".join(f"'{r.nhom}' → {r.cong_tac} ({r.don_vi}, {r.cach_tinh})"
+                                                           for r in groups[:8])
+                                               + ("…" if len(groups) > 8 else "")
+                                               + ". Xác nhận hoặc sửa từng nhóm.",
+                    "tham_so": "takeoff_decide (từng nhóm) | chap_nhan_B=true (chấp nhận tất cả đề xuất)"})
+    heights = sorted({x for r in rows for x in r.cho_xac_nhan if x.startswith("chiều cao")})
+    if heights:
+        hoi.append({"ma": "chieu_cao", "cau_hoi": "; ".join(heights) + ". Đúng chiều cao tầng dùng để tính không?",
+                    "tham_so": "height_m (giá trị người dùng đưa)"})
+    return hoi
 
 
 def stats(groups: list[Group]) -> dict:

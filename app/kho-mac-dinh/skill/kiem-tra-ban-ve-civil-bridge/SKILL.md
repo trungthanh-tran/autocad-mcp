@@ -1,7 +1,7 @@
 ---
 name: kiem-tra-ban-ve-civil-bridge
 description: Đọc, phân lớp và kiểm tra bản vẽ đường, cầu, thoát nước và hạ tầng theo vai trò kỹ thuật.
-version: 0.2
+version: 0.3
 ---
 
 # Kiểm tra bản vẽ đường và cầu
@@ -29,10 +29,12 @@ Civil 3D.
 
 - Đào đắp: `takeoff_earthwork(path, out)` đọc text lý trình (`Km0+100`, `Lý trình: 0+100`) và diện tích
   (`F đào = 12.35`, hoặc ô "Diện tích đắp" + ô số cùng hàng), tính mặt cắt trung bình giữa hai trắc ngang liền kề.
-  Báo người dùng các trắc ngang không thấy diện tích và đoạn tin cậy B (một đầu thiếu diện tích coi = 0, hoặc
-  diện tích nằm giữa hai lý trình).
-- Thép: `takeoff_rebar(path, out)` đọc ghi chú `N1 12Ø16 L=5200`, `%%c` = Ø. Ghi chú trùng ở nhiều hình chiếu chỉ
-  tính một lần (B) — hỏi người dùng có phải thanh khác nhau không. Ghi chú chỉ có bước `a200` hoặc thiếu `L=` → C.
+  Kết quả có `can_hoi` (một đầu đoạn không ghi diện tích, diện tích nằm giữa hai lý trình, hai giá trị cùng loại,
+  ô nhãn có nhiều ô số) → hỏi người dùng đúng câu đó, gọi lại với `thieu_dien_tich` / `gan` / `cong_trung` /
+  `gan_o_so` theo câu trả lời. Không tự chọn.
+- Thép: `takeoff_rebar(path, out)` đọc ghi chú `N1 12Ø16 L=5200`, `F1-D25-125`, `%%c` = Ø. `L=` không ghi đơn vị
+  hoặc ghi chú lặp ở nhiều chỗ → `can_hoi`; hỏi người dùng rồi gọi lại với `don_vi_L` (`mm`/`m`) và `trung_lap`
+  (`mot_lan`/`tung_cho`). Ghi chú chỉ có bước `a200` hoặc thiếu `L=` → C, để trống.
 - Nếu bản vẽ đã có bảng thống kê thép, đối chiếu tổng theo đường kính với bảng đó và báo chênh lệch, không thay số.
 - Mã định mức (TT 38/2026/TT-BXD) chỉ điền khi người dùng đưa mã: tham số `ma_dinh_muc`.
 

@@ -109,8 +109,10 @@ Luồng: `takeoff_propose` (đề xuất ánh xạ) → `takeoff_decide` (kỹ s
 ### Độ tin cậy A/B/C
 
 - **A** — đếm/đo trực tiếp theo quy tắc đơn vị hoặc attribute block.
-- **B** — đoán từ tên layer/block, hoặc chiều cao suy từ text `H=`. Cần kỹ sư xác nhận; xác nhận một lần là thành quy tắc
-  trong `quy-tac/anh-xa.json`.
+- **B** — đề xuất từ tên layer/block, hoặc chiều cao đọc từ text `H=`. **Khối lượng để trống** và tool trả câu hỏi
+  (`can_hoi`) cho tới khi kỹ sư xác nhận: `takeoff_decide` cho từng nhóm (lưu thành quy tắc trong
+  `quy-tac/anh-xa.json`, lần sau thành A), `height_m` cho chiều cao, hoặc `chap_nhan_B=true` khi người dùng nói rõ
+  chấp nhận mọi đề xuất. `takeoff_export` không xuất Excel khi còn câu hỏi (trừ `xuat_khi_con_hoi=true` để xuất nháp).
 - **C** — không xác định (layer 0, line rời). Khối lượng để trống, Excel ghi "khoanh để người đếm". Không bịa.
 
 ### Cột trong Excel
@@ -135,11 +137,23 @@ Không cần Civil 3D — đọc text trên bản vẽ AutoCAD thường (Nova-T
 | `takeoff_earthwork` | Text lý trình `Km0+100` / `Lý trình: 0+100`; diện tích `F đào = 12.35`, `FĐắp=4,0`, hoặc ô "Diện tích đào" + ô số cùng hàng; tách `đắp K95/K98`, vét hữu cơ, đánh cấp | V = (F1 + F2) / 2 × L giữa hai trắc ngang liền kề | Tổng hợp · Khối lượng đoạn · Trắc ngang (F, handle, lệnh zoom) · Kiểm soát |
 | `takeoff_rebar` | Ghi chú `N1 12Ø16 L=5200`, `6%%c22 L=12.5`, `2x10Φ12`, `F1-D25-125` (số hiệu-D đường kính-bước), mác `CB400-V` | Số thanh × dài × khối lượng 1 m dài theo Bảng 2 TCVN 1651-2:2018 (D16 = 1,58 kg/m) | Thống kê thép · Tổng hợp theo Ø (kg/m, sai lệch cho phép, nguồn) · Kiểm soát |
 
-Tin cậy: **A** đọc thẳng một text · **B** phải ghép (nhãn với ô số; diện tích giữa hai lý trình; một đầu đoạn thiếu
-diện tích coi = 0; ghi chú thép trùng ở nhiều hình chiếu chỉ tính một lần) · **C** thiếu số thanh hoặc `L=`, để trống.
+Không suy diễn — chỗ không rõ để trống và hỏi lại (`can_hoi`), chỉ tính khi người dùng trả lời qua tham số:
+
+| Tình huống | Câu hỏi | Tham số trả lời |
+|---|---|---|
+| Một đầu đoạn không ghi diện tích | Coi bằng 0, hay không tính đoạn? | `thieu_dien_tich`: `bang_0` / `bo_doan` |
+| Diện tích nằm giữa hai lý trình | Thuộc trắc ngang nào? | `gan`: `{handle: "Km0+020"}` |
+| Hai giá trị cùng loại ở một trắc ngang | Cộng lại, hay chỉ định lại? | `cong_trung`, `gan` |
+| Ô nhãn có nhiều ô số cùng hàng | Ô nào là giá trị? | `gan_o_so`: `{handle nhãn: handle ô số}` |
+| `L=` không ghi đơn vị | mm hay m? | `don_vi_L`: `mm` / `m` |
+| Ghi chú thép giống nhau ở nhiều chỗ | Cùng một thanh hay thanh riêng? | `trung_lap`: `mot_lan` / `tung_cho` |
+
+Tin cậy: **A** đọc thẳng một text hoặc theo câu trả lời của người dùng · **B** ghép ô nhãn với ô số duy nhất cùng
+hàng · **C** thiếu dữ liệu hoặc chờ trả lời (để trống). Còn câu hỏi thì không xuất Excel, trừ khi
+`xuat_khi_con_hoi=true` (bản nháp, ô chờ để trống).
 
 ```text
-Bóc đào đắp file D:\DuAn\trac-ngang.dwg ra Excel. Liệt kê trắc ngang không có diện tích và các đoạn tin cậy B.
+Bóc đào đắp file D:\DuAn\trac-ngang.dwg ra Excel. Chỗ nào không rõ thì hỏi tôi, không tự chọn.
 Thống kê thép bản vẽ D:\DuAn\tru-T1.dwg theo đường kính, đối chiếu với bảng thống kê trên bản vẽ nếu có.
 ```
 

@@ -422,6 +422,7 @@ def _find_dims(prims: list[_Prim], texts: list[_Text]) -> list[_Dim]:
                 continue                         # đoạn chạy xuyên thân chữ: không phải đường dim của chữ này
             cand[round(off / (0.2 * h))].append((i, s1, s2))
         best = None
+        options: list[float] = []
         for _, members in cand.items():
             members.sort(key=lambda m_: m_[1])
             spans, cur = [], None
@@ -435,10 +436,13 @@ def _find_dims(prims: list[_Prim], texts: list[_Text]) -> list[_Dim]:
             for s1, s2, ids in spans:
                 if s1 <= 0.0 <= s2 and s2 - s1 >= 0.6 * t.width:
                     off = abs((prims[ids[0]].pts[0][0] - cx) * vx + (prims[ids[0]].pts[0][1] - cy) * vy)
+                    options.append(off)
                     if best is None or off < best[0]:
                         best = (off, s1, s2, ids)
         if best is None:
             continue
+        if sum(1 for o in options if o <= best[0] + 0.3 * h) > 1:
+            continue                       # không rõ chữ thuộc đường dim nào: giữ nguyên nét và chữ như PDF
         _, s1, s2, ids = best
         p0 = prims[ids[0]].pts[0]
         off = (p0[0] - cx) * vx + (p0[1] - cy) * vy
@@ -566,6 +570,7 @@ def _find_leaders(prims: list[_Prim], texts: list[_Text]) -> list[_Leader]:
             continue
         h, box = t.height, _text_box(t)
         best = None
+        near_count = 0
         cx, cy = t.center
         for i in grid.near(cx, cy, t.width + 6 * h):
             if i in taken or i not in cand_ids:
@@ -581,11 +586,12 @@ def _find_leaders(prims: list[_Prim], texts: list[_Text]) -> list[_Leader]:
                 continue
             if len(p.pts) == 2 and _angle_diff(_seg_angle(p), t.angle) < 8 and _point_seg_dist(far, *box[:2]) < h:
                 continue                              # gạch chân chữ, không chỉ vào đâu
+            near_count += 1
             if best is None or dn < best[0]:
                 verts = list(p.pts) if p.pts[-1] == near else list(reversed(p.pts))
                 best = (dn, i, verts, far)
-        if best is None:
-            continue
+        if best is None or near_count > 1:
+            continue                       # không có, hoặc hơn một đường dẫn chạm chữ: giữ nguyên như PDF
         _, i, verts, far = best
         taken.add(i)
         parts, arrow = [prims[i]], "_NONE"
@@ -655,6 +661,11 @@ class _View:
     members: list = field(default_factory=list)       # _Prim | _Text | _Dim | _Leader
     factor: float | None = None                       # giấy → thực (mm thực / mm giấy)
     source: str = ""
+    ma: str = ""                                      # H1, H2… theo thứ tự đọc (trên → dưới, trái → phải)
+    ten: str = ""                                     # tên hình đọc được ngay trên nhãn tỷ lệ
+    dim_factors: list[float] = field(default_factory=list)
+    label_n: float | None = None
+    conflict: str = ""
 
 
 def _bbox_of(item) -> tuple[float, float, float, float]:
@@ -706,17 +717,16 @@ def _views(items: list, gap: float) -> list[_View]:
 
 
 def _assign_scales(views: list[_View], labels: list[tuple[_Text, float]], lfac: dict[int, float],
-                   label_factor) -> None:
+                   label_factor, texts: list[_Text]) -> None:
+    """Ghi nhận tỷ lệ đọc được của từng hình. Chỉ đặt factor khi các nguồn thống nhất; mâu thuẫn → conflict (hỏi)."""
     for v in views:
-        fs = [lfac[id(m)] for m in v.members if isinstance(m, _Dim) and id(m) in lfac]
-        if fs:
-            v.factor, v.source = statistics.median(fs), f"{len(fs)} kích thước"
-    # nhãn "(1:60)" dưới tên hình: gán cho hình có nét gần nhất nằm ngay dưới nhãn (hoặc chứa nhãn)
-    for t, n in labels:
-        cx, cy = t.center
+        v.dim_factors = [lfac[id(m)] for m in v.members if isinstance(m, _Dim) and id(m) in lfac]
+    # nhãn "(1:60)": thuộc hình có nét nằm ngay dưới nhãn (hoặc chứa nhãn), cách ≤ 25 mm giấy
+    for t_, n in labels:
+        cx, cy = t_.center
         best = None
         for v in views:
-            if v.factor is not None or not any(isinstance(m, _Prim) for m in v.members):
+            if not any(isinstance(m, _Prim) for m in v.members):
                 continue
             x0, y0, x1, y1 = v.bbox
             if not (x0 - 5 <= cx <= x1 + 5):
@@ -725,7 +735,54 @@ def _assign_scales(views: list[_View], labels: list[tuple[_Text, float]], lfac: 
             if dy is not None and dy < 25 and (best is None or dy < best[0]):
                 best = (dy, v)
         if best:
-            best[1].factor, best[1].source = label_factor(n), f"nhãn 1:{n:g}"
+            v = best[1]
+            if v.label_n is not None and v.label_n != n:
+                v.conflict = f"có hai nhãn tỷ lệ 1:{v.label_n:g} và 1:{n:g}"
+            v.label_n = n
+            above = [x for x in texts if x is not t_ and 0 < x.center[1] - cy < 15 and abs(x.center[0] - cx) < 60
+                     and not _SCALE_RE.match(x.text.strip())]
+            if above:
+                v.ten = min(above, key=lambda x: x.center[1] - cy).text
+    for v in views:
+        fs = v.dim_factors
+        if fs and max(fs) > min(fs) * 1.01:
+            v.conflict = v.conflict or "các kích thước trong hình cho tỷ lệ khác nhau: " + ", ".join(
+                f"1:{label_factor_inv(f, label_factor):g}" for f in sorted(set(round(x, 4) for x in fs)))
+            continue
+        if fs:
+            f = statistics.median(fs)
+            if v.label_n is not None and abs(f / label_factor(v.label_n) - 1) > 0.01:
+                v.conflict = (f"nhãn ghi 1:{v.label_n:g} nhưng kích thước cho 1:"
+                              f"{label_factor_inv(f, label_factor):g}")
+                continue
+            v.factor, v.source = f, f"{len(fs)} kích thước" + (f", khớp nhãn 1:{v.label_n:g}" if v.label_n else "")
+        elif v.label_n is not None and not v.conflict:
+            v.factor, v.source = label_factor(v.label_n), f"chỉ có nhãn 1:{v.label_n:g}"
+
+
+def label_factor_inv(f: float, label_factor) -> float:
+    return round(f / label_factor(1.0), 2)
+
+
+def _scale_questions(views: list[_View], label_factor) -> list[dict]:
+    hoi = []
+    for v in views:
+        if not any(isinstance(m, _Prim) for m in v.members):
+            continue
+        name = f"Hình {v.ma}" + (f" '{v.ten}'" if v.ten else "") + f" (vùng giấy {[round(c) for c in v.bbox]} mm)"
+        if v.conflict:
+            hoi.append({"ma": "ty_le", "hinh": v.ma, "cau_hoi": f"{name}: {v.conflict}. Tỷ lệ đúng là 1:N bao nhiêu?",
+                        "tham_so": "ty_le", "vi_du": {v.ma: v.label_n or 100}})
+        elif v.factor is not None and "chỉ có nhãn" in v.source:
+            hoi.append({"ma": "ty_le", "hinh": v.ma, "cau_hoi": f"{name}: tỷ lệ chỉ đọc từ nhãn 1:{v.label_n:g}, "
+                                                              "không có kích thước để đối chiếu. Xác nhận 1:"
+                                                              f"{v.label_n:g}?",
+                        "tham_so": "ty_le | xac_nhan_ty_le", "vi_du": {v.ma: v.label_n}})
+        elif v.factor is None and sum(isinstance(m, _Prim) for m in v.members) >= 3:
+            hoi.append({"ma": "ty_le", "hinh": v.ma, "cau_hoi": f"{name}: không đọc được tỷ lệ (không có kích thước, "
+                                                              "không có nhãn 1:N). Chỉ định 1:N, hay giữ theo khổ giấy?",
+                        "tham_so": "ty_le | xac_nhan_ty_le", "vi_du": {v.ma: 100}})
+    return hoi
 
 
 # ------------------------------------------------------------------ ghi ra
@@ -849,9 +906,14 @@ def _dimstyle(doc, dims: list[_Dim], main: float) -> None:
 # ------------------------------------------------------------------ chính
 def convert(source: Path, target: Path, *, dimensions: bool = True, keep_color: bool = True,
             leaders: bool = True, images: bool = True, real_scale: bool = False,
-            assets_dir: Path | None = None, layout: str = "A1-SEMANTIC") -> dict:
+            assets_dir: Path | None = None, layout: str = "A1-SEMANTIC",
+            ty_le: dict | None = None, xac_nhan_ty_le: bool = False) -> dict:
     """real_scale=True: model space vẽ 1:1 theo kích thước thật, layout ``layout`` khổ A1 chứa khung tên, ảnh,
-    ghi chú và một viewport đúng tỷ lệ cho mỗi hình. False: mọi thứ ở model space theo toạ độ giấy A1."""
+    ghi chú và một viewport đúng tỷ lệ cho mỗi hình. False: mọi thứ ở model space theo toạ độ giấy A1.
+
+    real_scale không suy diễn tỷ lệ: hình có tỷ lệ chỉ từ nhãn, nguồn mâu thuẫn, hoặc không đọc được → trả can_hoi
+    và KHÔNG ghi file, tới khi người dùng trả lời bằng ``ty_le={"H2": 100}`` (1:N theo mã hình) hoặc
+    ``xac_nhan_ty_le=True`` (chấp nhận tỷ lệ đã đọc; hình không đọc được giữ theo khổ giấy)."""
     pdf = pymupdf.open(str(source))
     if len(pdf) != 1:
         raise ValueError(f"Expected one PDF page, got {len(pdf)}")
@@ -890,7 +952,11 @@ def convert(source: Path, target: Path, *, dimensions: bool = True, keep_color: 
     main = Counter(round(v, 6) for v in lfac.values()).most_common(1)[0][0] if lfac else 1.0
     _dimstyle(doc, dims, main)
     lds = _find_leaders(prims, texts) if leaders else []
-    imgs = _images(pdf, page, tf, assets_dir or target.parent / f"{target.stem}_anh") if images else []
+    imgs: list[_Image] = []
+
+    def load_images() -> list[_Image]:
+        # chỉ tách ảnh ra file khi chắc chắn ghi bản vẽ (không để lại PNG khi còn câu hỏi)
+        return _images(pdf, page, tf, assets_dir or target.parent / f"{target.stem}_anh") if images else []
 
     w = _Writer(doc, keep_color)
     ident = (lambda q: (q[0], q[1]))
@@ -900,6 +966,7 @@ def convert(source: Path, target: Path, *, dimensions: bool = True, keep_color: 
     paper_layout = None
 
     if not real_scale:
+        imgs = load_images()
         for it in items:
             w.item(msp, it, ident, 1.0, lfac_of)
         for im in imgs:
@@ -924,7 +991,28 @@ def convert(source: Path, target: Path, *, dimensions: bool = True, keep_color: 
             if m:
                 labels.append((t, float(m.group(1).replace(",", "."))))
         pt_mm = 25.4 / 72
-        _assign_scales(views, labels, lfac, lambda n: n * pt_mm / tf.s)
+        label_factor = (lambda n: n * pt_mm / tf.s)
+        _assign_scales(views, labels, lfac, label_factor, [t for t in texts if not t.used])
+        for i, v in enumerate(sorted(views, key=lambda v: (-round(v.bbox[3] / 20), v.bbox[0])), 1):
+            v.ma = f"H{i}"
+        hoi = _scale_questions(views, label_factor)
+        given = {str(k).upper(): float(n) for k, n in (ty_le or {}).items()}
+        for v in views:
+            if v.ma in given:
+                v.factor, v.source, v.conflict = label_factor(given[v.ma]), f"người dùng chỉ định 1:{given[v.ma]:g}", ""
+        hoi = [q for q in hoi if q["hinh"] not in given]
+        if hoi and not xac_nhan_ty_le:
+            return {"ok": False, "written": False, "can_hoi": hoi,
+                    "views": [{"ma": v.ma, "ten": v.ten, "bbox_giay": [round(c, 1) for c in v.bbox],
+                               "ty_le_doc_duoc": (f"1:{label_factor_inv(v.factor, label_factor):g}" if v.factor else None),
+                               "nguon": v.source or v.conflict or "không đọc được"} for v in views
+                              if any(isinstance(m, _Prim) for m in v.members)],
+                    "huong_dan": "Chưa ghi file. Hỏi người dùng từng câu trong can_hoi, gọi lại với ty_le={mã: N} "
+                                 "hoặc xac_nhan_ty_le=true theo đúng câu trả lời; không tự chọn."}
+        for v in views:
+            if v.conflict and v.ma not in given:
+                v.factor = None                          # mâu thuẫn mà người dùng chỉ xác nhận chung: giữ khổ giấy
+        imgs = load_images()
         # nhóm hình cùng tỷ lệ (±1%): chung một phép biến đổi để vị trí tương đối giữa các cụm không đổi
         groups: list[tuple[float, list[_View]]] = []
         for v in sorted((v for v in views if v.factor), key=lambda v: v.factor):
@@ -963,7 +1051,8 @@ def convert(source: Path, target: Path, *, dimensions: bool = True, keep_color: 
             cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
             paper.add_viewport(center=(cx, cy), size=(x1 - x0 + 2 * m, y1 - y0 + 2 * m),
                                view_center_point=T((cx, cy)), view_height=(y1 - y0 + 2 * m) * f)
-            scale_info.append({"bbox_giay": [round(c, 1) for c in v.bbox], "ty_le": f"1:{_fmt(round(f / (pt_mm / tf.s), 2))}",
+            scale_info.append({"ma": v.ma, "ten": v.ten, "bbox_giay": [round(c, 1) for c in v.bbox],
+                               "ty_le": f"1:{_fmt(round(f / (pt_mm / tf.s), 2))}",
                                "he_so": f, "nguon": v.source, "doi_tuong": len(v.members)})
         paper_layout = {"layout": layout, "viewports": len(scale_info), "paper_mm": [PAPER_W, PAPER_H]}
 
@@ -979,6 +1068,9 @@ def convert(source: Path, target: Path, *, dimensions: bool = True, keep_color: 
     target.parent.mkdir(parents=True, exist_ok=True)
     doc.saveas(str(target))
     return {
+        "ok": True,
+        "written": True,
+        "can_hoi": [],
         "warnings": warnings,
         "lines": w.n["lines"],
         "polylines": w.n["polylines"],

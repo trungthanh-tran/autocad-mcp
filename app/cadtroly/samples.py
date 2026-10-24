@@ -119,7 +119,7 @@ def make_rebar_notes(out: str | Path) -> Path:
     doc = ezdxf.new("R2018", setup=True)
     doc.header["$INSUNITS"] = 4  # mm
     msp = doc.modelspace()
-    for i, s in enumerate(["N1 12Ø16 L=5200", "N1 12Ø16 L=5200", "N2 6%%c22 L=12.5",
+    for i, s in enumerate(["N1 12Ø16 L=5200", "N1 12Ø16 L=5200", "N2 6%%c22 L=12.5m",
                            "(3) 2x10Φ12 L=3000", "N4 Ø10 a200", "N5 8Ø25", "MẶT CẮT 1-1"]):
         msp.add_text(s, dxfattribs={"height": 250}).set_placement((0, -i * 600))
     doc.saveas(out)

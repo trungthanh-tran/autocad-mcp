@@ -19,12 +19,16 @@ from fastmcp import Context, FastMCP
 from fastmcp.exceptions import ToolError
 
 from ..check.engine import check_drawing, load_ruleset, summarize
-from ..takeoff.calc import compute, stats
-from ..takeoff.civil import earthwork, rebar, rebar_by_diameter
+from ..takeoff.calc import compute, stats, takeoff_questions
+from ..takeoff.civil import earthwork, rebar, rebar_by_diameter, rebar_questions
 from ..takeoff.excel import export_earthwork, export_excel, export_rebar
 from ..takeoff.mapper import apply_decision, propose_mapping
 
 log = logging.getLogger("cadtroly")
+
+# Gửi kèm mọi kết quả có câu hỏi: tool không tự quyết chỗ không rõ, LLM cũng không được tự trả lời thay người dùng.
+_ASK = ("Còn câu hỏi trong can_hoi. Hỏi người dùng đúng nội dung từng câu, chờ trả lời, rồi gọi lại tool với tham số "
+        "tương ứng. Không tự chọn đáp án, không suy từ bản vẽ khác hay kinh nghiệm.")
 
 CADTROLY_TOOL_NAMES = frozenset({
     "drawing_read", "drawing_entities",
@@ -113,27 +117,36 @@ def register(mcp: FastMCP) -> None:
 
     @mcp.tool(tags={"takeoff"})
     async def takeoff_compute(path: str, height_m: Annotated[float | None, "Chiều cao tầng (m); bỏ trống = tìm text H="] = None,
-                              tru_lo_cua_m3: float = 0.0, ctx: Context = None) -> dict:
+                              tru_lo_cua_m3: float = 0.0,
+                              chap_nhan_B: Annotated[bool, "Chỉ khi người dùng nói rõ chấp nhận mọi đề xuất B"] = False,
+                              ctx: Context = None) -> dict:
         """Bước 3 luồng A: tính khối lượng. Mỗi dòng có nguồn truy vết và tin cậy; thiếu dữ liệu thì để trống."""
         lc = _ctx(ctx)
         st, kho = lc["state"], lc["kho"]
         d = st.drawing(path)
         groups = st.groups.get(st.key(path)) or propose_mapping(d, kho.rules)
-        rows = compute(d, groups, height_m=height_m, overrides={"tru_lo_cua": tru_lo_cua_m3})
-        return {"rows": [{"ma_dinh_muc": r.ma_dinh_muc, "cong_tac": r.cong_tac, "don_vi": r.don_vi,
+        rows = compute(d, groups, height_m=height_m, overrides={"tru_lo_cua": tru_lo_cua_m3}, chap_nhan_B=chap_nhan_B)
+        hoi = takeoff_questions(rows)
+        return {"can_hoi": hoi, "huong_dan": _ASK if hoi else "", "rows": [{"ma_dinh_muc": r.ma_dinh_muc, "cong_tac": r.cong_tac, "don_vi": r.don_vi,
                           "khoi_luong": r.khoi_luong,
                           "cach_tinh": r.cach_tinh, "nguon": r.nguon, "tin_cay": r.tin_cay,
                           "ghi_chu": r.ghi_chu, "so_handle": len(r.handles)} for r in rows]}
 
     @mcp.tool(tags={"takeoff"})
     async def takeoff_export(path: str, out: Annotated[str | None, "File .xlsx; bỏ trống = kho/out/<ten>.xlsx"] = None,
-                             height_m: float | None = None, ctx: Context = None) -> dict:
+                             height_m: float | None = None,
+                             chap_nhan_B: Annotated[bool, "Chỉ khi người dùng nói rõ chấp nhận mọi đề xuất B"] = False,
+                             xuat_khi_con_hoi: Annotated[bool, "Xuất nháp dù còn câu hỏi (dòng chờ để trống)"] = False,
+                             ctx: Context = None) -> dict:
         """Bước 4 luồng A: xuất Excel 4 sheet (Khối lượng, Chi tiết từng handle + lệnh zoom, Ánh xạ, Kiểm soát)."""
         lc = _ctx(ctx)
         st, kho, cfg = lc["state"], lc["kho"], lc["cfg"]
         d = st.drawing(path)
         groups = st.groups.get(st.key(path)) or propose_mapping(d, kho.rules)
-        rows = compute(d, groups, height_m=height_m)
+        rows = compute(d, groups, height_m=height_m, chap_nhan_B=chap_nhan_B)
+        hoi = takeoff_questions(rows)
+        if hoi and not xuat_khi_con_hoi:
+            return {"ok": False, "excel": None, "can_hoi": hoi, "huong_dan": _ASK, "stats": stats(groups)}
         out_p = Path(out) if out else cfg.kho / "out" / (Path(path).stem + ".xlsx")
         export_excel(d, groups, rows, out_p, meta={"stats": stats(groups)})
         for g in groups:
@@ -145,7 +158,8 @@ def register(mcp: FastMCP) -> None:
     @mcp.tool(tags={"takeoff"})
     async def takeoff_run(path: Annotated[str, "File DXF hoặc thư mục"], height_m: float | None = None,
                           ctx: Context = None) -> dict:
-        """Chạy trọn luồng A không hỏi (dùng quy tắc đã có). Thư mục → mỗi file một Excel. Nhóm B/C vẫn ghi rõ trong Excel."""
+        """Chạy trọn luồng A theo quy tắc đã có. Thư mục → mỗi file một Excel nháp: nhóm B (đề xuất) và C để trống,
+        ghi lý do chờ xác nhận; câu hỏi từng file trả về trong can_hoi."""
         lc = _ctx(ctx)
         st, kho, cfg = lc["state"], lc["kho"], lc["cfg"]
         p = Path(path)
@@ -158,7 +172,8 @@ def register(mcp: FastMCP) -> None:
                 rows = compute(d, groups, height_m=height_m)
                 out_p = cfg.kho / "out" / (f.stem + ".xlsx")
                 export_excel(d, groups, rows, out_p, meta={"stats": stats(groups)})
-                results.append({"file": str(f), "excel": str(out_p), "stats": stats(groups)})
+                results.append({"file": str(f), "excel": str(out_p), "stats": stats(groups),
+                                "can_hoi": takeoff_questions(rows)})
             except Exception as exc:
                 results.append({"file": str(f), "error": str(exc)})
         return {"count": len(results), "results": results}
@@ -169,18 +184,31 @@ def register(mcp: FastMCP) -> None:
         path: Annotated[str, "Bản vẽ trắc ngang DXF/DWG (Nova-TDN, bản vẽ tay…)"],
         out: Annotated[str | None, "File .xlsx; bỏ trống = không xuất, chỉ trả số liệu"] = None,
         ma_dinh_muc: Annotated[dict | None, "Mã định mức theo loại: {'dao': '...', 'dap_k95': '...'}"] = None,
+        thieu_dien_tich: Annotated[str | None, "Trả lời câu hỏi: 'bang_0' | 'bo_doan'. Chỉ điền theo người dùng"] = None,
+        cong_trung: Annotated[bool | None, "Trả lời câu hỏi: cộng hai giá trị cùng loại ở một trắc ngang"] = None,
+        gan: Annotated[dict | None, "Trả lời câu hỏi: {handle diện tích: 'Km0+020'}"] = None,
+        gan_o_so: Annotated[dict | None, "Trả lời câu hỏi: {handle ô nhãn: handle ô số}"] = None,
+        xuat_khi_con_hoi: Annotated[bool, "Xuất Excel nháp dù còn câu hỏi (ô chờ trả lời để trống)"] = False,
         ctx: Context = None,
     ) -> dict:
         """Đào đắp từ trắc ngang: đọc text lý trình (Km0+100) và diện tích (F đào = …, ô 'Diện tích đắp'),
-        tính V = (F1+F2)/2 × L giữa hai trắc ngang liền kề. Mỗi số có handle nguồn và tin cậy A/B/C."""
+        tính V = (F1+F2)/2 × L giữa hai trắc ngang liền kề. Mỗi số có handle nguồn và tin cậy A/B/C.
+        Không suy diễn: chỗ không rõ trả về can_hoi — hỏi người dùng nguyên văn, gọi lại với câu trả lời."""
         lc = _ctx(ctx)
         st, kho = lc["state"], lc["kho"]
         d = st.drawing(path)
-        res = earthwork(d)
-        xl = str(export_earthwork(d, res, out, ma_dinh_muc=ma_dinh_muc)) if out else None
-        kho.log("takeoff", "earthwork", path=path, sections=len(res["sections"]), totals=res["totals"], out=xl)
+        res = earthwork(d, thieu_dien_tich=thieu_dien_tich, cong_trung=cong_trung, gan=gan, gan_o_so=gan_o_so)
+        hoi = res["can_hoi"]
+        xl = None
+        if out and (not hoi or xuat_khi_con_hoi):
+            xl = str(export_earthwork(d, res, out, ma_dinh_muc=ma_dinh_muc))
+        kho.log("takeoff", "earthwork", path=path, sections=len(res["sections"]), totals=res["totals"], out=xl,
+                can_hoi=len(hoi))
         return {
+            "can_hoi": hoi,
+            "huong_dan": _ASK if hoi else "",
             "totals_m3": {res["names"].get(k, k): v for k, v in res["totals"].items()},
+            "chua_du": [res["names"].get(k, k) for k in res.get("incomplete", [])],
             "sections": [{"ly_trinh": s.label, "m": s.station_m, "handle": s.handle, "F_m2": s.areas,
                           "tin_cay": s.tin_cay, "ghi_chu": s.ghi_chu} for s in res["sections"]],
             "segments": res["segments"], "warnings": res["warnings"], "excel": xl,
@@ -191,20 +219,29 @@ def register(mcp: FastMCP) -> None:
         path: Annotated[str, "Bản vẽ cốt thép DXF/DWG"],
         out: Annotated[str | None, "File .xlsx; bỏ trống = không xuất"] = None,
         ma_dinh_muc: Annotated[dict | None, "Mã định mức theo đường kính: {'16': '...'}"] = None,
+        don_vi_L: Annotated[str | None, "Trả lời câu hỏi: 'mm' | 'm' cho L= không ghi đơn vị"] = None,
+        trung_lap: Annotated[str | None, "Trả lời câu hỏi: 'mot_lan' | 'tung_cho' cho ghi chú lặp"] = None,
+        xuat_khi_con_hoi: Annotated[bool, "Xuất Excel nháp dù còn câu hỏi (dòng chờ trả lời để trống)"] = False,
         ctx: Context = None,
     ) -> dict:
-        """Thống kê thép từ ghi chú 'N1 12Ø16 L=5200' / '6%%c22 L=12.5' / 'F1-D25-125': số thanh × dài ×
+        """Thống kê thép từ ghi chú 'N1 12Ø16 L=5200' / '6%%c22 L=12.5m' / 'F1-D25-125': số thanh × dài ×
         khối lượng 1 m dài theo Bảng 2 TCVN 1651-2:2018 (thép trơn: TCVN 1651-1:2018, cùng giá trị).
-        Ghi chú trùng ở nhiều hình chiếu chỉ tính một lần (B); thiếu số thanh hoặc L → C, để trống."""
+        Không suy diễn: L= không ghi đơn vị, ghi chú lặp ở nhiều chỗ → can_hoi, khối lượng để trống tới khi trả lời."""
         lc = _ctx(ctx)
         st, kho = lc["state"], lc["kho"]
         d = st.drawing(path)
-        items = rebar(d)
+        items = rebar(d, trung_lap=trung_lap, don_vi_L=don_vi_L)
+        hoi = rebar_questions(items)
         by_d = rebar_by_diameter(items)
-        xl = str(export_rebar(d, items, by_d, out, ma_dinh_muc=ma_dinh_muc)) if out else None
-        kho.log("takeoff", "rebar", path=path, items=len(items), out=xl)
+        xl = None
+        if out and (not hoi or xuat_khi_con_hoi):
+            xl = str(export_rebar(d, items, by_d, out, ma_dinh_muc=ma_dinh_muc))
+        kho.log("takeoff", "rebar", path=path, items=len(items), out=xl, can_hoi=len(hoi))
         return {
+            "can_hoi": hoi,
+            "huong_dan": _ASK if hoi else "",
             "tong_kg": round(sum(g["tong_kg"] for g in by_d.values()), 2),
+            "tong_chua_du": any(g["thieu"] for g in by_d.values()),
             "theo_duong_kinh": {f"Ø{k}": v for k, v in by_d.items()},
             "items": [{"so_hieu": i.so_hieu, "d_mm": i.d_mm, "so_thanh": i.so_thanh, "dai_m": i.dai_m,
                        "tong_kg": i.tong_kg, "tin_cay": i.tin_cay, "ghi_chu": i.ghi_chu, "text": i.text,

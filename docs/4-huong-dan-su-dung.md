@@ -71,7 +71,7 @@ Tạo checkpoint, sửa, chụp lại, báo handle đã đổi và lưu thành b
 | Cơ khí, P&ID | Tạo bản vẽ cơ khí/P&ID theo mô tả, dùng layer và ký hiệu đúng ngành. Chưa có tiêu chuẩn thì hỏi trước. |
 | Dọn dẹp | Tìm đối tượng hình học trùng nhau. Chưa xoá; trả layer, handle, toạ độ và đề xuất nhóm nên xoá để tôi xác nhận. |
 | Lưu, dọn file tạm | Chuyển PDF thành DWG, lưu kết quả, xoá DXF và file tạm nhưng giữ PDF nguồn. |
-| Đào đắp (cầu đường) | Bóc đào đắp file trắc ngang `D:\DuAn\tn.dwg` ra Excel. Liệt kê trắc ngang không có diện tích và đoạn tin cậy B. |
+| Đào đắp (cầu đường) | Bóc đào đắp file trắc ngang `D:\DuAn\tn.dwg` ra Excel. Chỗ nào không rõ thì hỏi tôi. |
 | Thống kê thép | Thống kê thép bản vẽ trụ T1 theo đường kính, đối chiếu với bảng thống kê trên bản vẽ nếu có. |
 | Kiểm tra trước | Kiểm tra sức khoẻ bản vẽ này trước khi bóc: xref, đơn vị, layer, đối tượng lỗi. Không sửa gì. |
 | Kết cấu, PCCC | Kiểm tra sơ bộ lối thoát nạn, cửa thoát, hành lang, cầu thang, ký hiệu PCCC. Thiếu tiêu chuẩn hoặc số người thì hỏi, không tự điền. |
@@ -115,6 +115,15 @@ LLM phải báo file ảnh, vùng chụp và thay đổi quan sát được. Ả
 dữ liệu CAD. Nếu `view_render_report` báo có loại đối tượng không render được, phải kiểm tra lại trong AutoCAD.
 
 Ảnh live trước/sau cần backend COM và AutoCAD đang mở.
+
+## Không suy diễn — chỗ không rõ MCP hỏi lại
+
+MCP chỉ báo những gì đọc được trên bản vẽ và văn bản tiêu chuẩn. Khi dữ liệu không rõ — tỷ lệ hình chỉ có nhãn, nguồn
+tỷ lệ mâu thuẫn, `L=` không ghi đơn vị, ghi chú thép lặp ở nhiều chỗ, diện tích nằm giữa hai lý trình, ánh xạ
+layer/block chỉ là đề xuất — tool **không tự chọn**: để trống, trả về câu hỏi, và không ghi file/Excel cho tới khi bạn
+trả lời. LLM phải hỏi lại bạn đúng câu đó; nếu LLM tự trả lời thay, yêu cầu nó dừng và hỏi.
+
+> Bóc thép bản vẽ này. Chỗ nào không rõ (đơn vị, ghi chú lặp, tỷ lệ) thì hỏi tôi, không tự chọn.
 
 ## An toàn
 
