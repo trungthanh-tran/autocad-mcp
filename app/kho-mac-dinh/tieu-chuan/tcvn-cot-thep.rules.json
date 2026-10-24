@@ -1,0 +1,60 @@
+{
+  "id": "tcvn-cot-thep",
+  "ten": "Thép cốt bê tông — TCVN 1651-1:2018, TCVN 1651-2:2018",
+  "nganh": "structural",
+  "phien_ban": "2018",
+  "nguon": "TCVN 1651-1:2018 Thép cốt bê tông — Phần 1: Thép thanh tròn trơn (xuất bản lần 2); TCVN 1651-2:2018 Thép cốt bê tông — Phần 2: Thép thanh vằn (xuất bản lần 2)",
+  "hieu_luc": "co",
+  "doi_chieu": {
+    "ngay": "2026-10-24",
+    "cach": "Đọc trực tiếp ảnh trang văn bản (bản PDF scan), không qua tóm tắt",
+    "ban_doc": [
+      "TCVN 1651-1:2018 — bản sao có dấu Trung tâm Thông tin Tiêu chuẩn Đo lường Chất lượng, tải từ vicasasteel.com: mục 1 Phạm vi áp dụng, mục 5 và Bảng 2",
+      "TCVN 1651-2:2018 — bản PDF tải từ storethinghiem.vn: mục 1 Phạm vi áp dụng (kèm Chú thích 1, 2), mục 4 và Bảng 2"
+    ],
+    "luu_y": "Không phải bản do VSQI phát hành trực tiếp; trước khi dùng cho hồ sơ phát hành nên đối chiếu bản chính thức (tieuchuan.vsqi.gov.vn)."
+  },
+  "rules": [
+    {"id": "T-01", "loai": "rebar_diameter_in", "gia_tri": [6, 8, 10, 12, 14, 16, 18, 20, 22, 25, 28, 32, 36, 40, 50],
+     "muc": "canh_bao",
+     "mo_ta": "Đường kính danh nghĩa không có trong Bảng 2 — chỉ được dùng khi có thoả thuận giữa nhà sản xuất và người mua",
+     "dieu": "TCVN 1651-2:2018 mục 4 và Bảng 2 (thép vằn: 6…50 mm); TCVN 1651-1:2018 mục 5 và Bảng 2 (thép trơn: 6…40 mm)",
+     "duyet": true},
+    {"id": "T-02", "loai": "rebar_grade_in", "gia_tri": ["CB240-T", "CB300-T", "CB400-T", "CB300-V", "CB400-V", "CB500-V", "CB600-V"],
+     "muc": "loi",
+     "mo_ta": "Mác thép ghi trên ghi chú không thuộc các mác của TCVN 1651-1/2:2018",
+     "dieu": "TCVN 1651-1:2018 mục 1 (CB240-T, CB300-T, CB400-T); TCVN 1651-2:2018 mục 1 (CB300-V, CB400-V, CB500-V, CB600-V)",
+     "duyet": true},
+    {"id": "T-03", "loai": "rebar_grade_flag", "gia_tri": ["CB600-V"],
+     "muc": "xac_nhan",
+     "mo_ta": "Có dùng CB600-V — mác này không được sử dụng để hàn; kỹ sư kiểm tra không có liên kết hàn",
+     "dieu": "TCVN 1651-2:2018 mục 1, Chú thích 2",
+     "duyet": true},
+    {"id": "H-01", "loai": "rebar_note_complete",
+     "muc": "canh_bao",
+     "mo_ta": "Ghi chú thép thiếu số thanh kèm chiều dài L=, hoặc thiếu bước — không thống kê được khối lượng",
+     "dieu": "Yêu cầu thể hiện hồ sơ (không phải điều khoản TCVN)",
+     "duyet": true},
+    {"id": "H-02", "loai": "required_text", "pattern": "CB\\s*-?\\s*(240|300|400|500|600)\\s*-?\\s*[TV]",
+     "muc": "canh_bao",
+     "mo_ta": "Bản vẽ chưa ghi mác thép theo ký hiệu TCVN 1651 (CB…-T / CB…-V)",
+     "dieu": "Yêu cầu thể hiện hồ sơ; ký hiệu mác theo TCVN 1651-1/2:2018 mục 1 Chú thích",
+     "duyet": true},
+    {"id": "H-03", "loai": "required_text", "pattern": "lớp (bê tông|BT) bảo vệ|lop (be tong|bt) bao ve|chiều dày lớp bảo vệ|\\babv\\b|a\\s*bv",
+     "muc": "canh_bao",
+     "mo_ta": "Bản vẽ chưa ghi chiều dày lớp bê tông bảo vệ; giá trị do kỹ sư xác định theo tiêu chuẩn thiết kế áp dụng",
+     "dieu": "Yêu cầu thể hiện hồ sơ (không phải điều khoản TCVN 1651)",
+     "duyet": true}
+  ],
+  "bang_khoi_luong": {
+    "nguon": "TCVN 1651-2:2018 Bảng 2; TCVN 1651-1:2018 Bảng 2 (cùng giá trị khối lượng cho d 6…40)",
+    "cong_thuc": "S0 = 0,785 4 × d²; khối lượng theo chiều dài = 7,85 × 10⁻³ × S0",
+    "kg_m": {"6": 0.222, "8": 0.395, "10": 0.617, "12": 0.888, "14": 1.21, "16": 1.58, "18": 2.00, "20": 2.47,
+             "22": 2.98, "25": 3.85, "28": 4.83, "32": 6.31, "36": 7.99, "40": 9.86, "50": 15.42},
+    "sai_lech_phan_tram": {"6": 8, "8": 8, "10": 6, "12": 6, "14": 5, "16": 5, "18": 5, "20": 5, "22": 5,
+                           "25": 4, "28": 4, "32": 4, "36": 4, "40": 4, "50": 4},
+    "ghi_chu": "d 50 chỉ có trong TCVN 1651-2 (thép vằn). Đường kính > 50 mm phải có thoả thuận giữa nhà sản xuất và người mua (TCVN 1651-2:2018 Bảng 2, chú thích a)."
+  },
+  "lien_quan": "Yêu cầu bố trí cốt thép TCVN 5574:2018 (lớp bảo vệ, khoảng hở, khoảng cách lớn nhất) nằm ở bộ riêng tcvn-5574-2018-cot-thep.",
+  "ghi_chu": "Bộ này chỉ chứa nội dung đã đọc nguyên văn từ TCVN 1651-1/2:2018 và các yêu cầu thể hiện hồ sơ (H-…) được ghi rõ là không phải điều khoản tiêu chuẩn."
+}

@@ -5,8 +5,8 @@ Không cần đối tượng Civil 3D: chỉ đọc TEXT/MTEXT đã có trên b�
   earthwork  đào đắp từ trắc ngang. Mỗi trắc ngang có text lý trình (Km0+100) và text diện tích
              (F đào = 12.35, hoặc ô "Diện tích đào" cạnh ô số). Khối lượng giữa hai trắc ngang liền
              kề = (F1 + F2) / 2 × khoảng cách (phương pháp mặt cắt trung bình).
-  rebar      thống kê thép từ ghi chú: "N1 12Ø16 L=5200", "6%%c22 L=12.5". KL = số thanh × dài ×
-             0.0061654·d² kg/m.
+  rebar      thống kê thép từ ghi chú: "N1 12Ø16 L=5200", "6%%c22 L=12.5", "F1-D25-125". KL = số thanh × dài ×
+             khối lượng 1 m dài theo Bảng 2 TCVN 1651-2:2018 / TCVN 1651-1:2018 (cỡ ngoài bảng: công thức của Bảng 2).
 
 Tin cậy như luồng A: A đọc thẳng từ một text; B phải ghép (nhãn với ô số, diện tích với lý trình gần
 nhất khi có lý trình khác gần tương đương); C thiếu dữ liệu, để trống chứ không đoán.
@@ -20,7 +20,6 @@ from dataclasses import dataclass, field
 
 from ..reader.model import Drawing, Entity
 
-STEEL_KG_PER_M_PER_MM2 = math.pi / 4 * 7850 / 1e6     # 0.0061654 kg/m cho d = 1 mm
 
 
 def ascii_lower(s: str) -> str:
@@ -211,6 +210,17 @@ _DIA = r"(?:%%c|[øØΦφ∅⌀]|\\U\+2205|\\U\+00D8)"
 _BAR = re.compile(r"(?:(?<![A-Za-z\d])(\d+)\s*[x×*]\s*)?(?:(?<![A-WYZa-wyz\d])(\d+))?\s*" + _DIA + r"\s*(\d{1,2})\b", re.I)
 _LEN = re.compile(r"\bL\s*=\s*(\d+(?:[.,]\d+)?)\s*(mm|m)?", re.I)
 _SPACING = re.compile(r"\b[aA@]\s*=?\s*(\d{2,3})\b")
+# Kiểu ghi bản vẽ cầu/hầm: số hiệu-D đường kính[-bước], ví dụ S4-D14, F1-D25-125, H2-D14-250
+_MARK_D = re.compile(r"(?<![A-Za-z\d])([A-Z]{1,2}\d{1,2}[a-z]?)\s*-\s*D(\d{1,2})(?:\s*-\s*(\d{2,3}))?\b")
+# Khối lượng 1 m dài "yêu cầu" và sai lệch cho phép — chép từ Bảng 2 TCVN 1651-2:2018 (thép vằn, d 6…50) và
+# Bảng 2 TCVN 1651-1:2018 (thép trơn, d 6…40, cùng giá trị); đã đọc trực tiếp văn bản ngày 2026-10-24, xem
+# kho-mac-dinh/tieu-chuan/tcvn-cot-thep.rules.json "doi_chieu". Cỡ ngoài bảng → công thức của chính Bảng 2:
+# 7,85·10⁻³ × 0,7854·d² (ghi rõ trong Excel là ngoài bảng).
+NOMINAL_KG_PER_M = {6: 0.222, 8: 0.395, 10: 0.617, 12: 0.888, 14: 1.21, 16: 1.58, 18: 2.00, 20: 2.47,
+                    22: 2.98, 25: 3.85, 28: 4.83, 32: 6.31, 36: 7.99, 40: 9.86, 50: 15.42}
+MASS_TOLERANCE_PCT = {6: 8, 8: 8, 10: 6, 12: 6, 14: 5, 16: 5, 18: 5, 20: 5, 22: 5,
+                      25: 4, 28: 4, 32: 4, 36: 4, 40: 4, 50: 4}
+_GRADE = re.compile(r"\bCB\s*(\d{3})\s*-?\s*([TV])\b", re.I)   # đọc mọi mác dạng CBxxx-T/V; hợp lệ hay không do quy tắc
 _MARK = re.compile(r"\b(N\s?\d{1,3}[a-z]?)\b|\((\d{1,3}[a-z]?)\)|^\s*(\d{1,3}[a-z]?)\s*[-:.]", re.I)
 
 
@@ -225,6 +235,8 @@ class RebarItem:
     point: tuple[float, float] | None
     tin_cay: str = "A"
     ghi_chu: str = ""
+    buoc_mm: float | None = None              # bước thép (a200, -250)
+    mac: str = ""                             # mác thép ghi cùng ghi chú (CB400-V)
 
     @property
     def tong_dai_m(self) -> float | None:
@@ -232,7 +244,11 @@ class RebarItem:
 
     @property
     def kg_per_m(self) -> float:
-        return round(STEEL_KG_PER_M_PER_MM2 * self.d_mm ** 2, 4)
+        return NOMINAL_KG_PER_M.get(self.d_mm, round(7.85e-3 * 0.7854 * self.d_mm ** 2, 4))
+
+    @property
+    def trong_bang(self) -> bool:
+        return self.d_mm in NOMINAL_KG_PER_M
 
     @property
     def tong_kg(self) -> float | None:
@@ -246,11 +262,15 @@ def rebar(dwg: Drawing) -> list[RebarItem]:
     for e in dwg.texts():
         raw = e.text or ""
         m = _BAR.search(raw)
-        if not m:
+        md = None if m else _MARK_D.search(raw)
+        if not m and not md:
             continue
-        mult = int(m.group(1)) if m.group(1) else 1
-        n = int(m.group(2)) * mult if m.group(2) else None
-        d = int(m.group(3))
+        if m:
+            mult = int(m.group(1)) if m.group(1) else 1
+            n = int(m.group(2)) * mult if m.group(2) else None
+            d = int(m.group(3))
+        else:
+            mult, n, d = 1, None, int(md.group(2))
         if not 6 <= d <= 50:
             continue
         L = None
@@ -259,8 +279,15 @@ def rebar(dwg: Drawing) -> list[RebarItem]:
             v = _num(lm.group(1))
             unit = (lm.group(2) or "").lower()
             L = v if unit == "m" or (not unit and v < 50) else v / 1000
-        mk = _MARK.search(raw[: m.start()])
-        so_hieu = next((g for g in mk.groups() if g), "").replace(" ", "").upper() if mk else ""
+        if m:
+            mk = _MARK.search(raw[: m.start()])
+            so_hieu = next((g for g in mk.groups() if g), "").replace(" ", "").upper() if mk else ""
+            sp = _SPACING.search(raw)
+            buoc = float(sp.group(1)) if sp else None
+        else:
+            so_hieu, buoc = md.group(1).upper(), (float(md.group(3)) if md.group(3) else None)
+        g = _GRADE.search(raw)
+        mac = f"CB{g.group(1)}-{g.group(2).upper()}" if g else ""
         key = (so_hieu or ascii_lower(raw).strip(), d, n, L)
         if key in seen:
             dup = seen[key]
@@ -271,13 +298,12 @@ def rebar(dwg: Drawing) -> list[RebarItem]:
         tc, note = "A", ""
         if n is None:
             tc = "C"
-            note = ("bước " + _SPACING.search(raw).group(1) + " mm, cần chiều dài phân bố để ra số thanh"
-                    if _SPACING.search(raw) else "không ghi số thanh")
+            note = (f"bước {buoc:g} mm, cần chiều dài phân bố để ra số thanh" if buoc else "không ghi số thanh")
         elif L is None:
             tc, note = "C", "không ghi chiều dài L="
         if mult > 1:
             note = (note + "; " if note else "") + f"nhân {mult} theo ghi chú"
-        it = RebarItem(so_hieu, d, n, L, [e.handle], raw, e.point, tc, note)
+        it = RebarItem(so_hieu, d, n, L, [e.handle], raw, e.point, tc, note, buoc, mac)
         seen[key] = it
         out.append(it)
     return out

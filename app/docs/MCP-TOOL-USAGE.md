@@ -5510,7 +5510,7 @@ no image reader can open (named), a non-positive or non-finite scale.
 ### `knowledge_status`
 
 **Nhóm:** `cadtroly`
-**Làm gì:** Tình trạng kho tri thức, backend AutoCAD, nguồn AI.
+**Làm gì:** Tình trạng kho tri thức và backend AutoCAD.
 
 **Dùng khi nào:** Khi cần dùng chức năng `knowledge_status` trong quy trình CAD.
 
@@ -6614,6 +6614,7 @@ is saved, so callers do not have to manage intermediate artifacts.
 | `paper` | `string` | không | `A1` | Paper size for the sheet layout, default A1. |
 | `orientation` | `string` | không | `landscape` | landscape or portrait. |
 | `layout` | `string` | không | `A1-SEMANTIC` | Paper-space layout name. |
+| `real_scale` | `boolean` | không | `True` | Model space at 1:1 real size, one scaled viewport per view on the layout (default). False: model space on A1 paper coordinates, one fit viewport. |
 
 **Ví dụ gọi**
 
@@ -6643,6 +6644,18 @@ Outlined PDF text remains geometry by design, so dimensions and symbols
 are not lost when the source font prevents text extraction. The returned
 counts are a quick audit before opening the DXF and saving it as DWG.
 
+Fidelity: each PDF path becomes one continuous polyline (closed when the
+path closes; rectangles kept), with the PDF stroke width as lineweight and
+its dash pattern as a linetype. Text sits on its baseline at its angle,
+spans of one line joined. Dimension text next to a parallel line with
+ticks/arrows or extension lines at both ends is rebuilt as a real
+DIMENSION; DIMLFAC is derived from the written value / measured length so
+it displays the PDF number, and non-numeric texts (25x250=6250) stay as
+overrides. A scanned/raster-only PDF yields a warning, not geometry.
+A label with a short leader line (S2-D25-250) becomes one MLEADER; images
+(stamps, signatures) are saved as PNG with transparency next to the
+target and placed as IMAGE entities.
+
 **Dùng khi nào:** Khi cần dùng chức năng `pdf_vectorize` trong quy trình CAD.
 
 **Tham số**
@@ -6651,13 +6664,19 @@ counts are a quick audit before opening the DXF and saving it as DWG.
 |---|---|---:|---|---|
 | `source` | `string` | có | `—` | Full path to a single-page PDF sheet. |
 | `target` | `string` | có | `—` | Full output path ending in .dxf. |
+| `real_scale` | `boolean` | không | `False` | True: model space at 1:1 real size per view (scale from dimensions or a '(1:N)' label), sheet/title/stamps on an A1 layout with one scaled viewport per view. False: everything in model space on A1 paper coordinates. |
+| `leaders` | `boolean` | không | `True` | Rebuild label + leader line as MLEADER. |
+| `images` | `boolean` | không | `True` | Extract stamps/signatures/raster parts as PNG + IMAGE. |
 
 **Ví dụ gọi**
 
 ```json
 {
   "source": "D:\\DuAn\\drawing.dwg",
-  "target": "D:\\DuAn\\drawing.dwg"
+  "target": "D:\\DuAn\\drawing.dwg",
+  "real_scale": false,
+  "leaders": true,
+  "images": true
 }
 ```
 
@@ -8362,7 +8381,8 @@ tính V = (F1+F2)/2 × L giữa hai trắc ngang liền kề. Mỗi số có han
 ### `takeoff_rebar`
 
 **Nhóm:** `cadtroly`
-**Làm gì:** Thống kê thép từ ghi chú 'N1 12Ø16 L=5200' / '6%%c22 L=12.5': số thanh × dài × 0.0061654·d².
+**Làm gì:** Thống kê thép từ ghi chú 'N1 12Ø16 L=5200' / '6%%c22 L=12.5' / 'F1-D25-125': số thanh × dài ×
+khối lượng 1 m dài theo Bảng 2 TCVN 1651-2:2018 (thép trơn: TCVN 1651-1:2018, cùng giá trị).
 Ghi chú trùng ở nhiều hình chiếu chỉ tính một lần (B); thiếu số thanh hoặc L → C, để trống.
 
 **Dùng khi nào:** Khi cần dùng chức năng `takeoff_rebar` trong quy trình CAD.

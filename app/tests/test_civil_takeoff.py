@@ -7,7 +7,7 @@ from openpyxl import load_workbook
 
 from cadtroly.reader import read_dxf
 from cadtroly.samples import make_cross_sections, make_rebar_notes
-from cadtroly.takeoff.civil import STEEL_KG_PER_M_PER_MM2, earthwork, parse_station, rebar, rebar_by_diameter
+from cadtroly.takeoff.civil import earthwork, parse_station, rebar, rebar_by_diameter
 
 
 def _data(r):
@@ -40,7 +40,7 @@ def test_rebar(tmp_path):
     by = {(i.so_hieu, i.d_mm): i for i in items}
     n1 = by[("N1", 16)]
     assert n1.so_thanh == 12 and n1.dai_m == 5.2 and len(n1.handles) == 2 and n1.tin_cay == "B"   # trùng 2 chỗ
-    assert math.isclose(n1.tong_kg, 12 * 5.2 * STEEL_KG_PER_M_PER_MM2 * 256, abs_tol=0.01)
+    assert math.isclose(n1.tong_kg, 12 * 5.2 * 1.58, abs_tol=0.01)          # bảng TCVN 1651-2: D16 = 1,58 kg/m
     assert by[("N2", 22)].dai_m == 12.5                           # L < 50 → mét
     assert by[("3", 12)].so_thanh == 20                           # 2x10
     n4 = by[("N4", 10)]

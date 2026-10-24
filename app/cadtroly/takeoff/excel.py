@@ -193,17 +193,24 @@ def export_rebar(dwg: Drawing, items: list, by_d: dict, out: str | Path, *, ma_d
     _autosize(ws)
 
     wd = wb.create_sheet("Tong hop")
-    _header(wd, ["Mã định mức", "Đường kính", "Số dòng", "Tổng dài (m)", "Tổng KL (kg)", "Dòng thiếu dữ liệu"])
+    from .civil import MASS_TOLERANCE_PCT, NOMINAL_KG_PER_M
+    _header(wd, ["Mã định mức", "Đường kính", "kg/m", "Sai lệch KL cho phép (%)", "Nguồn kg/m", "Số dòng",
+                 "Tổng dài (m)", "Tổng KL (kg)", "Dòng thiếu dữ liệu"])
     for d, g in by_d.items():
-        wd.append([ma.get(d) or None, f"Ø{d}", g["so_dong"], g["tong_dai_m"], g["tong_kg"], g["thieu"]])
-    wd.append(["", "Cộng", sum(g["so_dong"] for g in by_d.values()), None,
+        in_tab = d in NOMINAL_KG_PER_M
+        wd.append([ma.get(d) or None, f"Ø{d}", NOMINAL_KG_PER_M.get(d, round(7.85e-3 * 0.7854 * d * d, 4)),
+                   f"±{MASS_TOLERANCE_PCT[d]}" if in_tab else None,
+                   "TCVN 1651-2:2018 Bảng 2" if in_tab else "ngoài Bảng 2 — tính theo công thức, cần thoả thuận",
+                   g["so_dong"], g["tong_dai_m"], g["tong_kg"], g["thieu"]])
+    wd.append(["", "Cộng", None, None, None, sum(g["so_dong"] for g in by_d.values()), None,
                round(sum(g["tong_kg"] for g in by_d.values()), 2), sum(g["thieu"] for g in by_d.values())])
     _autosize(wd)
 
     wk = wb.create_sheet("Kiem soat")
     _header(wk, ["Mục", "Giá trị"])
-    wk.append(["Phương pháp", "KL = số thanh × dài × 0.0061654·d² kg/m (thép 7850 kg/m3). Đọc ghi chú dạng "
-                              "'N1 12Ø16 L=5200', '%%c' = Ø; L < 50 coi là mét, còn lại mm."])
+    wk.append(["Phương pháp", "KL = số thanh × dài × khối lượng 1 m dài 'yêu cầu' theo Bảng 2 TCVN 1651-2:2018 / "
+                              "TCVN 1651-1:2018 (cỡ ngoài bảng: 7,85·10⁻³ × 0,7854·d², ghi rõ ở sheet Tổng hợp). "
+                              "Đọc ghi chú dạng 'N1 12Ø16 L=5200', 'F1-D25-125', '%%c' = Ø; L < 50 coi là mét, còn lại mm."])
     wk.append(["Trùng", "Cùng số hiệu/Ø/số thanh/dài ở nhiều hình chiếu chỉ tính 1 lần (tin cậy B) — kiểm tra lại."])
     wk.append(["Thiếu", "Ghi chú chỉ có bước (a200) hoặc không có L= → tin cậy C, KL để trống."])
     _control_tail(wk, rows=[ma.get(d, "") for d in by_d])

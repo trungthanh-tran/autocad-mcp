@@ -193,7 +193,8 @@ def register(mcp: FastMCP) -> None:
         ma_dinh_muc: Annotated[dict | None, "Mã định mức theo đường kính: {'16': '...'}"] = None,
         ctx: Context = None,
     ) -> dict:
-        """Thống kê thép từ ghi chú 'N1 12Ø16 L=5200' / '6%%c22 L=12.5': số thanh × dài × 0.0061654·d².
+        """Thống kê thép từ ghi chú 'N1 12Ø16 L=5200' / '6%%c22 L=12.5' / 'F1-D25-125': số thanh × dài ×
+        khối lượng 1 m dài theo Bảng 2 TCVN 1651-2:2018 (thép trơn: TCVN 1651-1:2018, cùng giá trị).
         Ghi chú trùng ở nhiều hình chiếu chỉ tính một lần (B); thiếu số thanh hoặc L → C, để trống."""
         lc = _ctx(ctx)
         st, kho = lc["state"], lc["kho"]

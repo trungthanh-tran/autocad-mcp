@@ -15,6 +15,18 @@ Bộ quy tắc (kho/tieu-chuan/<id>.rules.json hoặc kho/quy-tac/chuan-cong-ty.
   ]
 }
 Loại "xac_nhan" = tiêu chuẩn ghi "theo điều kiện thực tế", tool không tự kết luận.
+
+Cốt thép (đọc ghi chú thép trên bản vẽ bằng takeoff.civil.rebar: "N1 12Ø16 L=5200", "F1-D25-125", "Ø12 a200"):
+    {"loai": "rebar_diameter_in", "gia_tri": [6, 8, 10, …]}      đường kính phải thuộc dãy cho phép
+    {"loai": "rebar_note_complete"}                              ghi chú phải có số thanh (kèm L=) hoặc bước
+    {"loai": "rebar_clear_spacing_min", "gia_tri": 25}            bước − d ≥ max(d, gia_tri) mm
+    {"loai": "rebar_spacing_max", "gia_tri": 400}                 bước ≤ gia_tri mm
+    {"loai": "rebar_grade_in", "gia_tri": ["CB300-V", …]}        mác ghi trong ghi chú phải thuộc danh sách
+    {"loai": "rebar_grade_flag", "gia_tri": ["CB600-V"]}          có dùng mác trong danh sách → báo (thường xac_nhan)
+    {"loai": "cover_note_min", "gia_tri": 10, "theo_duong_kinh": true}
+                                  chiều dày lớp bảo vệ GHI trên bản vẽ (lớp bê tông bảo vệ 25, abv=25) ≥ gia_tri,
+                                  và ≥ đường kính thanh lớn nhất trong ghi chú thép khi theo_duong_kinh
+Giá trị số (khoảng cách, bước…) không có mặc định trong code: chỉ lấy từ bộ quy tắc do kỹ sư nhập theo văn bản gốc.
 """
 from __future__ import annotations
 
@@ -24,6 +36,7 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 from ..reader.model import Drawing, Entity
+from ..takeoff.civil import RebarItem, rebar
 
 
 @dataclass
@@ -69,8 +82,23 @@ def check_drawing(dwg: Drawing, rs: RuleSet, *, only_approved: bool = True) -> l
     if rs.hieu_luc == "khong":
         out.append(Finding(rs.id, "canh_bao", f"Bộ quy tắc {rs.ten} đã hết hiệu lực"
                            + (f", thay bởi {rs.thay_boi}" if rs.thay_boi else ""), ""))
+    bars: list[RebarItem] | None = None
     for r in rs.rules:
         if only_approved and not r.get("duyet", False):
+            continue
+        if r["loai"] == "cover_note_min":
+            if bars is None:
+                bars = rebar(dwg)
+            f = _cover_rule(r, dwg, bars)
+            if f:
+                out.append(f)
+            continue
+        if r["loai"].startswith("rebar_"):
+            if bars is None:
+                bars = rebar(dwg)
+            f = _rebar_rule(r, bars)
+            if f:
+                out.append(f)
             continue
         loai, muc, dieu, rid = r["loai"], r.get("muc", "loi"), r.get("dieu", ""), r["id"]
         mo_ta = r.get("mo_ta", loai)
@@ -128,6 +156,84 @@ def check_drawing(dwg: Drawing, rs: RuleSet, *, only_approved: bool = True) -> l
             if n > int(r["gia_tri"]):
                 out.append(Finding(rid, muc, f"{mo_ta}: {n} > {r['gia_tri']} trên {r['layer']}", dieu))
     return out
+
+
+_COVER = re.compile(r"(?:lop\s*(?:(?:be\s*tong|bt)\s*)?bao\s*ve|\ba\s*bv\b|\babv\b)[^0-9]{0,40}?(\d{1,3}(?:[.,]\d+)?)\s*(mm|cm)?")
+
+
+def _ascii(s: str) -> str:
+    import unicodedata
+    s = unicodedata.normalize("NFD", s)
+    s = "".join(c for c in s if unicodedata.category(c) != "Mn")
+    return s.replace("đ", "d").replace("Đ", "D").lower()
+
+
+def _cover_rule(r: dict, dwg: Drawing, bars: list[RebarItem]) -> Finding | None:
+    """So chiều dày lớp bảo vệ ghi trong text với gia_tri (và đường kính thanh lớn nhất). Không ghi → không kết luận."""
+    v_min = float(r["gia_tri"])
+    d_max = max((b.d_mm for b in bars), default=0) if r.get("theo_duong_kinh") else 0
+    need = max(v_min, d_max)
+    bad, vals = [], []
+    for e in dwg.texts():
+        m = _COVER.search(_ascii(e.text or ""))
+        if not m:
+            continue
+        v = float(m.group(1).replace(",", "."))
+        v = v * 10 if (m.group(2) or "") == "cm" else v
+        vals.append(v)
+        if v < need:
+            bad.append((e, v))
+    if not bad:
+        return None
+    lim = f"{need:g} mm" + (f" (= đường kính thanh lớn nhất Ø{d_max})" if d_max > v_min else "")
+    return Finding(r["id"], r.get("muc", "loi"), f"{r.get('mo_ta', 'lớp bảo vệ')}: ghi {', '.join(f'{v:g}' for _, v in bad)} mm < {lim}",
+                   r.get("dieu", ""), [e.handle for e, _ in bad], bad[0][0].point,
+                   gia_tri=", ".join(f"{v:g}" for _, v in bad), goi_y=r.get("trich", "")[:300])
+
+
+def _bar_pt(items: list[RebarItem]):
+    return next((it.point for it in items if it.point), None)
+
+
+def _bar_list(items: list[RebarItem], n: int = 5) -> str:
+    return ", ".join(f"{it.so_hieu or '?'} '{it.text.strip()}'" for it in items[:n]) + ("…" if len(items) > n else "")
+
+
+def _rebar_rule(r: dict, bars: list[RebarItem]) -> Finding | None:
+    loai, muc, dieu, rid = r["loai"], r.get("muc", "loi"), r.get("dieu", ""), r["id"]
+    mo_ta = r.get("mo_ta", loai)
+    bad: list[RebarItem] = []
+    goi_y = ""
+    if loai == "rebar_diameter_in":
+        allowed = {int(v) for v in r["gia_tri"]}
+        bad = [b for b in bars if b.d_mm not in allowed]
+        goi_y = "đổi sang đường kính trong dãy: " + ", ".join(str(v) for v in sorted(allowed))
+    elif loai == "rebar_note_complete":
+        bad = [b for b in bars if (b.so_thanh is None and b.buoc_mm is None) or (b.so_thanh and b.dai_m is None)]
+        goi_y = "ghi đủ số thanh + L=, hoặc bước a…"
+    elif loai == "rebar_clear_spacing_min":
+        v = float(r["gia_tri"])
+        bad = [b for b in bars if b.buoc_mm and b.buoc_mm - b.d_mm < max(b.d_mm, v)]
+        goi_y = f"khoảng hở thông thủy (bước − d) ≥ max(d, {v:g}) mm"
+    elif loai == "rebar_spacing_max":
+        v = float(r["gia_tri"])
+        bad = [b for b in bars if b.buoc_mm and b.buoc_mm > v]
+        goi_y = f"bước ≤ {v:g} mm"
+    elif loai == "rebar_grade_flag":
+        flagged = {str(v).upper() for v in r["gia_tri"]}
+        bad = [b for b in bars if b.mac and b.mac.upper() in flagged]
+    elif loai == "rebar_grade_in":
+        allowed = {str(v).upper() for v in r["gia_tri"]}
+        bad = [b for b in bars if b.mac and b.mac.upper() not in allowed]
+        goi_y = "mác trong bộ quy tắc: " + ", ".join(sorted(allowed))
+    else:
+        return None
+    if not bad:
+        return None
+    hs = [h for b in bad for h in b.handles]
+    return Finding(rid, muc, f"{mo_ta}: {len(bad)} ghi chú thép ({_bar_list(bad)})", dieu, hs, _bar_pt(bad),
+                   gia_tri="; ".join(f"Ø{b.d_mm}" + (f" a{b.buoc_mm:g}" if b.buoc_mm else "") for b in bad[:5]),
+                   goi_y=goi_y)
 
 
 def summarize(findings: list[Finding]) -> dict:

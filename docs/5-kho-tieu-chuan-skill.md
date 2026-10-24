@@ -43,6 +43,27 @@ Chi tiết tiêu chuẩn tham chiếu và giới hạn an toàn: [STANDARDS-SAFE
 - Có nhiều lựa chọn hoặc chưa rõ Việt Nam/quốc tế thì MCP phải hỏi lại.
 - `tieu-chuan/qcvn-18-2021.rules.json` hiện là **mẫu**, chưa bóc từ văn bản thật.
 
+### Cốt thép
+
+Hai bộ đi kèm, mọi quy tắc ghi điều khoản và **trích nguyên văn** (trường `trich`) đã đọc từ văn bản; nguồn bản đọc và
+ngày đối chiếu ghi trong trường `doi_chieu` của file. Nên đối chiếu thêm bản chính thức trước khi phát hành hồ sơ.
+
+| Bộ | Kiểm | Mức |
+|---|---|---|
+| `tcvn-cot-thep` (TCVN 1651-1/2:2018) | Đường kính ngoài Bảng 2 (chỉ dùng khi có thoả thuận NSX–người mua) · mác không thuộc CB240-T/CB300-T/CB400-T/CB300-V/CB400-V/CB500-V/CB600-V · có CB600-V (không được hàn) · hồ sơ thiếu mác, thiếu lớp bảo vệ, ghi chú thiếu số thanh/L/bước | cảnh báo · lỗi · xác nhận · cảnh báo |
+| `tcvn-5574-2018-cot-thep` (mục 10.3.1–10.3.3) | Lớp bảo vệ ghi trên bản vẽ < đường kính thanh hoặc < 10 mm · < 20 mm (đối chiếu Bảng 19) · khoảng hở (bước − d) < max(d, 25) · bước > 400 · bước > 200 | lỗi · xác nhận · cảnh báo · cảnh báo · xác nhận |
+
+Nguyên tắc: ghi chú thép không cho biết loại cấu kiện, chiều cao tiết diện, lớp thép hay cấp bê tông, nên chỉ báo
+**lỗi** khi giới hạn đúng với mọi trường hợp văn bản liệt kê (ví dụ lớp bảo vệ "trong mọi trường hợp … không nhỏ hơn
+đường kính thanh cốt thép và không nhỏ hơn 10 mm"). Giới hạn có điều kiện báo cảnh báo/xác nhận kèm điều kiện nguyên
+văn. Bản vẽ không ghi lớp bảo vệ thì không suy ra vi phạm. Chưa đưa vào: cốt thép đai (10.3.4), neo và nối (10.3.5),
+hàm lượng tối thiểu (10.3.3.1) — cần dữ liệu cấu kiện không có trên ghi chú.
+
+```text
+Kiểm tra bản vẽ cốt thép trụ T1 theo tcvn-cot-thep và tcvn-5574-2018-cot-thep. Liệt kê từng vấn đề kèm điều khoản và
+trích nguyên văn; mục "xác nhận" để tôi quyết, không tự kết luận.
+```
+
 ## Skill
 
 Skill là hướng dẫn chuyên ngành dạng `SKILL.md` mà LLM đọc trước khi làm (resource `cadtroly://skill/{name}`).
@@ -112,7 +133,7 @@ Không cần Civil 3D — đọc text trên bản vẽ AutoCAD thường (Nova-T
 | Tool | Đọc | Tính | Excel |
 |---|---|---|---|
 | `takeoff_earthwork` | Text lý trình `Km0+100` / `Lý trình: 0+100`; diện tích `F đào = 12.35`, `FĐắp=4,0`, hoặc ô "Diện tích đào" + ô số cùng hàng; tách `đắp K95/K98`, vét hữu cơ, đánh cấp | V = (F1 + F2) / 2 × L giữa hai trắc ngang liền kề | Tổng hợp · Khối lượng đoạn · Trắc ngang (F, handle, lệnh zoom) · Kiểm soát |
-| `takeoff_rebar` | Ghi chú `N1 12Ø16 L=5200`, `6%%c22 L=12.5`, `2x10Φ12` | Số thanh × dài × 0.0061654·d² kg/m | Thống kê thép · Tổng hợp theo Ø · Kiểm soát |
+| `takeoff_rebar` | Ghi chú `N1 12Ø16 L=5200`, `6%%c22 L=12.5`, `2x10Φ12`, `F1-D25-125` (số hiệu-D đường kính-bước), mác `CB400-V` | Số thanh × dài × khối lượng 1 m dài theo Bảng 2 TCVN 1651-2:2018 (D16 = 1,58 kg/m) | Thống kê thép · Tổng hợp theo Ø (kg/m, sai lệch cho phép, nguồn) · Kiểm soát |
 
 Tin cậy: **A** đọc thẳng một text · **B** phải ghép (nhãn với ô số; diện tích giữa hai lý trình; một đầu đoạn thiếu
 diện tích coi = 0; ghi chú thép trùng ở nhiều hình chiếu chỉ tính một lần) · **C** thiếu số thanh hoặc `L=`, để trống.
