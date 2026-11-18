@@ -1,8 +1,9 @@
 """ISO-25 and ANSI dimension style presets as data.
 
 Every value in ``PRESETS`` is pinned by name in
-``tests/test_standards_presets.py`` against the table in §4.1 of
-``docs/superpowers/specs/2026-09-16-v1.6-settings-design.md``:
+``tests/test_standards_presets.py`` against the table in §4.1 of the
+upstream v1.6 settings design spec (``docs/superpowers/specs/`` in
+U-C4N/Autocad-MCP; not kept in this fork):
 
 * ``iso-25`` — ISO 129-1:2018 dimensioning at the 2.5 mm lettering row of
   ISO 3098-1: 2.5 mm text and arrowheads, text above and aligned with the

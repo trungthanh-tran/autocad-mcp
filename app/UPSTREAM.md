@@ -10,7 +10,7 @@ giữ nguyên `LICENSE`), lấy tại commit `cdb10638963898b3ea9b10cdd96a2c9bc4
 
 ## Đã sửa trong fork
 - `server.py`: tên server → `cadtroly`; thêm hướng dẫn tiếng Việt vào `instructions`; lifespan gắn thêm `cfg`, `kho`,
-  `state` (từ `cadtroly/mcp/state.py`); cuối file gọi `cadtroly.mcp.tools.register(mcp)` để đăng ký tool cadtroly
+  `state` (từ `cadtroly/state.py`); cuối file gọi `cadtroly.mcp.tools.register(mcp)` để đăng ký tool cadtroly
   vào **cùng một server** (không mount, không tiền tố).
 - `pyproject.toml`: gộp phụ thuộc, tên gói `cadtroly`, không còn kéo upstream từ GitHub.
 - Mặc định triển khai `TOOL_PROFILE=full`, `TOOL_PACKS=all` khi chạy qua
@@ -18,7 +18,7 @@ giữ nguyên `LICENSE`), lấy tại commit `cdb10638963898b3ea9b10cdd96a2c9bc4
 
 ## Phần riêng (thư mục `cadtroly/`)
 reader (ezdxf, đo flatten), kho (quy tắc ánh xạ, tiêu chuẩn, skill), takeoff (A/B/C, Excel truy vết), check (bộ quy
-tắc JSON), llm (Claude/Gemini/OpenAI-compatible), cli, mcp/tools.
+tắc JSON), pdf_vectorize (PDF → DWG), cli, connect, mcp/tools.
 
 ## Cập nhật từ upstream
 Không có git remote; muốn kéo bản mới thì diff thủ công với tag upstream rồi áp lại ba chỗ sửa trong `server.py` ở trên.
